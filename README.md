@@ -1,2 +1,3 @@
 # Stage_1DOF_DroneBench
-Conception et fabrication d'un bras à un degré de liberté, asservi selon une commande d'angle
+Conception et fabrication d'un bras Ã  un degrÃ© de libertÃ© asservi selon une commande d'angle.
+Ce dispositif a pour vocation d'Ãªtre utiliser Ã  des fins pedagogique.
