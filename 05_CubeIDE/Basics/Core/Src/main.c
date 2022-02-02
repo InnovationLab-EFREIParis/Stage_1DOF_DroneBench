@@ -64,9 +64,7 @@ int main(void) {
 
 		// UART (transmit receive character)
 		if (HAL_UART_Receive(&huart2, rx_buffer, 1, 10) == HAL_OK) {
-			printf("Character recieved \n\r");
 			HAL_UART_Transmit(&huart2, rx_buffer, 1, 10);
-			printf("\n\r");
 		} else {
 			__HAL_UART_CLEAR_OREFLAG(&huart2);
 		}
