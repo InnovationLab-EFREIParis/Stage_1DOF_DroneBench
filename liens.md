@@ -1,3 +1,6 @@
 Les liens postés ici sont ceux des fichiers excel à jour
-lien pour le calcul de poussér minimale theorique
-https://docs.google.com/spreadsheets/d/1jTf0dL9yvQ2nFtRp25wLMqCBpXIPrx9fdykxBUDY2tk/edit?usp=sharing
+lien du dossier contenant les fichiers excel
+https://drive.google.com/drive/folders/1jXi5AT3fz9ABOeH-yycfwFXTwMAE1G0E?usp=sharing
+
+
+
