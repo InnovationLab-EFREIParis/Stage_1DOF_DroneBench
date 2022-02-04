@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="297mm"
+   height="420mm"
+   viewBox="0 0 297 420"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="automate.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="0.22645918"
+     inkscape:cx="-139.09792"
+     inkscape:cy="1163.5651"
+     inkscape:window-width="1680"
+     inkscape:window-height="987"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g43373">
+    <inkscape:grid
+       type="xygrid"
+       id="grid9"
+       units="mm"
+       spacingx="1"
+       spacingy="1"
+       empspacing="10" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible;"
+       id="Arrow2Lend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(1.1) rotate(180) translate(1,0)"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         style="stroke:context-stroke;fill-rule:evenodd;fill:context-stroke;stroke-width:0.62500000;stroke-linejoin:round;"
+         id="path7502" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="marker7866"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt;"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path7864" />
+    </marker>
+    <marker
+       style="overflow:visible;"
+       id="Arrow1Lend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt;"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path7484" />
+    </marker>
+    <symbol
+       id="AuxillaryOp">
+      <title
+         id="title299">Auxiliary Operation</title>
+      <desc
+         id="desc301">Offline operation.</desc>
+      <rect
+         x="9.260417"
+         y="9.260417"
+         width="21.166666"
+         height="21.166666"
+         style="stroke-width:0.529167"
+         id="rect303" />
+    </symbol>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend-8"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path7502-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend-8-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path7502-7-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path7502-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend-85"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path7502-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend-2-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path7502-6-1" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g43373"
+       transform="translate(89.999999,-29.999999)">
+      <use
+         xlink:href="#AuxillaryOp"
+         style="fill:#aaccee;stroke:#000000"
+         id="use743"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%"
+         transform="matrix(3.3070869,0,0,2.3622049,-40.625003,118.125)" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+         x="24.871845"
+         y="161.23767"
+         id="text10516"><tspan
+           sodipodi:role="line"
+           id="tspan10514"
+           style="font-size:6.35px;text-align:center;text-anchor:middle;fill:#008000;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+           x="24.871845"
+           y="161.23767">Init uC</tspan><tspan
+           sodipodi:role="line"
+           style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+           x="24.871845"
+           y="167.24406"
+           id="tspan31743">rs_msg = Nucleo Ready</tspan><tspan
+           sodipodi:role="line"
+           style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+           x="24.871845"
+           y="172.53574"
+           id="tspan27677">g_led = fading</tspan><tspan
+           sodipodi:role="line"
+           style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+           x="24.871845"
+           y="177.82739"
+           id="tspan27679" /><tspan
+           sodipodi:role="line"
+           style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+           x="24.871845"
+           y="183.11905"
+           id="tspan27675" /></text>
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="35.910782"
+         y="209.70792"
+         id="text120325"><tspan
+           sodipodi:role="line"
+           id="tspan120323"
+           style="stroke-width:0.264583"
+           x="35.910782"
+           y="209.70792">rs_cmd == init_mot</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="69.792892"
+         y="157.4243"
+         id="text120325-0"><tspan
+           sodipodi:role="line"
+           id="tspan120323-9"
+           style="stroke-width:0.264583"
+           x="69.792892"
+           y="157.4243">rs_cmd == info</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="-31.269283"
+         y="210"
+         id="text120325-1"><tspan
+           sodipodi:role="line"
+           id="tspan120323-8"
+           style="stroke-width:0.264583"
+           x="-31.269283"
+           y="210">rs_cmd == init_uc</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="-50.616074"
+         y="281.85345"
+         id="text120325-1-0"><tspan
+           sodipodi:role="line"
+           id="tspan120323-8-5"
+           style="stroke-width:0.264583"
+           x="-50.616074"
+           y="281.85345">rs_cmd == auto</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="60.015953"
+         y="285.65057"
+         id="text120325-1-0-4"><tspan
+           sodipodi:role="line"
+           id="tspan120323-8-5-7"
+           style="stroke-width:0.264583"
+           x="60.015953"
+           y="285.65057">rs_cmd == man</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:12.7px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="-20.000002"
+         y="50"
+         id="text152107"><tspan
+           sodipodi:role="line"
+           id="tspan152105"
+           style="stroke-width:0.264583"
+           x="-20.000002"
+           y="50">Diagramme automate</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+         x="-80"
+         y="80"
+         id="text155315"><tspan
+           sodipodi:role="line"
+           id="tspan155313"
+           style="stroke-width:0.264583"
+           x="-80"
+           y="80">rs_cmd : Commande envoyée depuis le pc vers le uc via liaison série</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="-80"
+           y="85.291664"
+           id="tspan166393">rs_msg : message envoyé depuis le uc vers le pc via liaison série</tspan><tspan
+           sodipodi:role="line"
+           style="stroke-width:0.264583"
+           x="-80"
+           y="90.583328"
+           id="tspan166395">g_led : led verte presente sur la carte</tspan></text>
+    </g>
+    <g
+       id="g62138"
+       transform="translate(60.000001,80)">
+      <g
+         id="g43373-8"
+         transform="translate(-1.4916978e-6,70.000001)">
+        <use
+           xlink:href="#AuxillaryOp"
+           style="fill:#aaccee;stroke:#000000"
+           id="use743-7"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%"
+           transform="matrix(3.3070869,0,0,2.3622049,-10.625003,18.124997)" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+           x="54.871845"
+           y="61.237679"
+           id="text10516-3"><tspan
+             sodipodi:role="line"
+             id="tspan10514-2"
+             style="font-size:6.35px;text-align:center;text-anchor:middle;fill:#008000;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="61.237679">Init Motor</tspan><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="67.24408"
+             id="tspan31743-5">rs_msg = Motor initialisation </tspan><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="72.535736"
+             id="tspan27677-6">g_led = toggling slowly</tspan><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="77.8274"
+             id="tspan27679-5" /><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="83.119064"
+             id="tspan27675-1" /></text>
+      </g>
+    </g>
+    <g
+       id="g43373-8-8"
+       transform="translate(130,230)">
+      <g
+         id="g62048">
+        <use
+           xlink:href="#AuxillaryOp"
+           style="fill:#aaccee;stroke:#000000"
+           id="use743-7-0"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%"
+           transform="matrix(3.3070869,0,0,2.3622049,-10.625003,18.124997)" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+           x="54.871845"
+           y="61.237679"
+           id="text10516-3-6"><tspan
+             sodipodi:role="line"
+             id="tspan10514-2-0"
+             style="font-size:6.35px;text-align:center;text-anchor:middle;fill:#008000;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="61.237679">Manual Mode</tspan><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="67.24408"
+             id="tspan31743-5-9">rs_msg = Manual Mode </tspan><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="72.535736"
+             id="tspan27677-6-6">g_led = toggling fast</tspan><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="77.8274"
+             id="tspan27679-5-9" /><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="83.119064"
+             id="tspan27675-1-1" /></text>
+      </g>
+    </g>
+    <g
+       id="g111023"
+       transform="translate(-110,90)">
+      <g
+         id="g110970"
+         transform="translate(99.999999,140)">
+        <use
+           xlink:href="#AuxillaryOp"
+           style="fill:#aaccee;stroke:#000000"
+           id="use743-7-0-6"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%"
+           transform="matrix(3.3070869,0,0,2.3622049,-10.625003,18.124997)" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+           x="54.871845"
+           y="61.237679"
+           id="text10516-3-6-4"><tspan
+             sodipodi:role="line"
+             id="tspan10514-2-0-8"
+             style="font-size:6.35px;text-align:center;text-anchor:middle;fill:#008000;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="61.237679">Auto. Mode</tspan><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="67.24408"
+             id="tspan31743-5-9-3">rs_msg = Auto Mode </tspan><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="72.535736"
+             id="tspan27677-6-6-6">g_led = Set </tspan><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="77.8274"
+             id="tspan27679-5-9-6" /><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="83.119064"
+             id="tspan27675-1-1-8" /></text>
+      </g>
+    </g>
+    <g
+       id="g111013"
+       transform="translate(20,20)">
+      <g
+         id="g110961"
+         transform="translate(99.999999,140)">
+        <use
+           xlink:href="#AuxillaryOp"
+           style="fill:#aaccee;stroke:#000000"
+           id="use743-7-0-6-3"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%"
+           transform="matrix(3.3070869,0,0,2.3622049,59.374997,-71.875002)" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+           x="124.87184"
+           y="-28.762321"
+           id="text10516-3-6-4-9"><tspan
+             sodipodi:role="line"
+             id="tspan10514-2-0-8-8"
+             style="font-size:6.35px;text-align:center;text-anchor:middle;fill:#008000;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="124.87184"
+             y="-28.762321">Info</tspan><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="124.87184"
+             y="-22.755924"
+             id="tspan31743-5-9-3-3">rs_msg = firmware version </tspan><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="124.87184"
+             y="-17.464262"
+             id="tspan27677-6-6-6-0">g_led = Reset </tspan><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="124.87184"
+             y="-12.1726"
+             id="tspan27679-5-9-6-2" /><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="124.87184"
+             y="-6.8809371"
+             id="tspan27675-1-1-8-5" /></text>
+      </g>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.966092;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
+       d="m 120,160 v 28"
+       id="path111171" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.966092;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend-2)"
+       d="M 100,190 V 160"
+       id="path111171-6"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.966092;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend-85)"
+       d="M 210,150 H 150"
+       id="path111171-9"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.966092;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend-2-1)"
+       d="m 150,130 h 60"
+       id="path111171-6-5"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.966092;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend-8)"
+       d="M 110,240 50,270"
+       id="path111171-7"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.966092;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend-8-9)"
+       d="m 120,240 50,30"
+       id="path111171-7-6"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="182.04462"
+       y="146.56398"
+       id="text144607"><tspan
+         sodipodi:role="line"
+         id="tspan144605"
+         style="stroke-width:0.264583"
+         x="182.04462"
+         y="146.56398">1</tspan></text>
+  </g>
+</svg>
