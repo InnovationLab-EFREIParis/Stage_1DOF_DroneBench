@@ -24,15 +24,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="true"
-     inkscape:zoom="0.22645918"
-     inkscape:cx="-139.09792"
-     inkscape:cy="1163.5651"
+     inkscape:zoom="0.90583672"
+     inkscape:cx="473.04331"
+     inkscape:cy="1273.4083"
      inkscape:window-width="1680"
      inkscape:window-height="987"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g43373">
+     inkscape:current-layer="layer1">
     <inkscape:grid
        type="xygrid"
        id="grid9"
@@ -169,145 +169,216 @@
          style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
          id="path7502-6-1" />
     </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend-2-4"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path7502-6-4" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path7502-2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow2Lend-15"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow2Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:0.625;stroke-linejoin:round"
+         id="path7502-8" />
+    </marker>
   </defs>
   <g
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <g
-       id="g43373"
-       transform="translate(89.999999,-29.999999)">
-      <use
-         xlink:href="#AuxillaryOp"
-         style="fill:#aaccee;stroke:#000000"
-         id="use743"
-         x="0"
-         y="0"
-         width="100%"
-         height="100%"
-         transform="matrix(3.3070869,0,0,2.3622049,-40.625003,118.125)" />
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-opacity:1"
-         x="24.871845"
-         y="161.23767"
-         id="text10516"><tspan
-           sodipodi:role="line"
-           id="tspan10514"
-           style="font-size:6.35px;text-align:center;text-anchor:middle;fill:#008000;stroke:none;stroke-width:0.264583;stroke-opacity:1"
-           x="24.871845"
-           y="161.23767">Init uC</tspan><tspan
-           sodipodi:role="line"
-           style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
-           x="24.871845"
-           y="167.24406"
-           id="tspan31743">rs_msg = Nucleo Ready</tspan><tspan
-           sodipodi:role="line"
-           style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
-           x="24.871845"
-           y="172.53574"
-           id="tspan27677">g_led = fading</tspan><tspan
-           sodipodi:role="line"
-           style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
-           x="24.871845"
-           y="177.82739"
-           id="tspan27679" /><tspan
-           sodipodi:role="line"
-           style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
-           x="24.871845"
-           y="183.11905"
-           id="tspan27675" /></text>
-      <text
-         xml:space="preserve"
-         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-         x="35.910782"
-         y="209.70792"
-         id="text120325"><tspan
-           sodipodi:role="line"
-           id="tspan120323"
-           style="stroke-width:0.264583"
-           x="35.910782"
-           y="209.70792">rs_cmd == init_mot</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-         x="69.792892"
-         y="157.4243"
-         id="text120325-0"><tspan
-           sodipodi:role="line"
-           id="tspan120323-9"
-           style="stroke-width:0.264583"
-           x="69.792892"
-           y="157.4243">rs_cmd == info</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-         x="-31.269283"
-         y="210"
-         id="text120325-1"><tspan
-           sodipodi:role="line"
-           id="tspan120323-8"
-           style="stroke-width:0.264583"
-           x="-31.269283"
-           y="210">rs_cmd == init_uc</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-         x="-50.616074"
-         y="281.85345"
-         id="text120325-1-0"><tspan
-           sodipodi:role="line"
-           id="tspan120323-8-5"
-           style="stroke-width:0.264583"
-           x="-50.616074"
-           y="281.85345">rs_cmd == auto</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-         x="60.015953"
-         y="285.65057"
-         id="text120325-1-0-4"><tspan
-           sodipodi:role="line"
-           id="tspan120323-8-5-7"
-           style="stroke-width:0.264583"
-           x="60.015953"
-           y="285.65057">rs_cmd == man</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-size:12.7px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-         x="-20.000002"
-         y="50"
-         id="text152107"><tspan
-           sodipodi:role="line"
-           id="tspan152105"
-           style="stroke-width:0.264583"
-           x="-20.000002"
-           y="50">Diagramme automate</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-         x="-80"
-         y="80"
-         id="text155315"><tspan
-           sodipodi:role="line"
-           id="tspan155313"
-           style="stroke-width:0.264583"
-           x="-80"
-           y="80">rs_cmd : Commande envoyée depuis le pc vers le uc via liaison série</tspan><tspan
-           sodipodi:role="line"
-           style="stroke-width:0.264583"
-           x="-80"
-           y="85.291664"
-           id="tspan166393">rs_msg : message envoyé depuis le uc vers le pc via liaison série</tspan><tspan
-           sodipodi:role="line"
-           style="stroke-width:0.264583"
-           x="-80"
-           y="90.583328"
-           id="tspan166395">g_led : led verte presente sur la carte</tspan></text>
-    </g>
+    <use
+       xlink:href="#AuxillaryOp"
+       style="fill:#aaccee;stroke:#000000"
+       id="use743"
+       x="0"
+       y="0"
+       width="100%"
+       height="100%"
+       transform="matrix(3.3070869,0,0,2.3622049,54.137499,88.125001)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+       x="119.63433"
+       y="131.23767"
+       id="text10516"><tspan
+         sodipodi:role="line"
+         id="tspan10514"
+         style="font-size:6.35px;text-align:center;text-anchor:middle;fill:#008000;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+         x="119.63433"
+         y="131.23767">Init uC</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+         x="119.63433"
+         y="137.24406"
+         id="tspan31743">rs_msg = Nucleo Ready</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+         x="119.63433"
+         y="142.53574"
+         id="tspan27677">g_led = fading</tspan><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+         x="119.63433"
+         y="147.82739"
+         id="tspan27679" /><tspan
+         sodipodi:role="line"
+         style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+         x="119.63433"
+         y="153.11905"
+         id="tspan27675" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="130.67325"
+       y="179.70792"
+       id="text120325"><tspan
+         sodipodi:role="line"
+         id="tspan120323"
+         style="stroke-width:0.264583"
+         x="130.67325"
+         y="179.70792">rs_cmd == init_mot</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="127.52934"
+       y="254.77434"
+       id="text120325-06"><tspan
+         sodipodi:role="line"
+         id="tspan120323-82"
+         style="stroke-width:0.264583"
+         x="127.52934"
+         y="254.77434">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="164.55533"
+       y="127.4243"
+       id="text120325-0"><tspan
+         sodipodi:role="line"
+         id="tspan120323-9"
+         style="stroke-width:0.264583"
+         x="164.55533"
+         y="127.4243">rs_cmd == info</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="63.493221"
+       y="180"
+       id="text120325-1"><tspan
+         sodipodi:role="line"
+         id="tspan120323-8"
+         style="stroke-width:0.264583"
+         x="63.493221"
+         y="180">rs_cmd == init_uc</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="51.156525"
+       y="332.66068"
+       id="text120325-1-0"><tspan
+         sodipodi:role="line"
+         id="tspan120323-8-5"
+         style="stroke-width:0.264583"
+         x="51.156525"
+         y="332.66068">rs_cmd == auto</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="23.047117"
+       y="287.67923"
+       id="text120325-1-0-2"><tspan
+         sodipodi:role="line"
+         id="tspan120323-8-5-4"
+         style="stroke-width:0.264583"
+         x="23.047117"
+         y="287.67923">rs_cmd == stop</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="172.30362"
+       y="287.67923"
+       id="text120325-1-0-2-2"><tspan
+         sodipodi:role="line"
+         id="tspan120323-8-5-4-4"
+         style="stroke-width:0.264583"
+         x="172.30362"
+         y="287.67923">rs_cmd == stop</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="150.98125"
+       y="332.95276"
+       id="text120325-1-0-4"><tspan
+         sodipodi:role="line"
+         id="tspan120323-8-5-7"
+         style="stroke-width:0.264583"
+         x="150.98125"
+         y="332.95276">rs_cmd == man</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12.7px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="70"
+       y="20.000002"
+       id="text152107"><tspan
+         sodipodi:role="line"
+         id="tspan152105"
+         style="stroke-width:0.264583"
+         x="70"
+         y="20.000002">Diagramme automate</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="9.999999"
+       y="50"
+       id="text155315"><tspan
+         sodipodi:role="line"
+         id="tspan155313"
+         style="stroke-width:0.264583"
+         x="9.999999"
+         y="50">rs_cmd : Commande envoyée depuis le pc vers le uc via liaison série</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="9.999999"
+         y="55.291664"
+         id="tspan166393">rs_msg : message envoyé depuis le uc vers le pc via liaison série</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="9.999999"
+         y="60.583324"
+         id="tspan166395">g_led : led verte presente sur la carte</tspan></text>
     <g
        id="g62138"
-       transform="translate(60.000001,80)">
+       transform="translate(64.762504,80)">
       <g
          id="g43373-8"
          transform="translate(-1.4916978e-6,70.000001)">
@@ -354,8 +425,61 @@
       </g>
     </g>
     <g
+       id="g62138-5"
+       transform="translate(64.762504,160)">
+      <g
+         id="g43373-8-3"
+         transform="translate(-1.4916978e-6,70.000001)">
+        <use
+           xlink:href="#AuxillaryOp"
+           style="fill:#aaccee;stroke:#000000"
+           id="use743-7-7"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%"
+           transform="matrix(3.3070869,0,0,2.3622049,-10.625003,18.124997)" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:4.23333px;line-height:1.25;font-family:sans-serif;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+           x="54.871845"
+           y="61.237679"
+           id="text10516-3-3"><tspan
+             sodipodi:role="line"
+             id="tspan10514-2-7"
+             style="font-size:6.35px;text-align:center;text-anchor:middle;fill:#008000;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="61.237679"> Motor Ready</tspan><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="67.24408"
+             id="tspan31743-5-94">rs_msg = Motor ready </tspan><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="72.535736"
+             id="tspan27677-6-8">g_led = toggling fast</tspan><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="77.8274"
+             id="tspan187674">gaz = 0</tspan><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="83.119064"
+             id="tspan27679-5-6" /><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="88.410728"
+             id="tspan27675-1-5" /></text>
+      </g>
+    </g>
+    <g
        id="g43373-8-8"
-       transform="translate(130,230)">
+       transform="translate(134.76253,310)">
       <g
          id="g62048">
         <use
@@ -387,22 +511,27 @@
              style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
              x="54.871845"
              y="72.535736"
-             id="tspan27677-6-6">g_led = toggling fast</tspan><tspan
+             id="tspan27677-6-6">g_led = set</tspan><tspan
              sodipodi:role="line"
              style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
              x="54.871845"
              y="77.8274"
-             id="tspan27679-5-9" /><tspan
+             id="tspan213554">gaz =potentiometre</tspan><tspan
              sodipodi:role="line"
              style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
              x="54.871845"
              y="83.119064"
+             id="tspan27679-5-9" /><tspan
+             sodipodi:role="line"
+             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="88.410728"
              id="tspan27675-1-1" /></text>
       </g>
     </g>
     <g
        id="g111023"
-       transform="translate(-110,90)">
+       transform="translate(-105.23747,170)">
       <g
          id="g110970"
          transform="translate(99.999999,140)">
@@ -450,7 +579,7 @@
     </g>
     <g
        id="g111013"
-       transform="translate(20,20)">
+       transform="translate(24.762503,20)">
       <g
          id="g110961"
          transform="translate(99.999999,140)">
@@ -498,43 +627,74 @@
     </g>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.966092;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
-       d="m 120,160 v 28"
+       d="m 124.76253,160 v 28"
        id="path111171" />
     <path
+       style="fill:none;stroke:#000000;stroke-width:0.966092;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend-1)"
+       d="m 124.76253,240 v 30"
+       id="path111171-8"
+       sodipodi:nodetypes="cc" />
+    <path
        style="fill:none;stroke:#000000;stroke-width:0.966092;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend-2)"
-       d="M 100,190 V 160"
+       d="M 104.76253,190 V 160"
        id="path111171-6"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.966092;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend-85)"
-       d="M 210,150 H 150"
+       d="m 214.76253,150 h -60"
        id="path111171-9"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.966092;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend-2-1)"
-       d="m 150,130 h 60"
+       d="m 154.76253,130 h 60"
        id="path111171-6-5"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.966092;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend-8)"
-       d="M 110,240 50,270"
+       d="M 114.76253,320 54.762503,350"
        id="path111171-7"
        sodipodi:nodetypes="cc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.966092;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend-8-9)"
-       d="m 120,240 50,30"
+       d="m 124.76253,320 50,30"
        id="path111171-7-6"
        sodipodi:nodetypes="cc" />
     <text
        xml:space="preserve"
        style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
-       x="182.04462"
+       x="186.80705"
        y="146.56398"
        id="text144607"><tspan
          sodipodi:role="line"
          id="tspan144605"
          style="stroke-width:0.264583"
-         x="182.04462"
+         x="186.80705"
          y="146.56398">1</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
+       d="M 34.762503,349.99998 V 290 h 49.999998"
+       id="path185695" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Lend-15)"
+       d="M 204.76253,349.99998 V 290 h -50"
+       id="path185695-3" />
+    <rect
+       style="fill:none;stroke:#000080;stroke-width:0.840875;stroke-miterlimit:4;stroke-dasharray:10.0905, 0.840875;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect222984"
+       width="99.999992"
+       height="70"
+       x="4.7624998"
+       y="340" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583;fill:#000080"
+       x="51.752522"
+       y="415.3266"
+       id="text224410"><tspan
+         sodipodi:role="line"
+         id="tspan224408"
+         style="stroke-width:0.264583;fill:#000080"
+         x="51.752522"
+         y="415.3266">Bras asservie en position</tspan></text>
   </g>
 </svg>
