@@ -6,19 +6,19 @@
  */
 
 #include "yann.h"
-#include "main.h"
 
-uint16_t ADCinput(ADC_HandleTypeDef hadc,int polTime){
 
-	HAL_ADC_Start(&hadc);
-	HAL_ADC_PollForConversion(&hadc, polTime);
-	return  HAL_ADC_GetValue(&hadc);
+int ADCinput(ADC_HandleTypeDef *hadc,int polTime){
+
+	HAL_ADC_Start(hadc);
+	HAL_ADC_PollForConversion(hadc, polTime);
+	return  HAL_ADC_GetValue(hadc);
 
 }
 
-void load_pwm(TIM_HandleTypeDef htimX,uint16_t val){
+void load_pwm(TIM_HandleTypeDef *htimX,int val){
 
-	htimX.Instance->CCR1=val ;
+	htimX->Instance->CCR1=val ;
 }
 
 

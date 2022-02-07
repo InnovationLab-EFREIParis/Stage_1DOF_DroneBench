@@ -18,7 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-<<<<<<< HEAD
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -38,14 +38,13 @@
 /* USER CODE BEGIN PM */
 
 /* USER CODE END PM */
-=======
+
 #include "remi.h"
+#include "yann.h"
 #include  <stdio.h>
 #include  <errno.h>
 #include  <sys/unistd.h> // STDOUT_FILENO, STDERR_FILENO
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> refs/remotes/origin/main
+
 
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
@@ -53,24 +52,21 @@ ADC_HandleTypeDef hadc1;
 TIM_HandleTypeDef htim17;
 
 UART_HandleTypeDef huart2;
-<<<<<<< HEAD
+
 
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
 
-=======
->>>>>>> refs/remotes/origin/main
-=======
+
 
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart2;
->>>>>>> 0a64d887b983537c5d2564c1ade2d07f4db2b852
-=======
+
 
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart2;
->>>>>>> 0a64d887b983537c5d2564c1ade2d07f4db2b852
+
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
@@ -96,9 +92,9 @@ int main(void)
 
   /* USER CODE END 1 */
 
-<<<<<<< HEAD
+
   /* MCU Configuration--------------------------------------------------------*/
-=======
+
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 	MX_USART2_UART_Init();
@@ -110,33 +106,21 @@ int main(void)
 	// Welcome message on UART
 	sendWelcomeMsgRS232(&huart2);
 	printf("Hello from main\n\r");
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
 
->>>>>>> 0a64d887b983537c5d2564c1ade2d07f4db2b852
 
->>>>>>> 0a64d887b983537c5d2564c1ade2d07f4db2b852
 
-<<<<<<< HEAD
->>>>>>> refs/remotes/origin/main
 
-<<<<<<< HEAD
+
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
-<<<<<<< HEAD
+
   /* USER CODE BEGIN Init */
-=======
-=======
->>>>>>> 0a64d887b983537c5d2564c1ade2d07f4db2b852
-=======
->>>>>>> 0a64d887b983537c5d2564c1ade2d07f4db2b852
+
 
 		// set green led if push button
 		setGreenLedViaButton();
->>>>>>> refs/remotes/origin/main
+
 
   /* USER CODE END Init */
 
