@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 main.c:71:5:main	8	static
 main.c:117:6:SystemClock_Config	96	static
 main.c:165:13:MX_ADC1_Init	48	static
@@ -5,3 +6,11 @@ main.c:229:13:MX_TIM17_Init	80	static
 main.c:291:13:MX_USART2_UART_Init	8	static
 main.c:326:13:MX_GPIO_Init	48	static
 main.c:362:6:Error_Handler	4	static,ignoring_inline_asm
+=======
+main.c:39:5:main	8	static
+main.c:77:6:SystemClock_Config	96	static
+main.c:122:13:MX_USART2_UART_Init	8	static
+main.c:155:13:MX_GPIO_Init	48	static
+main.c:190:6:Error_Handler	4	static,ignoring_inline_asm
+main.c:217:5:_write	32	static
+>>>>>>> refs/remotes/origin/main

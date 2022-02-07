@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+<<<<<<< HEAD
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -37,6 +38,12 @@
 /* USER CODE BEGIN PM */
 
 /* USER CODE END PM */
+=======
+#include "remi.h"
+#include  <stdio.h>
+#include  <errno.h>
+#include  <sys/unistd.h> // STDOUT_FILENO, STDERR_FILENO
+>>>>>>> refs/remotes/origin/main
 
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
@@ -44,11 +51,14 @@ ADC_HandleTypeDef hadc1;
 TIM_HandleTypeDef htim17;
 
 UART_HandleTypeDef huart2;
+<<<<<<< HEAD
 
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
 
+=======
+>>>>>>> refs/remotes/origin/main
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
@@ -74,12 +84,33 @@ int main(void)
 
   /* USER CODE END 1 */
 
+<<<<<<< HEAD
   /* MCU Configuration--------------------------------------------------------*/
+=======
+	/* Initialize all configured peripherals */
+	MX_GPIO_Init();
+	MX_USART2_UART_Init();
+	/* USER CODE BEGIN 2 */
+	// Light up green led
+	setGreenLed();
+	// blink green led
+	blinkGreenLed(10, 100);
+	// Welcome message on UART
+	sendWelcomeMsgRS232(&huart2);
+	printf("Hello from main\n\r");
+
+>>>>>>> refs/remotes/origin/main
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
+<<<<<<< HEAD
   /* USER CODE BEGIN Init */
+=======
+
+		// set green led if push button
+		setGreenLedViaButton();
+>>>>>>> refs/remotes/origin/main
 
   /* USER CODE END Init */
 
@@ -386,3 +417,19 @@ void assert_failed(uint8_t *file, uint32_t line)
 }
 #endif /* USE_FULL_ASSERT */
 
+// Redefine _write function for printf
+int _write(int file, char *data, int len)
+{
+   if ((file != STDOUT_FILENO) && (file != STDERR_FILENO))
+   {
+      errno = EBADF;
+      return -1;
+   }
+
+   // arbitrary timeout 1000
+   HAL_StatusTypeDef status =
+      HAL_UART_Transmit(&huart2, (uint8_t*)data, len, 1000);
+
+   // return # of bytes written - as best we can tell
+   return (status == HAL_OK ? len : 0);
+}

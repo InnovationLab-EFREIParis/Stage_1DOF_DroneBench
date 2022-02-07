@@ -4,7 +4,7 @@
  *  Created on: Feb 7, 2022
  *      Author: Remi
  */
-#include "main.h"
+
 #include "remi.h"
 
 // On board green LED On
@@ -20,7 +20,7 @@ void blinkGreenLed(int nb, int delay) {
 	}
 }
 
-//
+// set green led if blue push button is pressed
 void setGreenLedViaButton() {
 	// Gpio, push button
 	// by default, PUSH_BUTTON is at 1
@@ -34,6 +34,7 @@ void setGreenLedViaButton() {
 
 // Welcome Message On RS232
 void sendWelcomeMsgRS232(UART_HandleTypeDef *huart) {
+	printf("Hello from remi\n\r");
 	if (HAL_UART_Transmit(huart, "Nucleo L476RG connected\n\r", 25, 100)
 			!= HAL_OK)
 		Error_Handler();
@@ -47,4 +48,5 @@ void sendbackRS232(UART_HandleTypeDef *huart) {
 		__HAL_UART_CLEAR_OREFLAG(huart);
 	}
 }
+
 
