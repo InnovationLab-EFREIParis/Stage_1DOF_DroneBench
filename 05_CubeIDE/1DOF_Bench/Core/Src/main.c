@@ -23,50 +23,11 @@
 #include  <sys/unistd.h> // STDOUT_FILENO, STDERR_FILENO
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> b4ee3f37ce8206e11033d8e6e57678d727e54bc3
-/* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
-
 TIM_HandleTypeDef htim17;
-
 UART_HandleTypeDef huart2;
 
 
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
-
-
-
-<<<<<<< HEAD
->>>>>>> b4ee3f37ce8206e11033d8e6e57678d727e54bc3
-/* Private variables ---------------------------------------------------------*/
-ADC_HandleTypeDef hadc1;
-
-TIM_HandleTypeDef htim17;
-
-UART_HandleTypeDef huart2;
-
-
-<<<<<<< HEAD
-=======
-/* Private variables ---------------------------------------------------------*/
-UART_HandleTypeDef huart2;
-
->>>>>>> b4ee3f37ce8206e11033d8e6e57678d727e54bc3
-=======
-/* Private variables ---------------------------------------------------------*/
-UART_HandleTypeDef huart2;
-
-
-/* Private variables ---------------------------------------------------------*/
-UART_HandleTypeDef huart2;
-
->>>>>>> b4ee3f37ce8206e11033d8e6e57678d727e54bc3
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
