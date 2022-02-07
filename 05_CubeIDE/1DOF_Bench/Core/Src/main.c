@@ -46,6 +46,8 @@
 #include  <sys/unistd.h> // STDOUT_FILENO, STDERR_FILENO
 
 
+<<<<<<< HEAD
+=======
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
 
@@ -54,12 +56,34 @@ TIM_HandleTypeDef htim17;
 UART_HandleTypeDef huart2;
 
 
+/* USER CODE BEGIN PV */
+
+/* USER CODE END PV */
+
+
+
+>>>>>>> b4ee3f37ce8206e11033d8e6e57678d727e54bc3
+/* Private variables ---------------------------------------------------------*/
+ADC_HandleTypeDef hadc1;
+
+TIM_HandleTypeDef htim17;
+
+UART_HandleTypeDef huart2;
+
+
+<<<<<<< HEAD
+=======
+/* Private variables ---------------------------------------------------------*/
+UART_HandleTypeDef huart2;
+
+>>>>>>> b4ee3f37ce8206e11033d8e6e57678d727e54bc3
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM17_Init(void);
+<<<<<<< HEAD
 
 
 int main(void)
@@ -70,6 +94,25 @@ int main(void)
 	HAL_Init();
 	/* Configure the system clock */
 	SystemClock_Config();
+=======
+/* USER CODE BEGIN PFP */
+
+/* USER CODE END PFP */
+
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
+
+/* USER CODE END 0 */
+
+/**
+  * @brief  The application entry point.
+  * @retval int
+  */
+int main(void)
+{
+  /* USER CODE BEGIN 1 */
+
+>>>>>>> b4ee3f37ce8206e11033d8e6e57678d727e54bc3
   /* USER CODE END 1 */
 
 
@@ -90,11 +133,55 @@ int main(void)
 	printf("Hello from main\n\r");
 
 
+<<<<<<< HEAD
 	while (1) {
 		// set green led if push button
 		setGreenLedViaButton();
 		sendbackRS232(&huart2);
 	}
+=======
+
+
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+
+  /* USER CODE BEGIN Init */
+
+
+		// set green led if push button
+		setGreenLedViaButton();
+
+
+  /* USER CODE END Init */
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* USER CODE BEGIN SysInit */
+
+  /* USER CODE END SysInit */
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_USART2_UART_Init();
+  MX_ADC1_Init();
+  MX_TIM17_Init();
+  /* USER CODE BEGIN 2 */
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+  }
+  /* USER CODE END 3 */
+>>>>>>> b4ee3f37ce8206e11033d8e6e57678d727e54bc3
 }
 
 /**
@@ -105,6 +192,7 @@ void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+<<<<<<< HEAD
 
   /** Configure the main internal regulator output voltage
   */
@@ -271,13 +359,58 @@ static void MX_TIM17_Init(void) {
  */
 static void MX_USART2_UART_Init(void) {
 =======
+=======
+
+  /** Configure the main internal regulator output voltage
+  */
+  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
+  */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLM = 1;
+  RCC_OscInitStruct.PLL.PLLN = 10;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
+  RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
+  RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Initializes the CPU, AHB and APB buses clocks
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
+/**
+>>>>>>> b4ee3f37ce8206e11033d8e6e57678d727e54bc3
   * @brief ADC1 Initialization Function
   * @param None
   * @retval None
   */
 static void MX_ADC1_Init(void)
 {
+<<<<<<< HEAD
 >>>>>>> refs/remotes/origin/main
+=======
+>>>>>>> b4ee3f37ce8206e11033d8e6e57678d727e54bc3
 
   /* USER CODE BEGIN ADC1_Init 0 */
 
