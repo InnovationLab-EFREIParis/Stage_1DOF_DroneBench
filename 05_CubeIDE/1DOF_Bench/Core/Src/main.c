@@ -77,8 +77,7 @@ void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 
   /** Configure the main internal regulator output voltage
   */
@@ -119,7 +118,6 @@ void SystemClock_Config(void)
 }
 
 /**
-<<<<<<< HEAD
  * @brief ADC1 Initialization Function
  * @param None
  * @retval None
@@ -293,10 +291,7 @@ static void MX_USART2_UART_Init(void) {
   */
 static void MX_ADC1_Init(void)
 {
-<<<<<<< HEAD
->>>>>>> refs/remotes/origin/main
-=======
->>>>>>> b4ee3f37ce8206e11033d8e6e57678d727e54bc3
+
 
   /* USER CODE BEGIN ADC1_Init 0 */
 
@@ -307,7 +302,7 @@ static void MX_ADC1_Init(void)
 
   /* USER CODE BEGIN ADC1_Init 1 */
 
-=======
+
 
   /** Configure the main internal regulator output voltage
   */
