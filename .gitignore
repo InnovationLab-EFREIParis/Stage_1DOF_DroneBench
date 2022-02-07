@@ -1,0 +1,6 @@
+# Binaire STM32
+*.elf
+# Objet STM32
+*.o
+# bin STM32
+*.bin
