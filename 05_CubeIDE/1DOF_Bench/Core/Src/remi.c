@@ -49,4 +49,3 @@ void sendbackRS232(UART_HandleTypeDef *huart) {
 	}
 }
 
-

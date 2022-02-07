@@ -4,3 +4,11 @@
 *.o
 # bin STM32
 *.bin
+# STM32 File
+05_CubeIDE/.metadata/
+# STM32 File
+05_CubeIDE/.metadata/1DOF_Bench/.metadata
+# Temp Doc file
+~*
+# STM32 File
+05_CubeIDE/1DOF_Bench/Debug/
