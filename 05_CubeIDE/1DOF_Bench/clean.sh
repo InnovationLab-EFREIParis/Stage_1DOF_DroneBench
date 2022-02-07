@@ -5,4 +5,5 @@ rm -rf ./Core/Startup/startup_stm32l476rgtx.d ./Core/Startup/startup_stm32l476rg
 rm -rf ./Core/Src/1DOF.d ./Core/Src/1DOF.o ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/remi.d ./Core/Src/remi.o ./Core/Src/stm32l4xx_hal_msp.d ./Core/Src/stm32l4xx_hal_msp.o ./Core/Src/stm32l4xx_it.d ./Core/Src/stm32l4xx_it.o ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/system_stm32l4xx.d ./Core/Src/system_stm32l4xx.o ./Core/Src/yann.d ./Core/Src/yann.o
 
 rm -rf 1DOF_Bench.bin 1DOF_Bench.elf 1DOF_Bench.list default.size.stdout
- 
+
+rm ./Debug/1DOF_Bench.elf
