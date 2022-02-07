@@ -1,0 +1,28 @@
+/*
+ * remi.c
+ *
+ *  Created on: Feb 7, 2022
+ *      Author: Remi
+ */
+#include "main.h"
+
+// On board green LED On
+void setGreenLed(){
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, SET);
+}
+
+// On board green LED blink
+void blinkGreenLed(int nb, int delay){
+	for (int i = 0; i < nb; i++) {
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+		HAL_Delay(delay);
+	}
+}
+
+// Welcome Message On RS232
+void sendWelcomeMsgRS232(UART_HandleTypeDef* huart){
+	if (HAL_UART_Transmit(&huart, "Nucleo L476RG connected\n\r", 25, 100)
+			!= HAL_OK)
+		Error_Handler();
+}
+

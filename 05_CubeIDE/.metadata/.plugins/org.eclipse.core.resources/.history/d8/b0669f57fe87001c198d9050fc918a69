@@ -1,0 +1,22 @@
+/*
+ * remi.c
+ *
+ *  Created on: Feb 7, 2022
+ *      Author: Remi
+ */
+#include "main.h"
+
+
+void setGreenLed(){
+	// Light up green led
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, SET);
+}
+
+void blinkGreenLed(int nb, int delay){
+
+	for (int i = 0; i < nb; i++) {
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+		HAL_Delay(delay);
+	}
+
+}
