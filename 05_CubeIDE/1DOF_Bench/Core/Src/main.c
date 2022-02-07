@@ -44,6 +44,7 @@
 #include  <errno.h>
 #include  <sys/unistd.h> // STDOUT_FILENO, STDERR_FILENO
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> refs/remotes/origin/main
 
 /* Private variables ---------------------------------------------------------*/
@@ -60,6 +61,11 @@ UART_HandleTypeDef huart2;
 
 =======
 >>>>>>> refs/remotes/origin/main
+=======
+
+/* Private variables ---------------------------------------------------------*/
+UART_HandleTypeDef huart2;
+>>>>>>> 0a64d887b983537c5d2564c1ade2d07f4db2b852
 =======
 
 /* Private variables ---------------------------------------------------------*/
@@ -105,10 +111,15 @@ int main(void)
 	sendWelcomeMsgRS232(&huart2);
 	printf("Hello from main\n\r");
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
 =======
 
 >>>>>>> 0a64d887b983537c5d2564c1ade2d07f4db2b852
 
+>>>>>>> 0a64d887b983537c5d2564c1ade2d07f4db2b852
+
+<<<<<<< HEAD
 >>>>>>> refs/remotes/origin/main
 
 <<<<<<< HEAD
@@ -118,6 +129,8 @@ int main(void)
 <<<<<<< HEAD
   /* USER CODE BEGIN Init */
 =======
+=======
+>>>>>>> 0a64d887b983537c5d2564c1ade2d07f4db2b852
 =======
 >>>>>>> 0a64d887b983537c5d2564c1ade2d07f4db2b852
 

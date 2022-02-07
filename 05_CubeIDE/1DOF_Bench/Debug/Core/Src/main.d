@@ -37,7 +37,10 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
  ../Core/Inc/remi.h ../Core/Inc/main.h
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> refs/remotes/origin/main
+=======
+>>>>>>> 0a64d887b983537c5d2564c1ade2d07f4db2b852
 =======
 >>>>>>> 0a64d887b983537c5d2564c1ade2d07f4db2b852
 
@@ -115,6 +118,9 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 
 ../Core/Inc/main.h:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> refs/remotes/origin/main
+=======
+>>>>>>> 0a64d887b983537c5d2564c1ade2d07f4db2b852
 =======
 >>>>>>> 0a64d887b983537c5d2564c1ade2d07f4db2b852
