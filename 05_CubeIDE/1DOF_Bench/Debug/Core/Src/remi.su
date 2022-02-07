@@ -1,5 +1,0 @@
-remi.c:11:6:setGreenLed	8	static
-remi.c:16:6:blinkGreenLed	24	static
-remi.c:24:6:setGreenLedViaButton	8	static
-remi.c:36:6:sendWelcomeMsgRS232	16	static
-remi.c:45:6:sendbackRS232	16	static
