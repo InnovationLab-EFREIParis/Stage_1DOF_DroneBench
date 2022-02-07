@@ -19,10 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-<<<<<<< HEAD
-=======
 
->>>>>>> refs/remotes/origin/main
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -57,60 +54,27 @@ TIM_HandleTypeDef htim17;
 UART_HandleTypeDef huart2;
 
 
-
-<<<<<<< HEAD
-=======
-
-/* Private variables ---------------------------------------------------------*/
-UART_HandleTypeDef huart2;
-
->>>>>>> refs/remotes/origin/main
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM17_Init(void);
-<<<<<<< HEAD
 
-/**
- * @brief  The application entry point.
- * @retval int
- */
-int main(void) {
-	/* USER CODE BEGIN 1 */
 
-	/* USER CODE END 1 */
-
+int main(void)
+{
+  /* USER CODE BEGIN 1 */
 	/* MCU Configuration--------------------------------------------------------*/
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
 	HAL_Init();
 	/* Configure the system clock */
 	SystemClock_Config();
-=======
-/* USER CODE BEGIN PFP */
-
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-
-/* USER CODE END 0 */
-
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
-int main(void)
-{
-  /* USER CODE BEGIN 1 */
-
   /* USER CODE END 1 */
 
 
   /* MCU Configuration--------------------------------------------------------*/
 
->>>>>>> refs/remotes/origin/main
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 	MX_USART2_UART_Init();
@@ -125,57 +89,12 @@ int main(void)
 	sendWelcomeMsgRS232(&huart2);
 	printf("Hello from main\n\r");
 
-<<<<<<< HEAD
+
 	while (1) {
 		// set green led if push button
 		setGreenLedViaButton();
 		sendbackRS232(&huart2);
 	}
-
-=======
-
-
-
-
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
-
-
-  /* USER CODE BEGIN Init */
-
-
-		// set green led if push button
-		setGreenLedViaButton();
-
-
-  /* USER CODE END Init */
-
-  /* Configure the system clock */
-  SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
-
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  MX_USART2_UART_Init();
-  MX_ADC1_Init();
-  MX_TIM17_Init();
-  /* USER CODE BEGIN 2 */
-
-  /* USER CODE END 2 */
-
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-  }
-  /* USER CODE END 3 */
->>>>>>> refs/remotes/origin/main
 }
 
 /**
