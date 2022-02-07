@@ -4,12 +4,13 @@
  *  Created on: Feb 7, 2022
  *      Author: Remi
  */
-
+#include "main.h"
 #ifndef INC_REMI_H_
 #define INC_REMI_H_
 
 uint8_t rx_buffer[2];
 GPIO_PinState PinState;
+
 
 void setGreenLed();
 void blinkGreenLed(int nb, int delay);

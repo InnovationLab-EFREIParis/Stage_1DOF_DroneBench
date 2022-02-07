@@ -19,10 +19,12 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "remi.h"
+#include  <stdio.h>
+#include  <errno.h>
+#include  <sys/unistd.h> // STDOUT_FILENO, STDERR_FILENO
 
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart2;
-
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
@@ -52,10 +54,13 @@ int main(void) {
 	blinkGreenLed(10, 100);
 	// Welcome message on UART
 	sendWelcomeMsgRS232(&huart2);
+	printf("Hello from main\n\r");
+
 
 	while (1) {
 
-		// set led if push button
+
+		// set green led if push button
 		setGreenLedViaButton();
 
 		// UART (transmit receive character)
@@ -208,3 +213,19 @@ void assert_failed(uint8_t *file, uint32_t line)
 }
 #endif /* USE_FULL_ASSERT */
 
+// Redefine _write function for printf
+int _write(int file, char *data, int len)
+{
+   if ((file != STDOUT_FILENO) && (file != STDERR_FILENO))
+   {
+      errno = EBADF;
+      return -1;
+   }
+
+   // arbitrary timeout 1000
+   HAL_StatusTypeDef status =
+      HAL_UART_Transmit(&huart2, (uint8_t*)data, len, 1000);
+
+   // return # of bytes written - as best we can tell
+   return (status == HAL_OK ? len : 0);
+}
