@@ -57,16 +57,6 @@ TIM_HandleTypeDef htim17;
 UART_HandleTypeDef huart2;
 
 
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
-
-
-
-/* Private variables ---------------------------------------------------------*/
-ADC_HandleTypeDef hadc1;
-TIM_HandleTypeDef htim17;
-UART_HandleTypeDef huart2;
 
 <<<<<<< HEAD
 =======
