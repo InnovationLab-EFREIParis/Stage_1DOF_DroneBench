@@ -12,7 +12,6 @@
 uint8_t rx_buffer[2];
 GPIO_PinState PinState;
 
-
 void setGreenLed();
 void blinkGreenLed(int nb, int delay);
 void sendWelcomeMsgRS232(UART_HandleTypeDef *huart);
