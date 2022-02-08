@@ -6,6 +6,9 @@
  */
 
 #include "remi.h"
+#include  <stdio.h>
+#include  <errno.h>
+#include  <sys/unistd.h> // STDOUT_FILENO, STDERR_FILENO
 
 // On board green LED On
 void setGreenLed() {
@@ -34,7 +37,6 @@ void setGreenLedViaButton() {
 
 // Welcome Message On RS232
 void sendWelcomeMsgRS232(UART_HandleTypeDef *huart) {
-	printf("Hello from remi\n\r");
 	//pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
 	//if (HAL_UART_Transmit(huart, "Nucleo L476RG connected\n\r", 25, 100)
 	//modification au niveau du formatage du message
