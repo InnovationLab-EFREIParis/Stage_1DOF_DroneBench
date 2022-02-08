@@ -5,6 +5,7 @@
  *      Author: Remi
  */
 #include "main.h"
+#include <stdio.h>
 #ifndef INC_REMI_H_
 #define INC_REMI_H_
 

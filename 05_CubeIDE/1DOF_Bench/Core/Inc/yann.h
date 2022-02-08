@@ -9,8 +9,8 @@
 #define INC_YANN_H_
 #include"main.h"
 //SOUCI : ../Core/Inc/yann.h:13:15: error: unknown type name 'TIM_HandleTypeDef'
-int ADCinput(ADC_HandleTypeDef *hadc,int polTime); //this function will start the adc and return values
-void load_pwm(TIM_HandleTypeDef *htimX,int val);
+int ADCinput(ADC_HandleTypeDef hadc,int polTime); //this function will start the adc and return values
+void load_pwm(TIM_HandleTypeDef htimX,int val);
 
 
 

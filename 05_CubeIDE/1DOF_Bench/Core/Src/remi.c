@@ -35,7 +35,10 @@ void setGreenLedViaButton() {
 // Welcome Message On RS232
 void sendWelcomeMsgRS232(UART_HandleTypeDef *huart) {
 	printf("Hello from remi\n\r");
-	if (HAL_UART_Transmit(huart, "Nucleo L476RG connected\n\r", 25, 100)
+	//pointer targets in passing argument 2 of 'HAL_UART_Transmit' differ in signedness [-Wpointer-sign]
+	//if (HAL_UART_Transmit(huart, "Nucleo L476RG connected\n\r", 25, 100)
+	//modification au niveau du formatage du message
+	if (HAL_UART_Transmit(huart, (uint8_t*)"Nucleo L476RG connected\n\r", 25, 100)
 			!= HAL_OK)
 		Error_Handler();
 }
