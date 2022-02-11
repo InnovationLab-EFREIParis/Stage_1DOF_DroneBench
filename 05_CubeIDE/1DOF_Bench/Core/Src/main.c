@@ -20,27 +20,13 @@
 #include "main.h"
 #include "remi.h"
 #include "yann.h"
+#include <sys/unistd.h>
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
 
-/* USER CODE END Includes */
 
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
 
-/* USER CODE END PTD */
 
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-/* USER CODE END PD */
 
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
-
-/* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
 
 TIM_HandleTypeDef htim3;
@@ -84,9 +70,6 @@ int main(void)
   /* USER CODE BEGIN Init */
 
 
-		// set green led if push button
-		setGreenLedViaButton();
-
 
   /* USER CODE END Init */
 
@@ -111,9 +94,9 @@ int main(void)
 	sendWelcomeMsgRS232(&huart2);
 	printf("Hello from main\n\r");
 	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_2 );
-	TIM3->CCR2 = 4096;
-	int vol =4096;
-	HAL_Delay(1000);
+	TIM3->CCR2 = 1512;
+	HAL_Delay(5000);
+
 
 
 
@@ -124,11 +107,13 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  load_pwm(htim3, vol);
-	  HAL_Delay(50);
-	  vol--;
-	  if (vol==0)
-	    vol = 4096;
+	  //
+	  load_pwm(htim3, load_adc(hadc1, 5));
+	  //load_pwm(htim3, 1400);
+
+
+
+
 
 
 
@@ -269,11 +254,11 @@ static void MX_TIM3_Init(void)
 
   /* USER CODE END TIM3_Init 1 */
   htim3.Instance = TIM3;
-  htim3.Init.Prescaler = 0;
+  htim3.Init.Prescaler = 38;//38
   htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim3.Init.Period = 4096;
   htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
   {
     Error_Handler();
@@ -410,4 +395,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-

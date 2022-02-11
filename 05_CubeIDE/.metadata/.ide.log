@@ -636,3 +636,26 @@
 2022-02-08 16:11:02,438 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
 2022-02-08 16:11:04,439 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
 2022-02-08 16:11:06,441 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-08 16:36:54,341 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-08 16:36:56,343 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-08 16:36:58,346 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-08 16:37:00,425 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-08 16:37:02,428 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-08 16:37:04,431 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-08 17:55:53,652 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-08 17:55:55,654 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-08 17:55:57,655 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-08 17:56:11,777 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-08 17:56:13,778 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-08 17:56:15,781 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-10 11:07:20,168 [INFO] ADCParametersView:103 -                Rank 1 : false
+2022-02-11 14:58:35,983 [INFO] Activator:177 - 
+
+
+2022-02-11 14:58:36,010 [INFO] Activator:178 - !SESSION log4j initialized
+2022-02-11 14:58:55,735 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-02-11 15:00:00,128 [INFO] Activator:177 - 
+
+
+2022-02-11 15:00:00,130 [INFO] Activator:178 - !SESSION log4j initialized
+2022-02-11 15:00:09,702 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
