@@ -5,9 +5,9 @@
 # bin STM32
 *.bin
 # STM32 File
-05_CubeIDE/.metadata/
+05_CubeIDE/.metadata/*
 # STM32 File
-05_CubeIDE/.metadata/1DOF_Bench/.metadata
+05_CubeIDE/.metadata/1DOF_Bench/.metadata/
 # Temp Doc file
 ~*
 # STM32 File
@@ -15,3 +15,4 @@
 # STM32 File
 05_CubeIDE/1DOF_Bench/.settings/language.settings.xml
 
+05_CubeIDE/1DOF_Bench/Debug/1DOF_Bench.list
