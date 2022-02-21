@@ -1,4 +1,0 @@
-yann.c:10:5:load_adc	8	static
-yann.c:20:6:load_pwm	8	static
-yann.c:25:6:y_print	16	static
-yann.c:31:6:display_state	16	static
