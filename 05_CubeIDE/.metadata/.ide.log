@@ -659,3 +659,40 @@
 
 2022-02-11 15:00:00,130 [INFO] Activator:178 - !SESSION log4j initialized
 2022-02-11 15:00:09,702 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-02-11 16:56:10,382 [INFO] Activator:177 - 
+
+
+2022-02-11 16:56:10,386 [INFO] Activator:178 - !SESSION log4j initialized
+2022-02-11 16:56:18,464 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-02-14 11:15:33,137 [INFO] Activator:177 - 
+
+
+2022-02-14 11:15:33,160 [INFO] Activator:178 - !SESSION log4j initialized
+2022-02-14 11:16:06,893 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-02-14 11:16:09,220 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 11:16:11,223 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 11:16:13,226 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 13:14:29,337 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 13:14:31,341 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 13:14:33,344 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 13:16:48,318 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 13:16:50,319 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 13:16:52,322 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 13:16:59,387 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 13:17:01,388 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 13:17:03,390 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 14:06:15,060 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 14:06:17,063 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 14:06:19,065 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 14:06:21,126 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 14:06:23,127 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-14 14:06:25,129 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-21 09:04:19,106 [INFO] Activator:177 - 
+
+
+2022-02-21 09:04:19,152 [INFO] Activator:178 - !SESSION log4j initialized
+2022-02-21 09:04:46,937 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-02-21 10:35:05,676 [INFO] Activator:177 - 
+
+
+2022-02-21 10:35:05,680 [INFO] Activator:178 - !SESSION log4j initialized

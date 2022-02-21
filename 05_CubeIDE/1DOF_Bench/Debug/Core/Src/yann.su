@@ -1,3 +1,4 @@
-yann.c:12:5:load_adc	8	static
-yann.c:22:6:load_pwm	8	static
-yann.c:27:6:y_print	16	static
+yann.c:13:5:load_adc	8	static
+yann.c:24:6:load_pwm	8	static
+yann.c:29:6:y_print	16	static
+yann.c:36:6:changing	16	static

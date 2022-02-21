@@ -8,11 +8,12 @@
 #ifndef INC_YANN_H_
 #define INC_YANN_H_
 #include"main.h"
+#include"fsm.h"
 //SOUCI : ../Core/Inc/yann.h:13:15: error: unknown type name 'TIM_HandleTypeDef'
 int load_adc(ADC_HandleTypeDef hadc,int polTime); //this function will start the adc and return values
 void load_pwm(TIM_HandleTypeDef htimX,int val);
 void y_print(UART_HandleTypeDef *huart,char *mess);
-
+void changing(enum states etat,UART_HandleTypeDef *huart);
 
 
 
