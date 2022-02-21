@@ -20,8 +20,17 @@
 #include "main.h"
 #include "remi.h"
 #include "yann.h"
+#include <sys/unistd.h>
 
+<<<<<<< HEAD
+
+
+
+
+
+=======
 /* Private variables ---------------------------------------------------------*/
+>>>>>>> a33f360be2886c903f7e6ddc728d4c5fa2fc24bc
 ADC_HandleTypeDef hadc1;
 TIM_HandleTypeDef htim3;
 // UART Handler has moved in main.h
@@ -46,12 +55,39 @@ int main(void) {
 	/* Configure the system clock */
 	SystemClock_Config();
 
+<<<<<<< HEAD
+  /* MCU Configuration--------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* USER CODE BEGIN Init */
+
+
+
+  /* USER CODE END Init */
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* USER CODE BEGIN SysInit */
+
+  /* USER CODE END SysInit */
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_USART2_UART_Init();
+  MX_ADC1_Init();
+  MX_TIM3_Init();
+  /* USER CODE BEGIN 2 */
+=======
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 	MX_USART2_UART_Init();
 	MX_ADC1_Init();
 	MX_TIM3_Init();
 	/* USER CODE BEGIN 2 */
+>>>>>>> a33f360be2886c903f7e6ddc728d4c5fa2fc24bc
 	// Light up green led
 	setGreenLed();
 	// blink green led
@@ -59,10 +95,17 @@ int main(void) {
 	// Welcome message on UART
 	sendWelcomeMsgRS232(&huart2);
 	printf("Hello from main\n\r");
+<<<<<<< HEAD
+	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_2 );
+	TIM3->CCR2 = 1512;
+	HAL_Delay(5000);
+
+=======
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
 	TIM3->CCR2 = 4096;
 	int vol = 4096;
 	HAL_Delay(1000);
+>>>>>>> a33f360be2886c903f7e6ddc728d4c5fa2fc24bc
 
 	/* USER CODE END 2 */
 
@@ -76,9 +119,33 @@ int main(void) {
 		if (vol == 0)
 			vol = 4096;
 
+<<<<<<< HEAD
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+    /* USER CODE END WHILE */
+	  //
+	  load_pwm(htim3, load_adc(hadc1, 5));
+	  //load_pwm(htim3, 1400);
+
+
+
+
+
+
+
+
+    /* USER CODE BEGIN 3 */
+  }
+  /* USER CODE END 3 */
+=======
 		/* USER CODE BEGIN 3 */
 	}
 	/* USER CODE END 3 */
+>>>>>>> a33f360be2886c903f7e6ddc728d4c5fa2fc24bc
 }
 
 /**
@@ -202,6 +269,43 @@ static void MX_TIM3_Init(void) {
 
 	/* USER CODE BEGIN TIM3_Init 1 */
 
+<<<<<<< HEAD
+  /* USER CODE END TIM3_Init 1 */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 38;//38
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 4096;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_PWM_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 0;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM3_Init 2 */
+=======
 	/* USER CODE END TIM3_Init 1 */
 	htim3.Instance = TIM3;
 	htim3.Init.Prescaler = 0;
@@ -234,6 +338,7 @@ static void MX_TIM3_Init(void) {
 		Error_Handler();
 	}
 	/* USER CODE BEGIN TIM3_Init 2 */
+>>>>>>> a33f360be2886c903f7e6ddc728d4c5fa2fc24bc
 
 	/* USER CODE END TIM3_Init 2 */
 	HAL_TIM_MspPostInit(&htim3);
@@ -338,4 +443,3 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
