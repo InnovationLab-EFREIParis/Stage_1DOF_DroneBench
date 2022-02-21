@@ -56,11 +56,11 @@ static void MX_TIM3_Init(void);
 int main(void) {
 	/* USER CODE BEGIN 1 */
 		enum states etat;
-		etat = init_motor;
+		etat = idle_mode;
 		char r_buffer[2];
-		int size=25;
-		char buffer [size];
-		int counter = 0;
+		//int size=25;
+		//char buffer [size];
+		//int counter = 0;
 	/* USER CODE END 1 */
 
 	/* MCU Configuration--------------------------------------------------------*/
@@ -90,12 +90,12 @@ int main(void) {
 	// blink green led
 	blinkGreenLed(10, 100);
 	// Welcome message on UART
-	sendWelcomeMsgRS232(&huart2);
+	//sendWelcomeMsgRS232(&huart2);
 	//la fonction au dessus pose des soucis
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
 	TIM3->CCR2 = 1512;
+	y_print(&huart2, " 0 to 6 to change state \n");
 	HAL_Delay(5000);
-
 
 	/* USER CODE END 2 */
 
@@ -155,25 +155,29 @@ int main(void) {
 				//can't or don't know if the data is received correctly, hard to handle  large datas and string
 				//might consider using interrupts or DMA
 
-					for (int i = 0; (i <size) && (buffer[i]!='/'); ++i) {
+					/*for (int i = 0; (i <size) && (buffer[i]!='/'); ++i) {
 						buffer[i]=HAL_UART_Receive(&huart2,(uint8_t*) r_buffer, 2, 10);
 						HAL_Delay(50);
 						HAL_UART_Transmit(&huart2,(uint8_t*) r_buffer, 2, 10);
 						HAL_Delay(50);
 
-					}
-
-					/*if (HAL_UART_Receive(&huart2,(uint8_t*) r_buffer, 2, 10)==HAL_OK && counter<size) {
-						buffer[counter]=HAL_UART_Receive(&huart2,(uint8_t*) r_buffer, 2, 10);
-						HAL_Delay(50);
-						counter++;
-						HAL_UART_Transmit(&huart2,(uint8_t*) r_buffer, 2, 10);
-						HAL_Delay(50);
-						if (counter==size)
-							counter=0;
-
-
 					}*/
+				//idle_mode,init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode
+					 HAL_UART_Receive(&huart2,(uint8_t*) r_buffer, 2, 10);
+					 HAL_Delay(50);
+					 HAL_UART_Transmit(&huart2,(uint8_t*) r_buffer, 2, 10);
+					 HAL_Delay(50);
+						if(r_buffer[0]=='0') etat=idle_mode;
+						if(r_buffer[0]=='1') etat=init_uc;
+						if(r_buffer[0]=='2') etat=init_motor;
+						if(r_buffer[0]=='3') etat=motor_ready;
+						if(r_buffer[0]=='4') etat=manual_mode;
+						if(r_buffer[0]=='5') etat=auto_mode;
+						if(r_buffer[0]=='6') etat=info_mode;
+
+
+
+
 
 					//use interrupts instead of polling it might be less messy
 

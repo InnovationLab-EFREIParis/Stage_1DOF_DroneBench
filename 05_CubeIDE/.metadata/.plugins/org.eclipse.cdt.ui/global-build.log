@@ -279,3 +279,290 @@ Finished building: 1DOF_Bench.bin
  
 Finished building: 1DOF_Bench.list
  
+15:34:18 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/fsm.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/fsm.d" -MT"Core/Src/fsm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fsm.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/remi.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/remi.d" -MT"Core/Src/remi.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/remi.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32l4xx_hal_msp.d" -MT"Core/Src/stm32l4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_hal_msp.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:63:7: warning: unused variable 'counter' [-Wunused-variable]
+   63 |   int counter = 0;
+      |       ^~~~~~~
+../Core/Src/main.c:62:8: warning: unused variable 'buffer' [-Wunused-variable]
+   62 |   char buffer [size];
+      |        ^~~~~~
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32l4xx_it.d" -MT"Core/Src/stm32l4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_it.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22448	     20	   1884	  24352	   5f20	1DOF_Bench.elf
+Finished building: default.size.stdout
+Finished building: 1DOF_Bench.bin
+ 
+ 
+Finished building: 1DOF_Bench.list
+ 
+15:35:09 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:63:7: warning: unused variable 'counter' [-Wunused-variable]
+   63 |   int counter = 0;
+      |       ^~~~~~~
+../Core/Src/main.c:62:8: warning: unused variable 'buffer' [-Wunused-variable]
+   62 |   char buffer [size];
+      |        ^~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22468	     20	   1884	  24372	   5f34	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+15:35:37 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-size   1DOF_Bench.elf 
+   text	   data	    bss	    dec	    hex	filename
+  22468	     20	   1884	  24372	   5f34	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+15:41:00 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:63:7: warning: unused variable 'counter' [-Wunused-variable]
+   63 |   int counter = 0;
+      |       ^~~~~~~
+../Core/Src/main.c:62:8: warning: unused variable 'buffer' [-Wunused-variable]
+   62 |   char buffer [size];
+      |        ^~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22640	     20	   1884	  24544	   5fe0	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+15:41:27 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:63:7: warning: unused variable 'counter' [-Wunused-variable]
+   63 |   int counter = 0;
+      |       ^~~~~~~
+../Core/Src/main.c:62:8: warning: unused variable 'buffer' [-Wunused-variable]
+   62 |   char buffer [size];
+      |        ^~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22640	     20	   1884	  24544	   5fe0	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+15:41:40 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:61:7: warning: unused variable 'size' [-Wunused-variable]
+   61 |   int size=25;
+      |       ^~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22564	     20	   1884	  24468	   5f94	1DOF_Bench.elf
+Finished building: default.size.stdout
+Finished building: 1DOF_Bench.bin
+ 
+ 
+Finished building: 1DOF_Bench.list
+ 
+15:41:50 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22560	     20	   1884	  24464	   5f90	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+15:42:18 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-size   1DOF_Bench.elf 
+   text	   data	    bss	    dec	    hex	filename
+  22560	     20	   1884	  24464	   5f90	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+15:43:45 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22640	     20	   1884	  24544	   5fe0	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+15:45:03 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22560	     20	   1884	  24464	   5f90	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+15:47:36 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22556	     20	   1884	  24460	   5f8c	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+15:47:51 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-size   1DOF_Bench.elf 
+   text	   data	    bss	    dec	    hex	filename
+  22556	     20	   1884	  24460	   5f8c	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+15:49:19 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22560	     20	   1884	  24464	   5f90	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+15:49:58 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22560	     20	   1884	  24464	   5f90	1DOF_Bench.elf
+Finished building: default.size.stdout
+Finished building: 1DOF_Bench.bin
+ 
+ 
+Finished building: 1DOF_Bench.list
+ 
+15:50:32 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22560	     20	   1884	  24464	   5f90	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+15:53:21 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  22616	     20	   1884	  24520	   5fc8	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+15:53:38 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-size   1DOF_Bench.elf 
+   text	   data	    bss	    dec	    hex	filename
+  22616	     20	   1884	  24520	   5fc8	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
