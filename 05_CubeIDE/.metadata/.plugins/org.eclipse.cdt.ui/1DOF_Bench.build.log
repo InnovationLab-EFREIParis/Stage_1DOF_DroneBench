@@ -1,10 +1,10 @@
-15:53:38 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+16:19:12 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
 make -j4 all 
 arm-none-eabi-size   1DOF_Bench.elf 
    text	   data	    bss	    dec	    hex	filename
-  22616	     20	   1884	  24520	   5fc8	1DOF_Bench.elf
+  22624	     20	   1884	  24528	   5fd0	1DOF_Bench.elf
 Finished building: default.size.stdout
  
 
-15:53:39 Build Finished. 0 errors, 0 warnings. (took 615ms)
+16:19:13 Build Finished. 0 errors, 0 warnings. (took 508ms)
 

@@ -102,7 +102,6 @@ int main(void) {
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
-		__HAL_UART_CLEAR_OREFLAG(&huart2);
 
 
 			//-------------------premier test uart et datas
@@ -121,32 +120,8 @@ int main(void) {
 				//idle_mode,init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode
 
 		//---------changement d'etat-------
-				changing(etat, &huart2);//fonction qui change l'etat dans Yann.c
-
-				/*switch (etat) {
-
-				case idle_mode:
-					if (HAL_UART_Transmit(&huart2, (uint8_t*) "Idle mode \r", 15, 100)
-							!= HAL_OK)
-						Error_Handler();
-					HAL_Delay(1000);
-
-					break;
-				case init_uc:
-					if (HAL_UART_Transmit(&huart2, (uint8_t*) "UC Initialization \r",
-							25, 100) != HAL_OK)
-						Error_Handler();
-					HAL_Delay(5000);
-					break;
-				case init_motor:
-					if (HAL_UART_Transmit(&huart2,
-							(uint8_t*) "Motor Initialization \n\r", 27, 100) != HAL_OK)
-						Error_Handler();
-					HAL_Delay(5000);
-					break;
-				default:
-					break;
-				}*/
+				display_state(etat, &huart2);
+				__HAL_UART_CLEAR_OREFLAG(&huart2);//fonction qui change l'etat dans Yann.c
 
 		//---------changement d'etat----FIN---
 
@@ -175,7 +150,7 @@ int main(void) {
 						if(r_buffer[0]=='5') etat=auto_mode;
 						if(r_buffer[0]=='6') etat=info_mode;
 
-
+						__HAL_UART_CLEAR_OREFLAG(&huart2);
 
 
 
