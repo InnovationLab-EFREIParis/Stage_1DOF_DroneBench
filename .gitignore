@@ -2,6 +2,7 @@
 *.elf
 # Objet STM32
 *.o
+*.su
 # bin STM32
 *.bin
 # STM32 File
