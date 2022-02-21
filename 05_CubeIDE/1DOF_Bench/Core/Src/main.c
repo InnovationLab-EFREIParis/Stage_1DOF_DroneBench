@@ -20,20 +20,19 @@
 #include "main.h"
 #include "remi.h"
 #include "yann.h"
-#include <sys/unistd.h>
+#include "fsm.h"
+//#include <sys/unistd.h>
+#include <stdio.h>
 
-<<<<<<< HEAD
-
-
-
-
-
-=======
-/* Private variables ---------------------------------------------------------*/
->>>>>>> a33f360be2886c903f7e6ddc728d4c5fa2fc24bc
 ADC_HandleTypeDef hadc1;
+
 TIM_HandleTypeDef htim3;
-// UART Handler has moved in main.h
+
+UART_HandleTypeDef huart2;
+
+/* USER CODE BEGIN PV */
+
+/* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -41,111 +40,154 @@ static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_TIM3_Init(void);
+/* USER CODE BEGIN PFP */
 
+/* USER CODE END PFP */
+
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
+
+/* USER CODE END 0 */
 
 /**
  * @brief  The application entry point.
  * @retval int
  */
 int main(void) {
+	/* USER CODE BEGIN 1 */
+		enum states etat;
+		etat = idle_mode;
+		char r_buffer[2];
+		//int size=25;
+		//char buffer [size];
+		//int counter = 0;
+	/* USER CODE END 1 */
 
 	/* MCU Configuration--------------------------------------------------------*/
+
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
 	HAL_Init();
+
+	/* USER CODE BEGIN Init */
+
+	/* USER CODE END Init */
+
 	/* Configure the system clock */
 	SystemClock_Config();
 
-<<<<<<< HEAD
-  /* MCU Configuration--------------------------------------------------------*/
+	/* USER CODE BEGIN SysInit */
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+	/* USER CODE END SysInit */
 
-  /* USER CODE BEGIN Init */
-
-
-
-  /* USER CODE END Init */
-
-  /* Configure the system clock */
-  SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
-
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  MX_USART2_UART_Init();
-  MX_ADC1_Init();
-  MX_TIM3_Init();
-  /* USER CODE BEGIN 2 */
-=======
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 	MX_USART2_UART_Init();
 	MX_ADC1_Init();
 	MX_TIM3_Init();
 	/* USER CODE BEGIN 2 */
->>>>>>> a33f360be2886c903f7e6ddc728d4c5fa2fc24bc
 	// Light up green led
 	setGreenLed();
 	// blink green led
 	blinkGreenLed(10, 100);
 	// Welcome message on UART
-	sendWelcomeMsgRS232(&huart2);
-	printf("Hello from main\n\r");
-<<<<<<< HEAD
-	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_2 );
-	TIM3->CCR2 = 1512;
-	HAL_Delay(5000);
-
-=======
+	//sendWelcomeMsgRS232(&huart2);
+	//la fonction au dessus pose des soucis
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
-	TIM3->CCR2 = 4096;
-	int vol = 4096;
-	HAL_Delay(1000);
->>>>>>> a33f360be2886c903f7e6ddc728d4c5fa2fc24bc
+	TIM3->CCR2 = 1512;
+	y_print(&huart2, " 0 to 6 to change state \n");
+	HAL_Delay(5000);
 
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
+		__HAL_UART_CLEAR_OREFLAG(&huart2);
+
+
+			//-------------------premier test uart et datas
+
+				/*val=load_adc(hadc1, 5);
+				sprintf(valchar,"%d \n\r",val);
+				load_pwm(htim3, val);
+				if (HAL_UART_Transmit(huart2, (uint8_t*) valchar,20, 100) != HAL_OK)
+				if( HAL_UART_Transmit(&huart2,(uint8_t*) "COucou\n\r", 20, 100)!= HAL_OK)
+				Error_Handler();
+				load_pwm(htim3, 1400);
+				HAL_Delay(1000);*/
+		//-------------------
+
+					//differents etats qu'on peut avoir
+				//idle_mode,init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode
+
+		//---------changement d'etat-------
+				changing(etat, &huart2);//fonction qui change l'etat dans Yann.c
+
+				/*switch (etat) {
+
+				case idle_mode:
+					if (HAL_UART_Transmit(&huart2, (uint8_t*) "Idle mode \r", 15, 100)
+							!= HAL_OK)
+						Error_Handler();
+					HAL_Delay(1000);
+
+					break;
+				case init_uc:
+					if (HAL_UART_Transmit(&huart2, (uint8_t*) "UC Initialization \r",
+							25, 100) != HAL_OK)
+						Error_Handler();
+					HAL_Delay(5000);
+					break;
+				case init_motor:
+					if (HAL_UART_Transmit(&huart2,
+							(uint8_t*) "Motor Initialization \n\r", 27, 100) != HAL_OK)
+						Error_Handler();
+					HAL_Delay(5000);
+					break;
+				default:
+					break;
+				}*/
+
+		//---------changement d'etat----FIN---
+
+		//---------gestion des entrées UART-------
+				//use a buffer for receiving data
+				//can't or don't know if the data is received correctly, hard to handle  large datas and string
+				//might consider using interrupts or DMA
+
+					/*for (int i = 0; (i <size) && (buffer[i]!='/'); ++i) {
+						buffer[i]=HAL_UART_Receive(&huart2,(uint8_t*) r_buffer, 2, 10);
+						HAL_Delay(50);
+						HAL_UART_Transmit(&huart2,(uint8_t*) r_buffer, 2, 10);
+						HAL_Delay(50);
+
+					}*/
+				//idle_mode,init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode
+					 HAL_UART_Receive(&huart2,(uint8_t*) r_buffer, 2, 10);
+					 HAL_Delay(50);
+					 HAL_UART_Transmit(&huart2,(uint8_t*) r_buffer, 2, 10);
+					 HAL_Delay(50);
+						if(r_buffer[0]=='0') etat=idle_mode;
+						if(r_buffer[0]=='1') etat=init_uc;
+						if(r_buffer[0]=='2') etat=init_motor;
+						if(r_buffer[0]=='3') etat=motor_ready;
+						if(r_buffer[0]=='4') etat=manual_mode;
+						if(r_buffer[0]=='5') etat=auto_mode;
+						if(r_buffer[0]=='6') etat=info_mode;
+
+
+
+
+
+					//use interrupts instead of polling it might be less messy
+
+			//---------gestion des entrées UART-------
+
 		/* USER CODE END WHILE */
-		load_pwm(htim3, vol);
-		HAL_Delay(50);
-		vol--;
-		if (vol == 0)
-			vol = 4096;
 
-<<<<<<< HEAD
-  /* USER CODE END 2 */
-
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
-	  //
-	  load_pwm(htim3, load_adc(hadc1, 5));
-	  //load_pwm(htim3, 1400);
-
-
-
-
-
-
-
-
-    /* USER CODE BEGIN 3 */
-  }
-  /* USER CODE END 3 */
-=======
-		/* USER CODE BEGIN 3 */
 	}
+
 	/* USER CODE END 3 */
->>>>>>> a33f360be2886c903f7e6ddc728d4c5fa2fc24bc
 }
 
 /**
@@ -269,50 +311,13 @@ static void MX_TIM3_Init(void) {
 
 	/* USER CODE BEGIN TIM3_Init 1 */
 
-<<<<<<< HEAD
-  /* USER CODE END TIM3_Init 1 */
-  htim3.Instance = TIM3;
-  htim3.Init.Prescaler = 38;//38
-  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim3.Init.Period = 4096;
-  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  if (HAL_TIM_PWM_Init(&htim3) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 0;
-  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM3_Init 2 */
-=======
 	/* USER CODE END TIM3_Init 1 */
 	htim3.Instance = TIM3;
-	htim3.Init.Prescaler = 0;
+	htim3.Init.Prescaler = 38;	  		//38
 	htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
 	htim3.Init.Period = 4096;
 	htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-	htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+	htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
 	if (HAL_TIM_Base_Init(&htim3) != HAL_OK) {
 		Error_Handler();
 	}
@@ -338,7 +343,6 @@ static void MX_TIM3_Init(void) {
 		Error_Handler();
 	}
 	/* USER CODE BEGIN TIM3_Init 2 */
->>>>>>> a33f360be2886c903f7e6ddc728d4c5fa2fc24bc
 
 	/* USER CODE END TIM3_Init 2 */
 	HAL_TIM_MspPostInit(&htim3);
