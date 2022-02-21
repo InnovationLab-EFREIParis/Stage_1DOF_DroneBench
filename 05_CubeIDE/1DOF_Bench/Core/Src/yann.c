@@ -24,11 +24,11 @@ void load_pwm(TIM_HandleTypeDef htimX, int val) {
 
 void y_print(UART_HandleTypeDef *huart, char *mess) {
 
-	if (HAL_UART_Transmit(huart, (uint8_t*) mess, 25, 100) != HAL_OK)
+	if (HAL_UART_Transmit(huart, (uint8_t*) mess,30, 100) != HAL_OK)
 		Error_Handler();
 }
 
-void changing(enum states etat, UART_HandleTypeDef *huart) {
+void display_state(enum states etat, UART_HandleTypeDef *huart) {
 	switch (etat) {
 
 	case idle_mode:
