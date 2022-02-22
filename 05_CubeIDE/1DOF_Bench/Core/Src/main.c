@@ -90,6 +90,7 @@ int main(void) {
 	// blink green led
 	blinkGreenLed(10, 100);
 	// Welcome message on UART
+	printf("Hello from main\n\r");
 	//sendWelcomeMsgRS232(&huart2);
 	//la fonction au dessus pose des soucis
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
