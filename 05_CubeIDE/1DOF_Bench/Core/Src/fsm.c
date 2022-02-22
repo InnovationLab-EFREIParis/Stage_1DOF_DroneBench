@@ -8,6 +8,7 @@
 #include "fsm.h"
 #include "main.h"
 #include "yann.h"
+#include "remi.h"
 
 
 
@@ -24,7 +25,7 @@ void motor_init() {
 }
 
 void uc_init() {
-
+		printf("rest");
 
 	}
 
