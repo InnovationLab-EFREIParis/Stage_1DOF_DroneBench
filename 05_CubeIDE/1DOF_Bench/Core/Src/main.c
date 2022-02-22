@@ -55,12 +55,12 @@ static void MX_TIM3_Init(void);
  */
 int main(void) {
 	/* USER CODE BEGIN 1 */
-		enum states etat;
-		etat = idle_mode;
-		char r_buffer[2];
-		//int size=25;
-		//char buffer [size];
-		//int counter = 0;
+	enum states etat;
+	etat = idle_mode;
+	char r_buffer[2];
+	#define Valeur_minimale_moteur 1512
+	//char buffer [size];
+	//int counter = 0;
 	/* USER CODE END 1 */
 
 	/* MCU Configuration--------------------------------------------------------*/
@@ -93,8 +93,9 @@ int main(void) {
 	//sendWelcomeMsgRS232(&huart2);
 	//la fonction au dessus pose des soucis
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
-	TIM3->CCR2 = 1512;
-	y_print(&huart2, " 0 to 6 to change state \n");
+	//NOus mettons ici la valeur minimale pour emettre un signal vers notre ESC dans notre registre capture and compare register
+	TIM3->CCR2 = Valeur_minimale_moteur;
+	y_print(&huart2, " 0 to 6 to change state \r\n",26);
 	HAL_Delay(5000);
 
 	/* USER CODE END 2 */
@@ -102,61 +103,144 @@ int main(void) {
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
+		__HAL_UART_CLEAR_OREFLAG(&huart2);
 
-
-			//-------------------premier test uart et datas
-
-				/*val=load_adc(hadc1, 5);
-				sprintf(valchar,"%d \n\r",val);
-				load_pwm(htim3, val);
-				if (HAL_UART_Transmit(huart2, (uint8_t*) valchar,20, 100) != HAL_OK)
-				if( HAL_UART_Transmit(&huart2,(uint8_t*) "COucou\n\r", 20, 100)!= HAL_OK)
-				Error_Handler();
-				load_pwm(htim3, 1400);
-				HAL_Delay(1000);*/
-		//-------------------
-
-					//differents etats qu'on peut avoir
-				//idle_mode,init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode
+		//differents etats qu'on peut avoir
+		//idle_mode,init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode
 
 		//---------changement d'etat-------
-				display_state(etat, &huart2);
-				__HAL_UART_CLEAR_OREFLAG(&huart2);//fonction qui change l'etat dans Yann.c
+
+		switch (etat) {
+
+		case idle_mode:
+			//traitement des sorties
+
+			HAL_Delay(1000);
+			if (HAL_UART_Transmit(&huart2, (uint8_t*) "Idle mode \n\r", 15, 100)
+					!= HAL_OK)
+				Error_Handler();
+			HAL_Delay(3000);
+			//traitement des entrées (transitions)
+
+			break;
+		case info_mode:
+			if (HAL_UART_Transmit(&huart2, (uint8_t*) "Info mode\n\r", 12, 100)
+					!= HAL_OK)
+				Error_Handler();
+			HAL_Delay(3000);
+			//sortie de la boucle
+			do{
+					__HAL_UART_CLEAR_OREFLAG(&huart2);
+					if (HAL_UART_Receive(&huart2,(uint8_t*) r_buffer, 2, 10) == HAL_OK){
+						HAL_Delay(50);
+						HAL_UART_Transmit(&huart2,(uint8_t*) r_buffer, 2, 10);
+						HAL_Delay(50);
+					}
+
+			}while(r_buffer[0]!=1 );
+
+
+			if (r_buffer[0] == '0')
+				etat = idle_mode;
+			if (r_buffer[0] == '1')
+				etat = init_uc;
+				//le programme freeze dans l'etat info
+			break;
+
+
+		case init_uc:
+			if (HAL_UART_Transmit(&huart2, (uint8_t*) "UC Initialization \n\r", 22,
+					100) != HAL_OK)
+				Error_Handler();
+			HAL_Delay(3000);
+
+			break;
+
+
+
+		case init_motor:
+			if (HAL_UART_Transmit(&huart2, (uint8_t*) "Motor Initialization \n\r", 24,
+					100) != HAL_OK)
+				Error_Handler();
+			HAL_Delay(3000);
+			break;
+
+
+
+		case motor_ready:
+			if (HAL_UART_Transmit(&huart2, (uint8_t*) "Motor ready \n\r", 15, 100)
+					!= HAL_OK)
+				Error_Handler();
+			HAL_Delay(3000);
+
+			break;
+
+
+
+		case auto_mode:
+			if (HAL_UART_Transmit(&huart2, (uint8_t*) "Auto mode \n\r", 15, 100)
+					!= HAL_OK)
+				Error_Handler();
+			HAL_Delay(3000);
+
+			break;
+
+
+
+		case manual_mode:
+			if (HAL_UART_Transmit(&huart2, (uint8_t*) "Manual mode \n\r", 15, 100)
+					!= HAL_OK)
+				Error_Handler();
+			HAL_Delay(3000);
+
+			break;
+		default:
+			break;
+
+		}
+
+
 
 		//---------changement d'etat----FIN---
 
 		//---------gestion des entrées UART-------
-				//use a buffer for receiving data
-				//can't or don't know if the data is received correctly, hard to handle  large datas and string
-				//might consider using interrupts or DMA
+		//use a buffer for receiving data
+		//can't or don't know if the data is received correctly, hard to handle  large datas and string
+		//might consider using interrupts or DMA
 
-					/*for (int i = 0; (i <size) && (buffer[i]!='/'); ++i) {
-						buffer[i]=HAL_UART_Receive(&huart2,(uint8_t*) r_buffer, 2, 10);
-						HAL_Delay(50);
-						HAL_UART_Transmit(&huart2,(uint8_t*) r_buffer, 2, 10);
-						HAL_Delay(50);
+		/*for (int i = 0; (i <size) && (buffer[i]!='/'); ++i) {
+		 buffer[i]=HAL_UART_Receive(&huart2,(uint8_t*) r_buffer, 2, 10);
+		 HAL_Delay(50);
+		 HAL_UART_Transmit(&huart2,(uint8_t*) r_buffer, 2, 10);
+		 HAL_Delay(50);
 
-					}*/
-				//idle_mode,init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode
-					 HAL_UART_Receive(&huart2,(uint8_t*) r_buffer, 2, 10);
-					 HAL_Delay(50);
-					 HAL_UART_Transmit(&huart2,(uint8_t*) r_buffer, 2, 10);
-					 HAL_Delay(50);
-						if(r_buffer[0]=='0') etat=idle_mode;
-						if(r_buffer[0]=='1') etat=init_uc;
-						if(r_buffer[0]=='2') etat=init_motor;
-						if(r_buffer[0]=='3') etat=motor_ready;
-						if(r_buffer[0]=='4') etat=manual_mode;
-						if(r_buffer[0]=='5') etat=auto_mode;
-						if(r_buffer[0]=='6') etat=info_mode;
+		 }*/
+		//idle_mode,init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode
+		if (HAL_UART_Receive(&huart2,(uint8_t*) r_buffer, 2, 10) == HAL_OK)
+				HAL_UART_Transmit(&huart2,(uint8_t*) r_buffer, 2, 10);
+		/*HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10);
+		HAL_Delay(50);
+		HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
+		HAL_Delay(50);*/
+		//faire passer dans le switch
+		if (r_buffer[0] == '0')
+			etat = idle_mode;
+		if (r_buffer[0] == '1')
+			etat = init_uc;
+		if (r_buffer[0] == '2')
+			etat = init_motor;
+		if (r_buffer[0] == '3')
+			etat = motor_ready;
+		if (r_buffer[0] == '4')
+			etat = manual_mode;
+		if (r_buffer[0] == '5')
+			etat = auto_mode;
+		if (r_buffer[0] == '6')
+			etat = info_mode;
 
-						__HAL_UART_CLEAR_OREFLAG(&huart2);
+		//use interrupts instead of polling it might be less messy
 
-
-
-					//use interrupts instead of polling it might be less messy
-
-			//---------gestion des entrées UART-------
+		//---------gestion des entrées UART-------
 
 		/* USER CODE END WHILE */
 
