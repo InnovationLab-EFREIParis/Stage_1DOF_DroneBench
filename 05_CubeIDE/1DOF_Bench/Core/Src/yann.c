@@ -6,6 +6,8 @@
  */
 
 #include "yann.h"
+#include "remi.h"
+#include<stdio.h>
 
 int load_adc(ADC_HandleTypeDef hadc, int polTime) {
 
@@ -22,37 +24,42 @@ void load_pwm(TIM_HandleTypeDef htimX, int val) {
 	htimX.Instance->CCR2 = val;
 }
 
-void y_print(UART_HandleTypeDef *huart, char *mess) {
+void y_print(UART_HandleTypeDef *huart, char *mess,int len) {
 
-	if (HAL_UART_Transmit(huart, (uint8_t*) mess,30, 100) != HAL_OK)
+	if (HAL_UART_Transmit(huart, (uint8_t*) mess,len, 100) != HAL_OK)
 		Error_Handler();
 }
+
 
 void display_state(enum states etat, UART_HandleTypeDef *huart) {
 	switch (etat) {
 
 	case idle_mode:
+		//traitement des sorties
+
+		HAL_Delay(1000);
 		if (HAL_UART_Transmit(huart, (uint8_t*) "Idle mode \n\r", 15, 100)
 				!= HAL_OK)
 			Error_Handler();
 		HAL_Delay(3000);
+		//traitement des entrées (transitions)
 
 		break;
 	case info_mode:
-		if (HAL_UART_Transmit(huart, (uint8_t*) "Info mode\n\r", 15, 100)
+		if (HAL_UART_Transmit(huart, (uint8_t*) "Info mode\n\r", 12, 100)
 				!= HAL_OK)
 			Error_Handler();
 		HAL_Delay(3000);
 
 		break;
 	case init_uc:
-		if (HAL_UART_Transmit(huart, (uint8_t*) "UC Initialization \n\r", 25,
+		if (HAL_UART_Transmit(huart, (uint8_t*) "UC Initialization \n\r", 22,
 				100) != HAL_OK)
 			Error_Handler();
 		HAL_Delay(3000);
 		break;
 	case init_motor:
-		if (HAL_UART_Transmit(huart, (uint8_t*) "Motor Initialization \n\r", 27,
+		if (HAL_UART_Transmit(huart, (uint8_t*) "Motor Initialization \n\r", 24,
 				100) != HAL_OK)
 			Error_Handler();
 		HAL_Delay(3000);
