@@ -11,7 +11,7 @@
 
 
 
-float firmware= 0.1;
+
 void switch_states(enum states div);
 
 void motor_init() {

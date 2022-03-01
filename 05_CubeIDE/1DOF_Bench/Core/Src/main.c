@@ -136,17 +136,15 @@ int main(void) {
 		__HAL_UART_CLEAR_OREFLAG(&huart2);
 
 		//differents etats qu'on peut avoir
-		//idle_mode,init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode
+
 		val = load_adc(hadc1, 5);
 		if (val > 2025)
 			val = 2025;
-		//sprintf(valchar,"%d \n\r",val);
-		load_pwm(htim3, val);
-		//if (HAL_UART_Transmit(huart2, (uint8_t*) valchar,20, 100) != HAL_OK)
-		//if( HAL_UART_Transmit(&huart2,(uint8_t*) "COucou\n\r", 20, 100)!= HAL_OK)
-		//Error_Handler();
-		//load_pwm(htim3, 1400);
-		//HAL_Delay(1000);
+
+
+		//load_pwm(htim3, val);
+
+
 		//---------changement d'etat-------
 
 		switch (etat) {
@@ -159,10 +157,24 @@ int main(void) {
 					/*if (HAL_UART_Transmit(&huart2, (uint8_t*) "UC Initialization \n\r", 22,
 					 100) != HAL_OK)
 					 Error_Handler();*/
-					printf("Init Micro Controleur\r\n");
+					printf("nucleo ready\r\n");
 					HAL_Delay(3000);
 					//traitement des entrées (transitions)
+					do {
+
+											if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
+													== HAL_OK) {
+												HAL_Delay(50);
+												HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
+												HAL_Delay(50);
+											}
+
+										} while ((r_buffer[0] != '1')&& (r_buffer[0] != '2')); //|| (r_buffer[0] != '2')
+					if(r_buffer[0] == '2')
 					etat = info_mode;
+					else
+						etat = init_motor;
+					r_buffer[0]=' ';
 					break;
 
 				case info_mode:
@@ -170,9 +182,11 @@ int main(void) {
 						//	!= HAL_OK)
 						//Error_Handler();
 					printf("Info mode\r\n");
+					printf("Firmware version %.2f \n\r",firmware_version);
 					HAL_Delay(3000);
+
 					//sortie de la boucle
-					do {
+					/*do {
 						__HAL_UART_CLEAR_OREFLAG(&huart2);
 						if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
 								== HAL_OK) {
@@ -181,7 +195,7 @@ int main(void) {
 							HAL_Delay(50);
 						}
 
-					} while (r_buffer[0] != '0');
+					} while (r_buffer[0] != '0');*/
 
 					etat = init_uc;
 					// Reinitialisation du buffer
@@ -191,10 +205,14 @@ int main(void) {
 					break;
 
 				case init_motor:
-					if (HAL_UART_Transmit(&huart2,
+					/*if (HAL_UART_Transmit(&huart2,
 							(uint8_t*) "Motor Initialization \r\n", 24, 100) != HAL_OK)
-						Error_Handler();
+						Error_Handler();*/
+					printf("Motor Initialization \n\r");
 					HAL_Delay(3000);
+					load_pwm(htim3, valeur_min_moteur);
+
+
 					break;
 
 				case motor_ready:

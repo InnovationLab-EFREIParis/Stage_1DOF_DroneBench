@@ -1,9 +1,9 @@
-17:53:15 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+18:15:55 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
 make -j4 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 ../Core/Src/main.c: In function 'main':
-../Core/Src/main.c:277:3: warning: "/*" within comment [-Wcomment]
-  277 |   /* USER CODE END WHILE */
+../Core/Src/main.c:295:3: warning: "/*" within comment [-Wcomment]
+  295 |   /* USER CODE END WHILE */
       |    
 ../Core/Src/main.c:90:6: warning: unused variable 'k' [-Wunused-variable]
    90 |  int k = 0;
@@ -15,7 +15,7 @@ arm-none-eabi-size   1DOF_Bench.elf
 arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
 arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
    text	   data	    bss	    dec	    hex	filename
-  50152	    492	   1988	  52632	   cd98	1DOF_Bench.elf
+  50248	    496	   1984	  52728	   cdf8	1DOF_Bench.elf
 Finished building: default.size.stdout
  
 Finished building: 1DOF_Bench.bin
@@ -23,5 +23,5 @@ Finished building: 1DOF_Bench.bin
 Finished building: 1DOF_Bench.list
  
 
-17:53:17 Build Finished. 0 errors, 2 warnings. (took 1s.848ms)
+18:15:57 Build Finished. 0 errors, 2 warnings. (took 1s.792ms)
 
