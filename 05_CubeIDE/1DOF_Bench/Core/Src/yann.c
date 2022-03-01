@@ -5,9 +5,12 @@
  *      Author: AXEL NDO
  */
 
+
 #include "yann.h"
-#include "remi.h"
 #include<stdio.h>
+
+
+ float firm =0.1;
 
 int load_adc(ADC_HandleTypeDef hadc, int polTime) {
 

@@ -722,3 +722,859 @@ d:\stm32\stm32cubeide_1.8.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.extern
 collect2.exe: error: ld returned 1 exit status
 make: *** [makefile:79: 1DOF_Bench.elf] Error 1
 "make -j4 all" terminated with exit code 2. Build might be incomplete.
+16:26:41 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/remi.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/remi.d" -MT"Core/Src/remi.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/remi.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:81:1: error: version control conflict marker in file
+   81 | <<<<<<< HEAD
+      | ^~~~~~~
+../Core/Src/main.c:86:1: error: version control conflict marker in file
+   86 | =======
+      | ^~~~~~~
+../Core/Src/main.c:88:9: error: invalid suffix "a71a9b2b6231c86945bfa29a6e11584663274f4" on integer constant
+   88 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:126:1: error: version control conflict marker in file
+  126 | <<<<<<< HEAD
+      | ^~~~~~~
+../Core/Src/main.c:129:1: error: version control conflict marker in file
+  129 | =======
+      | ^~~~~~~
+../Core/Src/main.c:132:1: error: version control conflict marker in file
+  132 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      | ^~~~~~~
+../Core/Src/main.c:132:9: error: invalid suffix "a71a9b2b6231c86945bfa29a6e11584663274f4" on integer constant
+  132 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:144:3: error: 'val' undeclared (first use in this function)
+  144 |   val = load_adc(hadc1, 5);
+      |   ^~~
+../Core/Src/main.c:144:3: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:174:10: error: 'k' undeclared (first use in this function)
+  174 |      if (k==0)
+      |          ^
+../Core/Src/main.c:238:1: error: version control conflict marker in file
+  238 | =======
+      | ^~~~~~~
+../Core/Src/main.c:249:3: error: case label not within a switch statement
+  249 |   case init_uc:
+      |   ^~~~
+../Core/Src/main.c:260:3: error: case label not within a switch statement
+  260 |   case info_mode:
+      |   ^~~~
+../Core/Src/main.c:278:11: error: 'idle_mode' undeclared (first use in this function); did you mean 'info_mode'?
+  278 |    etat = idle_mode;
+      |           ^~~~~~~~~
+      |           info_mode
+../Core/Src/main.c:285:3: error: case label not within a switch statement
+  285 |   case init_motor:
+      |   ^~~~
+../Core/Src/main.c:292:3: error: case label not within a switch statement
+  292 |   case motor_ready:
+      |   ^~~~
+../Core/Src/main.c:300:3: error: case label not within a switch statement
+  300 |   case auto_mode:
+      |   ^~~~
+../Core/Src/main.c:308:3: error: case label not within a switch statement
+  308 |   case manual_mode:
+      |   ^~~~
+../Core/Src/main.c:315:3: error: 'default' label not within a switch statement
+  315 |   default:
+      |   ^~~~~~~
+../Core/Src/main.c:319:1: error: version control conflict marker in file
+  319 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      | ^~~~~~~
+../Core/Src/main.c:319:9: error: invalid suffix "a71a9b2b6231c86945bfa29a6e11584663274f4" on integer constant
+  319 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:342:1: error: version control conflict marker in file
+  342 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      | ^~~~~~~
+../Core/Src/main.c:342:9: error: invalid suffix "a71a9b2b6231c86945bfa29a6e11584663274f4" on integer constant
+  342 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:375:9: error: invalid suffix "a71a9b2b6231c86945bfa29a6e11584663274f4" on integer constant
+  375 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:384:1: error: expected identifier or '(' before '}' token
+  384 | }
+      | ^
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+16:31:39 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:80:7: warning: unused variable 'r_buffer' [-Wunused-variable]
+   80 |  char r_buffer[2];
+      |       ^~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+d:\stm32\stm32cubeide_1.8.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_2.0.0.202105311346\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/main.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:19: multiple definition of `firmware_version'; ./Core/Src/fsm.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:19: first defined here
+d:\stm32\stm32cubeide_1.8.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_2.0.0.202105311346\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/yann.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:19: multiple definition of `firmware_version'; ./Core/Src/fsm.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:19: first defined here
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:79: 1DOF_Bench.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+16:34:41 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/fsm.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/fsm.d" -MT"Core/Src/fsm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fsm.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:80:7: warning: unused variable 'r_buffer' [-Wunused-variable]
+   80 |  char r_buffer[2];
+      |       ^~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  49632	    488	   1984	  52104	   cb88	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+16:55:21 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:192:13: error: 'idle_mode' undeclared (first use in this function); did you mean 'info_mode'?
+  192 |      etat = idle_mode;
+      |             ^~~~~~~~~
+      |             info_mode
+../Core/Src/main.c:192:13: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+16:55:41 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  49992	    488	   1984	  52464	   ccf0	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+16:57:05 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-size   1DOF_Bench.elf 
+   text	   data	    bss	    dec	    hex	filename
+  49992	    488	   1984	  52464	   ccf0	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+16:57:42 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  50232	    488	   1984	  52704	   cde0	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+17:00:35 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  50184	    488	   1984	  52656	   cdb0	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+17:03:06 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/fsm.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/fsm.d" -MT"Core/Src/fsm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fsm.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+d:\stm32\stm32cubeide_1.8.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_2.0.0.202105311346\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/main.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/fsm.h:13: multiple definition of `firmware'; ./Core/Src/fsm.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/fsm.h:13: first defined here
+d:\stm32\stm32cubeide_1.8.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_2.0.0.202105311346\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/yann.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/fsm.h:13: multiple definition of `firmware'; ./Core/Src/fsm.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/fsm.h:13: first defined here
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:79: 1DOF_Bench.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:03:43 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/fsm.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/fsm.d" -MT"Core/Src/fsm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fsm.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  50184	    488	   1984	  52656	   cdb0	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+17:04:18 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:195:19: error: 'firmware' undeclared (first use in this function)
+  195 |      printf("%f",&firmware);
+      |                   ^~~~~~~~
+../Core/Src/main.c:195:19: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:04:31 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:195:18: error: 'firmware' undeclared (first use in this function)
+  195 |      printf("%f",firmware);
+      |                  ^~~~~~~~
+../Core/Src/main.c:195:18: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:07:43 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/fsm.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/fsm.d" -MT"Core/Src/fsm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fsm.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+d:\stm32\stm32cubeide_1.8.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_2.0.0.202105311346\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/yann.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:13: multiple definition of `firmware'; ./Core/Src/fsm.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:13: first defined here
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:79: 1DOF_Bench.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:08:24 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/fsm.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/fsm.d" -MT"Core/Src/fsm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fsm.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+d:\stm32\stm32cubeide_1.8.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_2.0.0.202105311346\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/yann.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:13: multiple definition of `firmware'; ./Core/Src/fsm.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:13: first defined here
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:79: 1DOF_Bench.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:09:58 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/yann.c:12:14: warning: 'firmware' initialized and declared 'extern'
+   12 | extern float firmware = 0.1;
+      |              ^~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+d:\stm32\stm32cubeide_1.8.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_2.0.0.202105311346\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/yann.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:13: multiple definition of `firmware'; ./Core/Src/fsm.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:13: first defined here
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:79: 1DOF_Bench.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:10:23 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/fsm.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/fsm.d" -MT"Core/Src/fsm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fsm.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/fsm.c:15:7: error: conflicting types for 'firmware'
+   15 | float firmware= 0.1;
+      |       ^~~~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:195:15: warning: format '%f' expects argument of type 'double', but argument 2 has type 'int' [-Wformat=]
+  195 |      printf("%f",firmware);
+      |              ~^  ~~~~~~~~
+      |               |  |
+      |               |  int
+      |               double
+      |              %d
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+In file included from ../Core/Src/fsm.c:10:
+../Core/Inc/yann.h:13:12: note: previous declaration of 'firmware' was here
+   13 | extern int firmware;
+      |            ^~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/fsm.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:10:33 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/fsm.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/fsm.d" -MT"Core/Src/fsm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fsm.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:195:18: error: 'firmware' undeclared (first use in this function)
+  195 |      printf("%f",firmware);
+      |                  ^~~~~~~~
+../Core/Src/main.c:195:18: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:11:17 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/fsm.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/fsm.d" -MT"Core/Src/fsm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fsm.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:195:18: error: 'firmware' undeclared (first use in this function)
+  195 |      printf("%f",firmware);
+      |                  ^~~~~~~~
+../Core/Src/main.c:195:18: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:12:28 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+In file included from ../Core/Src/yann.c:8:
+../Core/Inc/yann.h:18:25: warning: 'enum states' declared inside parameter list will not be visible outside of this definition or declaration
+   18 | void display_state(enum states etat,UART_HandleTypeDef *huart);
+      |                         ^~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:195:18: error: 'firmware' undeclared (first use in this function)
+  195 |      printf("%f",firmware);
+      |                  ^~~~~~~~
+../Core/Src/main.c:195:18: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+../Core/Src/yann.c:36:25: warning: 'enum states' declared inside parameter list will not be visible outside of this definition or declaration
+   36 | void display_state(enum states etat, UART_HandleTypeDef *huart) {
+      |                         ^~~~~~
+../Core/Src/yann.c:36:32: error: parameter 1 ('etat') has incomplete type
+   36 | void display_state(enum states etat, UART_HandleTypeDef *huart) {
+      |                    ~~~~~~~~~~~~^~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Core/Src/yann.c: In function 'display_state':
+../Core/Src/yann.c:40:7: error: 'info_mode' undeclared (first use in this function)
+   40 |  case info_mode:
+      |       ^~~~~~~~~
+../Core/Src/yann.c:40:7: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/yann.c:47:7: error: 'init_uc' undeclared (first use in this function)
+   47 |  case init_uc:
+      |       ^~~~~~~
+../Core/Src/yann.c:53:7: error: 'init_motor' undeclared (first use in this function)
+   53 |  case init_motor:
+      |       ^~~~~~~~~~
+../Core/Src/yann.c:59:7: error: 'motor_ready' undeclared (first use in this function)
+   59 |  case motor_ready:
+      |       ^~~~~~~~~~~
+../Core/Src/yann.c:66:7: error: 'auto_mode' undeclared (first use in this function)
+   66 |  case auto_mode:
+      |       ^~~~~~~~~
+../Core/Src/yann.c:73:7: error: 'manual_mode' undeclared (first use in this function)
+   73 |  case manual_mode:
+      |       ^~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/yann.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:12:55 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+In file included from ../Core/Src/yann.c:8:
+../Core/Inc/yann.h:18:25: warning: 'enum states' declared inside parameter list will not be visible outside of this definition or declaration
+   18 | void display_state(enum states etat,UART_HandleTypeDef *huart);
+      |                         ^~~~~~
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+../Core/Src/yann.c:36:25: warning: 'enum states' declared inside parameter list will not be visible outside of this definition or declaration
+   36 | void display_state(enum states etat, UART_HandleTypeDef *huart) {
+      |                         ^~~~~~
+../Core/Src/yann.c:36:32: error: parameter 1 ('etat') has incomplete type
+   36 | void display_state(enum states etat, UART_HandleTypeDef *huart) {
+      |                    ~~~~~~~~~~~~^~~~
+../Core/Src/yann.c: In function 'display_state':
+../Core/Src/yann.c:40:7: error: 'info_mode' undeclared (first use in this function)
+   40 |  case info_mode:
+      |       ^~~~~~~~~
+../Core/Src/yann.c:40:7: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/yann.c:47:7: error: 'init_uc' undeclared (first use in this function)
+   47 |  case init_uc:
+      |       ^~~~~~~
+../Core/Src/yann.c:53:7: error: 'init_motor' undeclared (first use in this function)
+   53 |  case init_motor:
+      |       ^~~~~~~~~~
+../Core/Src/yann.c:59:7: error: 'motor_ready' undeclared (first use in this function)
+   59 |  case motor_ready:
+      |       ^~~~~~~~~~~
+../Core/Src/yann.c:66:7: error: 'auto_mode' undeclared (first use in this function)
+   66 |  case auto_mode:
+      |       ^~~~~~~~~
+../Core/Src/yann.c:73:7: error: 'manual_mode' undeclared (first use in this function)
+   73 |  case manual_mode:
+      |       ^~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/yann.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:13:12 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+In file included from ../Core/Src/yann.c:8:
+../Core/Inc/yann.h:18:25: warning: 'enum states' declared inside parameter list will not be visible outside of this definition or declaration
+   18 | void display_state(enum states etat,UART_HandleTypeDef *huart);
+      |                         ^~~~~~
+../Core/Src/yann.c:12:12: warning: 'firmware' initialized and declared 'extern'
+   12 | extern int firmware = 1;
+      |            ^~~~~~~~
+../Core/Src/yann.c:36:25: warning: 'enum states' declared inside parameter list will not be visible outside of this definition or declaration
+   36 | void display_state(enum states etat, UART_HandleTypeDef *huart) {
+      |                         ^~~~~~
+../Core/Src/yann.c:36:32: error: parameter 1 ('etat') has incomplete type
+   36 | void display_state(enum states etat, UART_HandleTypeDef *huart) {
+      |                    ~~~~~~~~~~~~^~~~
+../Core/Src/yann.c: In function 'display_state':
+../Core/Src/yann.c:40:7: error: 'info_mode' undeclared (first use in this function)
+   40 |  case info_mode:
+      |       ^~~~~~~~~
+../Core/Src/yann.c:40:7: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/yann.c:47:7: error: 'init_uc' undeclared (first use in this function)
+   47 |  case init_uc:
+      |       ^~~~~~~
+../Core/Src/yann.c:53:7: error: 'init_motor' undeclared (first use in this function)
+   53 |  case init_motor:
+      |       ^~~~~~~~~~
+../Core/Src/yann.c:59:7: error: 'motor_ready' undeclared (first use in this function)
+   59 |  case motor_ready:
+      |       ^~~~~~~~~~~
+../Core/Src/yann.c:66:7: error: 'auto_mode' undeclared (first use in this function)
+   66 |  case auto_mode:
+      |       ^~~~~~~~~
+../Core/Src/yann.c:73:7: error: 'manual_mode' undeclared (first use in this function)
+   73 |  case manual_mode:
+      |       ^~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/yann.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:15:51 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+In file included from ../Core/Src/yann.c:8:
+../Core/Inc/yann.h:18:25: warning: 'enum states' declared inside parameter list will not be visible outside of this definition or declaration
+   18 | void display_state(enum states etat,UART_HandleTypeDef *huart);
+      |                         ^~~~~~
+../Core/Src/yann.c:36:25: warning: 'enum states' declared inside parameter list will not be visible outside of this definition or declaration
+   36 | void display_state(enum states etat, UART_HandleTypeDef *huart) {
+      |                         ^~~~~~
+../Core/Src/yann.c:36:32: error: parameter 1 ('etat') has incomplete type
+   36 | void display_state(enum states etat, UART_HandleTypeDef *huart) {
+      |                    ~~~~~~~~~~~~^~~~
+../Core/Src/yann.c: In function 'display_state':
+../Core/Src/yann.c:40:7: error: 'info_mode' undeclared (first use in this function)
+   40 |  case info_mode:
+      |       ^~~~~~~~~
+../Core/Src/yann.c:40:7: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/yann.c:47:7: error: 'init_uc' undeclared (first use in this function)
+   47 |  case init_uc:
+      |       ^~~~~~~
+../Core/Src/yann.c:53:7: error: 'init_motor' undeclared (first use in this function)
+   53 |  case init_motor:
+      |       ^~~~~~~~~~
+../Core/Src/yann.c:59:7: error: 'motor_ready' undeclared (first use in this function)
+   59 |  case motor_ready:
+      |       ^~~~~~~~~~~
+../Core/Src/yann.c:66:7: error: 'auto_mode' undeclared (first use in this function)
+   66 |  case auto_mode:
+      |       ^~~~~~~~~
+../Core/Src/yann.c:73:7: error: 'manual_mode' undeclared (first use in this function)
+   73 |  case manual_mode:
+      |       ^~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/yann.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:16:05 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  50184	    488	   1984	  52656	   cdb0	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+17:32:34 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  50184	    488	   1984	  52656	   cdb0	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+17:33:17 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+d:\stm32\stm32cubeide_1.8.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_2.0.0.202105311346\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/yann.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:13: multiple definition of `firm'; ./Core/Src/main.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:13: first defined here
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:79: 1DOF_Bench.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:33:40 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+d:\stm32\stm32cubeide_1.8.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_2.0.0.202105311346\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/yann.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:14: multiple definition of `firm'; ./Core/Src/main.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:14: first defined here
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:79: 1DOF_Bench.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:35:50 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+d:\stm32\stm32cubeide_1.8.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_2.0.0.202105311346\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/yann.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:15: multiple definition of `firm'; ./Core/Src/main.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:15: first defined here
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:79: 1DOF_Bench.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:35:56 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  50184	    488	   1984	  52656	   cdb0	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+17:37:09 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/fsm.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/fsm.d" -MT"Core/Src/fsm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fsm.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/remi.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/remi.d" -MT"Core/Src/remi.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/remi.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+d:\stm32\stm32cubeide_1.8.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_2.0.0.202105311346\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/yann.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:15: multiple definition of `firm'; ./Core/Src/main.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:15: first defined here
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:79: 1DOF_Bench.elf] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:37:33 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:285:3: warning: "/*" within comment [-Wcomment]
+  285 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:89:6: warning: unused variable 'k' [-Wunused-variable]
+   89 |  int k = 0;
+      |      ^
+../Core/Src/main.c:153:3: warning: statement will never be executed [-Wswitch-unreachable]
+  153 |   HAL_Delay(1000);
+      |   ^~~~~~~~~~~~~~~
+../Core/Src/yann.c:13:14: warning: 'firm' initialized and declared 'extern'
+   13 | extern float firm =0.1;
+      |              ^~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  50184	    488	   1984	  52656	   cdb0	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+17:37:40 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  50184	    488	   1984	  52656	   cdb0	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+17:39:37 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/yann.c:13:1: warning: data definition has no type or storage class
+   13 | firm =0.1;
+      | ^~~~
+../Core/Src/yann.c:13:1: warning: type defaults to 'int' in declaration of 'firm' [-Wimplicit-int]
+../Core/Src/yann.c:13:1: error: conflicting types for 'firm'
+In file included from ../Core/Src/yann.c:9:
+../Core/Inc/yann.h:15:14: note: previous declaration of 'firm' was here
+   15 | extern float firm;
+      |              ^~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/yann.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:40:03 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  50184	    488	   1984	  52656	   cdb0	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
+17:41:08 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-size   1DOF_Bench.elf 
+   text	   data	    bss	    dec	    hex	filename
+  50184	    488	   1984	  52656	   cdb0	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 

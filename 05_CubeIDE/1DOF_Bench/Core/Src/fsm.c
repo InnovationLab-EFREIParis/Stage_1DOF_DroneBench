@@ -7,12 +7,11 @@
 
 #include "fsm.h"
 #include "main.h"
-#include "yann.h"
-#include "remi.h"
 
 
 
 
+float firmware= 0.1;
 void switch_states(enum states div);
 
 void motor_init() {
