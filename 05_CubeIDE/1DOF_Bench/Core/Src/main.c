@@ -18,13 +18,32 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "remi.h"
-#include "yann.h"
 #include "fsm.h"
-//#include <sys/unistd.h>
-#include <stdio.h>
+#include "yann.h"
+#include "remi.h"
 
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+
+/* USER CODE END Includes */
+
+/* Private typedef -----------------------------------------------------------*/
+/* USER CODE BEGIN PTD */
+
+/* USER CODE END PTD */
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+
+/* USER CODE END PM */
+
+/* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef hadc1;
+DMA_HandleTypeDef hdma_adc1;
 
 TIM_HandleTypeDef htim3;
 
@@ -41,6 +60,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_ADC1_Init(void);
+static void MX_DMA_Init(void);
 static void MX_TIM3_Init(void);
 /* USER CODE BEGIN PFP */
 
@@ -60,9 +80,20 @@ int main(void) {
 	enum states etat;
 	etat = init_uc;
 	char r_buffer[2];
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+#define valeur_min_moteur 1512
+
+
+	int val;
+=======
+#define Valeur_minimale_moteur 1512
+>>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+>>>>>>> refs/remotes/origin/main
 	//char buffer [size];
-	//int counter = 0;
+	int k = 0;
 	/* USER CODE END 1 */
 
 	/* MCU Configuration--------------------------------------------------------*/
@@ -85,6 +116,7 @@ int main(void) {
 	MX_GPIO_Init();
 	MX_USART2_UART_Init();
 	MX_ADC1_Init();
+	MX_DMA_Init();
 	MX_TIM3_Init();
 	/* USER CODE BEGIN 2 */
 	// Light up green led
@@ -97,8 +129,13 @@ int main(void) {
 	//la fonction au dessus pose des soucis
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
 	//NOus mettons ici la valeur minimale pour emettre un signal vers notre ESC dans notre registre capture and compare register
+<<<<<<< HEAD
+	TIM3->CCR2 = valeur_min_moteur;
+	y_print(&huart2, " 0 to 6 to change state \r\n", 26);
+=======
 	TIM3->CCR2 = Valeur_minimale_moteur;
 	y_print(&huart2, " 0 to 6 to change state \n\r", 26);
+>>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
 	HAL_Delay(5000);
 
 	/* USER CODE END 2 */
@@ -110,12 +147,114 @@ int main(void) {
 
 		//differents etats qu'on peut avoir
 		//idle_mode,init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode
-
+		val = load_adc(hadc1, 5);
+		if (val > 2025)
+			val = 2025;
+		//sprintf(valchar,"%d \n\r",val);
+		load_pwm(htim3, val);
+		//if (HAL_UART_Transmit(huart2, (uint8_t*) valchar,20, 100) != HAL_OK)
+		//if( HAL_UART_Transmit(&huart2,(uint8_t*) "COucou\n\r", 20, 100)!= HAL_OK)
+		//Error_Handler();
+		//load_pwm(htim3, 1400);
+		//HAL_Delay(1000);
 		//---------changement d'etat-------
 
 		switch (etat) {
 
+<<<<<<< HEAD
 
+=======
+			/*	case idle_mode:
+					//traitement des sorties
+
+<<<<<<< HEAD
+					//HAL_Delay(1000);
+					if (k==0)
+							if (HAL_UART_Transmit(&huart2, (uint8_t*) "Idle mode \n\r", 15, 100)
+							!= HAL_OK)
+								Error_Handler();
+					HAL_Delay(10);
+					//traitement des entrées (transitions)
+					__HAL_UART_CLEAR_OREFLAG(&huart2);
+					k++;
+					break;*/
+
+				case init_uc:
+					if (k==0)
+					if (HAL_UART_Transmit(&huart2, (uint8_t*) "UC Initialization \n\r",
+							22, 100) != HAL_OK)
+						Error_Handler();
+					HAL_Delay(10);
+					k++;
+					break;
+
+				case init_motor:
+					if (k==0)
+					if (HAL_UART_Transmit(&huart2,
+							(uint8_t*) "Motor Initialization \n\r", 24, 100) != HAL_OK)
+						Error_Handler();
+					HAL_Delay(10);
+					__HAL_UART_CLEAR_OREFLAG(&huart2);
+					k++;
+					break;
+
+				case motor_ready:
+					if (k==0)
+					if (HAL_UART_Transmit(&huart2, (uint8_t*) "Motor ready \n\r", 15,
+							100) != HAL_OK)
+						Error_Handler();
+					HAL_Delay(10);
+					__HAL_UART_CLEAR_OREFLAG(&huart2);
+					k++;
+					break;
+
+				case auto_mode:
+					if (k==0)
+					if (HAL_UART_Transmit(&huart2, (uint8_t*) "Auto mode \n\r", 15, 100)
+							!= HAL_OK)
+						Error_Handler();
+					HAL_Delay(10);
+					__HAL_UART_CLEAR_OREFLAG(&huart2);
+					k++;
+					break;
+
+				case manual_mode:
+					if (k==0)
+					if (HAL_UART_Transmit(&huart2, (uint8_t*) "Manual mode \n\r", 15,
+							100) != HAL_OK)
+						Error_Handler();
+					HAL_Delay(10);
+					k++;
+					break;
+				case info_mode:
+							if (k==0)
+							if (HAL_UART_Transmit(&huart2, (uint8_t*) "Info mode\n\r", 12, 100)
+									!= HAL_OK)
+								Error_Handler();
+							HAL_Delay(10);
+							//sortie de la boucle
+
+							__HAL_UART_CLEAR_OREFLAG(&huart2);
+							//le programme freeze dans l'etat info
+							k++;
+							break;
+
+				default:
+					break;
+
+				}
+
+=======
+			HAL_Delay(1000);
+			//if (HAL_UART_Transmit(&huart2, (uint8_t*) "Idle mode \n\r", 15, 100)
+			//		!= HAL_OK)
+			//	Error_Handler();
+			printf("Idle Mode\n\r");
+			HAL_Delay(3000);
+			//traitement des entrées (transitions)
+			etat = init_uc;
+			break;
+>>>>>>> refs/remotes/origin/main
 
 		case init_uc:
 			//traitement des sorties
@@ -206,6 +345,7 @@ int main(void) {
 			break;
 
 		}
+>>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
 
 		//---------changement d'etat----FIN---
 
@@ -222,15 +362,25 @@ int main(void) {
 
 		 }*/
 		//idle_mode,init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode
+<<<<<<< HEAD
+		//if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10) == HAL_OK)
+			//HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
+=======
 		if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10) == HAL_OK)
 			HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
+>>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
 		/*HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10);
 		 HAL_Delay(50);
 		 HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
 		 HAL_Delay(50);*/
 		//faire passer dans le switch
+<<<<<<< HEAD
+			//if (r_buffer[0] == '0')
+		// etat = idle_mode;
+=======
 		/*		if (r_buffer[0] == '0')
 		 etat = idle_mode;
+>>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
 		 if (r_buffer[0] == '1')
 		 etat = init_uc;
 		 if (r_buffer[0] == '2')
@@ -242,14 +392,23 @@ int main(void) {
 		 if (r_buffer[0] == '5')
 		 etat = auto_mode;
 		 if (r_buffer[0] == '6')
+<<<<<<< HEAD
+		 etat = info_mode;
+		 if(r_buffer[0] == '0' || r_buffer[0] == '1'|| r_buffer[0] == '2'|| r_buffer[0] == '3'|| r_buffer[0] == '4'|| r_buffer[0] == '5'||r_buffer[0] == '6' )
+		 {
+		 k=0;
+		 r_buffer[0]=' ';
+		 }
+=======
 		 etat = info_mode;*/
+>>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
 
 		//use interrupts instead of polling it might be less messy
 		//---------gestion des entrées UART-------
 		/* USER CODE END WHILE */
 
+		/* USER CODE BEGIN 3 */
 	}
-
 	/* USER CODE END 3 */
 }
 
@@ -376,11 +535,11 @@ static void MX_TIM3_Init(void) {
 
 	/* USER CODE END TIM3_Init 1 */
 	htim3.Instance = TIM3;
-	htim3.Init.Prescaler = 38;	  		//38
+	htim3.Init.Prescaler = 38;
 	htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
 	htim3.Init.Period = 4096;
 	htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-	htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+	htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
 	if (HAL_TIM_Base_Init(&htim3) != HAL_OK) {
 		Error_Handler();
 	}
@@ -398,7 +557,7 @@ static void MX_TIM3_Init(void) {
 		Error_Handler();
 	}
 	sConfigOC.OCMode = TIM_OCMODE_PWM1;
-	sConfigOC.Pulse = 0;
+	sConfigOC.Pulse = 25;
 	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
 	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
 	if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_2)
@@ -442,6 +601,21 @@ static void MX_USART2_UART_Init(void) {
 	/* USER CODE BEGIN USART2_Init 2 */
 
 	/* USER CODE END USART2_Init 2 */
+
+}
+
+/**
+ * Enable DMA controller clock
+ */
+static void MX_DMA_Init(void) {
+
+	/* DMA controller clock enable */
+	__HAL_RCC_DMA1_CLK_ENABLE();
+
+	/* DMA interrupt init */
+	/* DMA1_Channel1_IRQn interrupt configuration */
+	HAL_NVIC_SetPriority(DMA1_Channel1_IRQn, 0, 0);
+	HAL_NVIC_EnableIRQ(DMA1_Channel1_IRQn);
 
 }
 
@@ -510,3 +684,4 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
+

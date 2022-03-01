@@ -16,7 +16,11 @@ void y_print(UART_HandleTypeDef *huart,char *mess,int len);
 void display_state(enum states etat,UART_HandleTypeDef *huart);
 void chating_uart(UART_HandleTypeDef *huart,char *buffer);
 
+<<<<<<< HEAD
 float firmware_version = 0.1;
 int Valeur_minimale_moteur =1512;
 
+=======
+float firmware_version=0.1;
+>>>>>>> refs/remotes/origin/main
 #endif /* INC_YANN_H_ */
