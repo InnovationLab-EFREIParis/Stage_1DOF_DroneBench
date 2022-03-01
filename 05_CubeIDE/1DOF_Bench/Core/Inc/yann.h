@@ -12,7 +12,9 @@
 #include "remi.h"
 #include"fsm.h"
 
-extern float firm;
+extern float firmware_version;
+extern int  valeur_min_moteur;
+extern int  valeur_max_moteur;
 
 //SOUCI : ../Core/Inc/yann.h:13:15: error: unknown type name 'TIM_HandleTypeDef'
 int load_adc(ADC_HandleTypeDef hadc,int polTime); //this function will start the adc and return values

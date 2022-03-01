@@ -1890,3 +1890,53 @@ Finished building: 1DOF_Bench.bin
  
 Finished building: 1DOF_Bench.list
  
+17:48:59 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-size   1DOF_Bench.elf 
+   text	   data	    bss	    dec	    hex	filename
+  50096	    488	   1984	  52568	   cd58	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+17:51:21 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:173:6: warning: "/*" within comment [-Wcomment]
+  173 |      /*if (HAL_UART_Transmit(&huart2, (uint8_t*) "UC Initialization \n\r", 22,
+      |       
+../Core/Src/main.c:291:3: warning: "/*" within comment [-Wcomment]
+  291 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:90:6: warning: unused variable 'k' [-Wunused-variable]
+   90 |  int k = 0;
+      |      ^
+../Core/Src/main.c:176:6: warning: statement will never be executed [-Wswitch-unreachable]
+  176 |      printf("Init Micro Controleur\r\n");
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/yann.c:14:7: error: redefinition of 'valeur_min_moteur'
+   14 |  int  valeur_min_moteur =2025;
+      |       ^~~~~~~~~~~~~~~~~
+../Core/Src/yann.c:13:7: note: previous definition of 'valeur_min_moteur' was here
+   13 |  int  valeur_min_moteur= 1512;
+      |       ^~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/yann.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:51:28 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  50096	    492	   1988	  52576	   cd60	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 

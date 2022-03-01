@@ -84,7 +84,7 @@ int main(void) {
 
 	int val;
 
-#define valeur_min_moteur 1512
+
 
 	//char buffer [size];
 	int k = 0;

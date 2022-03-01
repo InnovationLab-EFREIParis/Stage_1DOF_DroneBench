@@ -9,8 +9,9 @@
 #include "yann.h"
 #include<stdio.h>
 
-
- float firm =0.1;
+ float firmware_version =0.1;
+ int  valeur_min_moteur= 1512;
+ int  valeur_max_moteur =2025;
 
 int load_adc(ADC_HandleTypeDef hadc, int polTime) {
 
