@@ -153,20 +153,6 @@ int main(void) {
 
 
 
-			/*	case idle_mode:
-					//traitement des sorties
-
-<<<<<<< HEAD
-					//HAL_Delay(1000);
-					if (k==0)
-							if (HAL_UART_Transmit(&huart2, (uint8_t*) "Idle mode \n\r", 15, 100)
-							!= HAL_OK)
-								Error_Handler();
-					HAL_Delay(10);
->>>>>>> refs/remotes/origin/main
-					//traitement des entrées (transitions)
-					etat = init_uc;
-					break;
 
 				case init_uc:
 					//traitement des sorties
