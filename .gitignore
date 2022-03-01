@@ -1,3 +1,4 @@
+*.log
 # Binaire STM32
 *.elf
 # Objet STM32
@@ -15,5 +16,4 @@
 05_CubeIDE/1DOF_Bench/Debug/
 # STM32 File
 05_CubeIDE/1DOF_Bench/.settings/language.settings.xml
-
 05_CubeIDE/1DOF_Bench/Debug/1DOF_Bench.list

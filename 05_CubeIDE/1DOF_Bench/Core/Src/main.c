@@ -78,10 +78,14 @@ int main(void) {
 	enum states etat;
 	etat = init_uc;
 	char r_buffer[2];
+<<<<<<< HEAD
 #define valeur_min_moteur 1512
 
 
 	int val;
+=======
+#define Valeur_minimale_moteur 1512
+>>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
 	//char buffer [size];
 	int k = 0;
 	/* USER CODE END 1 */
@@ -114,12 +118,18 @@ int main(void) {
 	// blink green led
 	blinkGreenLed(10, 100);
 	// Welcome message on UART
+	printf("Hello from main\n\r");
 	//sendWelcomeMsgRS232(&huart2);
 	//la fonction au dessus pose des soucis
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
 	//NOus mettons ici la valeur minimale pour emettre un signal vers notre ESC dans notre registre capture and compare register
+<<<<<<< HEAD
 	TIM3->CCR2 = valeur_min_moteur;
 	y_print(&huart2, " 0 to 6 to change state \r\n", 26);
+=======
+	TIM3->CCR2 = Valeur_minimale_moteur;
+	y_print(&huart2, " 0 to 6 to change state \n\r", 26);
+>>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
 	HAL_Delay(5000);
 
 	/* USER CODE END 2 */
@@ -148,6 +158,7 @@ int main(void) {
 			/*	case idle_mode:
 					//traitement des sorties
 
+<<<<<<< HEAD
 					//HAL_Delay(1000);
 					if (k==0)
 							if (HAL_UART_Transmit(&huart2, (uint8_t*) "Idle mode \n\r", 15, 100)
@@ -224,6 +235,88 @@ int main(void) {
 
 				}
 
+=======
+			HAL_Delay(1000);
+			//if (HAL_UART_Transmit(&huart2, (uint8_t*) "Idle mode \n\r", 15, 100)
+			//		!= HAL_OK)
+			//	Error_Handler();
+			printf("Idle Mode\n\r");
+			HAL_Delay(3000);
+			//traitement des entrées (transitions)
+			etat = init_uc;
+			break;
+
+		case init_uc:
+			//traitement des sorties
+			/*if (HAL_UART_Transmit(&huart2, (uint8_t*) "UC Initialization \n\r", 22,
+			 100) != HAL_OK)
+			 Error_Handler();*/
+			printf("Init Micro Controleur\n\r");
+			HAL_Delay(3000);
+			//traitement des entrées (transitions)
+			etat = info_mode;
+			break;
+
+		case info_mode:
+			//if (HAL_UART_Transmit(&huart2, (uint8_t*) "Info mode\n\r", 12, 100)
+				//	!= HAL_OK)
+				//Error_Handler();
+			printf("Info mode\n\r");
+			HAL_Delay(3000);
+			//sortie de la boucle
+			do {
+				__HAL_UART_CLEAR_OREFLAG(&huart2);
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
+						== HAL_OK) {
+					HAL_Delay(50);
+					HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
+					HAL_Delay(50);
+				}
+
+			} while (r_buffer[0] != '0');
+
+			etat = idle_mode;
+			// Reinitialisation du buffer
+			r_buffer[0] = 0;
+
+			//le programme freeze dans l'etat info
+			break;
+
+		case init_motor:
+			if (HAL_UART_Transmit(&huart2,
+					(uint8_t*) "Motor Initialization \n\r", 24, 100) != HAL_OK)
+				Error_Handler();
+			HAL_Delay(3000);
+			break;
+
+		case motor_ready:
+			if (HAL_UART_Transmit(&huart2, (uint8_t*) "Motor ready \n\r", 15,
+					100) != HAL_OK)
+				Error_Handler();
+			HAL_Delay(3000);
+
+			break;
+
+		case auto_mode:
+			if (HAL_UART_Transmit(&huart2, (uint8_t*) "Auto mode \n\r", 15, 100)
+					!= HAL_OK)
+				Error_Handler();
+			HAL_Delay(3000);
+
+			break;
+
+		case manual_mode:
+			if (HAL_UART_Transmit(&huart2, (uint8_t*) "Manual mode \n\r", 15,
+					100) != HAL_OK)
+				Error_Handler();
+			HAL_Delay(3000);
+
+			break;
+		default:
+			break;
+
+		}
+>>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
 
 		//---------changement d'etat----FIN---
 
@@ -240,15 +333,25 @@ int main(void) {
 
 		 }*/
 		//idle_mode,init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode
+<<<<<<< HEAD
 		//if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10) == HAL_OK)
 			//HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
+=======
+		if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10) == HAL_OK)
+			HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
+>>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
 		/*HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10);
 		 HAL_Delay(50);
 		 HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
 		 HAL_Delay(50);*/
 		//faire passer dans le switch
+<<<<<<< HEAD
 			//if (r_buffer[0] == '0')
 		// etat = idle_mode;
+=======
+		/*		if (r_buffer[0] == '0')
+		 etat = idle_mode;
+>>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
 		 if (r_buffer[0] == '1')
 		 etat = init_uc;
 		 if (r_buffer[0] == '2')
@@ -260,12 +363,16 @@ int main(void) {
 		 if (r_buffer[0] == '5')
 		 etat = auto_mode;
 		 if (r_buffer[0] == '6')
+<<<<<<< HEAD
 		 etat = info_mode;
 		 if(r_buffer[0] == '0' || r_buffer[0] == '1'|| r_buffer[0] == '2'|| r_buffer[0] == '3'|| r_buffer[0] == '4'|| r_buffer[0] == '5'||r_buffer[0] == '6' )
 		 {
 		 k=0;
 		 r_buffer[0]=' ';
 		 }
+=======
+		 etat = info_mode;*/
+>>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
 
 		//use interrupts instead of polling it might be less messy
 		//---------gestion des entrées UART-------
