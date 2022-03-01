@@ -34,17 +34,7 @@ void y_print(UART_HandleTypeDef *huart, char *mess,int len) {
 void display_state(enum states etat, UART_HandleTypeDef *huart) {
 	switch (etat) {
 
-	case idle_mode:
-		//traitement des sorties
 
-		HAL_Delay(1000);
-		if (HAL_UART_Transmit(huart, (uint8_t*) "Idle mode \n\r", 15, 100)
-				!= HAL_OK)
-			Error_Handler();
-		HAL_Delay(3000);
-		//traitement des entrées (transitions)
-
-		break;
 	case info_mode:
 		if (HAL_UART_Transmit(huart, (uint8_t*) "Info mode\n\r", 12, 100)
 				!= HAL_OK)

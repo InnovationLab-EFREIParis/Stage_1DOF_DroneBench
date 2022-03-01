@@ -1128,3 +1128,126 @@
 2022-02-21 10:38:22,553 [INFO] IPUIPlugin:74 - create IPUIPlugin
 2022-02-21 10:38:22,554 [INFO] IPUIPlugin:74 - create IPUIPlugin
 2022-02-21 10:38:24,349 [INFO] OpenFileManager:333 - Restore cursor
+2022-02-28 11:49:59,133 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,583x159,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-02-28 11:50:06,249 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-02-28 11:50:07,823 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-02-28 11:50:10,028 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-02-28 11:50:19,267 [INFO] DbMcusDocs:143 - JSON generation date=Tue Nov 16 17:17:54 CET 2021 (1637079474)
+2022-02-28 11:50:20,311 [INFO] DbMcusDocs:79 - Found 682 MCUs documents
+2022-02-28 11:50:29,925 [INFO] ADCParametersView:103 -                Rank 1 : false
+2022-02-28 11:50:39,783 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,583x159,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-02-28 11:50:42,661 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-02-28 11:50:44,220 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-02-28 11:50:46,151 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-02-28 11:51:02,729 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 330599088 Bytes (728760320)
+2022-02-28 11:51:05,122 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 359664168 Bytes (728760320)
+2022-02-28 11:51:08,043 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 11:51:10,190 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 310511768 Bytes (728760320)
+2022-02-28 11:51:10,221 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 11:51:11,286 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: TIM1_8L4
+2022-02-28 11:51:11,286 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: SYS
+2022-02-28 11:51:11,287 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: ADC
+2022-02-28 11:51:11,287 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: RCC
+2022-02-28 11:51:11,287 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: NVIC
+2022-02-28 11:51:11,287 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: USART
+2022-02-28 11:51:11,288 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: GPIO
+2022-02-28 11:51:11,291 [INFO] CodeGenerator:663 - code generatio: config db path: D:\STM32\STM32CubeIDE_1.8.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.4.0.202111222105\\db\
+2022-02-28 11:51:12,792 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\license.tmp_save
+2022-02-28 11:51:13,044 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 11:51:14,157 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\license.tmp
+2022-02-28 11:51:14,615 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\gpio.tmp_save
+2022-02-28 11:51:14,826 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\gpio.tmp
+2022-02-28 11:51:15,225 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 11:51:15,276 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 11:51:16,415 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\stm32l4xx_it.c_save
+2022-02-28 11:51:16,752 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\stm32l4xx_it.c
+2022-02-28 11:51:16,782 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\stm32l4xx_it.h_save
+2022-02-28 11:51:17,038 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\stm32l4xx_it.h
+2022-02-28 11:51:17,098 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\stm32l4xx_hal_msp.c_save
+2022-02-28 11:51:17,463 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\stm32l4xx_hal_msp.c
+2022-02-28 11:51:17,512 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\system.tmp_save
+2022-02-28 11:51:17,642 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\system.tmp
+2022-02-28 11:51:17,754 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\stm32l4xx_hal_conf.h_save
+2022-02-28 11:51:17,924 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\stm32l4xx_hal_conf.h
+2022-02-28 11:51:18,027 [WARN] IPConfigManager:3151 - IP not found : TIM
+2022-02-28 11:51:18,028 [WARN] CodeGenerator:3358 - IP not found : null
+2022-02-28 11:51:18,047 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 11:51:18,083 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\main.h_save
+2022-02-28 11:51:18,305 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\main.h
+2022-02-28 11:51:18,344 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\main.c_save
+2022-02-28 11:51:18,757 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\main.c
+2022-02-28 11:51:20,394 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 11:51:20,394 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 11:51:23,912 [INFO] ProjectBuilder:2589 - Time for Copy HAL[1] : 2460mS.
+2022-02-28 11:51:23,948 [INFO] ProjectBuilder:3665 - Project Generator version: 3.15.2
+2022-02-28 11:51:25,033 [INFO] ConfigFileManager:1273 - The Die is : DIE415
+2022-02-28 11:51:25,089 [INFO] ApiDbMcu:488 - Load IP Config File for FATFS
+2022-02-28 11:51:25,171 [INFO] ApiDbMcu:488 - Load IP Config File for FREERTOS
+2022-02-28 11:51:25,463 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 11:51:25,563 [INFO] ApiDbMcu:488 - Load IP Config File for TOUCHSENSING
+2022-02-28 11:51:25,666 [INFO] ApiDbMcu:488 - Load IP Config File for USB_DEVICE
+2022-02-28 11:51:25,695 [INFO] ApiDbMcu:488 - Load IP Config File for USB_HOST
+2022-02-28 11:51:33,078 [INFO] ProjectBuilder:3832 - Time for Generating toolchain IDE Files: 9128mS.
+2022-02-28 11:51:33,081 [INFO] ProjectBuilder:2461 - Time for Copy CMSIS : 1mS.
+2022-02-28 11:51:33,086 [INFO] ProjectBuilder:2461 - Time for Copy CMSIS : 0mS.
+2022-02-28 11:52:15,825 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-02-28 11:59:52,549 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 495100048 Bytes (917504000)
+2022-02-28 11:59:57,234 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 524982416 Bytes (917504000)
+2022-02-28 11:59:57,661 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 12:00:02,331 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 12:00:02,663 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 12:00:04,244 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 588423312 Bytes (917504000)
+2022-02-28 12:00:05,110 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: TIM1_8L4
+2022-02-28 12:00:05,111 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: SYS
+2022-02-28 12:00:05,111 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: ADC
+2022-02-28 12:00:05,111 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: RCC
+2022-02-28 12:00:05,111 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: NVIC
+2022-02-28 12:00:05,111 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: USART
+2022-02-28 12:00:05,112 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: DMA
+2022-02-28 12:00:05,113 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: GPIO
+2022-02-28 12:00:05,114 [INFO] CodeGenerator:663 - code generatio: config db path: D:\STM32\STM32CubeIDE_1.8.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.4.0.202111222105\\db\
+2022-02-28 12:00:06,019 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\license.tmp_save
+2022-02-28 12:00:06,134 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\license.tmp
+2022-02-28 12:00:06,253 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\gpio.tmp_save
+2022-02-28 12:00:06,408 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\gpio.tmp
+2022-02-28 12:00:07,333 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 12:00:07,667 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 12:00:07,797 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\dma.tmp_save
+2022-02-28 12:00:07,965 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\dma.tmp
+2022-02-28 12:00:07,978 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\dma_GV.tmp_save
+2022-02-28 12:00:08,145 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\dma_GV.tmp
+2022-02-28 12:00:08,194 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\stm32l4xx_it.c_save
+2022-02-28 12:00:08,434 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\stm32l4xx_it.c
+2022-02-28 12:00:08,445 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\stm32l4xx_it.h_save
+2022-02-28 12:00:08,626 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\stm32l4xx_it.h
+2022-02-28 12:00:08,655 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\stm32l4xx_hal_msp.c_save
+2022-02-28 12:00:08,934 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\stm32l4xx_hal_msp.c
+2022-02-28 12:00:08,942 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\system.tmp_save
+2022-02-28 12:00:09,111 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\system.tmp
+2022-02-28 12:00:09,137 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\stm32l4xx_hal_conf.h_save
+2022-02-28 12:00:09,320 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 12:00:09,333 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\stm32l4xx_hal_conf.h
+2022-02-28 12:00:09,443 [WARN] IPConfigManager:3151 - IP not found : TIM
+2022-02-28 12:00:09,444 [WARN] CodeGenerator:3358 - IP not found : null
+2022-02-28 12:00:09,467 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\main.h_save
+2022-02-28 12:00:09,621 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\main.h
+2022-02-28 12:00:09,679 [INFO] CodeEngine:239 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\main.c_save
+2022-02-28 12:00:10,004 [INFO] CodeEngine:257 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\main.c
+2022-02-28 12:00:12,337 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 12:00:12,405 [INFO] ProjectBuilder:2589 - Time for Copy HAL[1] : 764mS.
+2022-02-28 12:00:12,419 [INFO] ProjectBuilder:3665 - Project Generator version: 3.15.2
+2022-02-28 12:00:13,542 [INFO] ConfigFileManager:1273 - The Die is : DIE415
+2022-02-28 12:00:14,372 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-02-28 12:00:17,071 [INFO] ProjectBuilder:3832 - Time for Generating toolchain IDE Files: 4652mS.
+2022-02-28 12:00:17,072 [INFO] ProjectBuilder:2461 - Time for Copy CMSIS : 1mS.
+2022-02-28 12:00:17,090 [INFO] ProjectBuilder:2461 - Time for Copy CMSIS : 1mS.
+2022-02-28 12:00:19,374 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-03-01 14:16:27,731 [INFO] Activator:177 - 
+
+
+2022-03-01 14:16:27,744 [INFO] Activator:178 - !SESSION log4j initialized
+2022-03-01 14:17:41,825 [INFO] Activator:177 - 
+
+
+2022-03-01 14:17:41,827 [INFO] Activator:178 - !SESSION log4j initialized
+2022-03-01 14:18:06,117 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com

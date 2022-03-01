@@ -9,7 +9,7 @@
 #ifndef INC_FSM_H_
 #define INC_FSM_H_
 
-enum states{idle_mode,init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode};
+enum states{init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode};
 
 
 
