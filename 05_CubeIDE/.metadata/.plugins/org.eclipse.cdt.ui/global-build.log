@@ -1578,3 +1578,315 @@ arm-none-eabi-size   1DOF_Bench.elf
   50184	    488	   1984	  52656	   cdb0	1DOF_Bench.elf
 Finished building: default.size.stdout
  
+17:44:31 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/yann.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/yann.d" -MT"Core/Src/yann.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/yann.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:83:1: error: version control conflict marker in file
+   83 | <<<<<<< HEAD
+      | ^~~~~~~
+../Core/Src/main.c:95:1: error: version control conflict marker in file
+   95 | <<<<<<< HEAD
+      | ^~~~~~~
+../Core/Src/main.c:101:9: error: invalid suffix "a71a9b2b6231c86945bfa29a6e11584663274f4" on integer constant
+  101 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:136:1: error: version control conflict marker in file
+  136 | <<<<<<< HEAD
+      | ^~~~~~~
+../Core/Src/main.c:138:1: error: version control conflict marker in file
+  138 | =======
+      | ^~~~~~~
+../Core/Src/main.c:159:3: error: 'val' undeclared (first use in this function)
+  159 |   val = load_adc(hadc1, 5);
+      |   ^~~
+../Core/Src/main.c:159:3: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:173:1: error: version control conflict marker in file
+  173 | <<<<<<< HEAD
+      | ^~~~~~~
+../Core/Src/main.c:180:1: error: version control conflict marker in file
+  180 | =======
+      | ^~~~~~~
+../Core/Src/main.c:201:6: warning: "/*" within comment [-Wcomment]
+  201 |      /*if (HAL_UART_Transmit(&huart2, (uint8_t*) "UC Initialization \n\r", 22,
+      |       
+../Core/Src/main.c:270:1: error: version control conflict marker in file
+  270 | <<<<<<< HEAD
+      | ^~~~~~~
+../Core/Src/main.c:283:1: error: version control conflict marker in file
+  283 | >>>>>>> refs/remotes/origin/main
+      | ^~~~~~~
+../Core/Src/main.c:310:3: error: case label not within a switch statement
+  310 |   case info_mode:
+      |   ^~~~
+../Core/Src/main.c:328:1: error: version control conflict marker in file
+  328 | <<<<<<< HEAD
+      | ^~~~~~~
+../Core/Src/main.c:331:1: error: version control conflict marker in file
+  331 | =======
+      | ^~~~~~~
+../Core/Src/main.c:335:1: error: version control conflict marker in file
+  335 | >>>>>>> refs/remotes/origin/main
+      | ^~~~~~~
+../Core/Src/main.c:340:3: error: case label not within a switch statement
+  340 |   case init_motor:
+      |   ^~~~
+../Core/Src/main.c:347:3: error: case label not within a switch statement
+  347 |   case motor_ready:
+      |   ^~~~
+../Core/Src/main.c:355:3: error: case label not within a switch statement
+  355 |   case auto_mode:
+      |   ^~~~
+../Core/Src/main.c:363:3: error: case label not within a switch statement
+  363 |   case manual_mode:
+      |   ^~~~
+../Core/Src/main.c:370:3: error: 'default' label not within a switch statement
+  370 |   default:
+      |   ^~~~~~~
+../Core/Src/main.c:374:1: error: version control conflict marker in file
+  374 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      | ^~~~~~~
+../Core/Src/main.c:374:9: error: invalid suffix "a71a9b2b6231c86945bfa29a6e11584663274f4" on integer constant
+  374 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:426:3: warning: "/*" within comment [-Wcomment]
+  426 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:431:1: error: expected identifier or '(' before '}' token
+  431 | }
+      | ^
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:178:6: warning: statement will never be executed [-Wswitch-unreachable]
+  178 |      printf("Idle Mode\r\n");
+      |      ^~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:45:29 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:127:15: error: 'valeur_min_moteur' undeclared (first use in this function); did you mean 'Valeur_minimale_moteur'?
+  127 |  TIM3->CCR2 = valeur_min_moteur;
+      |               ^~~~~~~~~~~~~~~~~
+      |               Valeur_minimale_moteur
+../Core/Src/main.c:127:15: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:173:6: warning: "/*" within comment [-Wcomment]
+  173 |      /*if (HAL_UART_Transmit(&huart2, (uint8_t*) "UC Initialization \n\r", 22,
+      |       
+../Core/Src/main.c:242:1: error: version control conflict marker in file
+  242 | <<<<<<< HEAD
+      | ^~~~~~~
+../Core/Src/main.c:255:1: error: version control conflict marker in file
+  255 | >>>>>>> refs/remotes/origin/main
+      | ^~~~~~~
+../Core/Src/main.c:282:3: error: case label not within a switch statement
+  282 |   case info_mode:
+      |   ^~~~
+../Core/Src/main.c:300:1: error: version control conflict marker in file
+  300 | <<<<<<< HEAD
+      | ^~~~~~~
+../Core/Src/main.c:303:1: error: version control conflict marker in file
+  303 | =======
+      | ^~~~~~~
+../Core/Src/main.c:307:1: error: version control conflict marker in file
+  307 | >>>>>>> refs/remotes/origin/main
+      | ^~~~~~~
+../Core/Src/main.c:312:3: error: case label not within a switch statement
+  312 |   case init_motor:
+      |   ^~~~
+../Core/Src/main.c:319:3: error: case label not within a switch statement
+  319 |   case motor_ready:
+      |   ^~~~
+../Core/Src/main.c:327:3: error: case label not within a switch statement
+  327 |   case auto_mode:
+      |   ^~~~
+../Core/Src/main.c:335:3: error: case label not within a switch statement
+  335 |   case manual_mode:
+      |   ^~~~
+../Core/Src/main.c:342:3: error: 'default' label not within a switch statement
+  342 |   default:
+      |   ^~~~~~~
+../Core/Src/main.c:346:1: error: version control conflict marker in file
+  346 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      | ^~~~~~~
+../Core/Src/main.c:346:9: error: invalid suffix "a71a9b2b6231c86945bfa29a6e11584663274f4" on integer constant
+  346 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:398:3: warning: "/*" within comment [-Wcomment]
+  398 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:90:6: warning: unused variable 'k' [-Wunused-variable]
+   90 |  int k = 0;
+      |      ^
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:403:1: error: expected identifier or '(' before '}' token
+  403 | }
+      | ^
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:176:6: warning: statement will never be executed [-Wswitch-unreachable]
+  176 |      printf("Init Micro Controleur\r\n");
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:45:49 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:127:15: error: 'valeur_min_moteur' undeclared (first use in this function); did you mean 'Valeur_min_moteur'?
+  127 |  TIM3->CCR2 = valeur_min_moteur;
+      |               ^~~~~~~~~~~~~~~~~
+      |               Valeur_min_moteur
+../Core/Src/main.c:127:15: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c:173:6: warning: "/*" within comment [-Wcomment]
+  173 |      /*if (HAL_UART_Transmit(&huart2, (uint8_t*) "UC Initialization \n\r", 22,
+      |       
+../Core/Src/main.c:242:1: error: version control conflict marker in file
+  242 | <<<<<<< HEAD
+      | ^~~~~~~
+../Core/Src/main.c:255:1: error: version control conflict marker in file
+  255 | >>>>>>> refs/remotes/origin/main
+      | ^~~~~~~
+../Core/Src/main.c:282:3: error: case label not within a switch statement
+  282 |   case info_mode:
+      |   ^~~~
+../Core/Src/main.c:300:1: error: version control conflict marker in file
+  300 | <<<<<<< HEAD
+      | ^~~~~~~
+../Core/Src/main.c:303:1: error: version control conflict marker in file
+  303 | =======
+      | ^~~~~~~
+../Core/Src/main.c:307:1: error: version control conflict marker in file
+  307 | >>>>>>> refs/remotes/origin/main
+      | ^~~~~~~
+../Core/Src/main.c:312:3: error: case label not within a switch statement
+  312 |   case init_motor:
+      |   ^~~~
+../Core/Src/main.c:319:3: error: case label not within a switch statement
+  319 |   case motor_ready:
+      |   ^~~~
+../Core/Src/main.c:327:3: error: case label not within a switch statement
+  327 |   case auto_mode:
+      |   ^~~~
+../Core/Src/main.c:335:3: error: case label not within a switch statement
+  335 |   case manual_mode:
+      |   ^~~~
+../Core/Src/main.c:342:3: error: 'default' label not within a switch statement
+  342 |   default:
+      |   ^~~~~~~
+../Core/Src/main.c:346:1: error: version control conflict marker in file
+  346 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      | ^~~~~~~
+../Core/Src/main.c:346:9: error: invalid suffix "a71a9b2b6231c86945bfa29a6e11584663274f4" on integer constant
+  346 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:398:3: warning: "/*" within comment [-Wcomment]
+  398 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:90:6: warning: unused variable 'k' [-Wunused-variable]
+   90 |  int k = 0;
+      |      ^
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:403:1: error: expected identifier or '(' before '}' token
+  403 | }
+      | ^
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:176:6: warning: statement will never be executed [-Wswitch-unreachable]
+  176 |      printf("Init Micro Controleur\r\n");
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:46:00 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:173:6: warning: "/*" within comment [-Wcomment]
+  173 |      /*if (HAL_UART_Transmit(&huart2, (uint8_t*) "UC Initialization \n\r", 22,
+      |       
+../Core/Src/main.c:242:1: error: version control conflict marker in file
+  242 | <<<<<<< HEAD
+      | ^~~~~~~
+../Core/Src/main.c:255:1: error: version control conflict marker in file
+  255 | >>>>>>> refs/remotes/origin/main
+      | ^~~~~~~
+../Core/Src/main.c:282:3: error: case label not within a switch statement
+  282 |   case info_mode:
+      |   ^~~~
+../Core/Src/main.c:300:1: error: version control conflict marker in file
+  300 | <<<<<<< HEAD
+      | ^~~~~~~
+../Core/Src/main.c:303:1: error: version control conflict marker in file
+  303 | =======
+      | ^~~~~~~
+../Core/Src/main.c:307:1: error: version control conflict marker in file
+  307 | >>>>>>> refs/remotes/origin/main
+      | ^~~~~~~
+../Core/Src/main.c:312:3: error: case label not within a switch statement
+  312 |   case init_motor:
+      |   ^~~~
+../Core/Src/main.c:319:3: error: case label not within a switch statement
+  319 |   case motor_ready:
+      |   ^~~~
+../Core/Src/main.c:327:3: error: case label not within a switch statement
+  327 |   case auto_mode:
+      |   ^~~~
+../Core/Src/main.c:335:3: error: case label not within a switch statement
+  335 |   case manual_mode:
+      |   ^~~~
+../Core/Src/main.c:342:3: error: 'default' label not within a switch statement
+  342 |   default:
+      |   ^~~~~~~
+../Core/Src/main.c:346:1: error: version control conflict marker in file
+  346 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      | ^~~~~~~
+../Core/Src/main.c:346:9: error: invalid suffix "a71a9b2b6231c86945bfa29a6e11584663274f4" on integer constant
+  346 | >>>>>>> 7a71a9b2b6231c86945bfa29a6e11584663274f4
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:398:3: warning: "/*" within comment [-Wcomment]
+  398 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:90:6: warning: unused variable 'k' [-Wunused-variable]
+   90 |  int k = 0;
+      |      ^
+../Core/Src/main.c: At top level:
+../Core/Src/main.c:403:1: error: expected identifier or '(' before '}' token
+  403 | }
+      | ^
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:176:6: warning: statement will never be executed [-Wswitch-unreachable]
+  176 |      printf("Init Micro Controleur\r\n");
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
+"make -j4 all" terminated with exit code 2. Build might be incomplete.
+17:46:32 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+make -j4 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'main':
+../Core/Src/main.c:173:6: warning: "/*" within comment [-Wcomment]
+  173 |      /*if (HAL_UART_Transmit(&huart2, (uint8_t*) "UC Initialization \n\r", 22,
+      |       
+../Core/Src/main.c:291:3: warning: "/*" within comment [-Wcomment]
+  291 |   /* USER CODE END WHILE */
+      |    
+../Core/Src/main.c:90:6: warning: unused variable 'k' [-Wunused-variable]
+   90 |  int k = 0;
+      |      ^
+../Core/Src/main.c:176:6: warning: statement will never be executed [-Wswitch-unreachable]
+  176 |      printf("Init Micro Controleur\r\n");
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  50096	    488	   1984	  52568	   cd58	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
