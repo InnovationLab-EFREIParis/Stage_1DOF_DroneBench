@@ -98,7 +98,7 @@ int main(void) {
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
 	//NOus mettons ici la valeur minimale pour emettre un signal vers notre ESC dans notre registre capture and compare register
 	TIM3->CCR2 = Valeur_minimale_moteur;
-	y_print(&huart2, " 0 to 6 to change state \r\n", 26);
+	y_print(&huart2, " 0 to 6 to change state \n\r", 26);
 	HAL_Delay(5000);
 
 	/* USER CODE END 2 */
@@ -143,9 +143,10 @@ int main(void) {
 			break;
 
 		case info_mode:
-			if (HAL_UART_Transmit(&huart2, (uint8_t*) "Info mode\n\r", 12, 100)
-					!= HAL_OK)
-				Error_Handler();
+			//if (HAL_UART_Transmit(&huart2, (uint8_t*) "Info mode\n\r", 12, 100)
+				//	!= HAL_OK)
+				//Error_Handler();
+			printf("Info mode\n\r");
 			HAL_Delay(3000);
 			//sortie de la boucle
 			do {
@@ -159,8 +160,14 @@ int main(void) {
 
 			} while (r_buffer[0] != '0');
 
+<<<<<<< HEAD
 			etat = init_uc;
 			r_buffer[0] = '9';
+=======
+			etat = idle_mode;
+			// Reinitialisation du buffer
+			r_buffer[0] = 0;
+>>>>>>> refs/remotes/origin/main
 
 			//le programme freeze dans l'etat info
 			break;
