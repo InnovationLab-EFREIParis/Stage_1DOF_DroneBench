@@ -32,6 +32,8 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -56,9 +58,9 @@ static void MX_TIM3_Init(void);
 int main(void) {
 	/* USER CODE BEGIN 1 */
 	enum states etat;
-	etat = idle_mode;
+	etat = init_uc;
 	char r_buffer[2];
-#define Valeur_minimale_moteur 1512
+
 	//char buffer [size];
 	//int counter = 0;
 	/* USER CODE END 1 */
@@ -90,7 +92,7 @@ int main(void) {
 	// blink green led
 	blinkGreenLed(10, 100);
 	// Welcome message on UART
-	printf("Hello from main\n\r");
+
 	//sendWelcomeMsgRS232(&huart2);
 	//la fonction au dessus pose des soucis
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
@@ -113,28 +115,31 @@ int main(void) {
 
 		switch (etat) {
 
-		case idle_mode:
-			//traitement des sorties
 
-			HAL_Delay(1000);
-			//if (HAL_UART_Transmit(&huart2, (uint8_t*) "Idle mode \n\r", 15, 100)
-			//		!= HAL_OK)
-			//	Error_Handler();
-			printf("Idle Mode\n\r");
-			HAL_Delay(3000);
-			//traitement des entrées (transitions)
-			etat = init_uc;
-			break;
 
 		case init_uc:
 			//traitement des sorties
-			/*if (HAL_UART_Transmit(&huart2, (uint8_t*) "UC Initialization \n\r", 22,
-			 100) != HAL_OK)
-			 Error_Handler();*/
-			printf("Init Micro Controleur\n\r");
-			HAL_Delay(3000);
+
+			printf("Nucleo Ready\n\r");
+
 			//traitement des entrées (transitions)
-			etat = info_mode;
+			do {
+				__HAL_UART_CLEAR_OREFLAG(&huart2);
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
+						== HAL_OK) {
+					HAL_Delay(50);
+					HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
+					HAL_Delay(50);
+				}
+
+			} while (r_buffer[0] != '1' || r_buffer[0] != '2');
+
+			if (r_buffer[0] == 2)
+				etat = info_mode;
+			else
+				etat = init_motor;
+
+			r_buffer[0] = 0;
 			break;
 
 		case info_mode:
@@ -154,7 +159,7 @@ int main(void) {
 
 			} while (r_buffer[0] != '0');
 
-			etat = idle_mode;
+			etat = init_uc;
 			r_buffer[0] = '9';
 
 			//le programme freeze dans l'etat info
