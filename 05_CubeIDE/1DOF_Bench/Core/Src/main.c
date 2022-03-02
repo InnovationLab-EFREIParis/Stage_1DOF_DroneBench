@@ -239,6 +239,20 @@ int main(void) {
 				Error_Handler();
 			HAL_Delay(3000);
 
+			do {
+
+							if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 1) == HAL_OK)
+									HAL_Delay(10);
+								//HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
+								//HAL_Delay(50);
+
+
+
+						} while (r_buffer[0] != '6');
+
+						etat = motor_ready;
+						r_buffer[0] = ' ';
+
 			break;
 
 		case manual_mode:
@@ -279,21 +293,18 @@ int main(void) {
 					//HAL_Delay(3000);
 
 					while(okay== true){
-						//val = load_adc(hadc1, 5);
-						//printf("%d \r",val);
+						//valeur_can = load_adc(hadc1, 5);
+						//printf("%d \r",valeur_can);
 						//printf("\n");
 						mapped_value =mapping_adc_value(load_adc(hadc1, 5));
-						//printf("map %d \r",mapped_value);
-						somme= somme+mapped_value;
-						k++;
+						printf("m %d \r",mapped_value);
+						//printf("%d okayy \n \r",okay);
 						//load_pwm(htim3, mapped_value);
-						if(k==100){
-							if (val<1400)
-							okay= false;
-							k=0;
-							somme=0;
-						}
+						if (mapped_value <=1513){
+						okay= false;
+							printf("o %d \n \r",okay);
 
+						}
 
 					}
 					printf("succes \n\r");

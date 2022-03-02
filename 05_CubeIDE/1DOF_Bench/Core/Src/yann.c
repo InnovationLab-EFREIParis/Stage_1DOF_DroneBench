@@ -28,7 +28,7 @@ int load_adc(ADC_HandleTypeDef hadc, int polTime) {
 
 int mapping_adc_value(int val){
 	remap = 1512 +  (val * 2583/4095);
-	map = (int) remap;
+	int map =  remap;
 	return map;
 }
 
