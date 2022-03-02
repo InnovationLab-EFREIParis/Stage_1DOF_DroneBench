@@ -12,15 +12,24 @@
  float firmware_version =0.1;
  int  valeur_min_moteur= 1512;
  int  valeur_max_moteur =2025;
-
+int somme=0;
+int moy=0;
+float remap;
+int map;
 int load_adc(ADC_HandleTypeDef hadc, int polTime) {
 
 	HAL_ADC_Start(&hadc);
 	HAL_ADC_PollForConversion(&hadc, polTime);
-	//if(HAL_ADC_GetValue(&hadc)==0)
-	//return 1;
 	return HAL_ADC_GetValue(&hadc);
 
+
+
+}
+
+int mapping_adc_value(int val){
+	remap = 1512 +  (val * 2583/4095);
+	map = (int) remap;
+	return map;
 }
 
 void load_pwm(TIM_HandleTypeDef htimX, int val) {

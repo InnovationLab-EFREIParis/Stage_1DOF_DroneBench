@@ -21,6 +21,9 @@
 #include "fsm.h"
 #include "yann.h"
 #include "remi.h"
+#include <stdbool.h>
+
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -51,8 +54,6 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
-
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -80,11 +81,9 @@ int main(void) {
 	enum states etat;
 	etat = init_uc;
 	char r_buffer[2];
-
-
-	int val;
-
-
+	bool okay;
+	int valeur_can;
+	int mapped_value;
 
 	//char buffer [size];
 	int k = 0;
@@ -124,7 +123,7 @@ int main(void) {
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
 	//NOus mettons ici la valeur minimale pour emettre un signal vers notre ESC dans notre registre capture and compare register
 
-	TIM3->CCR2 = valeur_min_moteur;
+	//TIM3->CCR2 = valeur_min_moteur;
 	y_print(&huart2, " 0 to 6 to change state \r\n", 26);
 	HAL_Delay(5000);
 
@@ -137,162 +136,183 @@ int main(void) {
 
 		//differents etats qu'on peut avoir
 
-		val = load_adc(hadc1, 5);
-		if (val > 2025)
-			val = 2025;
-
-
-		//load_pwm(htim3, val);
-
-
 		//---------changement d'etat-------
 
 		switch (etat) {
 
+		case init_uc:
+			//traitement des sorties
+			/*if (HAL_UART_Transmit(&huart2, (uint8_t*) "UC Initialization \n\r", 22,
+			 100) != HAL_OK)
+			 Error_Handler();*/
+			printf("nucleo ready\r\n");
+			HAL_Delay(3000);
+			//traitement des entrées (transitions)
+			do {
+
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
+						== HAL_OK) {
+					HAL_Delay(50);
+					HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
+					HAL_Delay(50);
+				}
+
+			} while ((r_buffer[0] != '1') && (r_buffer[0] != '2')); //|| (r_buffer[0] != '2')
+			if (r_buffer[0] == '2')
+				etat = info_mode;
+			else
+				etat = init_motor;
+			r_buffer[0] = ' ';
+			break;
+
+		case info_mode:
+			//if (HAL_UART_Transmit(&huart2, (uint8_t*) "Info mode\n\r", 12, 100)
+			//	!= HAL_OK)
+			//Error_Handler();
+			printf("Info mode\r\n");
+			printf("Firmware version %.2f \n\r", firmware_version);
+			HAL_Delay(3000);
+
+			//sortie de la boucle
+			/*do {
+			 __HAL_UART_CLEAR_OREFLAG(&huart2);
+			 if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
+			 == HAL_OK) {
+			 HAL_Delay(50);
+			 HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
+			 HAL_Delay(50);
+			 }
+
+			 } while (r_buffer[0] != '0');*/
+
+			etat = init_uc;
+			// Reinitialisation du buffer
+			r_buffer[0] = 0;
+			//printf("%f");
+			//le programme freeze dans l'etat info
+			break;
+
+		case init_motor:
+			/*if (HAL_UART_Transmit(&huart2,
+			 (uint8_t*) "Motor Initialization \r\n", 24, 100) != HAL_OK)
+			 Error_Handler();*/
+			printf("Motor Initialization \n\r");
+			HAL_Delay(3000);
+			//Chargement de la pwm
+			//HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
+			load_pwm(htim3, valeur_min_moteur);
+			r_buffer[0]=' ';
+			etat = motor_ready;
+
+			break;
+
+		case motor_ready:
+			/*	if (HAL_UART_Transmit(&huart2, (uint8_t*) "Motor ready \n\r", 15,
+			 100) != HAL_OK)
+			 Error_Handler();
+			 HAL_Delay(3000);*/
+			//k = 0;
+			load_pwm(htim3, valeur_min_moteur);
+			printf("Motor ready \n\r");
+			HAL_Delay(3000);
+			do {
+
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
+						== HAL_OK) {
+					HAL_Delay(50);
+					HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
+					HAL_Delay(50);
+				}
+
+			} while ((r_buffer[0] != '3') && (r_buffer[0] != '4')); //|| (r_buffer[0] != '2')
+			if (r_buffer[0] == '3')
+				etat = init_pot;
+			else
+				etat = auto_mode;
+			r_buffer[0] = ' ';
+
+			break;
+
+		case auto_mode:
+			if (HAL_UART_Transmit(&huart2, (uint8_t*) "Auto mode \n\r", 15, 100)
+					!= HAL_OK)
+				Error_Handler();
+			HAL_Delay(3000);
+
+			break;
+
+		case manual_mode:
 
 
+				if (HAL_UART_Transmit(&huart2, (uint8_t*) "Manual mode \n\r",
+						15, 100) != HAL_OK)
+					Error_Handler();
+			//
+			//recuperation de la pwm
 
-				case init_uc:
-					//traitement des sorties
-					/*if (HAL_UART_Transmit(&huart2, (uint8_t*) "UC Initialization \n\r", 22,
-					 100) != HAL_OK)
-					 Error_Handler();*/
-					printf("nucleo ready\r\n");
-					HAL_Delay(3000);
-					//traitement des entrées (transitions)
-					do {
 
-											if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
-													== HAL_OK) {
-												HAL_Delay(50);
-												HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
-												HAL_Delay(50);
-											}
+			do {
 
-										} while ((r_buffer[0] != '1')&& (r_buffer[0] != '2')); //|| (r_buffer[0] != '2')
-					if(r_buffer[0] == '2')
-					etat = info_mode;
-					else
-						etat = init_motor;
-					r_buffer[0]=' ';
-					break;
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 1) == HAL_OK)
+						HAL_Delay(10);
+					//HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
+					//HAL_Delay(50);
+					valeur_can = load_adc(hadc1, 5);
+					mapped_value=mapping_adc_value(valeur_can);
+					load_pwm(htim3, mapped_value);
 
-				case info_mode:
-					//if (HAL_UART_Transmit(&huart2, (uint8_t*) "Info mode\n\r", 12, 100)
+
+			} while (r_buffer[0] != '6');
+
+			etat = motor_ready;
+			r_buffer[0] = ' ';
+			break;
+
+		case init_pot:
+					//if (HAL_UART_Transmit(&huart2, (uint8_t*) "Auto mode \n\r", 15, 100)
 						//	!= HAL_OK)
 						//Error_Handler();
-					printf("Info mode\r\n");
-					printf("Firmware version %.2f \n\r",firmware_version);
-					HAL_Delay(3000);
+					okay = true;
+					//val = load_adc(hadc1, 5);
+					//load_pwm(htim3, val);
+					printf("mettez le potentiometre à zero \n\r");
+					//HAL_Delay(3000);
 
-					//sortie de la boucle
-					/*do {
-						__HAL_UART_CLEAR_OREFLAG(&huart2);
-						if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
-								== HAL_OK) {
-							HAL_Delay(50);
-							HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
-							HAL_Delay(50);
+					while(okay== true){
+						//val = load_adc(hadc1, 5);
+						//printf("%d \r",val);
+						//printf("\n");
+						mapped_value =mapping_adc_value(load_adc(hadc1, 5));
+						//printf("map %d \r",mapped_value);
+						somme= somme+mapped_value;
+						k++;
+						//load_pwm(htim3, mapped_value);
+						if(k==100){
+							if (val<1400)
+							okay= false;
+							k=0;
+							somme=0;
 						}
 
-					} while (r_buffer[0] != '0');*/
 
-					etat = init_uc;
-					// Reinitialisation du buffer
-					r_buffer[0] = 0;
-					//printf("%f");
-					//le programme freeze dans l'etat info
-					break;
+					}
+					printf("succes \n\r");
+					etat = manual_mode;
+					r_buffer[0] = ' ';
 
-				case init_motor:
-					/*if (HAL_UART_Transmit(&huart2,
-							(uint8_t*) "Motor Initialization \r\n", 24, 100) != HAL_OK)
-						Error_Handler();*/
-					printf("Motor Initialization \n\r");
-					HAL_Delay(3000);
-					load_pwm(htim3, valeur_min_moteur);
+				break;
 
+		default:
+			break;
 
-					break;
-
-				case motor_ready:
-					if (HAL_UART_Transmit(&huart2, (uint8_t*) "Motor ready \n\r", 15,
-							100) != HAL_OK)
-						Error_Handler();
-					HAL_Delay(3000);
-
-					break;
-
-				case auto_mode:
-					if (HAL_UART_Transmit(&huart2, (uint8_t*) "Auto mode \n\r", 15, 100)
-							!= HAL_OK)
-						Error_Handler();
-					HAL_Delay(3000);
-
-					break;
-
-				case manual_mode:
-					if (HAL_UART_Transmit(&huart2, (uint8_t*) "Manual mode \n\r", 15,
-							100) != HAL_OK)
-						Error_Handler();
-					HAL_Delay(3000);
-
-					break;
-				default:
-					break;
-
-				}
+		}
 
 		//---------changement d'etat----FIN---
 
-		//---------gestion des entrées UART-------
-		//use a buffer for receiving data
-		//can't or don't know if the data is received correctly, hard to handle  large datas and string
-		//might consider using interrupts or DMA
-
-		/*for (int i = 0; (i <size) && (buffer[i]!='/'); ++i) {
-		 buffer[i]=HAL_UART_Receive(&huart2,(uint8_t*) r_buffer, 2, 10);
-		 HAL_Delay(50);
-		 HAL_UART_Transmit(&huart2,(uint8_t*) r_buffer, 2, 10);
-		 HAL_Delay(50);
-
-		 }*/
-		//idle_mode,init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode
-
-		//if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10) == HAL_OK)
-			//HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
-
-		/*HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10);
-		 HAL_Delay(50);
-		 HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
-		 HAL_Delay(50);*/
-		//faire passer dans le switch
-
-		/*		if (r_buffer[0] == '0')
-		 etat = idle_mode;
-		 if (r_buffer[0] == '1')
-		 etat = init_uc;
-		 if (r_buffer[0] == '2')
-		 etat = init_motor;
-		 if (r_buffer[0] == '3')
-		 etat = motor_ready;
-		 if (r_buffer[0] == '4')
-		 etat = manual_mode;
-		 if (r_buffer[0] == '5')
-		 etat = auto_mode;
-		 if (r_buffer[0] == '6')
-		 etat = info_mode;
-
-		 if(r_buffer[0] == '0' || r_buffer[0] == '1'|| r_buffer[0] == '2'|| r_buffer[0] == '3'|| r_buffer[0] == '4'|| r_buffer[0] == '5'||r_buffer[0] == '6' )
-		 {
-		 k=0;
-		 r_buffer[0]=' ';
-		 }
 
 
-		//use interrupts instead of polling it might be less messy
-		//---------gestion des entrées UART-------
-		/* USER CODE END WHILE */
+
+		 /* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
 	}
