@@ -23,6 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -36,9 +37,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="true"
-     inkscape:zoom="0.8749317"
-     inkscape:cx="696.26951"
-     inkscape:cy="462.56927"
+     inkscape:zoom="0.84508109"
+     inkscape:cx="763.85931"
+     inkscape:cy="1320.1138"
      inkscape:window-width="1920"
      inkscape:window-height="1001"
      inkscape:window-x="-9"
@@ -352,7 +353,7 @@
          id="tspan120323-8-5"
          style="stroke-width:0.264583"
          x="56.39402"
-         y="322.66068">rs_cmd == auto</tspan></text>
+         y="322.66068">rs_cmd == 4</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
@@ -363,7 +364,7 @@
          id="tspan120323-8-5-4"
          style="stroke-width:0.264583"
          x="28.284615"
-         y="277.67923">rs_cmd == stop</tspan></text>
+         y="277.67923">rs_cmd == 6</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
@@ -374,7 +375,7 @@
          id="tspan120323-8-5-4-4"
          style="stroke-width:0.264583"
          x="177.54112"
-         y="277.67923">rs_cmd == stop</tspan></text>
+         y="277.67923">rs_cmd == 6</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4.23333px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
@@ -396,7 +397,7 @@
          id="tspan120323-8-5-7"
          style="stroke-width:0.264583"
          x="156.21875"
-         y="322.95276">rs_cmd == man</tspan></text>
+         y="322.95276">rs_cmd == 3</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12.7px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
@@ -456,24 +457,29 @@
              x="54.871845"
              y="61.237679">Init Motor</tspan><tspan
              sodipodi:role="line"
-             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             style="font-size:3.52778px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
              x="54.871845"
-             y="67.24408"
+             y="67.302422"
              id="tspan31743-5">rs_msg = Motor initialisation </tspan><tspan
              sodipodi:role="line"
-             style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             style="font-size:3.52778px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
              x="54.871845"
-             y="72.535736"
+             y="72.594086"
              id="tspan27677-6">g_led = toggling slowly</tspan><tspan
+             sodipodi:role="line"
+             style="font-size:3.52778px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
+             x="54.871845"
+             y="77.885742"
+             id="tspan1075">init PWM with Valeur_min_moteur </tspan><tspan
              sodipodi:role="line"
              style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
              x="54.871845"
-             y="77.8274"
+             y="83.177406"
              id="tspan27679-5" /><tspan
              sodipodi:role="line"
              style="font-size:4.23333px;text-align:center;text-anchor:middle;stroke:none;stroke-width:0.264583;stroke-opacity:1"
              x="54.871845"
-             y="83.119064"
+             y="88.46907"
              id="tspan27675-1" /></text>
       </g>
     </g>
