@@ -4,11 +4,11 @@
  *  Created on: Feb 7, 2022
  *      Author: Remi
  */
-#include "main.h"
-#include <stdio.h>
+
 #ifndef INC_REMI_H_
 #define INC_REMI_H_
-
+#include "main.h"
+#include <stdio.h>
 uint8_t rx_buffer[2];
 GPIO_PinState PinState;
 

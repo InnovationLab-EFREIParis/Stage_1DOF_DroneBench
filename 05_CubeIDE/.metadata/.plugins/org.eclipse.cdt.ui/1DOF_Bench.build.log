@@ -1,12 +1,20 @@
-16:20:08 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
+12:28:59 **** Incremental Build of configuration Debug for project 1DOF_Bench ****
 make -j4 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
 arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
-d:\stm32\stm32cubeide_1.8.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_2.0.0.202105311346\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/main.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:19: multiple definition of `firmware_version'; ./Core/Src/fsm.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:19: first defined here
-d:\stm32\stm32cubeide_1.8.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.9-2020-q2-update.win32_2.0.0.202105311346\tools\arm-none-eabi\bin\ld.exe: ./Core/Src/yann.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:19: multiple definition of `firmware_version'; ./Core/Src/fsm.o:C:/Users/AXEL NDO/Documents/master 1 SRD/test/Stage_1DOF_DroneBench/05_CubeIDE/1DOF_Bench/Debug/../Core/Inc/yann.h:19: first defined here
-collect2.exe: error: ld returned 1 exit status
-make: *** [makefile:79: 1DOF_Bench.elf] Error 1
-"make -j4 all" terminated with exit code 2. Build might be incomplete.
+Finished building target: 1DOF_Bench.elf
+ 
+arm-none-eabi-size   1DOF_Bench.elf 
+arm-none-eabi-objdump -h -S  1DOF_Bench.elf  > "1DOF_Bench.list"
+arm-none-eabi-objcopy  -O binary  1DOF_Bench.elf  "1DOF_Bench.bin"
+   text	   data	    bss	    dec	    hex	filename
+  50840	    496	   2000	  53336	   d058	1DOF_Bench.elf
+Finished building: default.size.stdout
+ 
+Finished building: 1DOF_Bench.bin
+ 
+Finished building: 1DOF_Bench.list
+ 
 
-16:20:09 Build Failed. 3 errors, 0 warnings. (took 1s.764ms)
+12:29:01 Build Finished. 0 errors, 0 warnings. (took 2s.365ms)
 
