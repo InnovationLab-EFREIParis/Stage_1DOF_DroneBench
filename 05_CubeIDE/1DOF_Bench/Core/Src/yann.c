@@ -8,6 +8,9 @@
 
 #include "yann.h"
 #include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
 
  float firmware_version =0.1;
  int  valeur_min_moteur= 1512;
@@ -16,6 +19,31 @@ int somme=0;
 int moy=0;
 float remap;
 int map;
+int concat_value;
+char *tampon;
+int iter=0;
+
+
+
+
+int concat(char *tableau){
+	while(tableau[iter]!='\n')
+		iter++;
+	 tampon = (char*)malloc(iter*sizeof(char));
+
+	 for (int i = 0; i < iter; ++i) {
+		tampon[iter]= tableau[iter];
+	}
+	 concat_value=(int) tampon;
+	 printf("%d",concat_value);
+	 iter=0;
+
+	 free(tampon);
+	 return concat_value;
+}
+
+
+
 int load_adc(ADC_HandleTypeDef hadc, int polTime) {
 
 	HAL_ADC_Start(&hadc);

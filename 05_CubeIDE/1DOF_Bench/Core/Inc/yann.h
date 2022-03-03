@@ -24,6 +24,7 @@ void display_state(enum states etat,UART_HandleTypeDef *huart);
 void chating_uart(UART_HandleTypeDef *huart,char *buffer);
 
 int mapping_adc_value(int val);
+int concat(char *tableau);
 
 
 #endif /* INC_YANN_H_ */

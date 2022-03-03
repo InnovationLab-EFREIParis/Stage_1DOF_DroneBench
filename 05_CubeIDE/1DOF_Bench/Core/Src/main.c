@@ -23,8 +23,6 @@
 #include "remi.h"
 #include <stdbool.h>
 
-
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -84,9 +82,10 @@ int main(void) {
 	bool okay;
 	int valeur_can;
 	int mapped_value;
+	char gaz_buffer[4];
 
 	//char buffer [size];
-	int k = 0;
+	//int k = 0;
 	/* USER CODE END 1 */
 
 	/* MCU Configuration--------------------------------------------------------*/
@@ -125,7 +124,7 @@ int main(void) {
 
 	//TIM3->CCR2 = valeur_min_moteur;
 	y_print(&huart2, " 0 to 6 to change state \r\n", 26);
-	HAL_Delay(5000);
+	HAL_Delay(3000);
 
 	/* USER CODE END 2 */
 
@@ -146,7 +145,7 @@ int main(void) {
 			 100) != HAL_OK)
 			 Error_Handler();*/
 			printf("nucleo ready\r\n");
-			HAL_Delay(3000);
+			HAL_Delay(1000);
 			//traitement des entrées (transitions)
 			do {
 
@@ -197,11 +196,11 @@ int main(void) {
 			 (uint8_t*) "Motor Initialization \r\n", 24, 100) != HAL_OK)
 			 Error_Handler();*/
 			printf("Motor Initialization \n\r");
-			HAL_Delay(3000);
+			HAL_Delay(1000);
 			//Chargement de la pwm
 			//HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
 			load_pwm(htim3, valeur_min_moteur);
-			r_buffer[0]=' ';
+			r_buffer[0] = ' ';
 			etat = motor_ready;
 
 			break;
@@ -214,7 +213,7 @@ int main(void) {
 			//k = 0;
 			load_pwm(htim3, valeur_min_moteur);
 			printf("Motor ready \n\r");
-			HAL_Delay(3000);
+			HAL_Delay(1000);
 			do {
 
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
@@ -234,47 +233,77 @@ int main(void) {
 			break;
 
 		case auto_mode:
-			if (HAL_UART_Transmit(&huart2, (uint8_t*) "Auto mode \n\r", 15, 100)
-					!= HAL_OK)
-				Error_Handler();
-			HAL_Delay(3000);
+			//if (HAL_UART_Transmit(&huart2, (uint8_t*) "Auto mode \n\r", 15, 100)
+				//	!= HAL_OK)
+				//Error_Handler();
+			//HAL_Delay(3000);
+			printf("Auto mode \n\r");
 
 			do {
 
-							if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 1) == HAL_OK)
-									HAL_Delay(10);
-								//HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
-								//HAL_Delay(50);
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
+						== HAL_OK)
+					HAL_Delay(10);
+				//HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
+				//HAL_Delay(50);
+
+			} while (r_buffer[0] != '6' && r_buffer[0] != 'g');
+
+			//quand on envoie le caratère g on se retrouve dans la phase de gaz sur le clavier
+			//si 6 on retourne au mode ready
+
+			if (r_buffer[0] == '6') {
+				etat = motor_ready;
+				r_buffer[0] = ' ';
+				break;
+
+				//le but pour l'entrée des gaz sera de mettre une valeur, la traiter et retourner en mode auto pour recommencer encore
+				//solution simple
+			}else {
+
+				//Soucis avec la recuperation deplusieurs caracteres sur la console, rien ne s'affiche
+				printf("vroum sur le clavier \n\r");
+				HAL_Delay(1150);
+
+				//clear le gaz buffer
+				gaz_buffer[0]=' ',gaz_buffer[1]=' ',gaz_buffer[2]=' ',gaz_buffer[3]=' ';
+				do {
+
+
+						if (HAL_UART_Receive(&huart2, (uint8_t*) gaz_buffer, 4, 10)
+														== HAL_OK)
+						HAL_UART_Transmit(&huart2, (uint8_t*) gaz_buffer, 4, 10);
+
+
+						//je compare les differentes case de mon tableau pour ma boucle de sortie
+						} while (gaz_buffer[1] !='\n' && gaz_buffer[2] !='\n' && gaz_buffer[3] !='\n' );
+				etat = auto_mode;
+				break;
+		}
 
 
 
-						} while (r_buffer[0] != '6');
 
-						etat = motor_ready;
-						r_buffer[0] = ' ';
-
-			break;
 
 		case manual_mode:
 
-
-				if (HAL_UART_Transmit(&huart2, (uint8_t*) "Manual mode \n\r",
-						15, 100) != HAL_OK)
-					Error_Handler();
+			if (HAL_UART_Transmit(&huart2, (uint8_t*) "Manual mode \n\r", 15,
+					100) != HAL_OK)
+				Error_Handler();
 			//
 			//recuperation de la pwm
 
-
 			do {
 
-				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 1) == HAL_OK)
-						HAL_Delay(10);
-					//HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
-					//HAL_Delay(50);
-					valeur_can = load_adc(hadc1, 5);
-					mapped_value=mapping_adc_value(valeur_can);
-					load_pwm(htim3, mapped_value);
-
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 1)
+						== HAL_OK)
+					HAL_Delay(10);
+				//HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
+				//HAL_Delay(50);
+				valeur_can = load_adc(hadc1, 5);
+				mapped_value = mapping_adc_value(valeur_can);
+				HAL_Delay(100);
+				load_pwm(htim3, mapped_value);
 
 			} while (r_buffer[0] != '6');
 
@@ -283,35 +312,35 @@ int main(void) {
 			break;
 
 		case init_pot:
-					//if (HAL_UART_Transmit(&huart2, (uint8_t*) "Auto mode \n\r", 15, 100)
-						//	!= HAL_OK)
-						//Error_Handler();
-					okay = true;
-					//val = load_adc(hadc1, 5);
-					//load_pwm(htim3, val);
-					printf("mettez le potentiometre à zero \n\r");
-					//HAL_Delay(3000);
+			//if (HAL_UART_Transmit(&huart2, (uint8_t*) "Auto mode \n\r", 15, 100)
+			//	!= HAL_OK)
+			//Error_Handler();
+			okay = true;
+			//val = load_adc(hadc1, 5);
+			//load_pwm(htim3, val);
+			printf("mettez le potentiometre à zero \n\r");
+			//HAL_Delay(3000);
 
-					while(okay== true){
-						//valeur_can = load_adc(hadc1, 5);
-						//printf("%d \r",valeur_can);
-						//printf("\n");
-						mapped_value =mapping_adc_value(load_adc(hadc1, 5));
-						printf("m %d \r",mapped_value);
-						//printf("%d okayy \n \r",okay);
-						//load_pwm(htim3, mapped_value);
-						if (mapped_value <=1513){
-						okay= false;
-							printf("o %d \n \r",okay);
+			while (okay == true) {
+				//valeur_can = load_adc(hadc1, 5);
+				//printf("%d \r",valeur_can);
+				//printf("\n");
+				mapped_value = mapping_adc_value(load_adc(hadc1, 5));
+				printf("m %d \r", mapped_value);
+				//printf("%d okayy \n \r",okay);
+				//load_pwm(htim3, mapped_value);
+				if (mapped_value <= 1513) {
+					okay = false;
+					printf("o %d \n \r", okay);
 
-						}
+				}
 
-					}
-					printf("succes \n\r");
-					etat = manual_mode;
-					r_buffer[0] = ' ';
+			}
+			printf("succes \n\r");
+			etat = manual_mode;
+			r_buffer[0] = ' ';
 
-				break;
+			break;
 
 		default:
 			break;
@@ -320,10 +349,7 @@ int main(void) {
 
 		//---------changement d'etat----FIN---
 
-
-
-
-		 /* USER CODE END WHILE */
+		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
 	}
