@@ -7,8 +7,7 @@
 
 #include "fsm.h"
 #include "main.h"
-#include "yann.h"
-#include "remi.h"
+
 
 
 
