@@ -7,9 +7,6 @@
 
 
 #include "yann.h"
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
 
 
  float firmware_version =0.1;
@@ -26,7 +23,7 @@ int iter=0;
 
 
 
-int concat(char *tableau){
+/*int concat(char *tableau){
 	while(tableau[iter]!='\n')
 		iter++;
 	 tampon = (char*)malloc(iter*sizeof(char));
@@ -40,7 +37,7 @@ int concat(char *tableau){
 
 	 free(tampon);
 	 return concat_value;
-}
+}*/
 
 
 

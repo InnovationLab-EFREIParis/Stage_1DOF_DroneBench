@@ -7,21 +7,19 @@
 
 #ifndef INC_FSM_H_
 #define INC_FSM_H_
-
-#include<stdio.h>
-#include "main.h"
-enum states{init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode,init_pot};
+//#include "main.h"
 
 
 
-void switch_states(enum states div);
+
+/*void switch_states(enum states div);
 void motor_init();
 void uc_init();
 void ready_motor();
 void manual_m();
 void auto_m();
 void info();
-
+*/
 
 
 

@@ -8,11 +8,13 @@
 #ifndef INC_REMI_H_
 #define INC_REMI_H_
 #include "main.h"
-#include <stdio.h>
-uint8_t rx_buffer[2];
-GPIO_PinState PinState;
+#include  <stdio.h>
+#include  <errno.h>
+#include  <sys/unistd.h>
+
 
 void setGreenLed();
+
 void blinkGreenLed(int nb, int delay);
 void sendWelcomeMsgRS232(UART_HandleTypeDef *huart);
 void sendbackRS232(UART_HandleTypeDef *huart);

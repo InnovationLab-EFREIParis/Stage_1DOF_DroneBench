@@ -6,10 +6,11 @@
  */
 
 #include "remi.h"
-#include  <stdio.h>
-#include  <errno.h>
-#include  <sys/unistd.h> // STDOUT_FILENO, STDERR_FILENO
+// STDOUT_FILENO, STDERR_FILENO
 
+/*
+uint8_t rx_buffer[2];
+GPIO_PinState PinState;
 // On board green LED On
 void setGreenLed() {
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, SET);
@@ -68,3 +69,4 @@ int _write(int file, char *data, int len) {
 	// return # of bytes written - as best we can tell
 	return (status == HAL_OK ? len : 0);
 }
+*/

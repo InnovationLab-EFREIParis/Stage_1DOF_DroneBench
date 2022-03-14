@@ -41,7 +41,7 @@ extern "C" {
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
-UART_HandleTypeDef huart2;
+//UART_HandleTypeDef huart2;
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/
