@@ -17,9 +17,9 @@
  */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-//#include "main.h"
+#include "main.h"
 #include"yann.h"
-//#include "remi.h"
+#include "remi.h"
 #include<stdio.h>
 //#include<stdbool.h>
 /* Private includes ----------------------------------------------------------*/
@@ -69,23 +69,10 @@ static void MX_TIM3_Init(void);
 /* USER CODE BEGIN 0 */
 
 uint8_t gaz_buffer[4];
-char gaz_data[4];
-int counter=4;
-
-
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
-
-				if (counter==0){
-					for (int i = 1; i <= 4; i++)
-						gaz_buffer[counter++]=0;
 
 
 
 
-				}
-
-
-	 	 }
 
 
 
@@ -105,6 +92,8 @@ int main(void)
 	 	 int okay;
 	 	int valeur_can;
 	 	int mapped_value;
+	 //	char gaz_data[4];
+	 	//int counter=4;
 
 
 
