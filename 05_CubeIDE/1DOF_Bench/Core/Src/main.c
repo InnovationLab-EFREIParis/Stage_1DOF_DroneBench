@@ -92,8 +92,8 @@ int main(void)
 	 	 int okay;
 	 	int valeur_can;
 	 	int mapped_value;
-	 //	char gaz_data[4];
-	 	//int counter=4;
+	 char gaz_data[4];
+	 	int counter=4;
 
 
 
