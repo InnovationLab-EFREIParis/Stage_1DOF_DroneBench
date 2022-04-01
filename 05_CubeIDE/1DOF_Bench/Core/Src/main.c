@@ -18,12 +18,14 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include"yann.h"
-#include "remi.h"
-#include<stdio.h>
-//#include<stdbool.h>
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "yann.h"
+#include "mpu6050.h"
+#include  <stdio.h>
+#include  <errno.h>
+#include  <sys/unistd.h>
 
 /* USER CODE END Includes */
 
@@ -45,13 +47,17 @@
 ADC_HandleTypeDef hadc1;
 DMA_HandleTypeDef hdma_adc1;
 
+I2C_HandleTypeDef hi2c1;
+
 TIM_HandleTypeDef htim3;
+
 UART_HandleTypeDef huart2;
 DMA_HandleTypeDef hdma_usart2_tx;
 DMA_HandleTypeDef hdma_usart2_rx;
 
 /* USER CODE BEGIN PV */
-
+Kalman_t kali;
+MPU6050_t mpu;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -61,6 +67,7 @@ static void MX_USART2_UART_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_DMA_Init(void);
 static void MX_TIM3_Init(void);
+static void MX_I2C1_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -84,10 +91,6 @@ int _write(int file, char *data, int len) {
 	return (status == HAL_OK ? len : 0);
 }
 
-
-
-
-
 /* USER CODE END 0 */
 
 /**
@@ -99,18 +102,18 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
 	enum states etat;
-	 etat = init_uc;
-	 char r_buffer[2];
-	 	 int okay;
-	 	int valeur_can;
-	 	int mapped_value;
-	 char gaz_data[4];
-	 	int counter=4;
-
-
-
+	etat = init_uc;
+	char r_buffer[2];
+	int okay;
+	int valeur_can;
+	int mapped_value;
+	// char gaz_data[4];
+	//	int counter=4;
+	double true_angle;
 	//char buffer [size];
-	//int k = 0;
+
+
+	int k = 1700;//var used to increement speed in auto state
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -135,7 +138,10 @@ int main(void)
   MX_ADC1_Init();
   MX_DMA_Init();
   MX_TIM3_Init();
+  MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
+	while (MPU6050_Init(&hi2c1) == 1)
+		;
 	// Light up green led
 	//setGreenLed();
 	// blink green led
@@ -171,6 +177,8 @@ int main(void)
 			 100) != HAL_OK)
 			 Error_Handler();*/
 			printf("nucleo ready\r\n");
+			//gyro init
+			MPU6050_Read_All(&hi2c1, &mpu);
 			HAL_Delay(1000);
 			//traitement des entrées (transitions)
 			do {
@@ -236,10 +244,11 @@ int main(void)
 			 100) != HAL_OK)
 			 Error_Handler();
 			 HAL_Delay(3000);*/
-			//k = 0;
+			k = 1700;
 			load_pwm(htim3, valeur_min_moteur);
 			printf("Motor ready \n\r");
 			HAL_Delay(1000);
+
 			do {
 
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
@@ -260,9 +269,10 @@ int main(void)
 
 		case auto_mode:
 			//if (HAL_UART_Transmit(&huart2, (uint8_t*) "Auto mode \n\r", 15, 100)
-				//	!= HAL_OK)
-				//Error_Handler();
+			//	!= HAL_OK)
+			//Error_Handler();
 			//HAL_Delay(3000);
+
 			printf("Auto mode \n\r");
 
 			do {
@@ -285,31 +295,41 @@ int main(void)
 
 				//le but pour l'entrée des gaz sera de mettre une valeur, la traiter et retourner en mode auto pour recommencer encore
 				//solution simple
-			}else {
+			} else {
 
 				//Soucis avec la recuperation deplusieurs caracteres sur la console, rien ne s'affiche
-				printf("vroum sur le clavier \n\r");
-				HAL_Delay(1150);
+				//printf("vroum sur le clavier \n\r");
 
-				//clear le gaz buffer
-				gaz_buffer[0]=' ',gaz_buffer[1]=' ',gaz_buffer[2]=' ',gaz_buffer[3]=' ';
-				do {
+				MPU6050_Read_All(&hi2c1, &mpu);
+				load_pwm(htim3, k);
+				true_angle=90-mpu.KalmanAngleX;
+				printf("beforeangle %.2f \n\r", true_angle);
+				HAL_Delay(50);
+
+				while ( true_angle<45.00) {
+					HAL_Delay(40);
+										MPU6050_Read_All(&hi2c1, &mpu);
+										true_angle=90-mpu.KalmanAngleX;
+										printf("angle %.2f \n\r", true_angle);
+										load_pwm(htim3, k);
+										k++;
+				} ;
+				while ( true_angle>48.00) {
+														HAL_Delay(40);
+														true_angle=90-mpu.KalmanAngleX;
+														MPU6050_Read_All(&hi2c1, &mpu);
+														printf("angle %.2f \n\r", true_angle);
+														load_pwm(htim3, k);
+														k--;
+								} ;
 
 
-						if (HAL_UART_Receive(&huart2, (uint8_t*) gaz_buffer, 4, 10)
-														== HAL_OK)
-						HAL_UART_Transmit(&huart2, (uint8_t*) gaz_buffer, 4, 10);
-
-
-						//je compare les differentes case de mon tableau pour ma boucle de sortie
-						} while (gaz_buffer[1] !='\n' && gaz_buffer[2] !='\n' && gaz_buffer[3] !='\n' );
+				//r_buffer[0] = ' ';
 				etat = auto_mode;
+
+
 				break;
-		}
-
-
-
-
+			}
 
 		case manual_mode:
 
@@ -494,6 +514,52 @@ static void MX_ADC1_Init(void)
 }
 
 /**
+  * @brief I2C1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_I2C1_Init(void)
+{
+
+  /* USER CODE BEGIN I2C1_Init 0 */
+
+  /* USER CODE END I2C1_Init 0 */
+
+  /* USER CODE BEGIN I2C1_Init 1 */
+
+  /* USER CODE END I2C1_Init 1 */
+  hi2c1.Instance = I2C1;
+  hi2c1.Init.Timing = 0x10909CEC;
+  hi2c1.Init.OwnAddress1 = 0;
+  hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c1.Init.OwnAddress2 = 0;
+  hi2c1.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  hi2c1.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c1.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure Analogue filter
+  */
+  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /** Configure Digital filter
+  */
+  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C1_Init 2 */
+
+  /* USER CODE END I2C1_Init 2 */
+
+}
+
+/**
   * @brief TIM3 Initialization Function
   * @param None
   * @retval None
@@ -513,7 +579,7 @@ static void MX_TIM3_Init(void)
 
   /* USER CODE END TIM3_Init 1 */
   htim3.Instance = TIM3;
-  htim3.Init.Prescaler = 0;
+  htim3.Init.Prescaler = 38;
   htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim3.Init.Period = 4096;
   htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
