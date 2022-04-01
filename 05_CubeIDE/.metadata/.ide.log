@@ -2261,3 +2261,937 @@
 
 
 2022-03-30 14:56:39,303 [INFO] Activator:178 - !SESSION log4j initialized
+2022-03-30 14:56:49,181 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-03-30 15:22:45,341 [INFO] McuFinderGlobals:39 - Set McuFinder mode to 2 (CubeIDE integrated)
+2022-03-30 15:22:46,409 [INFO] ApplicationProperties:181 - Using Application install path: D:\STM32\STM32CubeIDE_1.8.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.5.0.202202251913
+2022-03-30 15:22:46,467 [INFO] DbMcusXml:72 - Set database path to: D:\STM32\STM32CubeIDE_1.8.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.5.0.202202251913\\db\/mcu/
+2022-03-30 15:22:46,468 [INFO] ApiDb:260 - Set plugin database path to: D:\STM32\STM32CubeIDE_1.8.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.5.0.202202251913\\db\/plugins/boardmanager/
+2022-03-30 15:22:46,473 [WARN] ApiDb:245 - Overriding images path with different value:  => D:\STM32\STM32CubeIDE_1.8.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.5.0.202202251913\\db\/plugins/mcufinder/images/
+2022-03-30 15:22:46,644 [INFO] ApiDb:226 - Set database path to: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder//mcu/
+2022-03-30 15:22:46,647 [INFO] DbMcusAds:119 - Set database path to: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder//mcu/
+2022-03-30 15:22:46,687 [INFO] CrossReferenceDbSqlite:196 - Set database path to: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder//mcu/cs/
+2022-03-30 15:22:46,986 [INFO] RulesReader:57 - Compatibility file has been processed (281 Rules)
+2022-03-30 15:22:47,189 [INFO] DbMcusXml:72 - Set database path to: D:\STM32\STM32CubeIDE_1.8.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.5.0.202202251913\\db\/mcu/
+2022-03-30 15:22:47,190 [INFO] ApiDb:260 - Set plugin database path to: D:\STM32\STM32CubeIDE_1.8.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.5.0.202202251913\\db\/plugins/boardmanager/
+2022-03-30 15:22:47,191 [INFO] ApiDb:247 - Set plugin images path to: D:\STM32\STM32CubeIDE_1.8.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.5.0.202202251913\\db\/plugins/mcufinder/images/
+2022-03-30 15:22:47,192 [WARN] DbFile:35 - Overriding database path with different value: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder/ => C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder
+2022-03-30 15:22:47,193 [INFO] ApiDb:226 - Set database path to: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder//mcu/
+2022-03-30 15:22:47,193 [WARN] DbFile:35 - Overriding database path with different value: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder/ => C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder
+2022-03-30 15:22:47,194 [INFO] DbMcusAds:119 - Set database path to: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder//mcu/
+2022-03-30 15:22:47,196 [WARN] DbFile:35 - Overriding database path with different value: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder/ => C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder
+2022-03-30 15:22:47,196 [WARN] DbFile:35 - Overriding database path with different value: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder/ => C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder
+2022-03-30 15:22:47,197 [INFO] CrossReferenceDbSqlite:196 - Set database path to: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder//mcu/cs/
+2022-03-30 15:22:47,506 [INFO] MainPanel:230 - HeapMemory: 387973120
+2022-03-30 15:22:47,773 [INFO] DbMcusXml:72 - Set database path to: D:\STM32\STM32CubeIDE_1.8.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.5.0.202202251913\\db\/mcu/
+2022-03-30 15:22:47,774 [INFO] ApiDb:260 - Set plugin database path to: D:\STM32\STM32CubeIDE_1.8.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.5.0.202202251913\\db\/plugins/boardmanager/
+2022-03-30 15:22:47,774 [INFO] ApiDb:247 - Set plugin images path to: D:\STM32\STM32CubeIDE_1.8.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.5.0.202202251913\\db\/plugins/mcufinder/images/
+2022-03-30 15:22:47,775 [WARN] DbFile:35 - Overriding database path with different value: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder/ => C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder
+2022-03-30 15:22:47,775 [INFO] ApiDb:226 - Set database path to: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder//mcu/
+2022-03-30 15:22:47,775 [WARN] DbFile:35 - Overriding database path with different value: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder/ => C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder
+2022-03-30 15:22:47,775 [INFO] DbMcusAds:119 - Set database path to: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder//mcu/
+2022-03-30 15:22:47,775 [WARN] DbFile:35 - Overriding database path with different value: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder/ => C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder
+2022-03-30 15:22:47,775 [WARN] DbFile:35 - Overriding database path with different value: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder/ => C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder
+2022-03-30 15:22:47,775 [INFO] CrossReferenceDbSqlite:196 - Set database path to: C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder//mcu/cs/
+2022-03-30 15:22:47,815 [INFO] ApplicationProperties:181 - Using Application install path: D:\STM32\STM32CubeIDE_1.8.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.5.0.202202251913
+2022-03-30 15:22:47,819 [INFO] PluginManage:188 - Search for loadable plugins [exclusion list=, ]
+2022-03-30 15:22:47,822 [INFO] PluginManage:302 - Check plugin analytics
+2022-03-30 15:22:48,080 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-03-30 15:22:48,198 [INFO] AnalyticsPlugin:257 - Accepted Software Licenses: 
+2022-03-30 15:22:48,199 [INFO] AnalyticsPlugin:259 - Accepted CMSIS Pack Licenses: 
+2022-03-30 15:22:48,200 [INFO] AnalyticsPlugin:261 - Accepted Firmware Licenses: 
+2022-03-30 15:22:48,207 [INFO] PluginManage:352 - Loaded plugin analytics (category:tool,tabindex:-1)
+2022-03-30 15:22:48,209 [INFO] PluginManage:302 - Check plugin clock
+2022-03-30 15:22:48,269 [INFO] PluginManage:352 - Loaded plugin clock (category:base,tabindex:2)
+2022-03-30 15:22:48,271 [INFO] PluginManage:302 - Check plugin ddr
+2022-03-30 15:22:48,276 [INFO] PluginManage:352 - Loaded plugin ddr (category:tool,tabindex:6)
+2022-03-30 15:22:48,276 [INFO] PluginManage:302 - Check plugin filemanager
+2022-03-30 15:22:48,641 [INFO] PluginManage:352 - Loaded plugin filemanager (category:base,tabindex:10)
+2022-03-30 15:22:48,641 [INFO] PluginManage:302 - Check plugin ipmanager
+2022-03-30 15:22:48,658 [INFO] PluginManage:352 - Loaded plugin ipmanager (category:base,tabindex:5)
+2022-03-30 15:22:48,659 [INFO] PluginManage:302 - Check plugin lpbam
+2022-03-30 15:22:48,783 [INFO] PluginManage:352 - Loaded plugin lpbam (category:base,tabindex:0)
+2022-03-30 15:22:48,784 [INFO] PluginManage:302 - Check plugin pinoutandconfiguration
+2022-03-30 15:22:48,938 [INFO] PluginManage:352 - Loaded plugin pinoutandconfiguration (category:base,tabindex:1)
+2022-03-30 15:22:48,939 [INFO] PluginManage:302 - Check plugin pinoutconfig
+2022-03-30 15:22:49,045 [INFO] PluginManage:352 - Loaded plugin pinoutconfig (category:base,tabindex:0)
+2022-03-30 15:22:49,048 [INFO] PluginManage:302 - Check plugin power
+2022-03-30 15:22:49,129 [INFO] PluginManage:352 - Loaded plugin power (category:power,tabindex:4)
+2022-03-30 15:22:49,129 [INFO] PluginManage:302 - Check plugin projectmanager
+2022-03-30 15:22:49,160 [INFO] PluginManage:352 - Loaded plugin projectmanager (category:projectmanager,tabindex:3)
+2022-03-30 15:22:49,160 [INFO] PluginManage:302 - Check plugin thirdparty
+2022-03-30 15:22:49,792 [WARN] IntegrityCheckThread:78 - waiting for thirdparty lock release [integrity check]
+2022-03-30 15:22:49,793 [INFO] PluginManage:352 - Loaded plugin thirdparty (category:base,tabindex:-1)
+2022-03-30 15:22:49,793 [INFO] IntegrityCheckThread:80 - entering critical section [integrity check]
+2022-03-30 15:22:49,794 [INFO] PluginManage:302 - Check plugin tools
+2022-03-30 15:22:49,796 [INFO] ThirdPartyUpdaterWithRetryManager:66 - Updater plugin not ready yet. [1/15]
+2022-03-30 15:22:49,870 [INFO] PluginManage:352 - Loaded plugin tools (category:base,tabindex:7)
+2022-03-30 15:22:49,870 [INFO] PluginManage:302 - Check plugin tutovideos
+2022-03-30 15:22:50,518 [INFO] PluginManage:352 - Loaded plugin tutovideos (category:base,tabindex:-1)
+2022-03-30 15:22:50,519 [INFO] PluginManage:302 - Check plugin updater
+2022-03-30 15:22:50,555 [INFO] PluginManage:352 - Loaded plugin updater (category:base,tabindex:12)
+2022-03-30 15:22:50,558 [INFO] PluginManage:275 - PluginManage : Loaded plugins [14]
+2022-03-30 15:22:51,223 [INFO] PinOutPanel:1465 - setPackage(No Configuration,No Configuration)
+2022-03-30 15:22:52,088 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:52,088 [INFO] PluginManager:213 - loadIPPluginJar : add adc
+2022-03-30 15:22:52,169 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:52,172 [INFO] PluginManager:213 - loadIPPluginJar : add aes
+2022-03-30 15:22:52,266 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:52,266 [INFO] PluginManager:213 - loadIPPluginJar : add can
+2022-03-30 15:22:52,385 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:52,385 [INFO] PluginManager:213 - loadIPPluginJar : add comp
+2022-03-30 15:22:52,455 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:52,455 [INFO] PluginManager:213 - loadIPPluginJar : add cryp
+2022-03-30 15:22:52,718 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:52,718 [INFO] PluginManager:213 - loadIPPluginJar : add dfsdm
+2022-03-30 15:22:52,798 [INFO] ThirdPartyUpdaterWithRetryManager:66 - Updater plugin not ready yet. [2/15]
+2022-03-30 15:22:52,929 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:52,930 [INFO] PluginManager:213 - loadIPPluginJar : add dma
+2022-03-30 15:22:53,010 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:53,010 [INFO] PluginManager:213 - loadIPPluginJar : add dma3
+2022-03-30 15:22:53,056 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:53,056 [INFO] PluginManager:213 - loadIPPluginJar : add fatfs
+2022-03-30 15:22:53,136 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:53,136 [INFO] PluginManager:213 - loadIPPluginJar : add fmc
+2022-03-30 15:22:53,168 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:53,168 [INFO] PluginManager:213 - loadIPPluginJar : add freertos
+2022-03-30 15:22:53,189 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:53,189 [INFO] PluginManager:213 - loadIPPluginJar : add genericplugin
+2022-03-30 15:22:53,325 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:53,325 [INFO] PluginManager:213 - loadIPPluginJar : add gfxmmu
+2022-03-30 15:22:53,490 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:53,490 [INFO] PluginManager:213 - loadIPPluginJar : add gic
+2022-03-30 15:22:53,536 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:53,537 [INFO] PluginManager:213 - loadIPPluginJar : add gpio
+2022-03-30 15:22:53,708 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:53,708 [INFO] PluginManager:213 - loadIPPluginJar : add gtzc
+2022-03-30 15:22:53,795 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:53,795 [INFO] PluginManager:213 - loadIPPluginJar : add hash
+2022-03-30 15:22:53,869 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:53,869 [INFO] PluginManager:213 - loadIPPluginJar : add i2c
+2022-03-30 15:22:53,956 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:53,956 [INFO] PluginManager:213 - loadIPPluginJar : add i2s
+2022-03-30 15:22:54,016 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,016 [INFO] PluginManager:213 - loadIPPluginJar : add ipddr
+2022-03-30 15:22:54,124 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,127 [INFO] PluginManager:213 - loadIPPluginJar : add linkedlist
+2022-03-30 15:22:54,169 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,169 [INFO] PluginManager:213 - loadIPPluginJar : add lorawan
+2022-03-30 15:22:54,243 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,243 [INFO] PluginManager:213 - loadIPPluginJar : add ltdc
+2022-03-30 15:22:54,285 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,285 [INFO] PluginManager:213 - loadIPPluginJar : add mdma
+2022-03-30 15:22:54,309 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,309 [INFO] PluginManager:213 - loadIPPluginJar : add nvic
+2022-03-30 15:22:54,362 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,362 [INFO] PluginManager:213 - loadIPPluginJar : add opamp
+2022-03-30 15:22:54,428 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,428 [INFO] PluginManager:213 - loadIPPluginJar : add openamp
+2022-03-30 15:22:54,488 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,488 [INFO] PluginManager:213 - loadIPPluginJar : add pdm2pcm
+2022-03-30 15:22:54,519 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,526 [INFO] PluginManager:213 - loadIPPluginJar : add plateformsettings
+2022-03-30 15:22:54,559 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,559 [INFO] PluginManager:213 - loadIPPluginJar : add quadspi
+2022-03-30 15:22:54,584 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,584 [INFO] PluginManager:213 - loadIPPluginJar : add resmgrutility
+2022-03-30 15:22:54,640 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,640 [INFO] PluginManager:213 - loadIPPluginJar : add sai
+2022-03-30 15:22:54,671 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,675 [INFO] PluginManager:213 - loadIPPluginJar : add spi
+2022-03-30 15:22:54,745 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,749 [INFO] PluginManager:213 - loadIPPluginJar : add stm32_wpan
+2022-03-30 15:22:54,770 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,770 [INFO] PluginManager:213 - loadIPPluginJar : add tim
+2022-03-30 15:22:54,822 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,822 [INFO] PluginManager:213 - loadIPPluginJar : add touchsensing
+2022-03-30 15:22:54,843 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,843 [INFO] PluginManager:213 - loadIPPluginJar : add tracer_emb
+2022-03-30 15:22:54,868 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,868 [INFO] PluginManager:213 - loadIPPluginJar : add ts
+2022-03-30 15:22:54,889 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,889 [INFO] PluginManager:213 - loadIPPluginJar : add tsc
+2022-03-30 15:22:54,910 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,910 [INFO] PluginManager:213 - loadIPPluginJar : add ucpd
+2022-03-30 15:22:54,959 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:54,959 [INFO] PluginManager:213 - loadIPPluginJar : add usart
+2022-03-30 15:22:55,029 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:22:55,029 [INFO] PluginManager:213 - loadIPPluginJar : add usbx
+2022-03-30 15:22:55,658 [FATAL] Updater:297 - Updater called before beeing initialized
+2022-03-30 15:22:55,801 [INFO] ThirdPartyUpdaterWithRetryManager:66 - Updater plugin not ready yet. [3/15]
+2022-03-30 15:22:55,974 [FATAL] Updater:297 - Updater called before beeing initialized
+2022-03-30 15:22:55,986 [INFO] DbMcusAds:47 - JSON generation date=Thu Sep 30 08:55:09 CEST 2021 (1632984909247)
+2022-03-30 15:22:55,986 [FATAL] Updater:297 - Updater called before beeing initialized
+2022-03-30 15:22:56,194 [WARN] DetailPanel:320 - Failed to get advertising image, set to default
+2022-03-30 15:22:56,343 [FATAL] Updater:297 - Updater called before beeing initialized
+2022-03-30 15:22:56,382 [FATAL] Updater:297 - Updater called before beeing initialized
+2022-03-30 15:22:56,382 [FATAL] Updater:297 - Updater called before beeing initialized
+2022-03-30 15:22:56,382 [WARN] DetailPanel:320 - Failed to get advertising image, set to default
+2022-03-30 15:22:56,382 [FATAL] Updater:297 - Updater called before beeing initialized
+2022-03-30 15:22:56,518 [INFO] Updater:1026 - Updater Version found : 6.5.0
+2022-03-30 15:22:56,550 [INFO] ApplicationProperties:181 - Using Application install path: D:\STM32\STM32CubeIDE_1.8.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.5.0.202202251913
+2022-03-30 15:22:57,425 [INFO] MainUpdater:2729 - connection check result : 10
+2022-03-30 15:22:57,426 [INFO] MainUpdater:3414 - Updater definition file requires update
+2022-03-30 15:22:57,427 [INFO] MainUpdater:276 - Updater Check For Update Now.
+2022-03-30 15:22:57,429 [INFO] MicroXplorer:477 - Change Database Version : DB.6.0.50
+2022-03-30 15:22:57,446 [INFO] ServerAccessManage:359 - Download File updaters.zip
+2022-03-30 15:22:57,540 [INFO] FileExtend:235 - Unzip File : updaters.zip
+2022-03-30 15:22:57,540 [INFO] FileExtend:250 - Standard Zip Deflate
+2022-03-30 15:22:58,844 [WARN] MainUpdater:1180 - Updater busy. Cannot search thirdparties
+2022-03-30 15:22:58,846 [INFO] ThirdPartyUpdaterWithRetryManager:92 - Updater plugin is busy. [1/15]
+2022-03-30 15:22:58,912 [INFO] ServerAccessManage:359 - Download File PacksControlFlags.xml
+2022-03-30 15:22:59,075 [INFO] ServerAccessManage:359 - Download File cubemx.pidx
+2022-03-30 15:23:00,777 [INFO] ServerAccessManage:359 - Download File STMicroelectronics.X-CUBE-TOUCHGFX.pdsc
+2022-03-30 15:23:01,849 [WARN] MainUpdater:1180 - Updater busy. Cannot search thirdparties
+2022-03-30 15:23:01,849 [INFO] ThirdPartyUpdaterWithRetryManager:92 - Updater plugin is busy. [2/15]
+2022-03-30 15:23:01,958 [INFO] ServerAccessManage:359 - Download File emotas.I-CUBE-CANOPEN.pdsc
+2022-03-30 15:23:02,527 [INFO] MainUpdater:2729 - connection check result : 10
+2022-03-30 15:23:02,527 [INFO] CheckServerUpdateThread:115 - End of CheckServer Thread
+2022-03-30 15:23:02,810 [INFO] MainUpdater:2729 - connection check result : 10
+2022-03-30 15:23:02,828 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-TOUCHGFX.4.19.0
+2022-03-30 15:23:02,850 [WARN] PackLoader:238 - Cannot read IP mode file for emotas.I-CUBE-CANOPEN.1.1.2
+2022-03-30 15:23:02,854 [INFO] PopulateThirdPartyThread:60 - Ending populate Thread
+2022-03-30 15:23:02,854 [INFO] ThirdParty:977 - CMSIS Pack Vendor :emotas I-CUBE-CANOPEN 1.1.2
+2022-03-30 15:23:02,854 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TOUCHGFX 4.19.0
+2022-03-30 15:23:02,854 [INFO] LoadServerUpdatesThread:362 - End of LoadServerUpdate Thread
+2022-03-30 15:23:03,565 [INFO] MicroXplorer:447 - Change Database Path : 
+2022-03-30 15:23:03,565 [INFO] MicroXplorer:477 - Change Database Version : DB.6.0.50
+2022-03-30 15:23:03,569 [WARN] ThirdParty:823 - waiting for thirdparty lock release [close project]
+2022-03-30 15:23:05,997 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-AI.7.1.0
+2022-03-30 15:23:06,023 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-BLE1.6.2.3
+2022-03-30 15:23:06,059 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-BLE1.6.2.2
+2022-03-30 15:23:06,088 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-BLE2.3.2.2
+2022-03-30 15:23:06,120 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-NFC4.2.0.3
+2022-03-30 15:23:06,127 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-TOUCHGFX.4.19.0
+2022-03-30 15:23:06,159 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-SFXS2LP1.3.1.0
+2022-03-30 15:23:06,187 [WARN] PackLoader:238 - Cannot read IP mode file for wolfSSL.I-CUBE-wolfSSL.5.1.1
+2022-03-30 15:23:06,225 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-AZRTOS-F4.1.0.0
+2022-03-30 15:23:06,249 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-TOF1.2.0.0
+2022-03-30 15:23:06,284 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-NFC7.1.0.0
+2022-03-30 15:23:06,377 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-SUBG2.4.2.0
+2022-03-30 15:23:06,442 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-AZRTOS-G0.1.0.0
+2022-03-30 15:23:06,467 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-TOUCHGFX.4.18.1
+2022-03-30 15:23:06,496 [WARN] PackLoader:238 - Cannot read IP mode file for RoweBots.I-CUBE-UNISONRTOS.5.5.0-4
+2022-03-30 15:23:06,517 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-ALGOBUILD.1.3.0
+2022-03-30 15:23:06,603 [WARN] PackLoader:238 - Cannot read IP mode file for SEGGER.I-CUBE-embOS.1.2.0
+2022-03-30 15:23:06,734 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-AZRTOS-H7.2.0.0
+2022-03-30 15:23:06,792 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-AZRTOS-G4.1.0.0
+2022-03-30 15:23:06,855 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-AZRTOS-L4.1.0.0
+2022-03-30 15:23:06,870 [WARN] PackLoader:238 - Cannot read IP mode file for emotas.I-CUBE-CANOPEN.1.1.2
+2022-03-30 15:23:06,925 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-AZRTOS-F7.1.0.0
+2022-03-30 15:23:06,974 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-AZRTOS-WL.1.0.0
+2022-03-30 15:23:07,067 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-MEMS1.9.1.0
+2022-03-30 15:23:07,314 [WARN] PackLoader:238 - Cannot read IP mode file for portGmbH.I-Cube-SoM-uGOAL.1.1.0
+2022-03-30 15:23:07,341 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-ALS.1.0.1
+2022-03-30 15:23:07,404 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-AZRTOS-L5.1.0.0
+2022-03-30 15:23:07,464 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-EEPRMA1.3.1.0
+2022-03-30 15:23:07,497 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-EEPRMA1.3.1.1
+2022-03-30 15:23:07,529 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-GNSS1.5.2.0
+2022-03-30 15:23:07,557 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-DISPLAY.2.0.1
+2022-03-30 15:23:07,591 [WARN] PackLoader:238 - Cannot read IP mode file for STMicroelectronics.X-CUBE-TOF1.3.0.0
+2022-03-30 15:23:07,596 [INFO] ThirdParty:925 - Integrity check success = true
+2022-03-30 15:23:07,596 [INFO] IntegrityCheckThread:94 - exiting critical section [integrity check]
+2022-03-30 15:23:07,596 [INFO] ThirdParty:825 - entering critical section [close project]
+2022-03-30 15:23:07,597 [INFO] IntegrityCheckThread:97 - End integrity checks thread
+2022-03-30 15:23:07,598 [INFO] ThirdParty:835 - exiting critical section [close project]
+2022-03-30 15:23:07,602 [INFO] PinOutPanel:1465 - setPackage(No Configuration,No Configuration)
+2022-03-30 15:23:07,609 [INFO] UtilMem:74 - Begin LoadConfig() Used Memory: 370744856 Bytes (625999872)
+2022-03-30 15:23:07,616 [INFO] MicroXplorer:447 - Change Database Path : C:/Users/AXEL NDO/.stm32cubemx/databases/DB.6.0.40/db/
+2022-03-30 15:23:07,616 [INFO] MicroXplorer:477 - Change Database Version : DB.6.0.40
+2022-03-30 15:23:32,421 [INFO] OpenFileManager:303 - Change cursor
+2022-03-30 15:23:33,239 [INFO] ApiDb:567 - Connected to CubeFinder SQLite database (C:\Users\AXEL NDO\.stmcufinder\plugins\mcufinder\mcu\cube-finder-db.db)
+2022-03-30 15:23:33,407 [INFO] ApiDb:654 - CubeFinder database Data Model version=2.1
+2022-03-30 15:23:33,407 [INFO] ApiDb:655 - CubeFinder database Configuration version=3.0.22
+2022-03-30 15:23:33,407 [INFO] ApiDb:656 - CubeFinder database generation date=2022-01-05 (1641391108)
+2022-03-30 15:23:33,407 [INFO] ApiDb:657 - CubeFinder database FW Pack versions=[STM32Cube_FW_F4_V1.26.2, STM32Cube_FW_F7_V1.16.2, STM32Cube_FW_G0_V1.5.0, STM32Cube_FW_G4_V1.5.0, STM32Cube_FW_H7_V1.9.1, STM32Cube_FW_L5_V1.4.0, STM32Cube_FW_U5_V1.0.2, STM32Cube_FW_WB_V1.13.1, STM32Cube_FW_WL_V1.1.0, X-CUBE-ALS_V1.0.1, X-CUBE-AZRTOS-F4_V1.0.0, X-CUBE-AZRTOS-F7_V1.0.0, X-CUBE-AZRTOS-G0_V1.0.0, X-CUBE-AZRTOS-G4_V1.0.0, X-CUBE-AZRTOS-H7_V2.0.0, X-CUBE-AZRTOS-L4_V1.0.0, X-CUBE-AZRTOS-L5_V1.0.0, X-CUBE-BLE1_V6.2.1, X-CUBE-BLE2_V3.2.2, X-CUBE-EEPRMA1_V3.1.0, X-CUBE-GNSS1_V5.2.0, X-CUBE-MEMS1_V9.1.0, X-CUBE-NFC4_V2.0.3, X-CUBE-SFXS2LP1_V3.1.0, X-CUBE-SUBG2_V4.2.0]
+2022-03-30 15:23:34,346 [INFO] DbBoardsSqlite:220 - include board P-NUCLEO-WB55-NUCLEO as a kit item of type 'Nucleo-64'
+2022-03-30 15:23:34,346 [INFO] DbBoardsSqlite:220 - include board P-NUCLEO-WB55-USBDONGLE as a kit item of type 'Nucleo USB Dongle'
+2022-03-30 15:23:34,346 [INFO] DbBoardsSqlite:220 - include board STEVAL-IDP005V1 as a kit item of type 'Evaluation Board'
+2022-03-30 15:23:34,346 [INFO] DbBoardsSqlite:220 - include board STEVAL-IDP005V2 as a kit item of type 'Evaluation Board'
+2022-03-30 15:23:34,511 [ERROR] DbBoardsSqlite:354 - Found 1 error(s) while decoding attributes due to database compatibility issues
+2022-03-30 15:23:34,511 [ERROR] DbBoardsSqlite:356 - SQL statement error: no such column: 'cryptography' (195)
+2022-03-30 15:23:34,514 [INFO] ApiDb:212 - Found 97 in-development CPN: [NUCLEO-C031C6, STM32C0116-DK, STM32C011D6Y3TR, STM32C011D6Y6TR, STM32C011F4P3, STM32C011F4P6, STM32C011F4U3, STM32C011F4U6TR, STM32C011F6P3, STM32C011F6P6, STM32C011F6U3, STM32C011F6U6TR, STM32C011J4M3, STM32C011J4M6, STM32C011J6M3, STM32C011J6M6, STM32C0316-DK, STM32C031C4T3, STM32C031C4T6, STM32C031C4U3, STM32C031C4U6, STM32C031C6T3, STM32C031C6T6, STM32C031C6U3, STM32C031C6U6, STM32C031F4P3, STM32C031F4P6, STM32C031F6P3, STM32C031F6P6, STM32C031G4U3, STM32C031G4U6, STM32C031G6U3, STM32C031G6U6, STM32C031K4T3, STM32C031K4T6, STM32C031K4U3, STM32C031K4U6, STM32C031K6T3, STM32C031K6T6, STM32C031K6U3, STM32C031K6U6, STM32G071K8TXN, STM32G071K8UXN, STM32G081GBU6N, STM32G081KBT6N, STM32G081KBUXN, STM32G0B1CCT6N, STM32G0B1KCT6, STM32G0B1NEY6, STM32G0B1NEY6TR, STM32G0B1RCT6N, STM32G0C1CCT6, STM32G0C1CCT6N, STM32G0C1CCU6N, STM32G0C1CET6N, STM32G0C1CEU6N, STM32G0C1KCT6, STM32G0C1NEY6TR, STM32G0C1RCI6N, STM32G0C1RCT6N, STM32G0C1REI6N, STM32G0C1RET6N, STM32G0C1VCI6, STM32G0C1VEI6, STM32G471CCT6, STM32G471CCU6, STM32G471CET3, STM32G471CET6, STM32G471CEU3, STM32G471CEU6, STM32G471MCT6, STM32G471MET3, STM32G471MET6, STM32G471MEY6TR, STM32G471QCT6, STM32G471QET3, STM32G471RCT6, STM32G471RET3, STM32G471RET6, STM32G471VCH6, STM32G471VCI6, STM32G471VCT6, STM32G471VEH3, STM32G471VEH6, STM32G471VEI3, STM32G471VEI6, STM32G471VET3, STM32G471VET6, STM32G474CCT6, STM32L4R5QGI6STR, STM32U595ZJT6Q, STM32U599BJY6QTR, STM32U599NIH6Q, STM32U599NJH6Q, STM32U5A5ZJT6Q, STM32U5A9BJY6QTR, STM32U5A9NJH6Q]
+2022-03-30 15:23:34,625 [INFO] BoardInfo:872 - No configuration file found for board B-G431B-ESC1
+2022-03-30 15:23:34,625 [INFO] DbBoards:144 - Board is not supported: B-G431B-ESC1
+2022-03-30 15:23:34,635 [INFO] BoardInfo:872 - No configuration file found for board EVALKITSTKNX
+2022-03-30 15:23:34,635 [INFO] DbBoards:144 - Board is not supported: EVALKITSTKNX
+2022-03-30 15:23:34,635 [INFO] BoardInfo:872 - No configuration file found for board I-NUCLEO-LRWAN1
+2022-03-30 15:23:34,635 [INFO] DbBoards:144 - Board is not supported: I-NUCLEO-LRWAN1
+2022-03-30 15:23:34,733 [INFO] BoardInfo:872 - No configuration file found for board P-NUCLEO-USB002
+2022-03-30 15:23:34,733 [INFO] DbBoards:144 - Board is not supported: P-NUCLEO-USB002
+2022-03-30 15:23:34,733 [INFO] BoardInfo:872 - No configuration file found for board P-NUCLEO-WB55
+2022-03-30 15:23:34,736 [INFO] DbBoards:144 - Kit is not supported: P-NUCLEO-WB55
+2022-03-30 15:23:34,740 [INFO] BoardInfo:872 - No configuration file found for board STDES-AKI003V1
+2022-03-30 15:23:34,740 [INFO] DbBoards:144 - Board is not supported: STDES-AKI003V1
+2022-03-30 15:23:34,740 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-BFA001V1B
+2022-03-30 15:23:34,740 [INFO] DbBoards:144 - Kit is not supported: STEVAL-BFA001V1B
+2022-03-30 15:23:34,743 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-BFA001V2B
+2022-03-30 15:23:34,743 [INFO] DbBoards:144 - Kit is not supported: STEVAL-BFA001V2B
+2022-03-30 15:23:34,743 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-CCM007V2
+2022-03-30 15:23:34,743 [INFO] DbBoards:144 - Board is not supported: STEVAL-CCM007V2
+2022-03-30 15:23:34,747 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-DPS334C1
+2022-03-30 15:23:34,747 [INFO] DbBoards:144 - Board is not supported: STEVAL-DPS334C1
+2022-03-30 15:23:34,747 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-DPSTPFC1
+2022-03-30 15:23:34,747 [INFO] DbBoards:144 - Board is not supported: STEVAL-DPSTPFC1
+2022-03-30 15:23:34,754 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-IHM033V1
+2022-03-30 15:23:34,754 [INFO] DbBoards:144 - Board is not supported: STEVAL-IHM033V1
+2022-03-30 15:23:34,754 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-IHM036V1
+2022-03-30 15:23:34,754 [INFO] DbBoards:144 - Board is not supported: STEVAL-IHM036V1
+2022-03-30 15:23:34,754 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-IHM039V1
+2022-03-30 15:23:34,754 [INFO] DbBoards:144 - Board is not supported: STEVAL-IHM039V1
+2022-03-30 15:23:34,757 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-IHM040V1
+2022-03-30 15:23:34,757 [INFO] DbBoards:144 - Board is not supported: STEVAL-IHM040V1
+2022-03-30 15:23:34,757 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-IHM042V1
+2022-03-30 15:23:34,757 [INFO] DbBoards:144 - Board is not supported: STEVAL-IHM042V1
+2022-03-30 15:23:34,757 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-IHP002V2
+2022-03-30 15:23:34,757 [INFO] DbBoards:144 - Board is not supported: STEVAL-IHP002V2
+2022-03-30 15:23:34,761 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-IHP005V1
+2022-03-30 15:23:34,761 [INFO] DbBoards:144 - Board is not supported: STEVAL-IHP005V1
+2022-03-30 15:23:34,761 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-ILL015V1
+2022-03-30 15:23:34,761 [INFO] DbBoards:144 - Board is not supported: STEVAL-ILL015V1
+2022-03-30 15:23:34,761 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-ILL035V1
+2022-03-30 15:23:34,761 [INFO] DbBoards:144 - Board is not supported: STEVAL-ILL035V1
+2022-03-30 15:23:34,764 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-IOD04KT1
+2022-03-30 15:23:34,764 [INFO] DbBoards:144 - Board is not supported: STEVAL-IOD04KT1
+2022-03-30 15:23:34,764 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-IPE023V1
+2022-03-30 15:23:34,764 [INFO] DbBoards:144 - Board is not supported: STEVAL-IPE023V1
+2022-03-30 15:23:34,764 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-IPP002V1
+2022-03-30 15:23:34,764 [INFO] DbBoards:144 - Board is not supported: STEVAL-IPP002V1
+2022-03-30 15:23:34,768 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-ISA147V3
+2022-03-30 15:23:34,768 [INFO] DbBoards:144 - Board is not supported: STEVAL-ISA147V3
+2022-03-30 15:23:34,768 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-LLL006V1
+2022-03-30 15:23:34,768 [INFO] DbBoards:144 - Board is not supported: STEVAL-LLL006V1
+2022-03-30 15:23:34,771 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-MKI109V2
+2022-03-30 15:23:34,771 [INFO] DbBoards:144 - Board is not supported: STEVAL-MKI109V2
+2022-03-30 15:23:34,771 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-PCC009V2
+2022-03-30 15:23:34,771 [INFO] DbBoards:144 - Board is not supported: STEVAL-PCC009V2
+2022-03-30 15:23:34,771 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-PCC017V1
+2022-03-30 15:23:34,771 [INFO] DbBoards:144 - Board is not supported: STEVAL-PCC017V1
+2022-03-30 15:23:34,775 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-PCC020V2
+2022-03-30 15:23:34,775 [INFO] DbBoards:144 - Board is not supported: STEVAL-PCC020V2
+2022-03-30 15:23:34,775 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-PLC001V1
+2022-03-30 15:23:34,775 [INFO] DbBoards:144 - Board is not supported: STEVAL-PLC001V1
+2022-03-30 15:23:34,778 [INFO] BoardInfo:872 - No configuration file found for board STEVAL-WESU1
+2022-03-30 15:23:34,778 [INFO] DbBoards:144 - Board is not supported: STEVAL-WESU1
+2022-03-30 15:23:34,852 [INFO] DbBoards:148 - Found 195 boards, 164 are supported
+2022-03-30 15:23:34,859 [INFO] ApiDb:654 - CubeFinder database Data Model version=2.1
+2022-03-30 15:23:34,859 [INFO] ApiDb:655 - CubeFinder database Configuration version=3.0.22
+2022-03-30 15:23:34,859 [INFO] ApiDb:656 - CubeFinder database generation date=2022-01-05 (1641391108)
+2022-03-30 15:23:34,859 [INFO] ApiDb:657 - CubeFinder database FW Pack versions=[STM32Cube_FW_F4_V1.26.2, STM32Cube_FW_F7_V1.16.2, STM32Cube_FW_G0_V1.5.0, STM32Cube_FW_G4_V1.5.0, STM32Cube_FW_H7_V1.9.1, STM32Cube_FW_L5_V1.4.0, STM32Cube_FW_U5_V1.0.2, STM32Cube_FW_WB_V1.13.1, STM32Cube_FW_WL_V1.1.0, X-CUBE-ALS_V1.0.1, X-CUBE-AZRTOS-F4_V1.0.0, X-CUBE-AZRTOS-F7_V1.0.0, X-CUBE-AZRTOS-G0_V1.0.0, X-CUBE-AZRTOS-G4_V1.0.0, X-CUBE-AZRTOS-H7_V2.0.0, X-CUBE-AZRTOS-L4_V1.0.0, X-CUBE-AZRTOS-L5_V1.0.0, X-CUBE-BLE1_V6.2.1, X-CUBE-BLE2_V3.2.2, X-CUBE-EEPRMA1_V3.1.0, X-CUBE-GNSS1_V5.2.0, X-CUBE-MEMS1_V9.1.0, X-CUBE-NFC4_V2.0.3, X-CUBE-SFXS2LP1_V3.1.0, X-CUBE-SUBG2_V4.2.0]
+2022-03-30 15:23:37,902 [ERROR] DbMcusSqlite:522 - Found 2 error(s) while decoding attributes due to database compatibility issues
+2022-03-30 15:23:37,902 [ERROR] DbMcusSqlite:524 - SQL statement error: no such column: 'cryptography' (3379)
+2022-03-30 15:23:37,902 [ERROR] DbMcusSqlite:524 - SQL statement error: no such column: 'securityFunctions' (3379)
+2022-03-30 15:23:37,902 [INFO] ApiDb:212 - Found 97 in-development CPN: [NUCLEO-C031C6, STM32C0116-DK, STM32C011D6Y3TR, STM32C011D6Y6TR, STM32C011F4P3, STM32C011F4P6, STM32C011F4U3, STM32C011F4U6TR, STM32C011F6P3, STM32C011F6P6, STM32C011F6U3, STM32C011F6U6TR, STM32C011J4M3, STM32C011J4M6, STM32C011J6M3, STM32C011J6M6, STM32C0316-DK, STM32C031C4T3, STM32C031C4T6, STM32C031C4U3, STM32C031C4U6, STM32C031C6T3, STM32C031C6T6, STM32C031C6U3, STM32C031C6U6, STM32C031F4P3, STM32C031F4P6, STM32C031F6P3, STM32C031F6P6, STM32C031G4U3, STM32C031G4U6, STM32C031G6U3, STM32C031G6U6, STM32C031K4T3, STM32C031K4T6, STM32C031K4U3, STM32C031K4U6, STM32C031K6T3, STM32C031K6T6, STM32C031K6U3, STM32C031K6U6, STM32G071K8TXN, STM32G071K8UXN, STM32G081GBU6N, STM32G081KBT6N, STM32G081KBUXN, STM32G0B1CCT6N, STM32G0B1KCT6, STM32G0B1NEY6, STM32G0B1NEY6TR, STM32G0B1RCT6N, STM32G0C1CCT6, STM32G0C1CCT6N, STM32G0C1CCU6N, STM32G0C1CET6N, STM32G0C1CEU6N, STM32G0C1KCT6, STM32G0C1NEY6TR, STM32G0C1RCI6N, STM32G0C1RCT6N, STM32G0C1REI6N, STM32G0C1RET6N, STM32G0C1VCI6, STM32G0C1VEI6, STM32G471CCT6, STM32G471CCU6, STM32G471CET3, STM32G471CET6, STM32G471CEU3, STM32G471CEU6, STM32G471MCT6, STM32G471MET3, STM32G471MET6, STM32G471MEY6TR, STM32G471QCT6, STM32G471QET3, STM32G471RCT6, STM32G471RET3, STM32G471RET6, STM32G471VCH6, STM32G471VCI6, STM32G471VCT6, STM32G471VEH3, STM32G471VEH6, STM32G471VEI3, STM32G471VEI6, STM32G471VET3, STM32G471VET6, STM32G474CCT6, STM32L4R5QGI6STR, STM32U595ZJT6Q, STM32U599BJY6QTR, STM32U599NIH6Q, STM32U599NJH6Q, STM32U5A5ZJT6Q, STM32U5A9BJY6QTR, STM32U5A9NJH6Q]
+2022-03-30 15:23:37,906 [INFO] DbMcus:201 - Found 3379 MCUs, 3377 are supported
+2022-03-30 15:23:37,930 [INFO] ApiDb:407 - Load user favorites file C:\Users\AXEL NDO/.stm32cubeide/favorites.mcus.txt: 0 item(s)
+2022-03-30 15:23:37,930 [INFO] ApiDb:411 - User favorites MCUs=[]
+2022-03-30 15:23:37,930 [INFO] DbMcus:207 - Set 0 / 0 favorites MCUs
+2022-03-30 15:23:37,937 [INFO] ApiDb:407 - Load user favorites file C:\Users\AXEL NDO/.stm32cubeide/favorites.boards.txt: 0 item(s)
+2022-03-30 15:23:37,937 [INFO] ApiDb:411 - User favorites Boards=[]
+2022-03-30 15:23:37,937 [INFO] DbBoards:174 - Set 0 / 0 favorites Boards
+2022-03-30 15:23:37,937 [INFO] ProjectFactory:359 - No CPN specified for board NUCLEO-L476RG => set CPN to STM32L476RGT3
+2022-03-30 15:23:37,937 [INFO] Mcu:1893 - Initializing MCU STM32L476R(C-E-G)Tx STM32L476RGTx STM32L476RGT3
+2022-03-30 15:23:41,680 [INFO] Context:599 - Trying to add GPIOservice into a context  which must be forbidden
+2022-03-30 15:23:43,113 [WARN] ApiManager:304 - Cannot register API 'Wireless:BlueNRG-MS' from pack STMicroelectronics.X-CUBE-BLE1.6.2.3: no header file found
+2022-03-30 15:23:43,116 [INFO] RtosManager:484 - Registered RTOS mode: class=CMSIS, group=RTOS, mode=CMSIS_V1, owner=FREERTOS
+2022-03-30 15:23:43,116 [INFO] RtosManager:484 - Registered RTOS mode: class=CMSIS, group=RTOS2, mode=CMSIS_V2, owner=FREERTOS
+2022-03-30 15:23:43,116 [INFO] RtosManager:484 - Registered RTOS mode: class=RTOS, group=Core, mode=CMSIS_V1, owner=FREERTOS
+2022-03-30 15:23:43,116 [INFO] RtosManager:484 - Registered RTOS mode: class=RTOS, group=Core, mode=CMSIS_V2, owner=FREERTOS
+2022-03-30 15:23:43,116 [WARN] ModelIntegratedComponent:181 - Missing modes for component STMicroelectronics:FreeRTOS:0.0.1:STMicroelectronics:RTOS:FreeRTOS:Core:::10.2.0:
+2022-03-30 15:23:43,130 [WARN] ApiManager:304 - Cannot register API 'Wireless:BlueNRG-MS' from pack STMicroelectronics.X-CUBE-BLE1.6.2.2: no header file found
+2022-03-30 15:23:43,130 [WARN] ApiManager:304 - Cannot register API 'Wireless:BlueNRG-2' from pack STMicroelectronics.X-CUBE-BLE2.3.2.2: no header file found
+2022-03-30 15:23:43,134 [WARN] ApiManager:304 - Cannot register API 'Board Extension:NFC04A1' from pack STMicroelectronics.X-CUBE-NFC4.2.0.3: no header file found
+2022-03-30 15:23:43,137 [WARN] ApiManager:304 - Cannot register API 'Board Extension:S2868A1' from pack STMicroelectronics.X-CUBE-SFXS2LP1.3.1.0: no header file found
+2022-03-30 15:23:43,137 [WARN] ApiManager:304 - Cannot register API 'Board Extension:S2868A2' from pack STMicroelectronics.X-CUBE-SFXS2LP1.3.1.0: no header file found
+2022-03-30 15:23:43,137 [WARN] ApiManager:304 - Cannot register API 'Board Extension:S2915A1' from pack STMicroelectronics.X-CUBE-SFXS2LP1.3.1.0: no header file found
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,151 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,155 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,155 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,155 [WARN] ModelIntegratedComponent:60 - No mode defined for component null
+2022-03-30 15:23:43,155 [WARN] ApiManager:304 - Cannot register API 'Board Extension:NFC07A1' from pack STMicroelectronics.X-CUBE-NFC7.1.0.0: no header file found
+2022-03-30 15:23:43,162 [WARN] ApiManager:304 - Cannot register API 'Board Extension:S2868A1' from pack STMicroelectronics.X-CUBE-SUBG2.4.2.0: no header file found
+2022-03-30 15:23:43,165 [WARN] ApiManager:304 - Cannot register API 'Board Extension:S2868A2' from pack STMicroelectronics.X-CUBE-SUBG2.4.2.0: no header file found
+2022-03-30 15:23:43,165 [WARN] ApiManager:304 - Cannot register API 'Board Extension:S2915A1' from pack STMicroelectronics.X-CUBE-SUBG2.4.2.0: no header file found
+2022-03-30 15:23:43,451 [WARN] ApiManager:304 - Cannot register API 'Board Extension:IKS01A3' from pack STMicroelectronics.X-CUBE-MEMS1.9.1.0: no header file found
+2022-03-30 15:23:43,451 [WARN] ApiManager:304 - Cannot register API 'Board Extension:IKS01A2' from pack STMicroelectronics.X-CUBE-MEMS1.9.1.0: no header file found
+2022-03-30 15:23:43,451 [WARN] ApiManager:304 - Cannot register API 'Board Extension:IKS02A1' from pack STMicroelectronics.X-CUBE-MEMS1.9.1.0: no header file found
+2022-03-30 15:23:43,461 [WARN] ApiManager:304 - Cannot register API 'Board Extension:EEPRMA1' from pack STMicroelectronics.X-CUBE-EEPRMA1.3.1.0: no header file found
+2022-03-30 15:23:43,461 [WARN] ApiManager:304 - Cannot register API 'Board Extension:EEPRMA2' from pack STMicroelectronics.X-CUBE-EEPRMA1.3.1.0: no header file found
+2022-03-30 15:23:43,465 [WARN] ApiManager:304 - Cannot register API 'Board Extension:EEPRMA1' from pack STMicroelectronics.X-CUBE-EEPRMA1.3.1.1: no header file found
+2022-03-30 15:23:43,465 [WARN] ApiManager:304 - Cannot register API 'Board Extension:EEPRMA2' from pack STMicroelectronics.X-CUBE-EEPRMA1.3.1.1: no header file found
+2022-03-30 15:23:43,465 [WARN] ApiManager:304 - Cannot register API 'Board Extension:GNSS1A1' from pack STMicroelectronics.X-CUBE-GNSS1.5.2.0: no header file found
+2022-03-30 15:23:43,465 [WARN] ApiManager:304 - Cannot register API 'Board Support:Custom' from pack STMicroelectronics.X-CUBE-GNSS1.5.2.0: no header file found
+2022-03-30 15:23:43,468 [WARN] ApiManager:304 - Cannot register API 'Data Exchange:lib_gnss' from pack STMicroelectronics.X-CUBE-GNSS1.5.2.0: no header file found
+2022-03-30 15:23:43,484 [INFO] ThirdPartyModel:282 - Start build external matchings
+2022-03-30 15:23:43,830 [INFO] ThirdPartyModel:295 - End build external matchings
+2022-03-30 15:23:43,867 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (Instance) has Id (ADC1) currently not set
+2022-03-30 15:23:43,867 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (Request) has Id (ADC1) currently not set
+2022-03-30 15:23:43,867 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (Direction) has Id (ADC1) currently not set
+2022-03-30 15:23:43,867 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (PeriphInc) has Id (ADC1) currently not set
+2022-03-30 15:23:43,867 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (MemInc) has Id (ADC1) currently not set
+2022-03-30 15:23:43,867 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (PeriphDataAlignment) has Id (ADC1) currently not set
+2022-03-30 15:23:43,867 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (MemDataAlignment) has Id (ADC1) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (Mode) has Id (ADC1) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (Priority) has Id (ADC1) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (Instance) has Id (USART2_TX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (Request) has Id (USART2_TX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (Direction) has Id (USART2_TX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (PeriphInc) has Id (USART2_TX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (MemInc) has Id (USART2_TX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (PeriphDataAlignment) has Id (USART2_TX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (MemDataAlignment) has Id (USART2_TX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (Mode) has Id (USART2_TX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (Priority) has Id (USART2_TX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (Instance) has Id (USART2_RX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (Request) has Id (USART2_RX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (Direction) has Id (USART2_RX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (PeriphInc) has Id (USART2_RX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (MemInc) has Id (USART2_RX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (PeriphDataAlignment) has Id (USART2_RX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (MemDataAlignment) has Id (USART2_RX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (Mode) has Id (USART2_RX) currently not set
+2022-03-30 15:23:43,870 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (DMA) : Parameter (Priority) has Id (USART2_RX) currently not set
+2022-03-30 15:23:43,879 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (RCC) : Invalid parameter (FamilyName)
+2022-03-30 15:23:43,886 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (RCC) : Parameter (RNGFreq_Value) has invalid value (64000000)
+2022-03-30 15:23:43,886 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (RCC) : Parameter (SDMMCFreq_Value) has invalid value (64000000)
+2022-03-30 15:23:43,886 [INFO] ImportTextPane:183 - (OptionalMessage_ERROR) IP (RCC) : Parameter (USBFreq_Value) has invalid value (64000000)
+2022-03-30 15:23:44,984 [INFO] UtilMem:74 - End LoadConfig() Used Memory: 382772360 Bytes (625999872)
+2022-03-30 15:23:45,379 [WARN] ThirdParty:785 - waiting for thirdparty lock release [change project]
+2022-03-30 15:23:45,379 [INFO] ThirdParty:787 - entering critical section [change project]
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :RoweBots I-CUBE-UNISONRTOS 5.5.0-4
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics USB_HOST 2.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics LIBJPEG 8.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics USB_DEVICE 3.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics USB_DEVICE 2.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AI 7.1.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-BLE1 6.2.3
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-ALGOBUILD 1.3.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics FreeRTOS 0.0.1
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :SEGGER I-CUBE-embOS 1.2.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics STM32_WPAN 1.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics lwIP 2.0.3
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-BLE1 6.2.2
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-BLE2 3.2.2
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics USB_HOST 1.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-NFC4 2.0.3
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics PDM2PCM 3.1.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TOUCHGFX 4.19.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics PDM2PCM 3.3.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-SFXS2LP1 3.1.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :wolfSSL I-CUBE-wolfSSL 5.1.1
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-F4 1.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-H7 2.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-G4 1.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-L4 1.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TOF1 2.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics HAL Drivers 0.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics MBEDTLS 2.16.2
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :emotas I-CUBE-CANOPEN 1.1.2
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics MBEDTLS 2.14.1
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-NFC7 1.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-F7 1.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-WL 1.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-SUBG2 4.2.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-MEMS1 9.1.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :portGmbH I-Cube-SoM-uGOAL 1.1.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-ALS 1.0.1
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics ThreadX 1.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-L5 1.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics USB_DEVICE 1.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-EEPRMA1 3.1.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-AZRTOS-G0 1.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-EEPRMA1 3.1.1
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-GNSS1 5.2.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics ThreadX 0.0.2
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics lwIP 2.1.2
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-DISPLAY 2.0.1
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics PDM2PCM 3.2.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TOUCHGFX 4.18.1
+2022-03-30 15:23:45,379 [INFO] ThirdParty:977 - CMSIS Pack Vendor :STMicroelectronics X-CUBE-TOF1 3.0.0
+2022-03-30 15:23:45,379 [INFO] ThirdParty:793 - exiting critical section [change project]
+2022-03-30 15:23:46,398 [INFO] PinOutPanel:1465 - setPackage(No Configuration,No Configuration)
+2022-03-30 15:23:46,444 [INFO] PinOutPanel:1465 - setPackage(STM32L476RGTx,LQFP64)
+2022-03-30 15:23:48,414 [INFO] UtilMem:74 - Before build in PCC Used Memory: 421089728 Bytes (625999872)
+2022-03-30 15:23:50,560 [INFO] UtilMem:74 - After build in PCC Used Memory: 362650624 Bytes (625999872)
+2022-03-30 15:23:50,623 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,623 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,623 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,623 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,623 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,623 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,626 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,626 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,626 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,626 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,626 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,626 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,626 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,626 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,626 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,626 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,626 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,626 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,626 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,630 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,630 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,630 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,630 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,630 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,630 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,630 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,630 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,633 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,633 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,633 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,633 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,633 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,633 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,633 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,633 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,637 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,637 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,637 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,637 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,637 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,637 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,637 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,637 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,640 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,640 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,640 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,640 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,640 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,640 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,640 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,640 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,644 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,644 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,644 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,644 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,644 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,647 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,647 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:50,647 [INFO] IPUIPlugin:75 - create IPUIPlugin
+2022-03-30 15:23:51,154 [INFO] OpenFileManager:323 - Restore cursor
+2022-03-30 15:23:51,322 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 452828160 Bytes (625999872)
+2022-03-30 15:27:18,224 [INFO] I2cTimingTraitement:325 - 0x10909CEC
+2022-03-30 15:27:46,038 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 251725736 Bytes (625999872)
+2022-03-30 15:27:48,067 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 283807896 Bytes (625999872)
+2022-03-30 15:27:54,586 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 398950032 Bytes (625999872)
+2022-03-30 15:27:55,672 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: TIM1_8L4
+2022-03-30 15:27:55,672 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: SYS
+2022-03-30 15:27:55,672 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: ADC
+2022-03-30 15:27:55,672 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: RCC
+2022-03-30 15:27:55,672 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: I2C
+2022-03-30 15:27:55,672 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: NVIC
+2022-03-30 15:27:55,672 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: USART
+2022-03-30 15:27:55,675 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: DMA
+2022-03-30 15:27:55,675 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: GPIO
+2022-03-30 15:27:55,675 [INFO] CodeGenerator:681 - code generatio: config db path: C:/Users/AXEL NDO/.stm32cubemx/databases/DB.6.0.40/db/
+2022-03-30 15:27:56,768 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\license.tmp_save
+2022-03-30 15:27:57,472 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\license.tmp
+2022-03-30 15:27:57,807 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\gpio.tmp_save
+2022-03-30 15:27:57,991 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\gpio.tmp
+2022-03-30 15:27:59,959 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\dma.tmp_save
+2022-03-30 15:28:00,152 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\dma.tmp
+2022-03-30 15:28:00,162 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\dma_GV.tmp_save
+2022-03-30 15:28:00,292 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\dma_GV.tmp
+2022-03-30 15:28:00,351 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\stm32l4xx_it.c_save
+2022-03-30 15:28:00,538 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\stm32l4xx_it.c
+2022-03-30 15:28:00,575 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\stm32l4xx_it.h_save
+2022-03-30 15:28:00,685 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\stm32l4xx_it.h
+2022-03-30 15:28:00,740 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\stm32l4xx_hal_msp.c_save
+2022-03-30 15:28:01,015 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\stm32l4xx_hal_msp.c
+2022-03-30 15:28:01,052 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\system.tmp_save
+2022-03-30 15:28:01,152 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\system.tmp
+2022-03-30 15:28:01,192 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\stm32l4xx_hal_conf.h_save
+2022-03-30 15:28:01,366 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\stm32l4xx_hal_conf.h
+2022-03-30 15:28:01,446 [WARN] IPConfigManager:3312 - IP not found : TIM
+2022-03-30 15:28:01,450 [WARN] CodeGenerator:3483 - IP not found : null
+2022-03-30 15:28:01,506 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\main.h_save
+2022-03-30 15:28:01,695 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\main.h
+2022-03-30 15:28:01,737 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\main.c_save
+2022-03-30 15:28:02,090 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\main.c
+2022-03-30 15:28:05,490 [INFO] ProjectBuilder:2913 - Time for Copy HAL[1] : 2222mS.
+2022-03-30 15:28:05,509 [INFO] ProjectBuilder:4015 - Project Generator version: 3.16.0
+2022-03-30 15:28:05,828 [INFO] ConfigFileManager:1287 - The Die is : DIE415
+2022-03-30 15:28:05,905 [INFO] ApiDbMcu:488 - Load IP Config File for FATFS
+2022-03-30 15:28:05,947 [INFO] ApiDbMcu:488 - Load IP Config File for FREERTOS
+2022-03-30 15:28:06,007 [INFO] ApiDbMcu:488 - Load IP Config File for TOUCHSENSING
+2022-03-30 15:28:06,035 [INFO] ApiDbMcu:488 - Load IP Config File for USB_DEVICE
+2022-03-30 15:28:06,049 [INFO] ApiDbMcu:488 - Load IP Config File for USB_HOST
+2022-03-30 15:28:13,615 [INFO] ProjectBuilder:4183 - Time for Generating toolchain IDE Files: 8106mS.
+2022-03-30 15:28:13,615 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 0mS.
+2022-03-30 15:28:13,619 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 0mS.
+2022-03-30 15:42:13,923 [INFO] NvicIntPanel:96 - NVIC parent = com.st.microxplorer.plugins.ip.nvic.MultiNvicIntPanel[,0,0,0x0,invalid,layout=javax.swing.BoxLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=9,maximumSize=,minimumSize=,preferredSize=]
+2022-03-30 15:42:19,257 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 296747176 Bytes (642777088)
+2022-03-30 15:42:23,474 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 325278880 Bytes (642777088)
+2022-03-30 15:42:25,450 [INFO] UtilMem:74 - End SaveConfig() Used Memory: 421225632 Bytes (642777088)
+2022-03-30 15:42:25,907 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: TIM1_8L4
+2022-03-30 15:42:25,907 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: SYS
+2022-03-30 15:42:25,907 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: ADC
+2022-03-30 15:42:25,907 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: RCC
+2022-03-30 15:42:25,907 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: I2C
+2022-03-30 15:42:25,907 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: NVIC
+2022-03-30 15:42:25,907 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: USART
+2022-03-30 15:42:25,907 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: DMA
+2022-03-30 15:42:25,907 [INFO] BlockDiagram:2740 - set Specific Code input for plugin: GPIO
+2022-03-30 15:42:25,910 [INFO] CodeGenerator:681 - code generatio: config db path: C:/Users/AXEL NDO/.stm32cubemx/databases/DB.6.0.40/db/
+2022-03-30 15:42:25,921 [INFO] Argument:296 - Argument : hdmavalue: null
+2022-03-30 15:42:25,921 [INFO] Argument:298 - 	 sub Args: 
+2022-03-30 15:42:25,921 [INFO] Argument:296 - Argument : Instancevalue: DMA1_Channel1
+2022-03-30 15:42:25,921 [INFO] Argument:306 - Argument : Instancevalue: DMA1_Channel1
+2022-03-30 15:42:25,921 [INFO] Argument:296 - Argument : Initvalue: null
+2022-03-30 15:42:25,921 [INFO] Argument:298 - 	 sub Args: 
+2022-03-30 15:42:25,921 [INFO] Argument:296 - Argument : Requestvalue: DMA_REQUEST_0
+2022-03-30 15:42:25,921 [INFO] Argument:306 - Argument : Requestvalue: DMA_REQUEST_0
+2022-03-30 15:42:25,921 [INFO] Argument:296 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2022-03-30 15:42:25,921 [INFO] Argument:306 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2022-03-30 15:42:25,921 [INFO] Argument:296 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2022-03-30 15:42:25,921 [INFO] Argument:306 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2022-03-30 15:42:25,921 [INFO] Argument:296 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2022-03-30 15:42:25,921 [INFO] Argument:306 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2022-03-30 15:42:25,921 [INFO] Argument:296 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_HALFWORD
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_HALFWORD
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_HALFWORD
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_HALFWORD
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : Modevalue: DMA_NORMAL
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : Modevalue: DMA_NORMAL
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : Priorityvalue: DMA_PRIORITY_LOW
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : Priorityvalue: DMA_PRIORITY_LOW
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : Lockvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : Lockvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : Statevalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : Statevalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : Parentvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : Parentvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : XferCpltCallbackvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : XferCpltCallbackvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : XferHalfCpltCallbackvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : XferHalfCpltCallbackvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : XferErrorCallbackvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : XferErrorCallbackvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : XferAbortCallbackvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : XferAbortCallbackvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : ErrorCodevalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : ErrorCodevalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : DmaBaseAddressvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : DmaBaseAddressvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : ChannelIndexvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : ChannelIndexvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : hdmavalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:298 - 	 sub Args: 
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : Instancevalue: DMA1_Channel1
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : Instancevalue: DMA1_Channel1
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : Initvalue: null
+2022-03-30 15:42:25,924 [INFO] Argument:298 - 	 sub Args: 
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : Requestvalue: DMA_REQUEST_0
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : Requestvalue: DMA_REQUEST_0
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2022-03-30 15:42:25,924 [INFO] Argument:306 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2022-03-30 15:42:25,924 [INFO] Argument:296 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_HALFWORD
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_HALFWORD
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_HALFWORD
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_HALFWORD
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : Modevalue: DMA_NORMAL
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : Modevalue: DMA_NORMAL
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : Priorityvalue: DMA_PRIORITY_LOW
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : Priorityvalue: DMA_PRIORITY_LOW
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : Lockvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : Lockvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : Statevalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : Statevalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : Parentvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : Parentvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : XferCpltCallbackvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : XferCpltCallbackvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : XferHalfCpltCallbackvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : XferHalfCpltCallbackvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : XferErrorCallbackvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : XferErrorCallbackvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : XferAbortCallbackvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : XferAbortCallbackvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : ErrorCodevalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : ErrorCodevalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : DmaBaseAddressvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : DmaBaseAddressvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : ChannelIndexvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : ChannelIndexvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : pSyncConfigvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:298 - 	 sub Args: 
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : SyncSignalIDvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : SyncSignalIDvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : SyncPolarityvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : SyncPolarityvalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : SyncEnablevalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : SyncEnablevalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : EventEnablevalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : EventEnablevalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:296 - Argument : RequestNumbervalue: null
+2022-03-30 15:42:25,928 [INFO] Argument:306 - Argument : RequestNumbervalue: null
+2022-03-30 15:42:25,980 [INFO] Argument:296 - Argument : hdmavalue: null
+2022-03-30 15:42:25,984 [INFO] Argument:298 - 	 sub Args: 
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : Instancevalue: DMA1_Channel7
+2022-03-30 15:42:25,984 [INFO] Argument:306 - Argument : Instancevalue: DMA1_Channel7
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : Initvalue: null
+2022-03-30 15:42:25,984 [INFO] Argument:298 - 	 sub Args: 
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : Requestvalue: DMA_REQUEST_2
+2022-03-30 15:42:25,984 [INFO] Argument:306 - Argument : Requestvalue: DMA_REQUEST_2
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : Directionvalue: DMA_MEMORY_TO_PERIPH
+2022-03-30 15:42:25,984 [INFO] Argument:306 - Argument : Directionvalue: DMA_MEMORY_TO_PERIPH
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2022-03-30 15:42:25,984 [INFO] Argument:306 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2022-03-30 15:42:25,984 [INFO] Argument:306 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_BYTE
+2022-03-30 15:42:25,984 [INFO] Argument:306 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_BYTE
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_BYTE
+2022-03-30 15:42:25,984 [INFO] Argument:306 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_BYTE
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : Modevalue: DMA_NORMAL
+2022-03-30 15:42:25,984 [INFO] Argument:306 - Argument : Modevalue: DMA_NORMAL
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : Priorityvalue: DMA_PRIORITY_LOW
+2022-03-30 15:42:25,984 [INFO] Argument:306 - Argument : Priorityvalue: DMA_PRIORITY_LOW
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : Lockvalue: null
+2022-03-30 15:42:25,984 [INFO] Argument:306 - Argument : Lockvalue: null
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : Statevalue: null
+2022-03-30 15:42:25,984 [INFO] Argument:306 - Argument : Statevalue: null
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : Parentvalue: null
+2022-03-30 15:42:25,984 [INFO] Argument:306 - Argument : Parentvalue: null
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : XferCpltCallbackvalue: null
+2022-03-30 15:42:25,984 [INFO] Argument:306 - Argument : XferCpltCallbackvalue: null
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : XferHalfCpltCallbackvalue: null
+2022-03-30 15:42:25,984 [INFO] Argument:306 - Argument : XferHalfCpltCallbackvalue: null
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : XferErrorCallbackvalue: null
+2022-03-30 15:42:25,984 [INFO] Argument:306 - Argument : XferErrorCallbackvalue: null
+2022-03-30 15:42:25,984 [INFO] Argument:296 - Argument : XferAbortCallbackvalue: null
+2022-03-30 15:42:25,987 [INFO] Argument:306 - Argument : XferAbortCallbackvalue: null
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : ErrorCodevalue: null
+2022-03-30 15:42:25,987 [INFO] Argument:306 - Argument : ErrorCodevalue: null
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : DmaBaseAddressvalue: null
+2022-03-30 15:42:25,987 [INFO] Argument:306 - Argument : DmaBaseAddressvalue: null
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : ChannelIndexvalue: null
+2022-03-30 15:42:25,987 [INFO] Argument:306 - Argument : ChannelIndexvalue: null
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : hdmavalue: null
+2022-03-30 15:42:25,987 [INFO] Argument:298 - 	 sub Args: 
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : Instancevalue: DMA1_Channel7
+2022-03-30 15:42:25,987 [INFO] Argument:306 - Argument : Instancevalue: DMA1_Channel7
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : Initvalue: null
+2022-03-30 15:42:25,987 [INFO] Argument:298 - 	 sub Args: 
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : Requestvalue: DMA_REQUEST_2
+2022-03-30 15:42:25,987 [INFO] Argument:306 - Argument : Requestvalue: DMA_REQUEST_2
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : Directionvalue: DMA_MEMORY_TO_PERIPH
+2022-03-30 15:42:25,987 [INFO] Argument:306 - Argument : Directionvalue: DMA_MEMORY_TO_PERIPH
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2022-03-30 15:42:25,987 [INFO] Argument:306 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2022-03-30 15:42:25,987 [INFO] Argument:306 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_BYTE
+2022-03-30 15:42:25,987 [INFO] Argument:306 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_BYTE
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_BYTE
+2022-03-30 15:42:25,987 [INFO] Argument:306 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_BYTE
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : Modevalue: DMA_NORMAL
+2022-03-30 15:42:25,987 [INFO] Argument:306 - Argument : Modevalue: DMA_NORMAL
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : Priorityvalue: DMA_PRIORITY_LOW
+2022-03-30 15:42:25,987 [INFO] Argument:306 - Argument : Priorityvalue: DMA_PRIORITY_LOW
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : Lockvalue: null
+2022-03-30 15:42:25,987 [INFO] Argument:306 - Argument : Lockvalue: null
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : Statevalue: null
+2022-03-30 15:42:25,987 [INFO] Argument:306 - Argument : Statevalue: null
+2022-03-30 15:42:25,987 [INFO] Argument:296 - Argument : Parentvalue: null
+2022-03-30 15:42:25,987 [INFO] Argument:306 - Argument : Parentvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:296 - Argument : XferCpltCallbackvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:306 - Argument : XferCpltCallbackvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:296 - Argument : XferHalfCpltCallbackvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:306 - Argument : XferHalfCpltCallbackvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:296 - Argument : XferErrorCallbackvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:306 - Argument : XferErrorCallbackvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:296 - Argument : XferAbortCallbackvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:306 - Argument : XferAbortCallbackvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:296 - Argument : ErrorCodevalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:306 - Argument : ErrorCodevalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:296 - Argument : DmaBaseAddressvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:306 - Argument : DmaBaseAddressvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:296 - Argument : ChannelIndexvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:306 - Argument : ChannelIndexvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:296 - Argument : pSyncConfigvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:298 - 	 sub Args: 
+2022-03-30 15:42:25,991 [INFO] Argument:296 - Argument : SyncSignalIDvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:306 - Argument : SyncSignalIDvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:296 - Argument : SyncPolarityvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:306 - Argument : SyncPolarityvalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:296 - Argument : SyncEnablevalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:306 - Argument : SyncEnablevalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:296 - Argument : EventEnablevalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:306 - Argument : EventEnablevalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:296 - Argument : RequestNumbervalue: null
+2022-03-30 15:42:25,991 [INFO] Argument:306 - Argument : RequestNumbervalue: null
+2022-03-30 15:42:25,994 [INFO] Argument:296 - Argument : hdmavalue: null
+2022-03-30 15:42:25,994 [INFO] Argument:298 - 	 sub Args: 
+2022-03-30 15:42:25,994 [INFO] Argument:296 - Argument : Instancevalue: DMA1_Channel6
+2022-03-30 15:42:25,994 [INFO] Argument:306 - Argument : Instancevalue: DMA1_Channel6
+2022-03-30 15:42:25,994 [INFO] Argument:296 - Argument : Initvalue: null
+2022-03-30 15:42:25,994 [INFO] Argument:298 - 	 sub Args: 
+2022-03-30 15:42:25,994 [INFO] Argument:296 - Argument : Requestvalue: DMA_REQUEST_2
+2022-03-30 15:42:25,994 [INFO] Argument:306 - Argument : Requestvalue: DMA_REQUEST_2
+2022-03-30 15:42:25,994 [INFO] Argument:296 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2022-03-30 15:42:25,994 [INFO] Argument:306 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2022-03-30 15:42:25,994 [INFO] Argument:296 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2022-03-30 15:42:25,994 [INFO] Argument:306 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2022-03-30 15:42:25,994 [INFO] Argument:296 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2022-03-30 15:42:25,994 [INFO] Argument:306 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2022-03-30 15:42:25,994 [INFO] Argument:296 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_BYTE
+2022-03-30 15:42:25,994 [INFO] Argument:306 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_BYTE
+2022-03-30 15:42:25,994 [INFO] Argument:296 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_BYTE
+2022-03-30 15:42:25,994 [INFO] Argument:306 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_BYTE
+2022-03-30 15:42:25,994 [INFO] Argument:296 - Argument : Modevalue: DMA_NORMAL
+2022-03-30 15:42:25,994 [INFO] Argument:306 - Argument : Modevalue: DMA_NORMAL
+2022-03-30 15:42:25,994 [INFO] Argument:296 - Argument : Priorityvalue: DMA_PRIORITY_LOW
+2022-03-30 15:42:25,994 [INFO] Argument:306 - Argument : Priorityvalue: DMA_PRIORITY_LOW
+2022-03-30 15:42:25,994 [INFO] Argument:296 - Argument : Lockvalue: null
+2022-03-30 15:42:25,994 [INFO] Argument:306 - Argument : Lockvalue: null
+2022-03-30 15:42:25,994 [INFO] Argument:296 - Argument : Statevalue: null
+2022-03-30 15:42:25,994 [INFO] Argument:306 - Argument : Statevalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : Parentvalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : Parentvalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : XferCpltCallbackvalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : XferCpltCallbackvalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : XferHalfCpltCallbackvalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : XferHalfCpltCallbackvalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : XferErrorCallbackvalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : XferErrorCallbackvalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : XferAbortCallbackvalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : XferAbortCallbackvalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : ErrorCodevalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : ErrorCodevalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : DmaBaseAddressvalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : DmaBaseAddressvalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : ChannelIndexvalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : ChannelIndexvalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : hdmavalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:298 - 	 sub Args: 
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : Instancevalue: DMA1_Channel6
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : Instancevalue: DMA1_Channel6
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : Initvalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:298 - 	 sub Args: 
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : Requestvalue: DMA_REQUEST_2
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : Requestvalue: DMA_REQUEST_2
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : Directionvalue: DMA_PERIPH_TO_MEMORY
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : PeriphIncvalue: DMA_PINC_DISABLE
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : MemIncvalue: DMA_MINC_ENABLE
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_BYTE
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : PeriphDataAlignmentvalue: DMA_PDATAALIGN_BYTE
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_BYTE
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : MemDataAlignmentvalue: DMA_MDATAALIGN_BYTE
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : Modevalue: DMA_NORMAL
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : Modevalue: DMA_NORMAL
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : Priorityvalue: DMA_PRIORITY_LOW
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : Priorityvalue: DMA_PRIORITY_LOW
+2022-03-30 15:42:25,998 [INFO] Argument:296 - Argument : Lockvalue: null
+2022-03-30 15:42:25,998 [INFO] Argument:306 - Argument : Lockvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:296 - Argument : Statevalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:306 - Argument : Statevalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:296 - Argument : Parentvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:306 - Argument : Parentvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:296 - Argument : XferCpltCallbackvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:306 - Argument : XferCpltCallbackvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:296 - Argument : XferHalfCpltCallbackvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:306 - Argument : XferHalfCpltCallbackvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:296 - Argument : XferErrorCallbackvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:306 - Argument : XferErrorCallbackvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:296 - Argument : XferAbortCallbackvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:306 - Argument : XferAbortCallbackvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:296 - Argument : ErrorCodevalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:306 - Argument : ErrorCodevalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:296 - Argument : DmaBaseAddressvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:306 - Argument : DmaBaseAddressvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:296 - Argument : ChannelIndexvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:306 - Argument : ChannelIndexvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:296 - Argument : pSyncConfigvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:298 - 	 sub Args: 
+2022-03-30 15:42:26,001 [INFO] Argument:296 - Argument : SyncSignalIDvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:306 - Argument : SyncSignalIDvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:296 - Argument : SyncPolarityvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:306 - Argument : SyncPolarityvalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:296 - Argument : SyncEnablevalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:306 - Argument : SyncEnablevalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:296 - Argument : EventEnablevalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:306 - Argument : EventEnablevalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:296 - Argument : RequestNumbervalue: null
+2022-03-30 15:42:26,001 [INFO] Argument:306 - Argument : RequestNumbervalue: null
+2022-03-30 15:42:26,530 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\license.tmp_save
+2022-03-30 15:42:26,639 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\license.tmp
+2022-03-30 15:42:26,709 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\gpio.tmp_save
+2022-03-30 15:42:26,812 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\gpio.tmp
+2022-03-30 15:42:27,869 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\dma.tmp_save
+2022-03-30 15:42:28,461 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\dma.tmp
+2022-03-30 15:42:28,467 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\dma_GV.tmp_save
+2022-03-30 15:42:28,587 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\dma_GV.tmp
+2022-03-30 15:42:28,627 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\stm32l4xx_it.c_save
+2022-03-30 15:42:28,747 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\stm32l4xx_it.c
+2022-03-30 15:42:28,758 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\stm32l4xx_it.h_save
+2022-03-30 15:42:28,868 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\stm32l4xx_it.h
+2022-03-30 15:42:28,895 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\stm32l4xx_hal_msp.c_save
+2022-03-30 15:42:29,050 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\stm32l4xx_hal_msp.c
+2022-03-30 15:42:29,058 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\system.tmp_save
+2022-03-30 15:42:29,135 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\MXTmpFiles\system.tmp
+2022-03-30 15:42:29,163 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\stm32l4xx_hal_conf.h_save
+2022-03-30 15:42:29,292 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\stm32l4xx_hal_conf.h
+2022-03-30 15:42:29,331 [WARN] IPConfigManager:3312 - IP not found : TIM
+2022-03-30 15:42:29,331 [WARN] CodeGenerator:3483 - IP not found : null
+2022-03-30 15:42:29,348 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\main.h_save
+2022-03-30 15:42:29,446 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Inc\main.h
+2022-03-30 15:42:29,462 [INFO] CodeEngine:237 - oldGeneratedFile, C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\main.c_save
+2022-03-30 15:42:29,671 [INFO] CodeEngine:261 - Generated code: C:\Users\AXEL NDO\Documents\master 1 SRD\test\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\Core\Src\main.c
+2022-03-30 15:42:30,955 [INFO] ProjectBuilder:2913 - Time for Copy HAL[1] : 323mS.
+2022-03-30 15:42:30,967 [INFO] ProjectBuilder:4015 - Project Generator version: 3.16.0
+2022-03-30 15:42:31,674 [INFO] ConfigFileManager:1287 - The Die is : DIE415
+2022-03-30 15:42:34,937 [INFO] ProjectBuilder:4183 - Time for Generating toolchain IDE Files: 3970mS.
+2022-03-30 15:42:34,938 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 0mS.
+2022-03-30 15:42:34,944 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 0mS.
+2022-03-30 15:42:54,661 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-03-30 15:42:56,664 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-03-30 15:42:58,667 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-03-30 15:43:10,066 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-03-30 15:43:12,068 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-03-30 15:43:14,071 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-03-30 15:59:41,818 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-03-30 15:59:43,819 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-03-30 15:59:45,823 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-03-30 15:59:47,848 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-03-30 15:59:49,851 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
+2022-03-30 15:59:51,852 [ERROR] ConfigurationRetriever:139 - IOException on connection: connect timed out
