@@ -173,8 +173,8 @@ int main(void) {
 	MX_TIM3_Init();
 	MX_I2C1_Init();
 	/* USER CODE BEGIN 2 */
-	while (MPU6050_Init(&hi2c1) == 1)
-		;
+	//while (MPU6050_Init(&hi2c1) == 1)
+	//	;
 	// Light up green led
 	//setGreenLed();
 	// blink green led
@@ -189,7 +189,7 @@ int main(void) {
 
 	//TIM3->CCR2 = valeur_min_moteur;
 	//y_print(&huart2, " 0 to 6 to change state \r\n", 26);
-	printf("0 to 6 to change state \r\n");
+	//printf("0 to 6 to change state \r\n");
 	HAL_Delay(3000);
 
 	/* USER CODE END 2 */
@@ -210,7 +210,9 @@ int main(void) {
 			/*if (HAL_UART_Transmit(&huart2, (uint8_t*) "UC Initialization \n\r", 22,
 			 100) != HAL_OK)
 			 Error_Handler();*/
-			printf("nucleo ready\r\n");
+			printf("Init State\r\n");
+			printf("Press 2 for info mode\r\n");
+			//printf("nucleo ready\r\n");
 			//gyro init
 			MPU6050_Read_All(&hi2c1, &mpu);
 			HAL_Delay(1000);
@@ -238,7 +240,12 @@ int main(void) {
 			//Error_Handler();
 			printf("Info mode\r\n");
 			printf("Firmware version %.2f \n\r", firmware_version);
-			HAL_Delay(3000);
+			//HAL_Delay(3000);
+			printf("1 Init Motor \n\r");
+			printf("2 Info Mode \n\r");
+			printf("3 Init Pot \n\r");
+			printf("4 Auto Mode \n\r");
+			printf("5 Manual Mode \n\r");
 
 			//sortie de la boucle
 			/*do {
@@ -400,7 +407,7 @@ int main(void) {
 			printf("mettez le potentiometre à zero \n\r");
 			//HAL_Delay(3000);
 
-			while (okay == 1) {
+			/*while (okay == 1) {
 				//valeur_can = load_adc(hadc1, 5);
 				//printf("%d \r",valeur_can);
 				//printf("\n");
@@ -414,7 +421,7 @@ int main(void) {
 
 				}
 
-			}
+			}*/
 			printf("succes \n\r");
 			etat = manual_mode;
 			r_buffer[0] = ' ';
