@@ -9,12 +9,9 @@
 #define INC_YANN_H_
 
 #include"main.h"
-#include "remi.h"
-//#include"fsm.h"
-//#include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-//#include<stdbool.h>
+
 
 enum states{init_uc,init_motor,motor_ready,manual_mode,auto_mode,info_mode,init_pot};
 
