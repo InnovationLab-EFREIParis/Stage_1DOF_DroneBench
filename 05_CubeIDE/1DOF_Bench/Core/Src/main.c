@@ -241,10 +241,11 @@ int main(void) {
 
 		case init_motor:
 			printf("State: Motor Initialization \n\r");
-			HAL_Delay(1000);
+
 			//Chargement de la pwm
 			//HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
 			load_pwm(htim3, valeur_min_moteur);
+			HAL_Delay(100);
 			etat = motor_ready;
 			break;
 
@@ -256,8 +257,8 @@ int main(void) {
 			printf("> Press 7 for manual mode term\n\r");
 
 			k = 1700;
-			load_pwm(htim3, valeur_min_moteur);
-			HAL_Delay(1000);
+			//load_pwm(htim3, valeur_min_moteur);
+			//HAL_Delay(100);
 			do {
 
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
@@ -405,10 +406,11 @@ int main(void) {
 
 			printf("Gaz Term %d \n\r", gaz_term_percent);
 
-			mapped_value = mapping_adc_value(gaz_term_percent);
-			HAL_Delay(100);
-			load_pwm(htim3, mapped_value);
+			mapped_value = mapping_adc_value_percent(gaz_term_percent);
 
+			printf("Mapping adc value percent %d\n\r", mapped_value);
+			load_pwm(htim3, mapped_value);
+			HAL_Delay(100);
 
 			r_buffer_string[0] = 0;
 			r_buffer_string[1] = 0;

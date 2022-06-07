@@ -44,9 +44,14 @@ int load_adc(ADC_HandleTypeDef hadc, int polTime) {
 
 int mapping_adc_value(int val) {
 	//remap = 1512 + (val * 2583 / 4095);
-	remap = valeur_min_moteur + (val * valeur_max_moteur / 4095);
-	int map = remap;
-	return map;
+	//remap = valeur_min_moteur + (val * valeur_max_moteur / 4095);
+	//int map = remap;
+	return (valeur_min_moteur + (val * valeur_max_moteur) / 4095);
+}
+
+int mapping_adc_value_percent(int val) {
+
+	return (valeur_min_moteur + (val * (valeur_max_moteur-valeur_min_moteur) / 100));
 }
 
 void load_pwm(TIM_HandleTypeDef htimX, int val) {
