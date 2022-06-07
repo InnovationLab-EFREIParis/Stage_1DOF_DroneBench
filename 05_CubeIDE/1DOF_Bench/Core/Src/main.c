@@ -127,6 +127,11 @@ int main(void) {
 	double true_angle;
 
 	int k = 1700;	//var used to increement speed in auto state
+
+	int cpt_char = 0;
+	int max_cpt_char = 4;
+	char r_buffer_string[max_cpt_char];
+	int gaz_term_percent=0;
 	/* USER CODE END 1 */
 
 	/* MCU Configuration--------------------------------------------------------*/
@@ -167,8 +172,7 @@ int main(void) {
 	//NOus mettons ici la valeur minimale pour emettre un signal vers notre ESC dans notre registre capture and compare register
 
 	//TIM3->CCR2 = valeur_min_moteur;
-	//y_print(&huart2, " 0 to 6 to change state \r\n", 26);
-	//printf("0 to 6 to change state \r\n");
+
 	//HAL_Delay(3000);
 
 	/* USER CODE END 2 */
@@ -177,7 +181,8 @@ int main(void) {
 	/* USER CODE BEGIN WHILE */
 	while (1) {
 		__HAL_UART_CLEAR_OREFLAG(&huart2);
-
+		// Reinitialisation du buffer
+		r_buffer[0] = 0;
 		//differents etats qu'on peut avoir
 
 		//---------changement d'etat-------
@@ -186,11 +191,11 @@ int main(void) {
 
 		case init_uc:
 			//traitement des sorties
-			printf("State: Init uc\r\n");
-			printf("> Press 1 for init motor\r\n");
-			printf("> Press 2 for info mode\r\n");
+			printf("State: Init uc\n\r");
+			printf("> Press 1 for init motor\n\r");
+			printf("> Press 2 for info mode\n\r");
 
-			//printf("nucleo ready\r\n");
+
 			//gyro init
 			MPU6050_Read_All(&hi2c1, &mpu);
 			HAL_Delay(1000);
@@ -215,16 +220,18 @@ int main(void) {
 			break;
 
 		case info_mode:
-			printf("State: Info mode\r\n");
+			printf("State: Info mode\n\r");
 			printf(">Firmware version %.2f \n\r", firmware_version);
 			printf(">Baudrate %lu \n\r", huart2.Init.BaudRate);
 			printf(">States: \n\r");
+			printf(">>0 Init uc: Init Microcontroller \n\r");
 			printf(">>1 Init Motor \n\r");
 			printf(">>2 Info Mode \n\r");
 			printf(">>3 Init Pot \n\r");
 			printf(">>4 Auto Mode \n\r");
-			printf(">>5 Manual Mode \n\r");
+			printf(">>5 Manual Mode Pot \n\r");
 			printf(">>6 Moto Ready Mode \n\r");
+			printf(">>7 Manual Mode Term\n\r");
 
 			//go to init
 			etat = init_uc;
@@ -243,9 +250,10 @@ int main(void) {
 
 		case motor_ready:
 			printf("State: Motor ready \n\r");
-			printf("> Press 2 for info mode\r\n");
-			printf("> Press 3 for init pot\r\n");
-			printf("> Press 4 for auto mode\r\n");
+			printf("> Press 2 for info mode\n\r");
+			printf("> Press 3 for init pot\n\r");
+			printf("> Press 4 for auto mode\n\r");
+			printf("> Press 7 for manual mode term\n\r");
 
 			k = 1700;
 			load_pwm(htim3, valeur_min_moteur);
@@ -257,7 +265,7 @@ int main(void) {
 					HAL_Delay(50);
 				}
 			} while ((r_buffer[0] != '2') && (r_buffer[0] != '3')
-					&& (r_buffer[0] != '4'));
+					&& (r_buffer[0] != '4') && (r_buffer[0] != '7'));
 
 			switch (r_buffer[0]) {
 			case '2':
@@ -268,6 +276,9 @@ int main(void) {
 				break;
 			case '4':
 				etat = auto_mode;
+				break;
+			case '7':
+				etat = manual_mode_term;
 				break;
 			default:
 				break;
@@ -280,7 +291,7 @@ int main(void) {
 
 		case auto_mode:
 			printf("State: Auto mode \n\r");
-			printf("> Press 6 for motor ready mode\r\n");
+			printf("> Press 6 for motor ready mode\n\r");
 			do {
 
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
@@ -333,9 +344,9 @@ int main(void) {
 				break;
 			}
 
-		case manual_mode:
-			printf("State: Manual mode \n\r");
-			printf("> Press 6 for motor ready mode\r\n");
+		case manual_mode_pot:
+			printf("State: Manual mode pot \n\r");
+			printf("> Press 6 for motor ready mode\n\r");
 			//
 			//recuperation de la pwm
 			do {
@@ -355,6 +366,62 @@ int main(void) {
 			etat = motor_ready;
 			// Reinitialisation du buffer
 			r_buffer[0] = 0;
+			break;
+
+		case manual_mode_term:
+			printf("State: Manual mode term\n\r");
+			printf("> Enter value between 1 and 100 (power pourcentage) then presse enter\n\r");
+			printf("> Enter 0 then presse enter for Motot ready\n\r");
+			//recuperation de la pwm
+			do {
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
+						== HAL_OK) {
+					r_buffer_string[cpt_char] = r_buffer[0];
+					if (cpt_char < max_cpt_char) {
+						cpt_char++;
+					}
+				} else {
+					__HAL_UART_CLEAR_OREFLAG(&huart2);
+				}
+			} while (r_buffer[0] != '\r');
+			//HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer_string, max_cpt_char,
+			//		10);
+			//HAL_UART_Transmit(&huart2, "\n\r", 2, 10);
+
+			int value0 = r_buffer_string[0] - '0';
+			int value1 = r_buffer_string[1] - '0';
+			int value2 = r_buffer_string[2] - '0';
+
+			//printf("Cpt_char %d\n\r", cpt_char);
+			if (cpt_char == 2) {
+				gaz_term_percent = value0;
+			}
+			if (cpt_char == 3) {
+				gaz_term_percent = value0*10+value1;
+			}
+			if (cpt_char == 4) {
+				gaz_term_percent = value0*100+value1*10+value2;
+			}
+
+			printf("Gaz Term %d \n\r", gaz_term_percent);
+
+			mapped_value = mapping_adc_value(gaz_term_percent);
+			HAL_Delay(100);
+			load_pwm(htim3, mapped_value);
+
+
+			r_buffer_string[0] = 0;
+			r_buffer_string[1] = 0;
+			r_buffer_string[2] = 0;
+			value0 = 0;
+			value1 = 0;
+			value2 = 0;
+			cpt_char = 0;
+			if(gaz_term_percent==0){
+				etat = motor_ready;
+			}else{
+				etat = manual_mode_term;
+			}
 			break;
 
 		case init_pot:
@@ -389,7 +456,7 @@ int main(void) {
 
 			}
 			printf("\n succes \n\r");
-			etat = manual_mode;
+			etat = manual_mode_pot;
 			// Reinitialisation du buffer
 			r_buffer[0] = 0;
 
