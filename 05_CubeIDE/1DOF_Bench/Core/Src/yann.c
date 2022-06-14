@@ -6,10 +6,14 @@
  */
 
 #include "yann.h"
+#include "tim.h"
 
 float firmware_version = 0.1;
-int valeur_min_moteur = 1512;
-int valeur_max_moteur = 2025;
+int valeur_min_moteur = max_period_timer/2-250;//1512;
+// htim3.Init.Period-valeur_min_moteur-10
+//4096 - 1512 - 10 =
+int valeur_max_moteur = max_period_timer;// htim3.Init.Period//2584;
+
 int somme = 0;
 int moy = 0;
 float remap;
@@ -51,7 +55,7 @@ int mapping_adc_value(int val) {
 
 int mapping_adc_value_percent(int val) {
 
-	return (valeur_min_moteur + (val * (valeur_max_moteur-valeur_min_moteur) / 100));
+	return (valeur_min_moteur + (val * (valeur_max_moteur) / 100));
 }
 
 void load_pwm(TIM_HandleTypeDef htimX, int val) {
@@ -59,9 +63,19 @@ void load_pwm(TIM_HandleTypeDef htimX, int val) {
 	htimX.Instance->CCR2 = val;
 }
 
-void y_print(UART_HandleTypeDef *huart, char *mess, int len) {
+void load_pwm_filtre(TIM_HandleTypeDef htimX, int val) {
+	int old_val;
 
-	if (HAL_UART_Transmit(huart, (uint8_t*) mess, len, 100) != HAL_OK)
-		Error_Handler();
+	while (val > old_val) {
+		val--;
+		htimX.Instance->CCR2 = val;
+	}
+
+	while (val < old_val) {
+		val++;
+		htimX.Instance->CCR2 = val;
+	}
+
+	old_val = val;
+	//htimX.Instance->CCR2 = val;
 }
-

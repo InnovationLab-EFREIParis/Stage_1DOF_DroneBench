@@ -112,11 +112,12 @@ int _write(int file, char *data, int len) {
 /* USER CODE END 0 */
 
 /**
- * @brief  The application entry point.
- * @retval int
- */
-int main(void) {
-	/* USER CODE BEGIN 1 */
+  * @brief  The application entry point.
+  * @retval int
+  */
+int main(void)
+{
+  /* USER CODE BEGIN 1 */
 
 	enum states etat;
 	etat = init_uc;
@@ -131,33 +132,33 @@ int main(void) {
 	int cpt_char = 0;
 	int max_cpt_char = 4;
 	char r_buffer_string[max_cpt_char];
-	int gaz_term_percent=0;
-	/* USER CODE END 1 */
+	int gaz_term_percent = 0;
+  /* USER CODE END 1 */
 
-	/* MCU Configuration--------------------------------------------------------*/
+  /* MCU Configuration--------------------------------------------------------*/
 
-	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-	HAL_Init();
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
 
-	/* USER CODE BEGIN Init */
+  /* USER CODE BEGIN Init */
 
-	/* USER CODE END Init */
+  /* USER CODE END Init */
 
-	/* Configure the system clock */
-	SystemClock_Config();
+  /* Configure the system clock */
+  SystemClock_Config();
 
-	/* USER CODE BEGIN SysInit */
+  /* USER CODE BEGIN SysInit */
 
-	/* USER CODE END SysInit */
+  /* USER CODE END SysInit */
 
-	/* Initialize all configured peripherals */
-	MX_GPIO_Init();
-	MX_USART2_UART_Init();
-	MX_ADC1_Init();
-	MX_DMA_Init();
-	MX_TIM3_Init();
-	MX_I2C1_Init();
-	/* USER CODE BEGIN 2 */
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_USART2_UART_Init();
+  MX_ADC1_Init();
+  MX_DMA_Init();
+  MX_TIM3_Init();
+  MX_I2C1_Init();
+  /* USER CODE BEGIN 2 */
 	//while (MPU6050_Init(&hi2c1) == 1)
 	//	;
 	// Light up green led
@@ -175,10 +176,10 @@ int main(void) {
 
 	//HAL_Delay(3000);
 
-	/* USER CODE END 2 */
+  /* USER CODE END 2 */
 
-	/* Infinite loop */
-	/* USER CODE BEGIN WHILE */
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
 	while (1) {
 		__HAL_UART_CLEAR_OREFLAG(&huart2);
 		// Reinitialisation du buffer
@@ -192,9 +193,8 @@ int main(void) {
 		case init_uc:
 			//traitement des sorties
 			printf("State: Init uc\n\r");
-			printf("> Press 1 for init motor\n\r");
+			printf("> Press 1 for Motor ready\n\r");
 			printf("> Press 2 for info mode\n\r");
-
 
 			//gyro init
 			MPU6050_Read_All(&hi2c1, &mpu);
@@ -206,7 +206,7 @@ int main(void) {
 
 			switch (r_buffer[0]) {
 			case '1':
-				etat = init_motor;
+				etat = motor_ready;
 				break;
 			case '2':
 				etat = info_mode;
@@ -225,7 +225,6 @@ int main(void) {
 			printf(">Baudrate %lu \n\r", huart2.Init.BaudRate);
 			printf(">States: \n\r");
 			printf(">>0 Init uc: Init Microcontroller \n\r");
-			printf(">>1 Init Motor \n\r");
 			printf(">>2 Info Mode \n\r");
 			printf(">>3 Init Pot \n\r");
 			printf(">>4 Auto Mode \n\r");
@@ -239,16 +238,6 @@ int main(void) {
 			r_buffer[0] = 0;
 			break;
 
-		case init_motor:
-			printf("State: Motor Initialization \n\r");
-
-			//Chargement de la pwm
-			//HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
-			load_pwm(htim3, valeur_min_moteur);
-			HAL_Delay(100);
-			etat = motor_ready;
-			break;
-
 		case motor_ready:
 			printf("State: Motor ready \n\r");
 			printf("> Press 2 for info mode\n\r");
@@ -256,7 +245,11 @@ int main(void) {
 			printf("> Press 4 for auto mode\n\r");
 			printf("> Press 7 for manual mode term\n\r");
 
-			k = 1700;
+			// Init Motor
+			load_pwm(htim3, valeur_min_moteur);
+			HAL_Delay(100);
+
+			//k = 1700;
 			//load_pwm(htim3, valeur_min_moteur);
 			//HAL_Delay(100);
 			do {
@@ -285,39 +278,26 @@ int main(void) {
 				break;
 			}
 
-			// Reinitialisation du buffer
-			r_buffer[0] = ' ';
-
 			break;
 
 		case auto_mode:
 			printf("State: Auto mode \n\r");
 			printf("> Press 6 for motor ready mode\n\r");
-			do {
-
-				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
-						== HAL_OK)
-					HAL_Delay(10);
-			} while (r_buffer[0] != '6' && r_buffer[0] != 'g');
-
-			//quand on envoie le caratère g on se retrouve dans la phase de gaz sur le clavier
-			//si 6 on retourne au mode ready
-
-			if (r_buffer[0] == '6') {
-				etat = motor_ready;
-				r_buffer[0] = ' ';
-				break;
-
-				//le but pour l'entrée des gaz sera de mettre une valeur, la traiter et retourner en mode auto pour recommencer encore
-				//solution simple
+			if (MPU6050_Init(&hi2c1) == 1) {
+				printf("> Gyro MPU6050 initialized\n\r");
 			} else {
+				printf("> Gyro MPU6050 not working\n\r");
+				etat = motor_ready;
+				break;
+			}
 
-				//Soucis avec la recuperation deplusieurs caracteres sur la console, rien ne s'affiche
-				//printf("vroum sur le clavier \n\r");
-
+			do {
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
+						== HAL_OK) {
+				}
 				//pseudo asservisssement à 45deg
 				MPU6050_Read_All(&hi2c1, &mpu);
-				load_pwm(htim3, k);
+				//load_pwm(htim3, k);
 				true_angle = 90 - mpu.KalmanAngleX;
 				printf("beforeangle %.2f \n\r", true_angle);
 				HAL_Delay(50);
@@ -338,12 +318,9 @@ int main(void) {
 					load_pwm(htim3, k);
 					k--;
 				};
-
-				//r_buffer[0] = ' ';
-				etat = auto_mode;
-
-				break;
-			}
+			} while (r_buffer[0] != '6');
+			etat = auto_mode;
+			break;
 
 		case manual_mode_pot:
 			printf("State: Manual mode pot \n\r");
@@ -351,7 +328,6 @@ int main(void) {
 			//
 			//recuperation de la pwm
 			do {
-
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 1)
 						== HAL_OK)
 					HAL_Delay(10);
@@ -361,6 +337,7 @@ int main(void) {
 				mapped_value = mapping_adc_value(valeur_can);
 				HAL_Delay(100);
 				load_pwm(htim3, mapped_value);
+				//load_pwm_filtre(htim3, mapped_value);
 
 			} while (r_buffer[0] != '6');
 
@@ -371,8 +348,10 @@ int main(void) {
 
 		case manual_mode_term:
 			printf("State: Manual mode term\n\r");
-			printf("> Enter value between 1 and 100 (power pourcentage) then presse enter\n\r");
-			printf("> Enter 0 then presse enter for Motot ready\n\r");
+			printf(
+					"> Enter value between 1 and 100 (power pourcentage) then presse enter\n\r");
+			printf("> Enter + or -\n\r");
+			printf("> Enter 0 then press enter for Motor ready\n\r");
 			//recuperation de la pwm
 			do {
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
@@ -384,7 +363,8 @@ int main(void) {
 				} else {
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
-			} while (r_buffer[0] != '\r');
+			} while ((r_buffer[0] != '\r') && (r_buffer[0] != '+')
+					&& (r_buffer[0] != '-'));
 			//HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer_string, max_cpt_char,
 			//		10);
 			//HAL_UART_Transmit(&huart2, "\n\r", 2, 10);
@@ -398,10 +378,16 @@ int main(void) {
 				gaz_term_percent = value0;
 			}
 			if (cpt_char == 3) {
-				gaz_term_percent = value0*10+value1;
+				gaz_term_percent = value0 * 10 + value1;
 			}
 			if (cpt_char == 4) {
-				gaz_term_percent = value0*100+value1*10+value2;
+				gaz_term_percent = value0 * 100 + value1 * 10 + value2;
+			}
+			if (r_buffer[0] == '+') {
+				gaz_term_percent++;
+			}
+			if (r_buffer[0] == '-') {
+				gaz_term_percent--;
 			}
 
 			printf("Gaz Term %d \n\r", gaz_term_percent);
@@ -419,9 +405,9 @@ int main(void) {
 			value1 = 0;
 			value2 = 0;
 			cpt_char = 0;
-			if(gaz_term_percent==0){
+			if (gaz_term_percent == 0) {
 				etat = motor_ready;
-			}else{
+			} else {
 				etat = manual_mode_term;
 			}
 			break;
@@ -471,57 +457,60 @@ int main(void) {
 
 		//---------changement d'etat----FIN---
 
-		/* USER CODE END WHILE */
+    /* USER CODE END WHILE */
 
-		/* USER CODE BEGIN 3 */
+    /* USER CODE BEGIN 3 */
 	}
-	/* USER CODE END 3 */
+  /* USER CODE END 3 */
 }
 
 /**
- * @brief System Clock Configuration
- * @retval None
- */
-void SystemClock_Config(void) {
-	RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
-	RCC_ClkInitTypeDef RCC_ClkInitStruct = { 0 };
+  * @brief System Clock Configuration
+  * @retval None
+  */
+void SystemClock_Config(void)
+{
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
-	/** Configure the main internal regulator output voltage
-	 */
-	if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1)
-			!= HAL_OK) {
-		Error_Handler();
-	}
+  /** Configure the main internal regulator output voltage
+  */
+  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
-	/** Initializes the RCC Oscillators according to the specified parameters
-	 * in the RCC_OscInitTypeDef structure.
-	 */
-	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-	RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-	RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-	RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-	RCC_OscInitStruct.PLL.PLLM = 1;
-	RCC_OscInitStruct.PLL.PLLN = 10;
-	RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
-	RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
-	RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
-	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
-		Error_Handler();
-	}
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
+  */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLM = 1;
+  RCC_OscInitStruct.PLL.PLLN = 10;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
+  RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
+  RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
-	/** Initializes the CPU, AHB and APB buses clocks
-	 */
-	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
-			| RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
-	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
-	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  /** Initializes the CPU, AHB and APB buses clocks
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK) {
-		Error_Handler();
-	}
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
+  {
+    Error_Handler();
+  }
 }
 
 /* USER CODE BEGIN 4 */
@@ -529,16 +518,17 @@ void SystemClock_Config(void) {
 /* USER CODE END 4 */
 
 /**
- * @brief  This function is executed in case of error occurrence.
- * @retval None
- */
-void Error_Handler(void) {
-	/* USER CODE BEGIN Error_Handler_Debug */
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
+void Error_Handler(void)
+{
+  /* USER CODE BEGIN Error_Handler_Debug */
 	/* User can add his own implementation to report the HAL error return state */
 	__disable_irq();
 	while (1) {
 	}
-	/* USER CODE END Error_Handler_Debug */
+  /* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT
