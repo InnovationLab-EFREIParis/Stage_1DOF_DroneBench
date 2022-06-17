@@ -9,7 +9,7 @@
 #include "tim.h"
 
 float firmware_version = 0.1;
-int valeur_min_moteur = max_period_timer/2-250;//1512;
+int valeur_min_moteur = max_period_timer/2-225;//1512;
 // htim3.Init.Period-valeur_min_moteur-10
 //4096 - 1512 - 10 =
 int valeur_max_moteur = max_period_timer;// htim3.Init.Period//2584;
