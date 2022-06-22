@@ -125,7 +125,14 @@ int main(void)
 	int okay;
 	int valeur_can;
 	int mapped_value;
-	double true_angle;
+	double position_angulaire;
+
+	double consigne=30;
+	double commande=valeur_min_moteur;
+	double _commande=valeur_min_moteur;
+	double kp=0.02;
+	double erreur=0;
+
 
 	int pwm_auto_mode = valeur_min_moteur;	//var used to increement speed in auto state
 
@@ -159,8 +166,8 @@ int main(void)
   MX_TIM3_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-	while (MPU6050_Init(&hi2c1) == 1)
-		;
+//	while (MPU6050_Init(&hi2c1) == 1)
+//		;
 	// Light up green led
 	//setGreenLed();
 	// blink green led
@@ -215,8 +222,6 @@ int main(void)
 				break;
 			}
 
-			// Reinitialisation du buffer
-			//r_buffer[0] = 0;
 			break;
 
 		case info_mode:
@@ -234,8 +239,6 @@ int main(void)
 
 			//go to init
 			etat = init_uc;
-			// Reinitialisation du buffer
-			//r_buffer[0] = 0;
 			break;
 
 		case motor_ready:
@@ -249,9 +252,6 @@ int main(void)
 			load_pwm(htim3, valeur_min_moteur);
 			HAL_Delay(100);
 
-			//k = 1700;
-			//load_pwm(htim3, valeur_min_moteur);
-			//HAL_Delay(100);
 			do {
 
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
@@ -281,7 +281,14 @@ int main(void)
 			break;
 
 		case auto_mode:
-			printf("State: Auto mode \n\r");
+
+
+
+			printf("State: Auto mode\n\r");
+			printf("Waiting for MPU6050...\n\r");
+			while (MPU6050_Init(&hi2c1) == 1)
+				;
+			printf("MPU6050 OK!\n\r");
 			printf("> Press 6 for motor ready mode\n\r");
 			if (MPU6050_Init(&hi2c1) == 0) {
 				printf("> Gyro MPU6050 initialized\n\r");
@@ -291,18 +298,42 @@ int main(void)
 				break;
 			}
 
+
+			//consigne = 20;
 			do {
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
 						== HAL_OK) {
 				}
 				//pseudo asservisssement à 45deg
 				MPU6050_Read_All(&hi2c1, &mpu);
-				//load_pwm(htim3, k);
+				//MPU6050_Read_Accel(&hi2c1, &mpu);
+				//MPU6050_Read_Gyro(&hi2c1, &mpu);
+				position_angulaire = 90 - mpu.KalmanAngleX;
+				//printf("main %.2f\n\r", position_angulaire);HAL_Delay(500);
 
-				true_angle = 90 - mpu.KalmanAngleX;
-				printf("%.2f\n\r", true_angle);
-				HAL_Delay(50);
 
+
+				// Asservissement
+				erreur = consigne - position_angulaire;
+				commande = _commande + kp * (erreur);
+				//printf("pos %.2f err %.2f com %.2f\n\r", position_angulaire, erreur, commande);
+				if (commande > valeur_max_moteur) {
+					commande = valeur_max_moteur;
+				}
+				if (commande < valeur_min_moteur) {
+					commande = valeur_min_moteur;
+				}
+				_commande = commande;
+				load_pwm(htim3, commande);
+
+
+
+
+
+
+                //asservissement(0.5, 0, 0, 20, position_angulaire);
+
+				/*
 				while (true_angle < 20.00) {
 					HAL_Delay(50);
 					MPU6050_Read_All(&hi2c1, &mpu);
@@ -318,7 +349,7 @@ int main(void)
 					printf("%.2f\n\r", true_angle);
 					load_pwm(htim3, pwm_auto_mode);
 					pwm_auto_mode--;
-				};
+				};*/
 			} while (r_buffer[0] != '6');
 			etat = motor_ready;
 			break;
@@ -343,8 +374,7 @@ int main(void)
 			} while (r_buffer[0] != '6');
 
 			etat = motor_ready;
-			// Reinitialisation du buffer
-			r_buffer[0] = 0;
+
 			break;
 
 		case manual_mode_term:
@@ -446,8 +476,6 @@ int main(void)
 			}
 			printf("\n succes \n\r");
 			etat = manual_mode_pot;
-			// Reinitialisation du buffer
-			r_buffer[0] = 0;
 
 			break;
 

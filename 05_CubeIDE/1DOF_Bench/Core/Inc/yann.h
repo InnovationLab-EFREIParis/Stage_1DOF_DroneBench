@@ -26,6 +26,7 @@ void load_pwm_filtre(TIM_HandleTypeDef htimX, int val);
 void y_print(UART_HandleTypeDef *huart,char *mess,int len);
 void display_state(enum states etat,UART_HandleTypeDef *huart);
 void chating_uart(UART_HandleTypeDef *huart,char *buffer);
+void asservissement(float kp, float ki, float kd, int consigne, double position,  int _commande);
 
 int mapping_adc_value(int val);
 int mapping_adc_value_percent(int val);

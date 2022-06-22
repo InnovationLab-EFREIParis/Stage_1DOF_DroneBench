@@ -9,10 +9,10 @@
 #include "tim.h"
 
 float firmware_version = 0.1;
-int valeur_min_moteur = max_period_timer/2-225;//1512;
+int valeur_min_moteur = max_period_timer / 2 - 225; //1512;
 // htim3.Init.Period-valeur_min_moteur-10
 //4096 - 1512 - 10 =
-int valeur_max_moteur = max_period_timer;// htim3.Init.Period//2584;
+int valeur_max_moteur = max_period_timer; // htim3.Init.Period//2584;
 
 int somme = 0;
 int moy = 0;
@@ -78,4 +78,27 @@ void load_pwm_filtre(TIM_HandleTypeDef htimX, int val) {
 
 	old_val = val;
 	//htimX.Instance->CCR2 = val;
+}
+
+void asservissement(float kp, float ki, float kd, int consigne, double position, int _commande) {
+	int commande;
+
+	int erreur;
+
+	erreur = consigne - position;
+
+	commande = _commande + kp * (erreur);
+
+	printf("pos %.2f com %d \n\r", position, commande);
+
+	if (commande > valeur_max_moteur) {
+		commande = valeur_max_moteur;
+	}
+	if (commande < valeur_min_moteur) {
+		commande = valeur_min_moteur;
+	}
+
+	_commande = commande;
+	load_pwm(htim3, commande);
+	return commande;
 }
