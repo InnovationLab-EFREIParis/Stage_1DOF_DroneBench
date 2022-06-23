@@ -127,11 +127,16 @@ int main(void)
 	int mapped_value;
 	double position_angulaire;
 
-	double consigne=30;
+	double consigne=40;
 	double commande=valeur_min_moteur;
 	double _commande=valeur_min_moteur;
-	double kp=0.02;
+	double kp=0.0001;
+	double ki=0.02;
+	double kd=0.001;
 	double erreur=0;
+	double _erreur=0;
+	double integre_erreur=0;
+	double derive_erreur=0;
 
 
 	int pwm_auto_mode = valeur_min_moteur;	//var used to increement speed in auto state
@@ -300,6 +305,7 @@ int main(void)
 
 
 			//consigne = 20;
+			integre_erreur = 0;
 			do {
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
 						== HAL_OK) {
@@ -314,9 +320,14 @@ int main(void)
 
 
 				// Asservissement
+				_erreur = erreur;
 				erreur = consigne - position_angulaire;
-				commande = _commande + kp * (erreur);
-				//printf("pos %.2f err %.2f com %.2f\n\r", position_angulaire, erreur, commande);
+
+				integre_erreur += erreur;
+				derive_erreur = erreur - _erreur;
+
+				commande = kp * (erreur) + ki * (integre_erreur) + kd * (derive_erreur);
+				//printf("pos %.1f err %.1f com %.1f\n\r", position_angulaire, erreur, commande); HAL_Delay(100);
 				if (commande > valeur_max_moteur) {
 					commande = valeur_max_moteur;
 				}
