@@ -130,9 +130,14 @@ int main(void)
 	double consigne=40;
 	double commande=valeur_min_moteur;
 	double _commande=valeur_min_moteur;
-	double kp=0.0001;
+
+	// Coeff OK
+	/*double kp=0.0001;
 	double ki=0.02;
-	double kd=0.001;
+	double kd=0.001;*/
+	double kp=0.001;
+	double ki=0.018;
+	double kd=0.1;
 	double erreur=0;
 	double _erreur=0;
 	double integre_erreur=0;
@@ -290,10 +295,10 @@ int main(void)
 
 
 			printf("State: Auto mode\n\r");
-			printf("Waiting for MPU6050...\n\r");
+			printf("> Waiting for MPU6050...\n\r");
 			while (MPU6050_Init(&hi2c1) == 1)
 				;
-			printf("MPU6050 OK!\n\r");
+			printf("> MPU6050 OK!\n\r");
 			printf("> Press 6 for motor ready mode\n\r");
 			if (MPU6050_Init(&hi2c1) == 0) {
 				printf("> Gyro MPU6050 initialized\n\r");
@@ -314,6 +319,9 @@ int main(void)
 				MPU6050_Read_All(&hi2c1, &mpu);
 				//MPU6050_Read_Accel(&hi2c1, &mpu);
 				//MPU6050_Read_Gyro(&hi2c1, &mpu);
+				//Kalman_getAngle(&KalmanX, roll, DataStruct->Gx, dt);
+
+
 				position_angulaire = 90 - mpu.KalmanAngleX;
 				//printf("main %.2f\n\r", position_angulaire);HAL_Delay(500);
 
@@ -338,29 +346,6 @@ int main(void)
 				load_pwm(htim3, commande);
 
 
-
-
-
-
-                //asservissement(0.5, 0, 0, 20, position_angulaire);
-
-				/*
-				while (true_angle < 20.00) {
-					HAL_Delay(50);
-					MPU6050_Read_All(&hi2c1, &mpu);
-					true_angle = 90 - mpu.KalmanAngleX;
-					printf("%.2f\n\r", true_angle);
-					load_pwm(htim3, pwm_auto_mode);
-					pwm_auto_mode++;
-				};
-				while (true_angle > 25.00) {
-					HAL_Delay(50);
-					true_angle = 90 - mpu.KalmanAngleX;
-					MPU6050_Read_All(&hi2c1, &mpu);
-					printf("%.2f\n\r", true_angle);
-					load_pwm(htim3, pwm_auto_mode);
-					pwm_auto_mode--;
-				};*/
 			} while (r_buffer[0] != '6');
 			etat = motor_ready;
 			break;

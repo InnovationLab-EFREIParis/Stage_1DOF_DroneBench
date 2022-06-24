@@ -80,25 +80,4 @@ void load_pwm_filtre(TIM_HandleTypeDef htimX, int val) {
 	//htimX.Instance->CCR2 = val;
 }
 
-void asservissement(float kp, float ki, float kd, int consigne, double position, int _commande) {
-	int commande;
 
-	int erreur;
-
-	erreur = consigne - position;
-
-	commande = _commande + kp * (erreur);
-
-	printf("pos %.2f com %d \n\r", position, commande);
-
-	if (commande > valeur_max_moteur) {
-		commande = valeur_max_moteur;
-	}
-	if (commande < valeur_min_moteur) {
-		commande = valeur_min_moteur;
-	}
-
-	_commande = commande;
-	load_pwm(htim3, commande);
-	return commande;
-}
