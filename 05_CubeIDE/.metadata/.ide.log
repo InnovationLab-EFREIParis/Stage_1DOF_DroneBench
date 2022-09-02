@@ -3749,3 +3749,8 @@
 2022-08-24 11:37:40,201 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] 	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
 2022-08-24 11:37:40,209 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] 	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
 2022-08-24 11:37:40,209 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] 	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+2022-09-02 17:16:31,063 [INFO] Activator:177 - 
+
+
+2022-09-02 17:16:31,063 [INFO] Activator:178 - !SESSION log4j initialized
+2022-09-02 17:16:36,879 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com

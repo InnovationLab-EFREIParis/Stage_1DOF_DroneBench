@@ -127,9 +127,9 @@ int main(void)
 	int mapped_value;
 	double position_angulaire;
 
-	double consigne=40;
+	double consigne=45;
 	double commande=valeur_min_moteur;
-	double _commande=valeur_min_moteur;
+	//double _commande=valeur_min_moteur;
 
 	// Coeff OK
 	/*double kp=0.0001;
@@ -144,7 +144,6 @@ int main(void)
 	double derive_erreur=0;
 
 
-	int pwm_auto_mode = valeur_min_moteur;	//var used to increement speed in auto state
 
 	int cpt_char = 0;
 	int max_cpt_char = 4;
@@ -238,6 +237,7 @@ int main(void)
 			printf("State: Info mode\n\r");
 			printf(">Firmware version %.2f \n\r", firmware_version);
 			printf(">Baudrate %lu \n\r", huart2.Init.BaudRate);
+			printf(">Consigne (auto mode) %.2f deg \n\r", consigne);
 			printf(">States: \n\r");
 			printf(">>0 Init uc: Init Microcontroller \n\r");
 			printf(">>2 Info Mode \n\r");
@@ -309,7 +309,7 @@ int main(void)
 			}
 
 
-			//consigne = 20;
+
 			integre_erreur = 0;
 			do {
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
@@ -322,8 +322,9 @@ int main(void)
 				//Kalman_getAngle(&KalmanX, roll, DataStruct->Gx, dt);
 
 
-				position_angulaire = 90 - mpu.KalmanAngleX;
-				//printf("main %.2f\n\r", position_angulaire);HAL_Delay(500);
+				//position_angulaire = 90 - mpu.KalmanAngleX;
+				position_angulaire = mpu.KalmanAngleX + 90;
+				//printf("Position %.2f commande %.2f \n\r", position_angulaire, commande);HAL_Delay(500);
 
 
 
@@ -335,14 +336,14 @@ int main(void)
 				derive_erreur = erreur - _erreur;
 
 				commande = kp * (erreur) + ki * (integre_erreur) + kd * (derive_erreur);
-				//printf("pos %.1f err %.1f com %.1f\n\r", position_angulaire, erreur, commande); HAL_Delay(100);
+				//printf("pos %.1f err %.1f com %.1f\n\r", position_angulaire, erreur, commande); HAL_Delay(500);
 				if (commande > valeur_max_moteur) {
 					commande = valeur_max_moteur;
 				}
 				if (commande < valeur_min_moteur) {
 					commande = valeur_min_moteur;
 				}
-				_commande = commande;
+
 				load_pwm(htim3, commande);
 
 
@@ -365,7 +366,6 @@ int main(void)
 				mapped_value = mapping_adc_value(valeur_can);
 				HAL_Delay(100);
 				load_pwm(htim3, mapped_value);
-				//load_pwm_filtre(htim3, mapped_value);
 
 			} while (r_buffer[0] != '6');
 
