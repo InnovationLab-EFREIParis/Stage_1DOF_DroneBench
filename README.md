@@ -8,8 +8,8 @@ Dispositif pédagogique permettant de faire découvrir quelques principes et compo
 
 # Utilisation
 ## Alimentation
-Il faut connecter un PC à la carte microcontroller via un cable USB situé sur l'un des montants. La carte est alimenté par USB.
-La partie moteur est alimenté par les cables bannanes. Régler l'alimentation sur 24V avec une limitation de courant à 5A.
+La carte microcontroller est alimentée par USB. Il faut donc la connecter à un PC, ce qui permet egalement d'échanger des données.
+La partie moteur est alimentée par les cables bannanes. Régler l'alimentation sur 24V avec une limitation de courant à 5A.
 ## Commandes
 Ouvrir ensuite un terminal série puis établir la communication à 115200 bd/s.
 Le microcontroller se comporte comme un automate. En envoyant des commandes via la liaison série, il va entrer dans différent états, que l'on va appeler mode.
