@@ -8,7 +8,7 @@
 #include "yann.h"
 #include "tim.h"
 
-float firmware_version = 0.1;
+float firmware_version = 0.2;
 int valeur_min_moteur = max_period_timer / 2 - 225; //1512;
 // htim3.Init.Period-valeur_min_moteur-10
 //4096 - 1512 - 10 =
@@ -63,21 +63,6 @@ void load_pwm(TIM_HandleTypeDef htimX, int val) {
 	htimX.Instance->CCR2 = val;
 }
 
-void load_pwm_filtre(TIM_HandleTypeDef htimX, int val) {
-	int old_val;
 
-	while (val > old_val) {
-		val--;
-		htimX.Instance->CCR2 = val;
-	}
-
-	while (val < old_val) {
-		val++;
-		htimX.Instance->CCR2 = val;
-	}
-
-	old_val = val;
-	//htimX.Instance->CCR2 = val;
-}
 
 

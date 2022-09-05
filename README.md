@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Bras à un degré de liberté (1DOF Drone Bench)
 Ce dispositif a pour vocation d'Ãªtre utiliser Ã  des fins pedagogique. L'idée et de faire découvrir les principes et dispositifs que l'on peut retrouver sur un drone mais de façon largement simplifié et en toute sécurité.
 Le prinicpe est d'asservir le bras en position horizontal à un angle voulue en pilotant le moteur et l'hélice fixé à l'extrimité du bras. La mesure de l'angle se fait par un gyroscope fixé sur le bras mobile.
@@ -19,3 +20,9 @@ Les montants sont en profilé d'aluminium de 20 mm dont voici la [référence](http
 
 ## Electronique
 La 
+=======
+
+# 1DOF_DroneBench
+Conception et fabrication d'un bras Ã  un degrÃ© de libertÃ© asservi selon une commande d'angle.
+Ce dispositif a pour vocation d'Ãªtre utiliser Ã  des fins pedagogique.
+>>>>>>> refs/remotes/origin/main
