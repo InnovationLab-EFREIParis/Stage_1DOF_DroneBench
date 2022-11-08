@@ -8,7 +8,7 @@
 #include "yann.h"
 #include "tim.h"
 
-float firmware_version = 0.2;
+float firmware_version = 0.3;
 int valeur_min_moteur = max_period_timer / 2 - 225; //1512;
 // htim3.Init.Period-valeur_min_moteur-10
 //4096 - 1512 - 10 =
