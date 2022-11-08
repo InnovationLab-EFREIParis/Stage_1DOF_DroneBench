@@ -2,6 +2,13 @@ Premières idées:
 
 Création IHM en Python:
 
--> Tkinter (la bibli la + simple)
+-> Tkinter (la bibli la + simple) - RS232 possible
 -> PyQt/PySide (biblis + sophistiquées)
 -> Kivy ? (bibli pour créer des apps tactiles Android,iOS, etc.)
+
+
+Graphes 2D en temps réel:
+
+-> Matplotlib
+-> Canvas (Tkinter)
+-> PyQtGraph
