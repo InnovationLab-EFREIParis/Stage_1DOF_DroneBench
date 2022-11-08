@@ -1,3 +1,7 @@
-Test fichier
+Premières idées:
 
-Test Rémi
+Création IHM en Python:
+
+-> Tkinter (la bibli la + simple)
+-> PyQt/PySide (biblis + sophistiquées)
+-> Kivy ? (bibli pour créer des apps tactiles Android,iOS, etc.)
