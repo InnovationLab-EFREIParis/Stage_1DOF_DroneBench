@@ -308,6 +308,20 @@ int main(void)
 				break;
 			}
 
+			// réflexion en cours
+
+			//do {
+				//			if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
+					//				== HAL_OK) {
+						//		r_buffer_string[cpt_char] = r_buffer[0];
+							//	if (cpt_char < max_cpt_char) {
+								//	cpt_char++;
+								//}
+							//} else {
+								//__HAL_UART_CLEAR_OREFLAG(&huart2);
+							//}
+						//} while ((r_buffer[0] != '\r') && (r_buffer[0] != '+')
+							//	&& (r_buffer[0] != '-'));
 
 
 			integre_erreur = 0;
