@@ -13,7 +13,7 @@
 #include<string.h>
 
 
-enum states{init_uc,motor_ready,manual_mode_pot,manual_mode_term, auto_mode,info_mode,init_pot};
+enum states{init_uc,motor_ready,manual_mode_pot,manual_mode_term, auto_mode,info_mode};
 
 extern float firmware_version;
 extern int  valeur_min_moteur;

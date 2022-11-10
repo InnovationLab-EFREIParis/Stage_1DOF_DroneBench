@@ -118,7 +118,7 @@ int _write(int file, char *data, int len) {
 int main(void) {
 	/* USER CODE BEGIN 1 */
 
-	enum states etat;
+	enum states etat, previous_etat;
 	etat = init_uc;
 	char r_buffer[2];
 	int okay;
@@ -136,6 +136,7 @@ int main(void) {
 	double kp = 0.001;
 	double ki = 0.018;
 	double kd = 0.1;
+
 	double erreur = 0;
 	double _erreur = 0;
 	double integre_erreur = 0;
@@ -193,10 +194,11 @@ int main(void) {
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
+
 		__HAL_UART_CLEAR_OREFLAG(&huart2);
+
 		// Re-initialization of buffer
 		r_buffer[0] = 0;
-		//different states we can have
 
 		//---------changing states-------
 
@@ -232,63 +234,63 @@ int main(void) {
 
 			break;
 
-			// State 'i': board of informations
+		// State 'i': board of informations
 		case info_mode:
 
 			printf("State: Info mode\n\n\r");
 
-			printf(">Firmware version %.2f \n\r", firmware_version);
-			printf(">Baudrate %lu \n\r", huart2.Init.BaudRate);
-			printf(">Consigne (auto mode) %.2f deg \n\n\r", consigne);
+			printf("Firmware version %.2f \n\r", firmware_version);
+			printf("Baud rate %lu \n\r", huart2.Init.BaudRate);
+			printf("Consigne (auto mode) %.2f deg \n\n\r", consigne);
 
-			printf(">List of States:\n\r");
+			printf("List of States:\n\r");
 			printf(">>Init UC\n\r");
 			printf(">>Info Mode\n\r");
 			printf(">>Motor Ready\n\r");
-			printf(">>Init Pot\n\r");
 			printf(">>Manual Mode Pot\n\r");
 			printf(">>Manual Mode Term\n\r");
 			printf(">>Auto Mode\n\n\r");
 
 			//go to init uc
-			etat = init_uc;
+			etat = previous_etat;
 			break;
 
-			// State '0' | ' ': motor is ready
+		// State '0' | ' ': motor is ready
 		case motor_ready:
 
 			printf("State: Motor ready\n\n\r");
 
 			printf("> Press [ i ] for Info mode\n\r");
-			printf("> Press [ 3 ] for Init pot\n\r");
-			printf("> Press [ 4 ] for Auto mode\n\r");
-			printf("> Press [ 7 ] for Manual mode term\n\n\r");
+			printf("> Press [ 1 ] for Manual mode pot\n\r");
+			printf("> Press [ 2 ] for Manual mode term\n\r");
+			printf("> Press [ 3 ] for Auto mode\n\n\r");
+
 
 			// Init Motor
 			load_pwm(htim3, valeur_min_moteur);
 			HAL_Delay(100);
 
 			do {
-
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
 						== HAL_OK) {
 					HAL_Delay(50);
 				}
-			} while ((r_buffer[0] != 'i') && (r_buffer[0] != '3')
-					&& (r_buffer[0] != '4') && (r_buffer[0] != '7'));
+			} while ((r_buffer[0] != 'i') && (r_buffer[0] != '1')
+					&& (r_buffer[0] != '2') && (r_buffer[0] != '3'));
 
 			switch (r_buffer[0]) {
 			case 'i':
 				etat = info_mode;
+				previous_etat = motor_ready;
+				break;
+			case '1':
+				etat = manual_mode_pot;
+				break;
+			case '2':
+				etat = manual_mode_term;
 				break;
 			case '3':
-				etat = init_pot;
-				break;
-			case '4':
 				etat = auto_mode;
-				break;
-			case '7':
-				etat = manual_mode_term;
 				break;
 			default:
 				break;
@@ -296,40 +298,206 @@ int main(void) {
 
 			break;
 
-			// State '4': auto mode
+		// State '1': manual mode pot
+		case manual_mode_pot:
+
+			printf("State: Manual mode pot \n\n\r");
+
+			// Start Init Pot--------------------
+			printf("Init pot\n\r");
+
+			HAL_ADC_Start(&hadc1);
+			okay = 1;
+			printf("> Put the potentiometer at zero\n\r");
+			HAL_Delay(100);
+
+			while (okay == 1) {
+				HAL_ADC_Start(&hadc1);
+				if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK) {
+					valeur_can = HAL_ADC_GetValue(&hadc1);
+					printf("ADC value :\t %d \n\r", valeur_can);
+				} else {
+					printf("Conversion NOK\n\r");
+				}
+
+				if (valeur_can <= 20) {
+					okay = 0;
+				}
+
+				// home test condition -------
+				//okay = 0;
+				// end home test condition ---
+
+				HAL_Delay(1000);
+			}
+
+			printf("Success \n\n\r");
+			// End Init Pot----------------------
+
+			printf("> Press [ i ] for Info mode\n\r");
+			printf("> Press [ 0 ] or [ SPACE ] for Motor ready\n\n\r");
+
+			//recuperation de la pwm
+			do {
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 1)
+						== HAL_OK)
+					HAL_Delay(10);
+
+				valeur_can = load_adc(hadc1, 5);
+				mapped_value = mapping_adc_value(valeur_can);
+				HAL_Delay(100);
+				load_pwm(htim3, mapped_value);
+
+			} while (r_buffer[0] != '0' && (r_buffer[0] != ' ') && (r_buffer[0] != 'i'));
+
+			switch (r_buffer[0]) {
+			case 'i':
+				etat = info_mode;
+				previous_etat = manual_mode_pot;
+				break;
+			case '0':
+				etat = motor_ready;
+				break;
+			case ' ':
+				etat = motor_ready;
+				break;
+			default:
+				break;
+			}
+
+			break;
+
+		// State '2': manual mode term
+		case manual_mode_term:
+
+			printf("State: Manual mode term\n\n\r");
+
+			// for now let's say 10 as value max -> 15% = dangerous
+			printf("> Enter value between 1 and 10 (power percentage) then press [ ENTER ]\n\r");
+			printf("> Press [ + ] or [ - ]\n\n\r");
+			printf("> Press [ i ] for Info mode\n\r");
+			printf("> Press [ 0 ] or [ SPACE ] then press [ ENTER ] for Motor ready\n\n\r");
+
+			//recovery of the pwm
+			do {
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
+						== HAL_OK) {
+					r_buffer_string[cpt_char] = r_buffer[0];
+					if (cpt_char < max_cpt_char) {
+						cpt_char++;
+					}
+				} else {
+					__HAL_UART_CLEAR_OREFLAG(&huart2);
+				}
+			} while ((r_buffer[0] != '\r') && (r_buffer[0] != '+')
+					&& (r_buffer[0] != '-') && (r_buffer[0] != 'i') && (r_buffer_string[0] != '0') && (r_buffer_string[2] != '0') && (r_buffer[0] != ' '));
+
+			int value0 = r_buffer_string[0] - '0';
+			int value1 = r_buffer_string[1] - '0';
+			int value2 = r_buffer_string[2] - '0';
+
+			if (cpt_char == 2) {
+				if ((value0 > 9)||(value0 < 0)){
+					printf("ERROR: Please enter only characters included in this list : 0 1 2 3 4 5 6 7 8 9\n\n\r");
+				} else{
+					int prov_gaz_term_percent = value0;
+					if (prov_gaz_term_percent > 10){
+						printf("ERROR: Value > 10\n\n\r");
+					} else{
+						gaz_term_percent = prov_gaz_term_percent;
+					}
+				}
+			}
+			if (cpt_char == 3) {
+				if ((value0 > 9)||(value0 < 0)||(value1 > 9)||(value1 < 0)){
+					printf("ERROR: Please enter only characters included in this list : 0 1 2 3 4 5 6 7 8 9\n\n\r");
+				} else{
+					 int prov_gaz_term_percent = value0 * 10 + value1;
+					if (prov_gaz_term_percent > 10){
+						printf("ERROR: Value > 10\n\n\r");
+					} else{
+						gaz_term_percent = prov_gaz_term_percent;
+					}
+				}
+			}
+			if (cpt_char == 4) {
+				if ((value0 > 9)||(value0 < 0)||(value1 > 9)||(value1 < 0)||(value2 > 9)||(value2 < 0)){
+					printf("ERROR: Please enter only characters included in this list : 0 1 2 3 4 5 6 7 8 9\n\n\r");
+				} else{
+					int prov_gaz_term_percent = value0 * 100 + value1 * 10 + value2;
+					if (prov_gaz_term_percent > 10){
+						printf("ERROR: Value > 10\n\n\r");
+					} else{
+						gaz_term_percent = prov_gaz_term_percent;
+					}
+				}
+			}
+
+			if (r_buffer[0] == '+') {
+				gaz_term_percent++;
+			}
+			if (r_buffer[0] == '-') {
+				gaz_term_percent--;
+			}
+			if (r_buffer[0] == 'i') {
+			}
+			if (r_buffer[0] == ' ') {
+				gaz_term_percent = 0;
+			}
+			if (r_buffer_string[0] == '0') {
+				gaz_term_percent = 0;
+			}
+
+			printf("Gaz Term %d \n\r", gaz_term_percent);
+
+			mapped_value = mapping_adc_value_percent(gaz_term_percent);
+
+			printf("Mapping adc value percent %d\n\n\r", mapped_value);
+			load_pwm(htim3, mapped_value);
+			HAL_Delay(100);
+
+			r_buffer_string[0] = 0;
+			r_buffer_string[1] = 0;
+			r_buffer_string[2] = 0;
+			value0 = 0;
+			value1 = 0;
+			value2 = 0;
+			cpt_char = 0;
+			if (gaz_term_percent == 0) {
+				etat = motor_ready;
+			} else {
+				etat = manual_mode_term;
+			}
+
+			if (r_buffer[0] == 'i'){
+				etat = info_mode;
+				previous_etat = manual_mode_term;
+			}
+			break;
+
+		// State '3': auto mode
 		case auto_mode:
 
 			printf("State: Auto mode\n\n\r");
 
-			printf("> Waiting for Gyro MPU6050...\n\r");
+			printf("Waiting for Gyro MPU6050...\n\r");
 			while (MPU6050_Init(&hi2c1) == 1)
 				;
-			printf("> Gyro MPU6050 OK!\n\n\r");
+			printf("Gyro MPU6050 OK!\n\n\r");
 
+			printf("> Press [ i ] for Info mode\n\r");
 			printf("> Press [ 0 ] or [ SPACE ] for Motor ready\n\n\r");
 
 			if (MPU6050_Init(&hi2c1) == 0) {
-				printf("> Gyro MPU6050 initialized\n\r");
+				printf("Gyro MPU6050 initialized\n\r");
 			} else {
-				printf("> Gyro MPU6050 is not working\n\r");
+				printf("Gyro MPU6050 is not working\n\r");
 				etat = motor_ready;
 				break;
 			}
 
 			// réflexion en cours sur demande de consigne d'angle
 
-			//do {
-			//			if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
-			//				== HAL_OK) {
-			//		r_buffer_string[cpt_char] = r_buffer[0];
-			//	if (cpt_char < max_cpt_char) {
-			//	cpt_char++;
-			//}
-			//} else {
-			//__HAL_UART_CLEAR_OREFLAG(&huart2);
-			//}
-			//} while ((r_buffer[0] != '\r') && (r_buffer[0] != '+')
-			//	&& (r_buffer[0] != '-'));
 
 			integre_erreur = 0;
 			do {
@@ -365,142 +533,22 @@ int main(void) {
 
 				load_pwm(htim3, commande);
 
-			} while (r_buffer[0] != '0' && (r_buffer[0] != ' '));
+			} while (r_buffer[0] != '0' && (r_buffer[0] != ' ') && (r_buffer[0] != 'i'));
 
-			//go to motor ready
-			etat = motor_ready;
-			break;
-
-			// State '5': manual mode pot
-		case manual_mode_pot:
-
-			printf("State: Manual mode pot \n\n\r");
-
-			printf("> Press [ 0 ] or [ SPACE ] for Motor ready\n\n\r");
-
-			//recuperation de la pwm
-			do {
-				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 1)
-						== HAL_OK)
-					HAL_Delay(10);
-				//HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 2, 10);
-				//HAL_Delay(50);
-				valeur_can = load_adc(hadc1, 5);
-				mapped_value = mapping_adc_value(valeur_can);
-				HAL_Delay(100);
-				load_pwm(htim3, mapped_value);
-
-			} while (r_buffer[0] != '0' && (r_buffer[0] != ' '));
-
-			etat = motor_ready;
-
-			break;
-
-			// State '7': manual mode term
-		case manual_mode_term:
-
-			printf("State: Manual mode term\n\n\r");
-
-			printf("> Enter value between 1 and 100 (power percentage) then press [ ENTER ]\n\r");
-			printf("> Press [ + ] or [ - ]\n\n\r");
-			printf("> Press [ 0 ] or [ SPACE ] then press [ ENTER ] for Motor ready\n\n\r");
-			//recuperation de la pwm
-			do {
-				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
-						== HAL_OK) {
-					r_buffer_string[cpt_char] = r_buffer[0];
-					if (cpt_char < max_cpt_char) {
-						cpt_char++;
-					}
-				} else {
-					__HAL_UART_CLEAR_OREFLAG(&huart2);
-				}
-			} while ((r_buffer[0] != '\r') && (r_buffer[0] != '+')
-					&& (r_buffer[0] != '-'));
-			//HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer_string, max_cpt_char,
-			//		10);
-			//HAL_UART_Transmit(&huart2, "\n\r", 2, 10);
-
-			int value0 = r_buffer_string[0] - '0';
-			int value1 = r_buffer_string[1] - '0';
-			int value2 = r_buffer_string[2] - '0';
-
-			//printf("Cpt_char %d\n\r", cpt_char);
-			if (cpt_char == 2) {
-				gaz_term_percent = value0;
-			}
-			if (cpt_char == 3) {
-				gaz_term_percent = value0 * 10 + value1;
-			}
-			if (cpt_char == 4) {
-				gaz_term_percent = value0 * 100 + value1 * 10 + value2;
-			}
-			if (r_buffer[0] == '+') {
-				gaz_term_percent++;
-			}
-			if (r_buffer[0] == '-') {
-				gaz_term_percent--;
-			}
-
-			printf("Gaz Term %d \n\r", gaz_term_percent);
-
-			mapped_value = mapping_adc_value_percent(gaz_term_percent);
-
-			printf("Mapping adc value percent %d\n\n\r", mapped_value);
-			load_pwm(htim3, mapped_value);
-			HAL_Delay(100);
-
-			r_buffer_string[0] = 0;
-			r_buffer_string[1] = 0;
-			r_buffer_string[2] = 0;
-			value0 = 0;
-			value1 = 0;
-			value2 = 0;
-			cpt_char = 0;
-			if (gaz_term_percent == 0) {
+			switch (r_buffer[0]) {
+			case 'i':
+				etat = info_mode;
+				previous_etat = manual_mode_pot;
+				break;
+			case '0':
 				etat = motor_ready;
-			} else {
-				etat = manual_mode_term;
+				break;
+			case ' ':
+				etat = motor_ready;
+				break;
+			default:
+				break;
 			}
-			break;
-
-			// State '3': initialization of pot
-		case init_pot:
-
-			printf("State: Init pot \n\r");
-
-			HAL_ADC_Start(&hadc1);
-			okay = 1;
-			//val = load_adc(hadc1, 5);
-			//load_pwm(htim3, val);
-			printf(">mettez le potentiometre a zero \n\r");
-			HAL_Delay(100);
-
-			while (okay == 1) {
-				HAL_ADC_Start(&hadc1);
-				if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK) {
-					valeur_can = HAL_ADC_GetValue(&hadc1);
-					printf(">Valeur can :\t %d \n\r", valeur_can);
-				} else {
-
-					printf(">Convertion NOK\n\r");
-				}
-				//printf("\n");
-				//mapped_value = mapping_adc_value(load_adc(hadc1, 5));
-				//printf("pot %d \r", mapped_value);
-				//printf("%d okayy \n \r",okay);
-				//load_pwm(htim3, mapped_value);
-				if (valeur_can <= 20) {
-					okay = 0;
-					//printf("o %d \n \r", okay);
-
-				}
-				HAL_Delay(1000);
-
-			}
-			printf("\n success \n\r");
-			etat = manual_mode_pot;
-
 			break;
 
 		default:
