@@ -17,17 +17,17 @@ Graphes 2D en temps réel:
 Jeudi soir:
 Main.c
 -> machine à états adaptée à la nouvelle idée (dessin papier -> svg inkscape à réaliser)
-	-> le mode init pot a fusionné avec mode manuel pot => mode manuel pot (nb attribué : 1)
+	-> le mode init pot a fusionné avec le mode manuel pot => mode manuel pot (nb attribué : 1)
 	-> init uc (pas de nb attribué car il était accessible uniquement via le mode info, cad qu'en appelant ce mode, on était redirigé direct vers init uc /
 	/ ce qui n'est plus le cas. Dès à présent, init uc est présent uniquement au démarrage du terminal)
 	-> info mode (char attribué: i / je n'ai pas encore cherché le moyen d'attribuer la touche F1 qui se traduit par 2 ASCII sur le terminal) est maintenant /
 	/ un mode pop-up, cad qu'une fois appelé, on obtient les infos habituelles, puis on est réorienté au mode précédent
 	-> moteur ready (char attribué: 0 ou SPACE BAR) peut être appelé depuis n'importe quel mode (fait office de "STOP"= gaz à 0%)
-	-> manuel term (nb 2) a subit bcp de modifications, notamment au sujet des "gardes-fous" (conditions sur les char acceptables + valeur final de gaz% comprise /
+	-> manuel term (nb 2) a subit bcp de modifications, notamment au sujet des "garde-fous" (conditions sur les char acceptables + valeur final de gaz% comprise /
 	/ entre 0 et 10, valeur de 10 déterminée comme max dans un 1er temps, au vue des pbms engendrés par la valeur de 15% + 0 seul et SPACE BAR compris directement /
-	/ comme un STOP -> il faut que je change la phrase, il n'y a plus besoin de "press ENTER") + permettre l'appel de info mode et de revenir sur la valeur de % précédente /
-	/ (à vérifier, mais sur ce mode, le moteur ne devrait pas retourner à 0% lors de l'appel info mode)
-	-> auto mode (nb3) : je n'ai pas encore eu le temps de m'occuper de la demande de consigne. Cependant, les gardes-fous du manuel term devraient m'être utiles pour ce /
+	/ comme un STOP) + permettre l'appel de info mode et de revenir sur la valeur de % précédente /
+	/ (à vérifier, mais sur ce mode, le moteur ne devrait pas retourner à 0% lors de l'appel d'info mode)
+	-> auto mode (nb3) : je n'ai pas encore eu le temps de m'occuper de la demande de consigne. Cependant, les garde-fous du manuel term devraient m'être utiles pour ce /
 	/ mode-ci
 
 + atterrissage à rajouter
