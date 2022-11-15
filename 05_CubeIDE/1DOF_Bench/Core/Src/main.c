@@ -126,7 +126,7 @@ int main(void) {
 	int mapped_value;
 	double position_angulaire;
 
-	double consigne = 45;
+	//double consigne = 45;
 	double commande = valeur_min_moteur;
 
 	// Coeff OK
@@ -152,6 +152,20 @@ int main(void) {
 	int max_cpt_char_prime = 3;
 	char r_buffer_string_prime[max_cpt_char_prime];
 	int angle_term = 0;
+
+	int cpt_char_kp = 0;
+	int max_cpt_char_kp = 7;
+	char r_buffer_string_kp[max_cpt_char_kp];
+
+	int cpt_char_ki = 0;
+	int max_cpt_char_ki = 7;
+	char r_buffer_string_ki[max_cpt_char_ki];
+
+	int cpt_char_kd = 0;
+	int max_cpt_char_kd = 7;
+	char r_buffer_string_kd[max_cpt_char_kd];
+
+
 
 	char msg_motor_ready[] = "> Press [ 0 ] or [ SPACE ] for Motor ready\n\r";
 	char msg_info_mode[] = "> Press [ i ] for Info mode\n\n\r";
@@ -254,8 +268,13 @@ int main(void) {
 			printf("State: Info mode\n\n\r");
 
 			printf("Firmware version %.2f \n\r", firmware_version);
-			printf("Baud rate %lu \n\r", huart2.Init.BaudRate);
-			printf("Consigne (auto mode) %.2f deg \n\n\r", consigne);
+			printf("Baud rate %lu \n\n\r", huart2.Init.BaudRate);
+
+			printf("Angle (auto mode) = %d deg\n\n\r", angle_term);
+			printf("kp = %.4f\n\r",kp);
+			printf("ki = %.4f\n\r",ki);
+			printf("kd = %.4f\n\n\r",kd);
+
 
 			printf("List of States:\n\r");
 			printf(">>Init UC\n\r");
@@ -304,7 +323,7 @@ int main(void) {
 				etat = manual_mode_term;
 				break;
 			case '3':
-				etat = auto_mode;
+				etat = init_gyro;
 				break;
 			default:
 				break;
@@ -477,6 +496,7 @@ int main(void) {
 			value1 = 0;
 			value2 = 0;
 			cpt_char = 0;
+
 			if (gaz_term_percent == 0) {
 				etat = motor_ready;
 			} else {
@@ -515,7 +535,7 @@ int main(void) {
 			printf(msg_info_mode);
 			printf(msg_motor_ready);
 			// Ask for instructions for the angle of the arm
-			printf("> Enter value between 1 and 90 degrees (angle of the arm) then press [ ENTER ]\n\r");
+			printf("> Enter value between 1 and 90 degrees (angle of the arm) then press [ ENTER ]\n\n\r");
 
 			do {
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
@@ -545,6 +565,7 @@ int main(void) {
 						angle_term = prov_angle_term;
 						printf("Angle : %d degree(s)\n\n\r", angle_term);
 						etat = auto_mode;
+						//etat = instruct_kp;
 					}
 				}
 			}
@@ -561,6 +582,7 @@ int main(void) {
 						angle_term = prov_angle_term;
 						printf("Angle : %d degree(s)\n\n\r", angle_term);
 						etat = auto_mode;
+						//etat = instruct_kp;
 					}
 				}
 			}
@@ -583,9 +605,117 @@ int main(void) {
 			cpt_char_prime = 0;
 			break;
 
+		case instruct_kp:
+
+			printf(msg_info_mode);
+			printf(msg_motor_ready);
+
+			// Ask for instructions for the coefficient kp
+			printf("> Enter value for the coefficient kp then press [ ENTER ]\n\n\r");
+
+			do {
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
+						== HAL_OK) {
+					r_buffer_string_kp[cpt_char_kp] = r_buffer[0];
+					if (cpt_char_kp < max_cpt_char_kp) {
+						cpt_char_kp++;
+					}
+				} else {
+					__HAL_UART_CLEAR_OREFLAG(&huart2);
+				}
+			} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i') && (r_buffer[0] != ' '));
+
+			int value_kp = 0;
+			int kp_prov = 0;
+			int test_err_kp = 0;
+			int counter_comma_pos = 0;// -> condition par rapport à position 0 (car impossible d'avoir la virgule en 1ere entrée)
+			int counter_comma_nb = 0;// -> nombre de virgules : si plus d'une -> erreur
+
+			for (int i = 0; i = cpt_char_kp -2; ++i){
+				value_kp = r_buffer_string_kp[i];
+				if (value_kp == 44 || value_kp == 46){
+					counter_comma_pos = i;
+					counter_comma_nb++;
+				} else{
+					value_kp = r_buffer_string_kp[0] - '0';
+					if (value_kp<0 || value_kp>9){
+						test_err_kp++;
+						printf(msg_error_char_nb);
+					} else{
+						// kp_prov = kp_prov + ; A POURSUIVRE
+					}
+				}
+
+			}
+
+			int value_kp0 = r_buffer_string_kp[0] - '0';
+			int value_kp1 = r_buffer_string_kp[1] - '0';
+
+
+
+
+			// à continuer
+
+			break;
+
+		case instruct_ki:
+
+		printf(msg_info_mode);
+		printf(msg_motor_ready);
+
+		// Ask for instructions for the coefficient ki
+		printf("> Enter value for the coefficient ki then press [ ENTER ]\n\n\r");
+
+		do {
+			if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
+					== HAL_OK) {
+				r_buffer_string_ki[cpt_char_ki] = r_buffer[0];
+				if (cpt_char_ki < max_cpt_char_ki) {
+					cpt_char_ki++;
+				}
+			} else {
+				__HAL_UART_CLEAR_OREFLAG(&huart2);
+			}
+		} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i') && (r_buffer[0] != ' '));
+
+		int value_ki0 = r_buffer_string_ki[0] - '0';
+		int value_ki1 = r_buffer_string_ki[1] - '0';
+
+		// à continuer
+
+			break;
+
+		case instruct_kd:
+
+		printf(msg_info_mode);
+		printf(msg_motor_ready);
+
+		// Ask for instructions for the coefficient kd
+		printf("> Enter value for the coefficient kd then press [ ENTER ]\n\n\r");
+
+		do {
+			if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
+					== HAL_OK) {
+				r_buffer_string_kd[cpt_char_kd] = r_buffer[0];
+				if (cpt_char_kd < max_cpt_char_kd) {
+					cpt_char_kd++;
+				}
+			} else {
+				__HAL_UART_CLEAR_OREFLAG(&huart2);
+			}
+		} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i') && (r_buffer[0] != ' '));
+
+		int value_kd0 = r_buffer_string_kd[0] - '0';
+		int value_kd1 = r_buffer_string_kd[1] - '0';
+
+		// à continuer
+
+			break;
 
 		case auto_mode:
 
+			printf(msg_info_mode);
+			printf(msg_motor_ready);
 			//consigne = angle_term;
 			integre_erreur = 0;
 
@@ -625,12 +755,6 @@ int main(void) {
 
 
 			} while (r_buffer[0] != '0' && (r_buffer[0] != ' ') && (r_buffer[0] != 'i'));
-
-			if (angle_term == 0) {
-				etat = motor_ready;
-			} else {
-				etat = auto_mode;
-			}
 
 			if (r_buffer[0] == '0'){
 				etat = motor_ready;
