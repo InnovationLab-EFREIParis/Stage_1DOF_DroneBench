@@ -490,7 +490,8 @@ int main(void) {
 			break;
 
 		// State '3': auto mode
-		case auto_mode:
+
+		case init_gyro:
 
 			printf("State: Auto mode\n\n\r");
 
@@ -499,17 +500,20 @@ int main(void) {
 				;
 			printf("Gyro MPU6050 OK!\n\n\r");
 
-			printf(msg_info_mode);
-			printf(msg_motor_ready);
-
 			if (MPU6050_Init(&hi2c1) == 0) {
-				printf("Gyro MPU6050 initialized\n\r");
+				printf("Gyro MPU6050 initialized\n\n\r");
+				etat = instruct_angle;
 			} else {
-				printf("Gyro MPU6050 is not working\n\r");
+				printf("Gyro MPU6050 is not working\n\n\r");
 				etat = motor_ready;
 				break;
 			}
+			break;
 
+		case instruct_angle:
+
+			printf(msg_info_mode);
+			printf(msg_motor_ready);
 			// Ask for instructions for the angle of the arm
 			printf("> Enter value between 1 and 90 degrees (angle of the arm) then press [ ENTER ]\n\r");
 
@@ -531,54 +535,60 @@ int main(void) {
 			if (cpt_char_prime == 2) {
 				if ((value_prime0 > 9)||(value_prime0 < 0)){
 					printf(msg_error_char_nb);
+					etat = instruct_angle;
 				} else{
 					int prov_angle_term = value_prime0;
 					if (prov_angle_term > 90){
 						printf(msg_error_value_sup_angle);
+						etat = instruct_angle;
 					} else{
 						angle_term = prov_angle_term;
+						printf("Angle : %d degree(s)\n\n\r", angle_term);
+						etat = auto_mode;
 					}
 				}
 			}
 			if (cpt_char_prime == 3) {
 				if ((value_prime0 > 9)||(value_prime0 < 0)||(value_prime1 > 9)||(value_prime1 < 0)){
 					printf(msg_error_char_nb);
+					etat = instruct_angle;
 				} else{
 					int prov_angle_term = value_prime0 * 10 + value_prime1;
 					if (prov_angle_term > 90){
 						printf(msg_error_value_sup_angle);
+						etat = instruct_angle;
 					} else{
 						angle_term = prov_angle_term;
+						printf("Angle : %d degree(s)\n\n\r", angle_term);
+						etat = auto_mode;
 					}
 				}
 			}
 
 			if (r_buffer[0] == 'i') {
+				etat = info_mode;
+				previous_etat = instruct_angle;
 			}
 			if (r_buffer[0] == ' ') {
-				angle_term = 0;
+				etat = motor_ready;
 			}
 			if (r_buffer_string_prime[0] == '0') {
-				angle_term = 0;
+				etat = motor_ready;
 			}
-
-			printf("Angle : %d degree(s)\n\r", angle_term);
-			//printf(msg_info_mode);
-			//printf(msg_motor_ready);
 
 			r_buffer_string_prime[0] = 0;
 			r_buffer_string_prime[1] = 0;
 			value_prime0 = 0;
 			value_prime1 = 0;
 			cpt_char_prime = 0;
+			break;
+
+
+		case auto_mode:
 
 			//consigne = angle_term;
-
-
-
-			// -------------------------------------------------------------------------------------------
-
 			integre_erreur = 0;
+
 			do {
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
 						== HAL_OK) {
