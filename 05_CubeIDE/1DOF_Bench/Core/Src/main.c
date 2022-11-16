@@ -123,16 +123,13 @@ int main(void) {
 	char r_buffer[2];
 	int okay;
 	int valeur_can;
-	int mapped_value;
+	int mapped_value = valeur_min_moteur;
 	double position_angulaire;
 
-	//double consigne = 45;
 	double commande = valeur_min_moteur;
+	double landing_value = valeur_min_moteur;
 
-	// Coeff OK
-	/*double kp=0.0001;
-	 double ki=0.02;
-	 double kd=0.001;*/
+	// Default coefficients
 	double kp = 0.001;
 	double ki = 0.018;
 	double kd = 0.1;
@@ -154,15 +151,15 @@ int main(void) {
 	int angle_term = 0;
 
 	int cpt_char_kp = 0;
-	int max_cpt_char_kp = 7;
+	int max_cpt_char_kp = 5; //7 avec virgule et chiffre des unités
 	char r_buffer_string_kp[max_cpt_char_kp];
 
 	int cpt_char_ki = 0;
-	int max_cpt_char_ki = 7;
+	int max_cpt_char_ki = 5; //7 avec virgule et chiffre des unités
 	char r_buffer_string_ki[max_cpt_char_ki];
 
 	int cpt_char_kd = 0;
-	int max_cpt_char_kd = 7;
+	int max_cpt_char_kd = 5; //7 avec virgule et chiffre des unités
 	char r_buffer_string_kd[max_cpt_char_kd];
 
 
@@ -389,10 +386,12 @@ int main(void) {
 				previous_etat = manual_mode_pot;
 				break;
 			case '0':
-				etat = motor_ready;
+				landing_value = mapped_value;
+				etat = landing;
 				break;
 			case ' ':
-				etat = motor_ready;
+				landing_value = mapped_value;
+				etat = landing;
 				break;
 			default:
 				break;
@@ -472,14 +471,6 @@ int main(void) {
 			if (r_buffer[0] == '-') {
 				gaz_term_percent--;
 			}
-			if (r_buffer[0] == 'i') {
-			}
-			if (r_buffer[0] == ' ') {
-				gaz_term_percent = 0;
-			}
-			if (r_buffer_string[0] == '0') {
-				gaz_term_percent = 0;
-			}
 
 			printf("Gaz Term %d \n\r", gaz_term_percent);
 
@@ -489,16 +480,12 @@ int main(void) {
 			load_pwm(htim3, mapped_value);
 			HAL_Delay(100);
 
-			r_buffer_string[0] = 0;
-			r_buffer_string[1] = 0;
-			r_buffer_string[2] = 0;
-			value0 = 0;
-			value1 = 0;
-			value2 = 0;
-			cpt_char = 0;
+
 
 			if (gaz_term_percent == 0) {
-				etat = motor_ready;
+				landing_value = mapped_value;
+				mapped_value = valeur_min_moteur;
+				etat = landing;
 			} else {
 				etat = manual_mode_term;
 			}
@@ -507,6 +494,25 @@ int main(void) {
 				etat = info_mode;
 				previous_etat = manual_mode_term;
 			}
+			if (r_buffer[0] == ' ') {
+				landing_value = mapped_value;
+				mapped_value = valeur_min_moteur;
+				etat = landing;
+			}
+			if (r_buffer_string[0] == '0') {
+				landing_value = mapped_value;
+				mapped_value = valeur_min_moteur;
+				etat = landing;
+			}
+
+			r_buffer_string[0] = 0;
+			r_buffer_string[1] = 0;
+			r_buffer_string[2] = 0;
+			value0 = 0;
+			value1 = 0;
+			value2 = 0;
+			cpt_char = 0;
+
 			break;
 
 		// State '3': auto mode
@@ -592,10 +598,14 @@ int main(void) {
 				previous_etat = instruct_angle;
 			}
 			if (r_buffer[0] == ' ') {
-				etat = motor_ready;
+				landing_value = commande;
+				commande = valeur_min_moteur;
+				etat = landing;
 			}
 			if (r_buffer_string_prime[0] == '0') {
-				etat = motor_ready;
+				landing_value = commande;
+				commande = valeur_min_moteur;
+				etat = landing;
 			}
 
 			r_buffer_string_prime[0] = 0;
@@ -611,7 +621,8 @@ int main(void) {
 			printf(msg_motor_ready);
 
 			// Ask for instructions for the coefficient kp
-			printf("> Enter value for the coefficient kp then press [ ENTER ]\n\n\r");
+			//printf("> Enter value for the coefficient kp then press [ ENTER ]\n\n\r");
+			printf("> kp coefficient looks like [0.****].\n\rPlease enter all the values at the [*] then press [ ENTER ]\n\n\r");
 
 			do {
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
@@ -624,37 +635,114 @@ int main(void) {
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
 			} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i') && (r_buffer[0] != ' '));
+			//----------------------------------------------------------------------------------------------------------------------------
+			int value_kp0 = r_buffer_string_kp[0] - '0';
+			printf("Value kp0 = %d\n\r", value_kp0);
+			int value_kp1 = r_buffer_string_kp[1] - '0';
+			printf("Value kp1 = %d\n\r", value_kp1);
+			int value_kp2 = r_buffer_string_kp[2] - '0';
+			printf("Value kp2 = %d\n\r", value_kp2);
+			int value_kp3 = r_buffer_string_kp[3] - '0';
+			printf("Value kp3 = %d\n\r", value_kp3);
 
-			int value_kp = 0;
-			int kp_prov = 0;
-			int test_err_kp = 0;
-			int counter_comma_pos = 0;// -> condition par rapport à position 0 (car impossible d'avoir la virgule en 1ere entrée)
-			int counter_comma_nb = 0;// -> nombre de virgules : si plus d'une -> erreur
-
-			for (int i = 0; i = cpt_char_kp -2; ++i){
-				value_kp = r_buffer_string_kp[i];
-				if (value_kp == 44 || value_kp == 46){
-					counter_comma_pos = i;
-					counter_comma_nb++;
+			if (cpt_char_kp == 2) {
+				if ((value_kp0 > 9)||(value_kp0 < 0)){
+					printf(msg_error_char_nb);
+					etat = instruct_kp;
 				} else{
-					value_kp = r_buffer_string_kp[0] - '0';
-					if (value_kp<0 || value_kp>9){
-						test_err_kp++;
-						printf(msg_error_char_nb);
-					} else{
-						// kp_prov = kp_prov + ; A POURSUIVRE
-					}
+					kp =value_kp0 /10.;
+					printf("kp = %.4f \n\r", kp);
+					//etat = instruct_ki;
+					etat = auto_mode;
 				}
-
+			}
+			if (cpt_char_kp == 3) {
+				if ((value_kp0 > 9)||(value_kp0 < 0)||(value_kp1 > 9)||(value_kp1 < 0)){
+					printf(msg_error_char_nb);
+					etat = instruct_kp;
+				} else{
+					kp = value_kp0 /10. + value_kp1 /100.;
+					printf("kp = %.4f \n\r", kp);
+					//etat = instruct_ki;
+					etat = auto_mode;
+				}
+			}
+			if (cpt_char_kp == 4) {
+				if ((value_kp0 > 9)||(value_kp0 < 0)||(value_kp1 > 9)||(value_kp1 < 0)||(value_kp2 > 9)||(value_kp2 < 0)){
+					printf(msg_error_char_nb);
+					etat = instruct_kp;
+				} else{
+					kp = value_kp0 /10. + value_kp1 /100. + value_kp2 /1000.;
+					printf("kp = %.4f \n\r", kp);
+					//etat = instruct_ki;
+					etat = auto_mode;
+				}
+			}
+			if (cpt_char_kp == 5) {
+				if ((value_kp0 > 9)||(value_kp0 < 0)||(value_kp1 > 9)||(value_kp1 < 0)||(value_kp2 > 9)||(value_kp2 < 0)||(value_kp3 > 9)||(value_kp3 < 0)){
+					printf(msg_error_char_nb);
+					etat = instruct_kp;
+				} else{
+					kp = value_kp0 /10. + value_kp1 /100. + value_kp2 /1000. + value_kp3 /10000.;
+					printf("kp = %.4f \n\r", kp);
+					//etat = instruct_ki;
+					etat = auto_mode;
+				}
 			}
 
-			int value_kp0 = r_buffer_string_kp[0] - '0';
-			int value_kp1 = r_buffer_string_kp[1] - '0';
+			if (r_buffer[0] == 'i') {
+				etat = info_mode;
+				previous_etat = instruct_kp;
+			}
+			if (r_buffer[0] == ' ') {
+				landing_value = commande;
+				commande = valeur_min_moteur;
+				etat = landing;
+			}
+
+			r_buffer_string_kp[0] = 0;
+			r_buffer_string_kp[1] = 0;
+			r_buffer_string_kp[2] = 0;
+			r_buffer_string_kp[3] = 0;
+			value_kp0 = 0;
+			value_kp1 = 0;
+			value_kp2 = 0;
+			value_kp3 = 0;
+			cpt_char_kp = 0;
+
+			//----------------------------------------------------------------------------------------------------------------------------
+
+			// --------------------------------- TEST ------------------------------------------------------------------------------------
+			//int value_kp = 0;
+			//int kp_prov = 0;
+			//int test_err_kp = 0;
+			//int counter_comma_pos = 0;// -> condition par rapport à position 0 (car impossible d'avoir la virgule en 1ere entrée)
+			//int counter_comma_nb = 0;// -> nombre de virgules : si plus d'une -> erreur
+
+			//for (int i = 0; i = cpt_char_kp -2; ++i){
+				//value_kp = r_buffer_string_kp[i];
+				//if (value_kp == 44 || value_kp == 46){
+					//counter_comma_pos = i;
+					//counter_comma_nb++;
+				//} else{
+					//value_kp = r_buffer_string_kp[0] - '0';
+					//if (value_kp<0 || value_kp>9){
+						//test_err_kp++;
+						//printf(msg_error_char_nb);
+					//} else{
+						// kp_prov = kp_prov + ; A POURSUIVRE
+					//}
+				//}
+
+			//}
+
+			//int value_kp0 = r_buffer_string_kp[0] - '0';
+			//int value_kp1 = r_buffer_string_kp[1] - '0';
 
 
 
 
-			// à continuer
+			// à continuer ----------------------------------------------------------------------------------------------------------------
 
 			break;
 
@@ -664,7 +752,8 @@ int main(void) {
 		printf(msg_motor_ready);
 
 		// Ask for instructions for the coefficient ki
-		printf("> Enter value for the coefficient ki then press [ ENTER ]\n\n\r");
+		//printf("> Enter value for the coefficient ki then press [ ENTER ]\n\n\r");
+		printf("> ki coefficient looks like [0.****].\n\rPlease enter all the values at the [*] then press [ ENTER ]\n\n\r");
 
 		do {
 			if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
@@ -677,11 +766,82 @@ int main(void) {
 				__HAL_UART_CLEAR_OREFLAG(&huart2);
 			}
 		} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i') && (r_buffer[0] != ' '));
-
+		//----------------------------------------------------------------------------------------------------------------------------
 		int value_ki0 = r_buffer_string_ki[0] - '0';
+		printf("Value ki0 = %d\n\r", value_ki0);
 		int value_ki1 = r_buffer_string_ki[1] - '0';
+		printf("Value ki1 = %d\n\r", value_ki1);
+		int value_ki2 = r_buffer_string_ki[2] - '0';
+		printf("Value ki2 = %d\n\r", value_ki2);
+		int value_ki3 = r_buffer_string_ki[3] - '0';
+		printf("Value ki3 = %d\n\r", value_ki3);
 
-		// à continuer
+		if (cpt_char_ki == 2) {
+			if ((value_ki0 > 9)||(value_ki0 < 0)) {
+				printf(msg_error_char_nb);
+				etat = instruct_ki;
+			} else{
+				ki =value_ki0 /10.;
+				printf("ki = %.4f \n\r", ki);
+				//etat = instruct_kd;
+				etat = auto_mode;
+			}
+		}
+		if (cpt_char_ki == 3) {
+			if ((value_ki0 > 9)||(value_ki0 < 0)||(value_ki1 > 9)||(value_ki1 < 0)){
+				printf(msg_error_char_nb);
+				etat = instruct_ki;
+			} else{
+				ki = value_ki0 /10. + value_ki1 /100.;
+				printf("ki = %.4f \n\r", ki);
+				//etat = instruct_kd;
+				etat = auto_mode;
+			}
+		}
+		if (cpt_char_ki == 4) {
+			if ((value_ki0 > 9)||(value_ki0 < 0)||(value_ki1 > 9)||(value_ki1 < 0)||(value_ki2 > 9)||(value_ki2 < 0)){
+				printf(msg_error_char_nb);
+				etat = instruct_ki;
+			} else{
+				ki = value_ki0 /10. + value_ki1 /100. + value_ki2 /1000.;
+				printf("ki = %.4f \n\r", ki);
+				//etat = instruct_kd;
+				etat = auto_mode;
+			}
+		}
+		if (cpt_char_ki == 5) {
+			if ((value_ki0 > 9)||(value_ki0 < 0)||(value_ki1 > 9)||(value_ki1 < 0)||(value_ki2 > 9)||(value_ki2 < 0)||(value_ki3 > 9)||(value_ki3 < 0)){
+					printf(msg_error_char_nb);
+				etat = instruct_ki;
+			} else{
+				ki = value_ki0 /10. + value_ki1 /100. + value_ki2 /1000. + value_ki3 /10000.;
+				printf("ki = %.4f \n\r", ki);
+				//etat = instruct_kd;
+				etat = auto_mode;
+			}
+		}
+
+		if (r_buffer[0] == 'i') {
+			etat = info_mode;
+			previous_etat = instruct_ki;
+		}
+		if (r_buffer[0] == ' ') {
+			landing_value = commande;
+			commande = valeur_min_moteur;
+			etat = landing;
+		}
+
+		r_buffer_string_ki[0] = 0;
+		r_buffer_string_ki[1] = 0;
+		r_buffer_string_ki[2] = 0;
+		r_buffer_string_ki[3] = 0;
+		value_ki0 = 0;
+		value_ki1 = 0;
+		value_ki2 = 0;
+		value_ki3 = 0;
+		cpt_char_ki = 0;
+
+		//----------------------------------------------------------------------------------------------------------------------------
 
 			break;
 
@@ -691,7 +851,8 @@ int main(void) {
 		printf(msg_motor_ready);
 
 		// Ask for instructions for the coefficient kd
-		printf("> Enter value for the coefficient kd then press [ ENTER ]\n\n\r");
+		//printf("> Enter value for the coefficient kd then press [ ENTER ]\n\n\r");
+		printf("> kd coefficient looks like [0.****].\n\rPlease enter all the values at the [*] then press [ ENTER ]\n\n\r");
 
 		do {
 			if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
@@ -704,11 +865,78 @@ int main(void) {
 				__HAL_UART_CLEAR_OREFLAG(&huart2);
 			}
 		} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i') && (r_buffer[0] != ' '));
-
+		//----------------------------------------------------------------------------------------------------------------------------
 		int value_kd0 = r_buffer_string_kd[0] - '0';
+		printf("Value kd0 = %d\n\r", value_kd0);
 		int value_kd1 = r_buffer_string_kd[1] - '0';
+		printf("Value kd1 = %d\n\r", value_kd1);
+		int value_kd2 = r_buffer_string_kd[2] - '0';
+		printf("Value kd2 = %d\n\r", value_kd2);
+		int value_kd3 = r_buffer_string_kd[3] - '0';
+		printf("Value kd3 = %d\n\r", value_kd3);
 
-		// à continuer
+		if (cpt_char_kd == 2) {
+			if ((value_kd0 > 9)||(value_kd0 < 0)){
+				printf(msg_error_char_nb);
+				etat = instruct_kd;
+			} else{
+				kd =value_kd0 /10.;
+				printf("kd = %.4f \n\r", kd);
+				etat = auto_mode;
+			}
+		}
+		if (cpt_char_kd == 3) {
+			if ((value_kd0 > 9)||(value_kd0 < 0)||(value_kd1 > 9)||(value_kd1 < 0)){
+				printf(msg_error_char_nb);
+				etat = instruct_kd;
+			} else{
+				kd = value_kd0 /10. + value_kd1 /100.;
+				printf("kd = %.4f \n\r", kd);
+				etat = auto_mode;
+			}
+		}
+		if (cpt_char_kd == 4) {
+			if ((value_kd0 > 9)||(value_kd0 < 0)||(value_kd1 > 9)||(value_kd1 < 0)||(value_kd2 > 9)||(value_kd2 < 0)){
+				printf(msg_error_char_nb);
+				etat = instruct_kd;
+			} else{
+				kd = value_kd0 /10. + value_kd1 /100. + value_kd2 /1000.;
+				printf("kd = %.4f \n\r", kd);
+				etat = auto_mode;
+			}
+		}
+		if (cpt_char_kd == 5) {
+			if ((value_kd0 > 9)||(value_kd0 < 0)||(value_kd1 > 9)||(value_kd1 < 0)||(value_kd2 > 9)||(value_kd2 < 0)||(value_kd3 > 9)||(value_kd3 < 0)){
+				printf(msg_error_char_nb);
+				etat = instruct_kd;
+			} else{
+				kd = value_kd0 /10. + value_kd1 /100. + value_kd2 /1000. + value_kd3 /10000.;
+				printf("kd = %.4f \n\r", kd);
+				etat = auto_mode;
+			}
+		}
+
+		if (r_buffer[0] == 'i') {
+			etat = info_mode;
+			previous_etat = instruct_kd;
+		}
+		if (r_buffer[0] == ' ') {
+			landing_value = commande;
+			commande = valeur_min_moteur;
+			etat = landing;
+		}
+
+		r_buffer_string_kd[0] = 0;
+		r_buffer_string_kd[1] = 0;
+		r_buffer_string_kd[2] = 0;
+		r_buffer_string_kd[3] = 0;
+		value_kd0 = 0;
+		value_kd1 = 0;
+		value_kd2 = 0;
+		value_kd3 = 0;
+		cpt_char_kd = 0;
+
+		//----------------------------------------------------------------------------------------------------------------------------
 
 			break;
 
@@ -716,6 +944,9 @@ int main(void) {
 
 			printf(msg_info_mode);
 			printf(msg_motor_ready);
+			printf("> Please enter [x] if you want to modify kp value\n\rPlease enter [y] if you want to modify ki value\n\rPlease enter [z] if you want to modify kd value\n\r");
+			printf("> Please enter [w] if you want to modify the angle value\n\r");
+			printf("> If you want to come back to default set of PID coefficients then press [d]\n\n\r");
 			//consigne = angle_term;
 			integre_erreur = 0;
 
@@ -754,19 +985,53 @@ int main(void) {
 				load_pwm(htim3, commande);
 
 
-			} while (r_buffer[0] != '0' && (r_buffer[0] != ' ') && (r_buffer[0] != 'i'));
+			} while (r_buffer[0] != '0' && (r_buffer[0] != ' ') && (r_buffer[0] != 'i') && (r_buffer[0] != 'd') && (r_buffer[0] != 'w') && (r_buffer[0] != 'x') && (r_buffer[0] != 'y') && (r_buffer[0] != 'z'));
 
 			if (r_buffer[0] == '0'){
-				etat = motor_ready;
+				landing_value = commande;
+				commande = valeur_min_moteur;
+				etat = landing;
 			}
 
 			if (r_buffer[0] == ' '){
-				etat = motor_ready;
+				landing_value = commande;
+				commande = valeur_min_moteur;
+				etat = landing;
 			}
 			if (r_buffer[0] == 'i'){
 				etat = info_mode;
 				previous_etat = auto_mode;
 			}
+			if (r_buffer[0] == 'd'){
+				kp = 0.001;
+				ki = 0.018;
+				kd = 0.1;
+				etat = auto_mode;
+			}
+			if (r_buffer[0] == 'w'){
+				etat = instruct_angle;
+			}
+			if (r_buffer[0] == 'x'){
+				etat = instruct_kp;
+			}
+			if (r_buffer[0] == 'y'){
+				etat = instruct_ki;
+			}
+			if (r_buffer[0] == 'z'){
+				etat = instruct_kd;
+			}
+
+			break;
+
+		case landing:
+
+			do{
+				landing_value--;
+				load_pwm(htim3, landing_value);
+				HAL_Delay(25);
+			} while(landing_value>valeur_min_moteur);
+
+			etat = motor_ready;
 
 			break;
 
@@ -774,7 +1039,6 @@ int main(void) {
 			break;
 
 		}
-
 		//---------changing states----END---
 
 		/* USER CODE END WHILE */
