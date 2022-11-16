@@ -32,8 +32,8 @@
  * Gyro : 4 pins{
  * 	vcc = 5v    **brancher sur 3.3
  * 	gnd=gnd
- * 	scl=PB8
- * 	sda = PB9
+ * 	scl=PB8=d15
+ * 	sda = PB9=d14
  *
  *
  * }
@@ -126,7 +126,7 @@ int main(void) {
 	int mapped_value;
 	double position_angulaire;
 
-	double consigne = 45;
+	//double consigne = 45;
 	double commande = valeur_min_moteur;
 
 	// Coeff OK
@@ -142,10 +142,38 @@ int main(void) {
 	double integre_erreur = 0;
 	double derive_erreur = 0;
 
+	// mode 2
 	int cpt_char = 0;
 	int max_cpt_char = 4;
 	char r_buffer_string[max_cpt_char];
 	int gaz_term_percent = 0;
+	// mode 3
+	int cpt_char_prime = 0;
+	int max_cpt_char_prime = 3;
+	char r_buffer_string_prime[max_cpt_char_prime];
+	int angle_term = 0;
+
+	int cpt_char_kp = 0;
+	int max_cpt_char_kp = 7;
+	char r_buffer_string_kp[max_cpt_char_kp];
+
+	int cpt_char_ki = 0;
+	int max_cpt_char_ki = 7;
+	char r_buffer_string_ki[max_cpt_char_ki];
+
+	int cpt_char_kd = 0;
+	int max_cpt_char_kd = 7;
+	char r_buffer_string_kd[max_cpt_char_kd];
+
+
+
+	char msg_motor_ready[] = "> Press [ 0 ] or [ SPACE ] for Motor ready\n\r";
+	char msg_info_mode[] = "> Press [ i ] for Info mode\n\n\r";
+	char msg_error_char_nb[] = "ERROR: Please enter only characters included in this list : 0 1 2 3 4 5 6 7 8 9\n\n\r";
+	char msg_error_value_sup[] = "ERROR: Value > 10\n\n\r";
+	char msg_error_value_sup_angle[] = "ERROR: Value > 90\n\n\r";
+
+
 	/* USER CODE END 1 */
 
 	/* MCU Configuration--------------------------------------------------------*/
@@ -210,8 +238,8 @@ int main(void) {
 			//managing outputs
 			printf("State: Init uc\n\r");
 
-			printf("> Press [ 0 ] or [ SPACE ] for Motor ready\n\r");
-			printf("> Press [ i ] for Info mode\n\n\r");
+			printf(msg_motor_ready);
+			printf(msg_info_mode);
 
 			//managing inputs (transitions)
 			do {
@@ -240,8 +268,13 @@ int main(void) {
 			printf("State: Info mode\n\n\r");
 
 			printf("Firmware version %.2f \n\r", firmware_version);
-			printf("Baud rate %lu \n\r", huart2.Init.BaudRate);
-			printf("Consigne (auto mode) %.2f deg \n\n\r", consigne);
+			printf("Baud rate %lu \n\n\r", huart2.Init.BaudRate);
+
+			printf("Angle (auto mode) = %d deg\n\n\r", angle_term);
+			printf("kp = %.4f\n\r",kp);
+			printf("ki = %.4f\n\r",ki);
+			printf("kd = %.4f\n\n\r",kd);
+
 
 			printf("List of States:\n\r");
 			printf(">>Init UC\n\r");
@@ -260,7 +293,7 @@ int main(void) {
 
 			printf("State: Motor ready\n\n\r");
 
-			printf("> Press [ i ] for Info mode\n\r");
+			printf(msg_info_mode);
 			printf("> Press [ 1 ] for Manual mode pot\n\r");
 			printf("> Press [ 2 ] for Manual mode term\n\r");
 			printf("> Press [ 3 ] for Auto mode\n\n\r");
@@ -290,7 +323,7 @@ int main(void) {
 				etat = manual_mode_term;
 				break;
 			case '3':
-				etat = auto_mode;
+				etat = init_gyro;
 				break;
 			default:
 				break;
@@ -334,8 +367,8 @@ int main(void) {
 			printf("Success \n\n\r");
 			// End Init Pot----------------------
 
-			printf("> Press [ i ] for Info mode\n\r");
-			printf("> Press [ 0 ] or [ SPACE ] for Motor ready\n\n\r");
+			printf(msg_info_mode);
+			printf(msg_motor_ready);
 
 			//recuperation de la pwm
 			do {
@@ -375,8 +408,8 @@ int main(void) {
 			// for now let's say 10 as value max -> 15% = dangerous
 			printf("> Enter value between 1 and 10 (power percentage) then press [ ENTER ]\n\r");
 			printf("> Press [ + ] or [ - ]\n\n\r");
-			printf("> Press [ i ] for Info mode\n\r");
-			printf("> Press [ 0 ] or [ SPACE ] then press [ ENTER ] for Motor ready\n\n\r");
+			printf(msg_info_mode);
+			printf(msg_motor_ready);
 
 			//recovery of the pwm
 			do {
@@ -398,11 +431,11 @@ int main(void) {
 
 			if (cpt_char == 2) {
 				if ((value0 > 9)||(value0 < 0)){
-					printf("ERROR: Please enter only characters included in this list : 0 1 2 3 4 5 6 7 8 9\n\n\r");
+					printf(msg_error_char_nb);
 				} else{
 					int prov_gaz_term_percent = value0;
 					if (prov_gaz_term_percent > 10){
-						printf("ERROR: Value > 10\n\n\r");
+						printf(msg_error_value_sup);
 					} else{
 						gaz_term_percent = prov_gaz_term_percent;
 					}
@@ -410,11 +443,11 @@ int main(void) {
 			}
 			if (cpt_char == 3) {
 				if ((value0 > 9)||(value0 < 0)||(value1 > 9)||(value1 < 0)){
-					printf("ERROR: Please enter only characters included in this list : 0 1 2 3 4 5 6 7 8 9\n\n\r");
+					printf(msg_error_char_nb);
 				} else{
 					 int prov_gaz_term_percent = value0 * 10 + value1;
 					if (prov_gaz_term_percent > 10){
-						printf("ERROR: Value > 10\n\n\r");
+						printf(msg_error_value_sup);
 					} else{
 						gaz_term_percent = prov_gaz_term_percent;
 					}
@@ -422,11 +455,11 @@ int main(void) {
 			}
 			if (cpt_char == 4) {
 				if ((value0 > 9)||(value0 < 0)||(value1 > 9)||(value1 < 0)||(value2 > 9)||(value2 < 0)){
-					printf("ERROR: Please enter only characters included in this list : 0 1 2 3 4 5 6 7 8 9\n\n\r");
+					printf(msg_error_char_nb);
 				} else{
 					int prov_gaz_term_percent = value0 * 100 + value1 * 10 + value2;
 					if (prov_gaz_term_percent > 10){
-						printf("ERROR: Value > 10\n\n\r");
+						printf(msg_error_value_sup);
 					} else{
 						gaz_term_percent = prov_gaz_term_percent;
 					}
@@ -463,6 +496,7 @@ int main(void) {
 			value1 = 0;
 			value2 = 0;
 			cpt_char = 0;
+
 			if (gaz_term_percent == 0) {
 				etat = motor_ready;
 			} else {
@@ -476,7 +510,8 @@ int main(void) {
 			break;
 
 		// State '3': auto mode
-		case auto_mode:
+
+		case init_gyro:
 
 			printf("State: Auto mode\n\n\r");
 
@@ -485,21 +520,205 @@ int main(void) {
 				;
 			printf("Gyro MPU6050 OK!\n\n\r");
 
-			printf("> Press [ i ] for Info mode\n\r");
-			printf("> Press [ 0 ] or [ SPACE ] for Motor ready\n\n\r");
-
 			if (MPU6050_Init(&hi2c1) == 0) {
-				printf("Gyro MPU6050 initialized\n\r");
+				printf("Gyro MPU6050 initialized\n\n\r");
+				etat = instruct_angle;
 			} else {
-				printf("Gyro MPU6050 is not working\n\r");
+				printf("Gyro MPU6050 is not working\n\n\r");
 				etat = motor_ready;
 				break;
 			}
+			break;
 
-			// réflexion en cours sur demande de consigne d'angle
+		case instruct_angle:
+
+			printf(msg_info_mode);
+			printf(msg_motor_ready);
+			// Ask for instructions for the angle of the arm
+			printf("> Enter value between 1 and 90 degrees (angle of the arm) then press [ ENTER ]\n\n\r");
+
+			do {
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
+						== HAL_OK) {
+					r_buffer_string_prime[cpt_char_prime] = r_buffer[0];
+					if (cpt_char_prime < max_cpt_char_prime) {
+						cpt_char_prime++;
+					}
+				} else {
+					__HAL_UART_CLEAR_OREFLAG(&huart2);
+				}
+			} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i') && (r_buffer_string_prime[0] != '0') && (r_buffer[0] != ' '));
+
+			int value_prime0 = r_buffer_string_prime[0] - '0';
+			int value_prime1 = r_buffer_string_prime[1] - '0';
+
+			if (cpt_char_prime == 2) {
+				if ((value_prime0 > 9)||(value_prime0 < 0)){
+					printf(msg_error_char_nb);
+					etat = instruct_angle;
+				} else{
+					int prov_angle_term = value_prime0;
+					if (prov_angle_term > 90){
+						printf(msg_error_value_sup_angle);
+						etat = instruct_angle;
+					} else{
+						angle_term = prov_angle_term;
+						printf("Angle : %d degree(s)\n\n\r", angle_term);
+						etat = auto_mode;
+						//etat = instruct_kp;
+					}
+				}
+			}
+			if (cpt_char_prime == 3) {
+				if ((value_prime0 > 9)||(value_prime0 < 0)||(value_prime1 > 9)||(value_prime1 < 0)){
+					printf(msg_error_char_nb);
+					etat = instruct_angle;
+				} else{
+					int prov_angle_term = value_prime0 * 10 + value_prime1;
+					if (prov_angle_term > 90){
+						printf(msg_error_value_sup_angle);
+						etat = instruct_angle;
+					} else{
+						angle_term = prov_angle_term;
+						printf("Angle : %d degree(s)\n\n\r", angle_term);
+						etat = auto_mode;
+						//etat = instruct_kp;
+					}
+				}
+			}
+
+			if (r_buffer[0] == 'i') {
+				etat = info_mode;
+				previous_etat = instruct_angle;
+			}
+			if (r_buffer[0] == ' ') {
+				etat = motor_ready;
+			}
+			if (r_buffer_string_prime[0] == '0') {
+				etat = motor_ready;
+			}
+
+			r_buffer_string_prime[0] = 0;
+			r_buffer_string_prime[1] = 0;
+			value_prime0 = 0;
+			value_prime1 = 0;
+			cpt_char_prime = 0;
+			break;
+
+		case instruct_kp:
+
+			printf(msg_info_mode);
+			printf(msg_motor_ready);
+
+			// Ask for instructions for the coefficient kp
+			printf("> Enter value for the coefficient kp then press [ ENTER ]\n\n\r");
+
+			do {
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
+						== HAL_OK) {
+					r_buffer_string_kp[cpt_char_kp] = r_buffer[0];
+					if (cpt_char_kp < max_cpt_char_kp) {
+						cpt_char_kp++;
+					}
+				} else {
+					__HAL_UART_CLEAR_OREFLAG(&huart2);
+				}
+			} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i') && (r_buffer[0] != ' '));
+
+			int value_kp = 0;
+			int kp_prov = 0;
+			int test_err_kp = 0;
+			int counter_comma_pos = 0;// -> condition par rapport à position 0 (car impossible d'avoir la virgule en 1ere entrée)
+			int counter_comma_nb = 0;// -> nombre de virgules : si plus d'une -> erreur
+
+			for (int i = 0; i = cpt_char_kp -2; ++i){
+				value_kp = r_buffer_string_kp[i];
+				if (value_kp == 44 || value_kp == 46){
+					counter_comma_pos = i;
+					counter_comma_nb++;
+				} else{
+					value_kp = r_buffer_string_kp[0] - '0';
+					if (value_kp<0 || value_kp>9){
+						test_err_kp++;
+						printf(msg_error_char_nb);
+					} else{
+						// kp_prov = kp_prov + ; A POURSUIVRE
+					}
+				}
+
+			}
+
+			int value_kp0 = r_buffer_string_kp[0] - '0';
+			int value_kp1 = r_buffer_string_kp[1] - '0';
 
 
+
+
+			// à continuer
+
+			break;
+
+		case instruct_ki:
+
+		printf(msg_info_mode);
+		printf(msg_motor_ready);
+
+		// Ask for instructions for the coefficient ki
+		printf("> Enter value for the coefficient ki then press [ ENTER ]\n\n\r");
+
+		do {
+			if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
+					== HAL_OK) {
+				r_buffer_string_ki[cpt_char_ki] = r_buffer[0];
+				if (cpt_char_ki < max_cpt_char_ki) {
+					cpt_char_ki++;
+				}
+			} else {
+				__HAL_UART_CLEAR_OREFLAG(&huart2);
+			}
+		} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i') && (r_buffer[0] != ' '));
+
+		int value_ki0 = r_buffer_string_ki[0] - '0';
+		int value_ki1 = r_buffer_string_ki[1] - '0';
+
+		// à continuer
+
+			break;
+
+		case instruct_kd:
+
+		printf(msg_info_mode);
+		printf(msg_motor_ready);
+
+		// Ask for instructions for the coefficient kd
+		printf("> Enter value for the coefficient kd then press [ ENTER ]\n\n\r");
+
+		do {
+			if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
+					== HAL_OK) {
+				r_buffer_string_kd[cpt_char_kd] = r_buffer[0];
+				if (cpt_char_kd < max_cpt_char_kd) {
+					cpt_char_kd++;
+				}
+			} else {
+				__HAL_UART_CLEAR_OREFLAG(&huart2);
+			}
+		} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i') && (r_buffer[0] != ' '));
+
+		int value_kd0 = r_buffer_string_kd[0] - '0';
+		int value_kd1 = r_buffer_string_kd[1] - '0';
+
+		// à continuer
+
+			break;
+
+		case auto_mode:
+
+			printf(msg_info_mode);
+			printf(msg_motor_ready);
+			//consigne = angle_term;
 			integre_erreur = 0;
+
 			do {
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
 						== HAL_OK) {
@@ -516,7 +735,8 @@ int main(void) {
 
 				// Asservissement
 				_erreur = erreur;
-				erreur = consigne - position_angulaire;
+				//erreur = consigne - position_angulaire;
+				erreur = angle_term - position_angulaire;
 
 				integre_erreur += erreur;
 				derive_erreur = erreur - _erreur;
@@ -533,22 +753,21 @@ int main(void) {
 
 				load_pwm(htim3, commande);
 
+
 			} while (r_buffer[0] != '0' && (r_buffer[0] != ' ') && (r_buffer[0] != 'i'));
 
-			switch (r_buffer[0]) {
-			case 'i':
-				etat = info_mode;
-				previous_etat = manual_mode_pot;
-				break;
-			case '0':
+			if (r_buffer[0] == '0'){
 				etat = motor_ready;
-				break;
-			case ' ':
-				etat = motor_ready;
-				break;
-			default:
-				break;
 			}
+
+			if (r_buffer[0] == ' '){
+				etat = motor_ready;
+			}
+			if (r_buffer[0] == 'i'){
+				etat = info_mode;
+				previous_etat = auto_mode;
+			}
+
 			break;
 
 		default:
