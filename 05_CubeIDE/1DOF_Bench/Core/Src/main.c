@@ -149,6 +149,7 @@ int main(void) {
 	int max_cpt_char_prime = 3;
 	char r_buffer_string_prime[max_cpt_char_prime];
 	int angle_term = 0;
+	int consigne = 0;
 
 	int cpt_char_kp = 0;
 	int max_cpt_char_kp = 5; //7 avec virgule et chiffre des unités
@@ -354,10 +355,6 @@ int main(void) {
 					okay = 0;
 				}
 
-				// home test condition -------
-				//okay = 0;
-				// end home test condition ---
-
 				HAL_Delay(1000);
 			}
 
@@ -437,6 +434,7 @@ int main(void) {
 						printf(msg_error_value_sup);
 					} else{
 						gaz_term_percent = prov_gaz_term_percent;
+						printf("Gaz Term %d \n\r", gaz_term_percent);
 					}
 				}
 			}
@@ -449,6 +447,7 @@ int main(void) {
 						printf(msg_error_value_sup);
 					} else{
 						gaz_term_percent = prov_gaz_term_percent;
+						printf("Gaz Term %d \n\r", gaz_term_percent);
 					}
 				}
 			}
@@ -461,26 +460,25 @@ int main(void) {
 						printf(msg_error_value_sup);
 					} else{
 						gaz_term_percent = prov_gaz_term_percent;
+						printf("Gaz Term %d \n\r", gaz_term_percent);
 					}
 				}
 			}
 
 			if (r_buffer[0] == '+') {
 				gaz_term_percent++;
+				printf("Gaz Term %d \n\r", gaz_term_percent);
 			}
 			if (r_buffer[0] == '-') {
 				gaz_term_percent--;
+				printf("Gaz Term %d \n\r", gaz_term_percent);
 			}
-
-			printf("Gaz Term %d \n\r", gaz_term_percent);
 
 			mapped_value = mapping_adc_value_percent(gaz_term_percent);
 
 			printf("Mapping adc value percent %d\n\n\r", mapped_value);
 			load_pwm(htim3, mapped_value);
 			HAL_Delay(100);
-
-
 
 			if (gaz_term_percent == 0) {
 				landing_value = mapped_value;
@@ -498,11 +496,13 @@ int main(void) {
 				landing_value = mapped_value;
 				mapped_value = valeur_min_moteur;
 				etat = landing;
+				gaz_term_percent = 0;
 			}
 			if (r_buffer_string[0] == '0') {
 				landing_value = mapped_value;
 				mapped_value = valeur_min_moteur;
 				etat = landing;
+				gaz_term_percent = 0;
 			}
 
 			r_buffer_string[0] = 0;
@@ -947,8 +947,8 @@ int main(void) {
 			printf("> Please enter [x] if you want to modify kp value\n\rPlease enter [y] if you want to modify ki value\n\rPlease enter [z] if you want to modify kd value\n\r");
 			printf("> Please enter [w] if you want to modify the angle value\n\r");
 			printf("> If you want to come back to default set of PID coefficients then press [d]\n\n\r");
-			//consigne = angle_term;
-			integre_erreur = 0;
+			consigne = angle_term;
+			//integre_erreur = 0;
 
 			do {
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
@@ -960,14 +960,12 @@ int main(void) {
 				//MPU6050_Read_Gyro(&hi2c1, &mpu);
 				//Kalman_getAngle(&KalmanX, roll, DataStruct->Gx, dt);
 
-				//position_angulaire = 90 - mpu.KalmanAngleX;
 				position_angulaire = mpu.KalmanAngleX + 90;
 				//printf("Position %.2f commande %.2f \n\r", position_angulaire, commande);HAL_Delay(500);
 
 				// Asservissement
 				_erreur = erreur;
-				//erreur = consigne - position_angulaire;
-				erreur = angle_term - position_angulaire;
+				erreur = consigne - position_angulaire;
 
 				integre_erreur += erreur;
 				derive_erreur = erreur - _erreur;
@@ -1020,6 +1018,8 @@ int main(void) {
 			if (r_buffer[0] == 'z'){
 				etat = instruct_kd;
 			}
+
+			erreur = 0;
 
 			break;
 
