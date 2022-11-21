@@ -601,11 +601,15 @@ int main(void) {
 				landing_value = commande;
 				commande = valeur_min_moteur;
 				etat = landing;
+				integre_erreur = 0;
+				erreur = 0;
 			}
 			if (r_buffer_string_prime[0] == '0') {
 				landing_value = commande;
 				commande = valeur_min_moteur;
 				etat = landing;
+				integre_erreur = 0;
+				erreur = 0;
 			}
 
 			r_buffer_string_prime[0] = 0;
@@ -698,6 +702,8 @@ int main(void) {
 				landing_value = commande;
 				commande = valeur_min_moteur;
 				etat = landing;
+				integre_erreur = 0;
+				erreur = 0;
 			}
 
 			r_buffer_string_kp[0] = 0;
@@ -829,6 +835,8 @@ int main(void) {
 			landing_value = commande;
 			commande = valeur_min_moteur;
 			etat = landing;
+			integre_erreur = 0;
+			erreur = 0;
 		}
 
 		r_buffer_string_ki[0] = 0;
@@ -924,6 +932,8 @@ int main(void) {
 			landing_value = commande;
 			commande = valeur_min_moteur;
 			etat = landing;
+			integre_erreur = 0;
+			erreur = 0;
 		}
 
 		r_buffer_string_kd[0] = 0;
@@ -948,7 +958,6 @@ int main(void) {
 			printf("> Please enter [w] if you want to modify the angle value\n\r");
 			printf("> If you want to come back to default set of PID coefficients then press [d]\n\n\r");
 			consigne = angle_term;
-			//integre_erreur = 0;
 
 			do {
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
@@ -989,12 +998,16 @@ int main(void) {
 				landing_value = commande;
 				commande = valeur_min_moteur;
 				etat = landing;
+				integre_erreur = 0;
+				erreur = 0;
 			}
 
 			if (r_buffer[0] == ' '){
 				landing_value = commande;
 				commande = valeur_min_moteur;
 				etat = landing;
+				integre_erreur = 0;
+				erreur = 0;
 			}
 			if (r_buffer[0] == 'i'){
 				etat = info_mode;
@@ -1019,7 +1032,7 @@ int main(void) {
 				etat = instruct_kd;
 			}
 
-			erreur = 0;
+			//erreur = 0;
 
 			break;
 
