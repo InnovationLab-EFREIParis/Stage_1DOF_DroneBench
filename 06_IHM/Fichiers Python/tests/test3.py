@@ -8,14 +8,68 @@ Created on Mon Nov 21 17:20:31 2022
 import serial
 import time
 
-SerialObj = serial.Serial('COM3')
-SerialObj.bytesize = 8
-SerialObj.parity = 'N'
-SerialObj.stopbits = 1
+with serial.Serial() as SerialObj:
+    SerialObj.port = 'COM3' 
+    SerialObj.baudrate = 115200
+    SerialObj.bytesize = 8
+    SerialObj.parity = 'N'
+    SerialObj.stopbits = 1
+    
 
-time.sleep(3)
+    SerialObj.open()
+    
+    SerialObj.write(b'0')
+    
+    #ReceivedString = SerialObj.read_until('\r')
+    #print(ReceivedString)
+    
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    
+    SerialObj.write(b'2')
+    
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    
+    
+#time.sleep(3)
 
-SerialObj.write(str(0).encode('ascii'))
+#SerialObj.write(str(0).encode('ascii'))
+#SerialObj.write(b'0')
+
 #ReceivedString = SerialObj.readline()
 #print(ReceivedString)
-SerialObj.close()
+
+#SerialObj.close()
