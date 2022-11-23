@@ -17,7 +17,14 @@ with serial.Serial() as SerialObj:
     
 
     SerialObj.open()
-    SerialObj.isOpen
+    #SerialObj.isOpen
+    SerialObj.write(b'\r')
+    
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    ReceivedString = SerialObj.readline()
+    print(ReceivedString)
+    
     SerialObj.write(b'0')
     
     #ReceivedString = SerialObj.read_until('\r')

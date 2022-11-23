@@ -119,7 +119,7 @@ int main(void) {
 	/* USER CODE BEGIN 1 */
 
 	enum states etat, previous_etat;
-	etat = init_uc;
+	etat = entrance;
 	char r_buffer[2];
 	int okay;
 	int valeur_can;
@@ -230,25 +230,34 @@ int main(void) {
 
 		switch (etat) {
 
+		// First step: Press ENTER to start the experiment
+		case entrance:
+
+			do {
+				HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 10);
+			} while (r_buffer[0] != '\r');
+
+			etat = init_uc;
+
+			break;
+
 		// State init: initialization of micro-controller
 		case init_uc:
 
-			//managing outputs
 			printf("State: Init uc\n\r");
 
 			printf(msg_motor_ready);
 			printf(msg_info_mode);
 
-			//managing inputs (transitions)
+			printf("\n\r");
 			do {
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 10) == HAL_OK) {
-					printf("Entry: ");
 					HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 1, 10);
-					printf("\n\n\r");
 			    } else {
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
 			} while ((r_buffer[0] != ' ') && (r_buffer[0] != '0') && (r_buffer[0] != 'i'));
+			printf("\n\n\r");
 
 			switch (r_buffer[0]) {
 			case ' ':
@@ -276,10 +285,9 @@ int main(void) {
 			printf("Baud rate %lu \n\n\r", huart2.Init.BaudRate);
 
 			printf("Angle (auto mode) = %d deg\n\n\r", angle_term);
-			printf("kp = %.4f\n\r",kp);
-			printf("ki = %.4f\n\r",ki);
-			printf("kd = %.4f\n\n\r",kd);
-
+			printf("kp = %.4f\n\r", kp);
+			printf("ki = %.4f\n\r", ki);
+			printf("kd = %.4f\n\n\r", kd);
 
 			printf("List of States:\n\r");
 			printf(">>Init UC\n\r");
@@ -289,7 +297,7 @@ int main(void) {
 			printf(">>Manual Mode Term\n\r");
 			printf(">>Auto Mode\n\n\r");
 
-			//go to init uc
+			//go to previous state
 			etat = previous_etat;
 			break;
 
@@ -301,20 +309,23 @@ int main(void) {
 			printf(msg_info_mode);
 			printf("> Press [ 1 ] for Manual mode pot\n\r");
 			printf("> Press [ 2 ] for Manual mode term\n\r");
-			printf("> Press [ 3 ] for Auto mode\n\n\r");
+			printf("> Press [ 3 ] for Auto mode\n\r");
 
 
 			// Init Motor
 			load_pwm(htim3, valeur_min_moteur);
 			HAL_Delay(100);
 
+			printf("\n\r");
 			do {
-				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
-						== HAL_OK) {
-					HAL_Delay(50);
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 10) == HAL_OK) {
+					HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 1, 10);
+				} else {
+					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
 			} while ((r_buffer[0] != 'i') && (r_buffer[0] != '1')
 					&& (r_buffer[0] != '2') && (r_buffer[0] != '3'));
+			printf("\n\n\r");
 
 			switch (r_buffer[0]) {
 			case 'i':
@@ -353,7 +364,7 @@ int main(void) {
 				HAL_ADC_Start(&hadc1);
 				if (HAL_ADC_PollForConversion(&hadc1, 100) == HAL_OK) {
 					valeur_can = HAL_ADC_GetValue(&hadc1);
-					printf("ADC value :\t %d \n\r", valeur_can);
+					printf("ADC value : %d \n\r", valeur_can);
 				} else {
 					printf("Conversion NOK\n\r");
 				}
@@ -372,17 +383,20 @@ int main(void) {
 			printf(msg_motor_ready);
 
 			//recuperation de la pwm
+			printf("\n\r");
 			do {
-				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 1)
-						== HAL_OK)
-					HAL_Delay(10);
-
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 10) == HAL_OK) {
+					HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 1, 10);
+				} else {
+					__HAL_UART_CLEAR_OREFLAG(&huart2);
+				}
 				valeur_can = load_adc(hadc1, 5);
 				mapped_value = mapping_adc_value(valeur_can);
 				HAL_Delay(100);
 				load_pwm(htim3, mapped_value);
 
 			} while (r_buffer[0] != '0' && (r_buffer[0] != ' ') && (r_buffer[0] != 'i'));
+			printf("\n\n\r");
 
 			switch (r_buffer[0]) {
 			case 'i':
@@ -409,16 +423,18 @@ int main(void) {
 			printf("State: Manual mode term\n\n\r");
 
 			// for now let's say 10 as value max -> 15% = dangerous
+			// edit: it can now go up to 10% but only by incrementing by 1% with '+'
 			printf("> Enter value between 1 and 10 (power percentage) then press [ ENTER ]\n\r");
 			printf("> Press [ + ] or [ - ]\n\n\r");
 			printf(msg_info_mode);
 			printf(msg_motor_ready);
 
 			//recovery of the pwm
+			printf("\n\r");
 			do {
-				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
-						== HAL_OK) {
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1) == HAL_OK) {
 					r_buffer_string[cpt_char] = r_buffer[0];
+					HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 1, 1);
 					if (cpt_char < max_cpt_char) {
 						cpt_char++;
 					}
@@ -427,6 +443,7 @@ int main(void) {
 				}
 			} while ((r_buffer[0] != '\r') && (r_buffer[0] != '+')
 					&& (r_buffer[0] != '-') && (r_buffer[0] != 'i') && (r_buffer_string[0] != '0') && (r_buffer_string[2] != '0') && (r_buffer[0] != ' '));
+			printf("\n\n\r");
 
 			int value0 = r_buffer_string[0] - '0';
 			int value1 = r_buffer_string[1] - '0';
@@ -441,7 +458,7 @@ int main(void) {
 						printf(msg_error_value_sup);
 					} else{
 						gaz_term_percent = prov_gaz_term_percent;
-						printf("Gaz Term %d \n\r", gaz_term_percent);
+						printf("Gaz Term : %d\n\r", gaz_term_percent);
 					}
 				}
 			}
@@ -454,7 +471,7 @@ int main(void) {
 						printf(msg_error_value_sup);
 					} else{
 						gaz_term_percent = prov_gaz_term_percent;
-						printf("Gaz Term %d \n\r", gaz_term_percent);
+						printf("Gaz Term : %d\n\r", gaz_term_percent);
 					}
 				}
 			}
@@ -467,23 +484,23 @@ int main(void) {
 						printf(msg_error_value_sup);
 					} else{
 						gaz_term_percent = prov_gaz_term_percent;
-						printf("Gaz Term %d \n\r", gaz_term_percent);
+						printf("Gaz Term : %d\n\r", gaz_term_percent);
 					}
 				}
 			}
 
 			if (r_buffer[0] == '+') {
 				gaz_term_percent++;
-				printf("Gaz Term %d \n\r", gaz_term_percent);
+				printf("Gaz Term : %d\n\r", gaz_term_percent);
 			}
 			if (r_buffer[0] == '-') {
 				gaz_term_percent--;
-				printf("Gaz Term %d \n\r", gaz_term_percent);
+				printf("Gaz Term : %d\n\r", gaz_term_percent);
 			}
 
 			mapped_value = mapping_adc_value_percent(gaz_term_percent);
 
-			printf("Mapping adc value percent %d\n\n\r", mapped_value);
+			printf("Mapping adc value percent : %d\n\n\r", mapped_value);
 			load_pwm(htim3, mapped_value);
 			HAL_Delay(100);
 
@@ -548,12 +565,13 @@ int main(void) {
 			printf(msg_info_mode);
 			printf(msg_motor_ready);
 			// Ask for instructions for the angle of the arm
-			printf("> Enter value between 1 and 90 degrees (angle of the arm) then press [ ENTER ]\n\n\r");
+			printf("> Enter value between 1 and 90 degrees (angle of the arm) then press [ ENTER ]\n\r");
 
+			printf("\n\r");
 			do {
-				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
-						== HAL_OK) {
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1) == HAL_OK) {
 					r_buffer_string_prime[cpt_char_prime] = r_buffer[0];
+					HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 1, 1);
 					if (cpt_char_prime < max_cpt_char_prime) {
 						cpt_char_prime++;
 					}
@@ -561,6 +579,7 @@ int main(void) {
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
 			} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i') && (r_buffer_string_prime[0] != '0') && (r_buffer[0] != ' '));
+			printf("\n\n\r");
 
 			int value_prime0 = r_buffer_string_prime[0] - '0';
 			int value_prime1 = r_buffer_string_prime[1] - '0';
@@ -578,7 +597,6 @@ int main(void) {
 						angle_term = prov_angle_term;
 						printf("Angle : %d degree(s)\n\n\r", angle_term);
 						etat = auto_mode;
-						//etat = instruct_kp;
 					}
 				}
 			}
@@ -595,7 +613,6 @@ int main(void) {
 						angle_term = prov_angle_term;
 						printf("Angle : %d degree(s)\n\n\r", angle_term);
 						etat = auto_mode;
-						//etat = instruct_kp;
 					}
 				}
 			}
@@ -632,13 +649,14 @@ int main(void) {
 			printf(msg_motor_ready);
 
 			// Ask for instructions for the coefficient kp
-			//printf("> Enter value for the coefficient kp then press [ ENTER ]\n\n\r");
-			printf("> kp coefficient looks like [0.****].\n\rPlease enter all the values at the [*] then press [ ENTER ]\n\n\r");
+			printf("> kp coefficient looks like [0.****].\n\rPlease enter all the values at the [*] then press [ ENTER ]\n\r");
 
+			printf("\n\r");
 			do {
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
 						== HAL_OK) {
 					r_buffer_string_kp[cpt_char_kp] = r_buffer[0];
+					HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 1, 1);
 					if (cpt_char_kp < max_cpt_char_kp) {
 						cpt_char_kp++;
 					}
@@ -646,6 +664,7 @@ int main(void) {
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
 			} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i') && (r_buffer[0] != ' '));
+			printf("\n\n\r");
 			//----------------------------------------------------------------------------------------------------------------------------
 			int value_kp0 = r_buffer_string_kp[0] - '0';
 			printf("Value kp0 = %d\n\r", value_kp0);
@@ -663,7 +682,6 @@ int main(void) {
 				} else{
 					kp =value_kp0 /10.;
 					printf("kp = %.4f \n\r", kp);
-					//etat = instruct_ki;
 					etat = auto_mode;
 				}
 			}
@@ -674,7 +692,6 @@ int main(void) {
 				} else{
 					kp = value_kp0 /10. + value_kp1 /100.;
 					printf("kp = %.4f \n\r", kp);
-					//etat = instruct_ki;
 					etat = auto_mode;
 				}
 			}
@@ -685,7 +702,6 @@ int main(void) {
 				} else{
 					kp = value_kp0 /10. + value_kp1 /100. + value_kp2 /1000.;
 					printf("kp = %.4f \n\r", kp);
-					//etat = instruct_ki;
 					etat = auto_mode;
 				}
 			}
@@ -696,7 +712,6 @@ int main(void) {
 				} else{
 					kp = value_kp0 /10. + value_kp1 /100. + value_kp2 /1000. + value_kp3 /10000.;
 					printf("kp = %.4f \n\r", kp);
-					//etat = instruct_ki;
 					etat = auto_mode;
 				}
 			}
@@ -765,13 +780,14 @@ int main(void) {
 		printf(msg_motor_ready);
 
 		// Ask for instructions for the coefficient ki
-		//printf("> Enter value for the coefficient ki then press [ ENTER ]\n\n\r");
-		printf("> ki coefficient looks like [0.****].\n\rPlease enter all the values at the [*] then press [ ENTER ]\n\n\r");
+		printf("> ki coefficient looks like [0.****].\n\rPlease enter all the values at the [*] then press [ ENTER ]\n\r");
 
+		printf("\n\r");
 		do {
 			if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
 					== HAL_OK) {
 				r_buffer_string_ki[cpt_char_ki] = r_buffer[0];
+				HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 1, 1);
 				if (cpt_char_ki < max_cpt_char_ki) {
 					cpt_char_ki++;
 				}
@@ -779,6 +795,7 @@ int main(void) {
 				__HAL_UART_CLEAR_OREFLAG(&huart2);
 			}
 		} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i') && (r_buffer[0] != ' '));
+		printf("\n\n\r");
 		//----------------------------------------------------------------------------------------------------------------------------
 		int value_ki0 = r_buffer_string_ki[0] - '0';
 		printf("Value ki0 = %d\n\r", value_ki0);
@@ -796,7 +813,6 @@ int main(void) {
 			} else{
 				ki =value_ki0 /10.;
 				printf("ki = %.4f \n\r", ki);
-				//etat = instruct_kd;
 				etat = auto_mode;
 			}
 		}
@@ -807,7 +823,6 @@ int main(void) {
 			} else{
 				ki = value_ki0 /10. + value_ki1 /100.;
 				printf("ki = %.4f \n\r", ki);
-				//etat = instruct_kd;
 				etat = auto_mode;
 			}
 		}
@@ -818,7 +833,6 @@ int main(void) {
 			} else{
 				ki = value_ki0 /10. + value_ki1 /100. + value_ki2 /1000.;
 				printf("ki = %.4f \n\r", ki);
-				//etat = instruct_kd;
 				etat = auto_mode;
 			}
 		}
@@ -829,7 +843,6 @@ int main(void) {
 			} else{
 				ki = value_ki0 /10. + value_ki1 /100. + value_ki2 /1000. + value_ki3 /10000.;
 				printf("ki = %.4f \n\r", ki);
-				//etat = instruct_kd;
 				etat = auto_mode;
 			}
 		}
@@ -866,13 +879,14 @@ int main(void) {
 		printf(msg_motor_ready);
 
 		// Ask for instructions for the coefficient kd
-		//printf("> Enter value for the coefficient kd then press [ ENTER ]\n\n\r");
-		printf("> kd coefficient looks like [0.****].\n\rPlease enter all the values at the [*] then press [ ENTER ]\n\n\r");
+		printf("> kd coefficient looks like [0.****].\n\rPlease enter all the values at the [*] then press [ ENTER ]\n\r");
 
+		printf("\n\r");
 		do {
 			if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 1)
 					== HAL_OK) {
 				r_buffer_string_kd[cpt_char_kd] = r_buffer[0];
+				HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 1, 1);
 				if (cpt_char_kd < max_cpt_char_kd) {
 					cpt_char_kd++;
 				}
@@ -880,6 +894,7 @@ int main(void) {
 				__HAL_UART_CLEAR_OREFLAG(&huart2);
 			}
 		} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i') && (r_buffer[0] != ' '));
+		printf("\n\n\r");
 		//----------------------------------------------------------------------------------------------------------------------------
 		int value_kd0 = r_buffer_string_kd[0] - '0';
 		printf("Value kd0 = %d\n\r", value_kd0);
@@ -963,14 +978,17 @@ int main(void) {
 			printf(msg_motor_ready);
 			printf("> Please enter [x] if you want to modify kp value\n\rPlease enter [y] if you want to modify ki value\n\rPlease enter [z] if you want to modify kd value\n\r");
 			printf("> Please enter [w] if you want to modify the angle value\n\r");
-			printf("> If you want to come back to default set of PID coefficients then press [d]\n\n\r");
+			printf("> If you want to come back to default set of PID coefficients then press [d]\n\r");
 			consigne = angle_term;
 
+			printf("\n\r");
 			do {
-				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10)
-						== HAL_OK) {
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 10) == HAL_OK) {
+					HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 1, 10);
+					printf("\n\n\r");
+				} else {
+					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
-				//pseudo asservisssement à 45deg
 				MPU6050_Read_All(&hi2c1, &mpu);
 				//MPU6050_Read_Accel(&hi2c1, &mpu);
 				//MPU6050_Read_Gyro(&hi2c1, &mpu);
@@ -1038,8 +1056,6 @@ int main(void) {
 			if (r_buffer[0] == 'z'){
 				etat = instruct_kd;
 			}
-
-			//erreur = 0;
 
 			break;
 
