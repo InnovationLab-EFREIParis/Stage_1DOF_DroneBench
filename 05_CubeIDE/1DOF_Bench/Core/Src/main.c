@@ -241,7 +241,13 @@ int main(void) {
 
 			//managing inputs (transitions)
 			do {
-				HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 2, 10);
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 10) == HAL_OK) {
+					printf("Entry: ");
+					HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 1, 10);
+					printf("\n\n\r");
+			    } else {
+					__HAL_UART_CLEAR_OREFLAG(&huart2);
+				}
 			} while ((r_buffer[0] != ' ') && (r_buffer[0] != '0') && (r_buffer[0] != 'i'));
 
 			switch (r_buffer[0]) {
@@ -253,6 +259,7 @@ int main(void) {
 				break;
 			case 'i':
 				etat = info_mode;
+				previous_etat = init_uc;
 				break;
 			default:
 				break;

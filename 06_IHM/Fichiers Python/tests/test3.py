@@ -6,7 +6,7 @@ Created on Mon Nov 21 17:20:31 2022
 """
 
 import serial
-import time
+#import time
 
 with serial.Serial() as SerialObj:
     SerialObj.port = 'COM3' 
@@ -17,7 +17,7 @@ with serial.Serial() as SerialObj:
     
 
     SerialObj.open()
-    
+    SerialObj.isOpen
     SerialObj.write(b'0')
     
     #ReceivedString = SerialObj.read_until('\r')
