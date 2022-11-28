@@ -60,6 +60,8 @@
 #include  <stdio.h>
 #include  <errno.h>
 #include  <sys/unistd.h>
+#include  <inttypes.h>
+#include  <stdint.h>
 
 /* USER CODE END Includes */
 
@@ -119,7 +121,8 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
-	uint16_t timer_val;
+	//uint16_t timer_val;
+	uint32_t timer_val2=UINT32_C(1234567890);
 
 	enum states etat, previous_etat;
 	etat = entrance;
@@ -201,6 +204,8 @@ int main(void)
   MX_TIM3_Init();
   MX_I2C1_Init();
   MX_TIM2_Init();
+  MX_TIM15_Init();
+  MX_TIM17_Init();
   /* USER CODE BEGIN 2 */
 //	while (MPU6050_Init(&hi2c1) == 1)
 //		;
@@ -214,6 +219,8 @@ int main(void)
 	//la fonction au dessus pose des soucis
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
 	//NOus mettons ici la valeur minimale pour emettre un signal vers notre ESC dans notre registre capture and compare register
+	HAL_TIM_Base_Start(&htim15);
+	HAL_TIM_Base_Start(&htim2);
 
 	//TIM3->CCR2 = valeur_min_moteur;
 
@@ -249,6 +256,20 @@ int main(void)
 		case init_uc:
 
 			printf("State: Init uc\n\r");
+
+			// -> démarrer le compteur
+			//HAL_Delay(1000);
+			//timer_val = __HAL_TIM_GET_COUNTER(&htim15);
+			//HAL_Delay(6);
+			//timer_val = __HAL_TIM_GET_COUNTER(&htim15) - timer_val ;
+			//printf("Time consumed : %d *10^-6 secondes\r\n", timer_val);
+
+			//HAL_Delay(1000);
+			//timer_val2 = __HAL_TIM_GET_COUNTER(&htim2);
+			//HAL_Delay(10);
+			//timer_val2 = __HAL_TIM_GET_COUNTER(&htim2) - timer_val2 ;
+			//HAL_TIM_Base_Stop(&htim2);
+			//printf("Time consumed : %" PRIu32 " *10^-7 secondes\r\n", timer_val2);
 
 			printf(msg_motor_ready);
 			printf(msg_info_mode);
@@ -983,61 +1004,37 @@ int main(void)
 			printf("> Please enter [x] if you want to modify kp value\n\rPlease enter [y] if you want to modify ki value\n\rPlease enter [z] if you want to modify kd value\n\r");
 			printf("> Please enter [w] if you want to modify the angle value\n\r");
 			printf("> If you want to come back to default set of PID coefficients then press [d]\n\r");
+
 			consigne = angle_term;
-
 			printf("\n\r");
+
+
+			// -----------------------------------------
+			HAL_Delay(1000);
+			timer_val2 = __HAL_TIM_GET_COUNTER(&htim2);
 			do {
-				// -> démarrer le compteur
-				HAL_TIM_Base_Init(&htim2); // Init counter
-				HAL_TIM_Base_Start(&htim2); //Start counter
-				timer_val = __HAL_TIM_GET_COUNTER(&htim2);
-
-
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 10) == HAL_OK) {
 					HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 1, 10);
 					printf("\n\n\r");
 				} else {
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
-				timer_val = __HAL_TIM_GET_COUNTER(&htim2) - timer_val ;
-				// -> cb de t ?
-				HAL_TIM_Base_Stop(&htim2);
-				//printf("Time consumed : %d micro secondes\r\n", timer_val);
 
-				// -> démarrer le compteur
-				//HAL_TIM_Base_Init(&htim2); // Init counter
-				//HAL_TIM_Base_Start(&htim2); //Start counter
-				//timer_val = __HAL_TIM_GET_COUNTER(&htim2);
 				MPU6050_Read_All(&hi2c1, &mpu);
-				//timer_val = __HAL_TIM_GET_COUNTER(&htim2) - timer_val ;
-				// -> cb de t ?
-				//HAL_TIM_Base_Stop(&htim2);
-
 				//MPU6050_Read_Accel(&hi2c1, &mpu);
 				//MPU6050_Read_Gyro(&hi2c1, &mpu);
 				//Kalman_getAngle(&KalmanX, roll, DataStruct->Gx, dt);
 
-				// -> démarrer le compteur
-				//HAL_TIM_Base_Init(&htim2); // Init counter
-				//HAL_TIM_Base_Start(&htim2); //Start counter
-				//timer_val = __HAL_TIM_GET_COUNTER(&htim2);
 				position_angulaire = mpu.KalmanAngleX + 90;
-				//timer_val = __HAL_TIM_GET_COUNTER(&htim2) - timer_val ;
-				// -> cb de t ?
-				//HAL_TIM_Base_Stop(&htim2);
-
-				//printf("Position %.2f commande %.2f \n\r", position_angulaire, commande);HAL_Delay(500);
 
 				// Asservissement
+
 				_erreur = erreur;
 				erreur = consigne - position_angulaire;
-
 				integre_erreur += erreur;
 				derive_erreur = erreur - _erreur;
+				commande = kp * (erreur) + ki * (integre_erreur) + kd * (derive_erreur);
 
-				commande = kp * (erreur) + ki * (integre_erreur)
-						+ kd * (derive_erreur);
-				//printf("pos %.1f err %.1f com %.1f\n\r", position_angulaire, erreur, commande); HAL_Delay(500);
 				if (commande > valeur_max_moteur) {
 					commande = valeur_max_moteur;
 				}
@@ -1045,17 +1042,13 @@ int main(void)
 					commande = valeur_min_moteur;
 				}
 
-				//HAL_TIM_Base_Init(&htim2); // Init counter
-				//HAL_TIM_Base_Start(&htim2); //Start counter
-				//timer_val = __HAL_TIM_GET_COUNTER(&htim2);
 				load_pwm(htim3, commande);
-				//timer_val = __HAL_TIM_GET_COUNTER(&htim2) - timer_val ;
-				// -> cb de t ?
-				//HAL_TIM_Base_Stop(&htim2);
-
 			} while (r_buffer[0] != '0' && (r_buffer[0] != ' ') && (r_buffer[0] != 'i') && (r_buffer[0] != 'd') && (r_buffer[0] != 'w') && (r_buffer[0] != 'x') && (r_buffer[0] != 'y') && (r_buffer[0] != 'z'));
+			timer_val2 = __HAL_TIM_GET_COUNTER(&htim2) - timer_val2 ;
+			//HAL_TIM_Base_Stop(&htim2);
+			printf("Time consumed : %" PRIu32 " *10^-7 seconds\r\n", timer_val2);
+			// -----------------------------------------
 
-			printf("Time consumed : %d micro secondes\r\n", timer_val);
 
 			if (r_buffer[0] == '0'){
 				landing_value = commande;
