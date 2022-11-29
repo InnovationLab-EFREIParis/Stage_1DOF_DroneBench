@@ -75,8 +75,8 @@ all: main-build
 main-build: 1DOF_Bench.elf secondary-outputs
 
 # Tool invocations
-1DOF_Bench.elf 1DOF_Bench.map: $(OBJS) $(USER_OBJS) C:\Users\panni\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\panni\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+1DOF_Bench.elf 1DOF_Bench.map: $(OBJS) $(USER_OBJS) C:\Users\Julien\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "1DOF_Bench.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Julien\Stage_1DOF_DroneBench\05_CubeIDE\1DOF_Bench\STM32L476RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="1DOF_Bench.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

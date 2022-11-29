@@ -56,12 +56,14 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "yann.h"
+#include "julien.h"
 #include "mpu6050.h"
 #include  <stdio.h>
 #include  <errno.h>
 #include  <sys/unistd.h>
 #include  <inttypes.h>
 #include  <stdint.h>
+
 
 /* USER CODE END Includes */
 
@@ -122,7 +124,7 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
 	//uint16_t timer_val;
-	uint32_t timer_val2=UINT32_C(1234567890);
+	//uint32_t timer_val2=UINT32_C(1234567890);
 
 	enum states etat, previous_etat;
 	etat = entrance;
@@ -198,9 +200,9 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_USART2_UART_Init();
-  MX_ADC1_Init();
   MX_DMA_Init();
+  MX_ADC1_Init();
+  MX_USART2_UART_Init();
   MX_TIM3_Init();
   MX_I2C1_Init();
   MX_TIM2_Init();
@@ -218,9 +220,9 @@ int main(void)
 	//sendWelcomeMsgRS232(&huart2);
 	//la fonction au dessus pose des soucis
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
-	//NOus mettons ici la valeur minimale pour emettre un signal vers notre ESC dans notre registre capture and compare register
-	HAL_TIM_Base_Start(&htim15);
-	HAL_TIM_Base_Start(&htim2);
+	//Nous mettons ici la valeur minimale pour émettre un signal vers notre ESC dans notre registre capture and compare register
+	//HAL_TIM_Base_Start(&htim15);
+	//HAL_TIM_Base_Start(&htim2);
 
 	//TIM3->CCR2 = valeur_min_moteur;
 
@@ -763,40 +765,6 @@ int main(void)
 			value_kp3 = 0;
 			cpt_char_kp = 0;
 
-			//----------------------------------------------------------------------------------------------------------------------------
-
-			// --------------------------------- TEST ------------------------------------------------------------------------------------
-			//int value_kp = 0;
-			//int kp_prov = 0;
-			//int test_err_kp = 0;
-			//int counter_comma_pos = 0;// -> condition par rapport à position 0 (car impossible d'avoir la virgule en 1ere entrée)
-			//int counter_comma_nb = 0;// -> nombre de virgules : si plus d'une -> erreur
-
-			//for (int i = 0; i = cpt_char_kp -2; ++i){
-				//value_kp = r_buffer_string_kp[i];
-				//if (value_kp == 44 || value_kp == 46){
-					//counter_comma_pos = i;
-					//counter_comma_nb++;
-				//} else{
-					//value_kp = r_buffer_string_kp[0] - '0';
-					//if (value_kp<0 || value_kp>9){
-						//test_err_kp++;
-						//printf(msg_error_char_nb);
-					//} else{
-						// kp_prov = kp_prov + ; A POURSUIVRE
-					//}
-				//}
-
-			//}
-
-			//int value_kp0 = r_buffer_string_kp[0] - '0';
-			//int value_kp1 = r_buffer_string_kp[1] - '0';
-
-
-
-
-			// à continuer ----------------------------------------------------------------------------------------------------------------
-
 			break;
 
 		case instruct_ki:
@@ -1008,15 +976,21 @@ int main(void)
 			consigne = angle_term;
 			printf("\n\r");
 
-
 			// -----------------------------------------
-			HAL_Delay(1000);
-			timer_val2 = __HAL_TIM_GET_COUNTER(&htim2);
+			//HAL_Delay(1000);
+			//timer_val2 = __HAL_TIM_GET_COUNTER(&htim2);
+			// ********* ligne à mesurer ***************
+			//timer_val2 = __HAL_TIM_GET_COUNTER(&htim2) - timer_val2 ;
+			//HAL_TIM_Base_Stop(&htim2);
+			//printf("Time consumed : %" PRIu32 " *10^-7 seconds\r\n", timer_val2);
+			// -----------------------------------------
+
 			do {
 				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 10) == HAL_OK) {
 					HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 1, 10);
 					printf("\n\n\r");
-				} else {
+				}
+				else {
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
 
@@ -1044,11 +1018,6 @@ int main(void)
 
 				load_pwm(htim3, commande);
 			} while (r_buffer[0] != '0' && (r_buffer[0] != ' ') && (r_buffer[0] != 'i') && (r_buffer[0] != 'd') && (r_buffer[0] != 'w') && (r_buffer[0] != 'x') && (r_buffer[0] != 'y') && (r_buffer[0] != 'z'));
-			timer_val2 = __HAL_TIM_GET_COUNTER(&htim2) - timer_val2 ;
-			//HAL_TIM_Base_Stop(&htim2);
-			printf("Time consumed : %" PRIu32 " *10^-7 seconds\r\n", timer_val2);
-			// -----------------------------------------
-
 
 			if (r_buffer[0] == '0'){
 				landing_value = commande;
@@ -1073,31 +1042,46 @@ int main(void)
 				kp = 0.001;
 				ki = 0.018;
 				kd = 0.1;
+				landing_value = commande;
+				commande = valeur_min_moteur;
+				landing_func(landing_value, htim3, valeur_min_moteur);
 				etat = auto_mode;
+				integre_erreur = 0;
+				erreur = 0;
 			}
 			if (r_buffer[0] == 'w'){
 				etat = instruct_angle;
 			}
 			if (r_buffer[0] == 'x'){
+				landing_value = commande;
+				commande = valeur_min_moteur;
+				landing_func(landing_value, htim3, valeur_min_moteur);
 				etat = instruct_kp;
+				integre_erreur = 0;
+				erreur = 0;
 			}
 			if (r_buffer[0] == 'y'){
+				landing_value = commande;
+				commande = valeur_min_moteur;
+				landing_func(landing_value, htim3, valeur_min_moteur);
 				etat = instruct_ki;
+				integre_erreur = 0;
+				erreur = 0;
 			}
 			if (r_buffer[0] == 'z'){
+				landing_value = commande;
+				commande = valeur_min_moteur;
+				landing_func(landing_value, htim3, valeur_min_moteur);
 				etat = instruct_kd;
+				integre_erreur = 0;
+				erreur = 0;
 			}
 
 			break;
 
 		case landing:
 
-			do{
-				landing_value--;
-				load_pwm(htim3, landing_value);
-				HAL_Delay(25);
-			} while(landing_value>valeur_min_moteur);
-
+			landing_func(landing_value, htim3, valeur_min_moteur);
 			etat = motor_ready;
 
 			break;
