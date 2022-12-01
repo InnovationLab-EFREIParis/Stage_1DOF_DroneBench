@@ -35,3 +35,10 @@ Les montants sont en profilé d'aluminium de 20 mm dont voici la [référence](http
 - [Carte microcontroller STM32 L476RG](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/stm)
 - [Moteur et ESC](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/moteur_esc)
 - [Gyroscope](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/gyro%20doc)
+
+# IHM
+## Installation
+- Bibliothèques à installer : tkinter et serial
+- Pour run le fichier main "Master" (Stage_1DOF_DroneBench\06_IHM\Fichiers Python\GUI), il est nécessaire d'avoir tous les fichiers du dossier GUI
+
+
