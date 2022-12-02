@@ -43,7 +43,7 @@ class ReadFromSerial(object):
                 
 import serial
 
-s = serial.Serial('COM3') # Check COM port in device manager
+s = serial.Serial('COM4') # Check COM port in device manager
 opClass = ReadFromSerial(s)
 while opClass.read_one_struct():
    pass
