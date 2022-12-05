@@ -9,12 +9,14 @@ class DataMaster():
     def __init__(self):
         self.sync = "\r"
         self.syncb = "0"
+        self.syncc = "3"
+        
+        self.msg = []
     
     def DecodeMsg(self):
         temp = self.RowMsg.decode('utf8')
         if len(temp) >0:
-            if "#" in temp:
-                self.msg = temp.split("#")
-                print(self.msg)
+            if "\r" in temp:
+                self.msg = temp.split("\r")
                 del self.msg[0]
                 print(self.msg)

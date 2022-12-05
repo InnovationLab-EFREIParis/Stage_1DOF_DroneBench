@@ -6,16 +6,25 @@ Created on Thu Dec  1 10:27:04 2022
 """
 
 from tkinter import Tk, LabelFrame, Label, StringVar
-from tkinter import OptionMenu, Button, messagebox, ttk
+from tkinter import OptionMenu, Button, messagebox
 import threading
 
-class RootGUI:
-    def __init__(self):
+class RootGUI():
+    def __init__(self, serial, data):
         self.root = Tk() 
         self.root.title("Serial Communication")
         self.root.geometry("360x120")
         self.root.config(bg="white")
-             
+        self.serial = serial
+        self.data = data
+        self.root.protocol("WM_DELETE_WINDOW", self.close_window)
+        
+    def close_window(self):
+        print("Closing the window and exit")
+        self.root.destroy()
+        self.serial.SerialClose(self)
+        self.serial.threading = False
+        
 class ComGUI():
     def __init__(self, root, serial, data):
         self.root = root
@@ -102,17 +111,20 @@ class ComGUI():
                 self.drop_bd["state"] = "disable"
                 InfoMsg = f"Successful UART connection using {self.clicked_com.get()} "
                 messagebox.showinfo("showinfo", InfoMsg)
-                self.conn = ConnGUI(self.root,self.serial, self.data)
+                self.conn = Auto_ModeGUI(self.root,self.serial,
+                                    self.data)
                 self.serial.t1 = threading.Thread(
-                    target= self.serial.SerialSync, args=(self,), daemon=True)
+                    target= self.serial.SerialSync, 
+                    args=(self,), daemon=True)
                 self.serial.t1.start()
+                
             else:
                 ErrorMsg = f"Failure to establish UART connection using {self.clicked_com.get()} "
                 messagebox.showerror("showerror", ErrorMsg)
         else:
             self.serial.threading = False
             self.serial.SerialClose()
-            self.conn.ConnGUIClose()
+            self.conn.Auto_ModeGUIClose()
             InfoMsg = f"UART connection using {self.clicked_com.get()} is now closed"
             messagebox.showwarning("showinfo", InfoMsg)
             self.btn_connect["text"] = "Connect"
@@ -120,41 +132,34 @@ class ComGUI():
             self.drop_com["state"] = "active"
             self.drop_bd["state"] = "active"
 
-class ConnGUI():
+class Auto_ModeGUI():
     def __init__(self,root,serial, data):
         self.root = root
         self.serial = serial
         self.data = data
         
         self.frame = LabelFrame(
-            root, text="Connection Manager", 
+            root, text="Mode Auto", 
             padx=5, pady=5, bg="white", width=60)
-        self.sync_label = Label(
-            self.frame, text="Sync Status: ",
-            bg="white", width=15, anchor="w")
-        self.sync_status = Label(
-            self.frame, text="..Sync..",
-            bg="white", fg="orange", width=5)
         
-        self.ConnGUIOpen()
+        self.Auto_ModeGUIOpen()
     
-    def ConnGUIOpen(self):
-        self.root.geometry('800x120')
+    def Auto_ModeGUIOpen(self):
+        self.root.geometry('600x120')
         self.frame.grid(
             row=0, column=4, rowspan=3, 
             columnspan=5, padx=5, pady=5)
-        self.sync_label.grid(column=1, row=1)
-        self.sync_status.grid(column=2, row=1)
         
-    def ConnGUIClose(self):
+    def Auto_ModeGUIClose(self):
         for widget in self.frame.winfo_children():
             widget.destroy()
         self.frame.destroy()
         self.root.geometry("360x120")    
+
         
 if __name__ == "__main__":
     RootGUI()
     ComGUI()
-    ConnGUI
+    Auto_ModeGUI
     
     
