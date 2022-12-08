@@ -16,7 +16,8 @@ class DataMaster():
         self.iptx = "x"
         self.ipty = "y"
         self.iptz = "z"
-        
+        self.iptw = "w"     
+
         self.msg = []
 
     def DecodeMsg(self):

@@ -30,9 +30,10 @@ class RootGUI():
         print("Closing the window and exit")
         self.root.destroy()
         # Landing Mode called in case the engine is still functionning (if we click on the red cross before the 'STOP!' button)
-        self.serial.SerialIpt0(self)
+        self.serial.SerialIpt(self, self.data.ipt0)
         # Closing Serial COM
         self.serial.SerialClose(self)
+        
 
 # Class to setup and create the communication manager with MCU
 class ComGui():
@@ -49,7 +50,7 @@ class ComGui():
         self.label_com = Label(
             self.frame, text="Available Port(s): ", bg="white", width=15, anchor="w")
         self.label_bd = Label(
-            self.frame, text="Baude Rate: ", bg="white", width=15, anchor="w")
+            self.frame, text="Baud Rate: ", bg="white", width=15, anchor="w")
 
         # Setup the Drop option menu
         self.baudOptionMenu()
@@ -161,18 +162,18 @@ class ComGui():
                 # Display the Auto Mode manager
                 self.auto_mode = AutoModeGUI(self.root, self.serial, self.data)
                 # Access to Init UC
-                self.serial.SerialIptENTER(self)
+                self.serial.SerialIpt(self, self.data.iptENTER)
                 # Access to Motor Ready
-                self.serial.SerialIpt0(self)
+                self.serial.SerialIpt(self, self.data.ipt0)
                 # Access to Auto Mode
-                self.serial.SerialIpt3(self)
+                self.serial.SerialIpt(self, self.data.ipt3)
             else:
                 ErrorMsg = f"Failure to estabish UART connection using {self.clicked_com.get()} "
                 messagebox.showerror("showerror", ErrorMsg)
         else:
             
             # Landing mode called in case the motor is still functionning (if you click on 'Disconnect' button before 'STOP!' button)
-            self.serial.SerialIpt0(self)
+            self.serial.SerialIpt(self, self.data.ipt0)
             # Closing the Serial COM
             self.serial.SerialClose(self)
             # Closing the Auto Mode Manager
@@ -199,27 +200,42 @@ class AutoModeGUI():
         # Build AutoModeGUI Static Elements
         self.frame = LabelFrame(root, text="Auto Mode",
                                 padx=5, pady=5, bg="white", width=60)
+        ## Angle consigne
         self.label_consigne = Label(
             self.frame, text="Angle (°): ", bg="white", width=15, anchor="w")
         self.consigne_box = Entry(self.frame, width=5)
+        ## Button to start the engine
         self.btn_go_consigne = Button(self.frame, text="GO!", width=10, 
                                       command=self.start_auto_mode)
-        self.btn_stop_landing = Button(self.frame, text="STOP!", width=10, 
+        ## Button to stop the engine by landing
+        self.btn_stop_landing = Button(self.frame, text="STOP!", width=10,
+                                       state="disabled",
                                       command=self.stop_auto_mode)
+        ## kp
         self.label_kp = Label(
-            self.frame, text="kp: 0,", bg="white", width=15, anchor="w")
+            self.frame, text="kp:\t\t0,", bg="white", width=15, anchor="w")
         self.kp_box = Entry(self.frame, width=5)
+        ### Default value
         self.kp_box.insert(0, "001")
+        
+        ## ki
         self.label_ki = Label(
-            self.frame, text="ki: 0,", bg="white", width=15, anchor="w")
+            self.frame, text="ki:\t\t0,", bg="white", width=15, anchor="w")
         self.ki_box = Entry(self.frame, width=5)
+        ### Default value
         self.ki_box.insert(0, "018")
+        
+        ## kd
         self.label_kd = Label(
-            self.frame, text="kd: 0,", bg="white", width=15, anchor="w")
+            self.frame, text="kd:\t\t0,", bg="white", width=15, anchor="w")
         self.kd_box = Entry(self.frame, width=5)
+        ### Default value
         self.kd_box.insert(0, "1")
-
-
+        
+        ## Button to come back to default set of kp/ki/kd values
+        self.btn_default_set_k = Button(self.frame, text="Default", width=10,
+                                      command=self.default_k_values)
+        
         # Optional Graphic parameters
         self.padx = 20
         self.pady = 15
@@ -250,13 +266,14 @@ class AutoModeGUI():
         self.label_kd.grid(row=4, column=1)
         self.kd_box.grid(row=4, column=2, 
                                padx=5, pady=5)
-        
+        self.btn_default_set_k.grid(row=3, column=3, 
+                               padx=5, pady=5)
 
     def AutoModeClose(self):
         '''
         Method to close the Auto Mode GUI and destroy the widgets
         '''
-        # Must destroy all the element so they are not kept in Memory
+        # Must destroy all the elements so that they are not kept in memory
         for widget in self.frame.winfo_children():
             widget.destroy()
         self.frame.destroy()
@@ -267,41 +284,68 @@ class AutoModeGUI():
         Method to start the engine after entering the angle value and
         clicking on the button "GO!"
         """
-        # Take the angle value in the "Entry" widget and we add the ENTER char
+        self.btn_stop_landing["state"] = "active"
+        self.btn_default_set_k["state"] = "disabled"
+        # Take the angle value in the "Entry" widget
         angle_value = self.consigne_box.get()
-        kp_value = self.kp_box.get()
-        print(kp_value)
-        ki_value = self.ki_box.get()
-        print(ki_value)
-        kd_value =self.kd_box.get()
-        print(kd_value)
-        
-        self.serial.ser.write(angle_value.encode())
-        self.serial.SerialIptENTER(self)   
-        
-        self.serial.SerialIptx(self)
-        self.serial.ser.write(kp_value.encode())
-        self.serial.SerialIptENTER(self)
-        
-        self.serial.SerialIpty(self)
-        self.serial.ser.write(ki_value.encode())
-        self.serial.SerialIptENTER(self)
-        
-        self.serial.SerialIptz(self) 
-        self.serial.ser.write(kd_value.encode())
-        self.serial.SerialIptENTER(self)
+        if self.kp_box["state"] == "disabled":
+            self.serial.SerialIpt(self, self.data.iptw)
+            self.serial.ser.write(angle_value.encode())
+            self.serial.SerialIpt(self, self.data.iptENTER) 
+        elif self.kp_box["state"] == "normal":
+            # Take the kp value in the "Entry" widget
+            kp_value = self.kp_box.get()
+            # Take the ki value in the "Entry" widget
+            ki_value = self.ki_box.get()
+            # Take the kd value in the "Entry" widget
+            kd_value =self.kd_box.get()
+            # Communicate the values of the Entry widgets
+            ## Angle
+            self.serial.ser.write(angle_value.encode())
+            self.serial.SerialIpt(self, self.data.iptENTER)
+            ## kp
+            self.serial.SerialIpt(self, self.data.iptx)
+            self.serial.ser.write(kp_value.encode())
+            self.serial.SerialIpt(self, self.data.iptENTER)
+            ## ki
+            self.serial.SerialIpt(self, self.data.ipty)
+            self.serial.ser.write(ki_value.encode())
+            self.serial.SerialIpt(self, self.data.iptENTER)
+            ## kd
+            self.serial.SerialIpt(self, self.data.iptz)
+            self.serial.ser.write(kd_value.encode())
+            self.serial.SerialIpt(self, self.data.iptENTER)
+            
+            self.kp_box["state"] = "disabled"
+            self.ki_box["state"] = "disabled"
+            self.kd_box["state"] = "disabled"
         
     def stop_auto_mode(self):
         """
         Method to stop the engine and landing after clicking on the button "STOP!"
         """
-        # '0': Landing & Return to Motor Ready
-        self.serial.SerialIpt0(self)
-        # '3': Go to Auto Mode (for now, we need this line too because we don't have a menu for modes, we directly go to Auto Mode)
-        self.serial.SerialIpt3(self)
+        # Landing & Return to Motor Ready
+        self.serial.SerialIpt(self, self.data.ipt0)
+        # Go to Auto Mode (for now, we need this line too because we don't have a menu for modes, we directly go to Auto Mode)
+        self.serial.SerialIpt(self, self.data.ipt3)
         
-
-
+        self.kp_box["state"] = "normal"
+        self.ki_box["state"] = "normal"
+        self.kd_box["state"] = "normal"
+        
+        self.btn_stop_landing["state"] = "disabled"
+        self.btn_default_set_k["state"] = "active"
+            
+    def default_k_values(self):
+        """
+        Method to reset the kp/i/d values to default ones
+        """
+        self.kp_box.delete(0,"end")
+        self.kp_box.insert(0, "001")
+        self.ki_box.delete(0,"end")
+        self.ki_box.insert(0, "018")
+        self.kd_box.delete(0,"end")
+        self.kd_box.insert(0, "1")
 
 if __name__ == "__main__":
     RootGUI()

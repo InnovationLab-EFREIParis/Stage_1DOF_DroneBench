@@ -60,72 +60,14 @@ class SerialCtrl():
             self.ser.close()
             self.ser.status = False
         except:
-            self.ser.status = False
+            self.ser.status = False 
     
-    def SerialIptENTER(self, gui):
+    def SerialIpt(self, gui, ipt):
         """"
-        Method used to communicate with the STM32 and send "\r" which is
-        the ENTER to access to Init_UC or the ENTER necessary for consigne
+        Method used to communicate with the STM32 by sending a char
         """
-        self.ser.write(gui.data.iptENTER.encode())
-        # Read the printf
-        for i in range(30):
-            gui.data.RowMsg = self.ser.readline()
-            print(f"RowMsg: {gui.data.RowMsg}")
-    
-    def SerialIpt0(self, gui):
-        """"
-        Method used to communicate with the STM32 and send "0" which is
-        the '0' to access to Motor Ready and/or landing 
-        """
-        self.ser.write(gui.data.ipt0.encode())
+        self.ser.write(ipt.encode())
         # Read the printf
         for i in range(30):
             gui.data.RowMsg = self.ser.readline()
             print(f"RowMsg: {gui.data.RowMsg}")        
-    
-    def SerialIpt3(self, gui):
-        """"
-        Method used to communicate with the STM32 and send "3" which is
-        the '3' to access to Auto Mode
-        """
-        self.ser.write(gui.data.ipt3.encode())
-        # Read the printf
-        for i in range(30):
-            gui.data.RowMsg = self.ser.readline()
-            print(f"RowMsg: {gui.data.RowMsg}")
-    
-    def SerialIptx(self, gui):
-        """
-        Method used to communicate with the STM32 and send "x" which is
-        the 'x' to access to instruct kp 
-        """
-        self.ser.write(gui.data.iptx.encode())
-        # Read the printf
-        for i in range(30):
-            gui.data.RowMsg = self.ser.readline()
-            print(f"RowMsg: {gui.data.RowMsg}")
-            
-    def SerialIpty(self, gui):
-        """
-        Method used to communicate with the STM32 and send "y" which is
-        the 'y' to access to instruct ki 
-        """
-        self.ser.write(gui.data.ipty.encode())
-        # Read the printf
-        for i in range(30):
-            gui.data.RowMsg = self.ser.readline()
-            print(f"RowMsg: {gui.data.RowMsg}")
-            
-    def SerialIptz(self, gui):
-        """
-        Method used to communicate with the STM32 and send "z" which is
-        the 'z' to access to instruct kd 
-        """
-        self.ser.write(gui.data.iptz.encode())
-        # Read the printf
-        for i in range(30):
-            gui.data.RowMsg = self.ser.readline()
-            print(f"RowMsg: {gui.data.RowMsg}")
-        
-        
