@@ -48,7 +48,8 @@ class ComGui():
         self.frame = LabelFrame(root, text="Com Manager",
                                 padx=5, pady=5, bg="white")
         self.label_com = Label(
-            self.frame, text="Available Port(s): ", bg="white", width=15, anchor="w")
+            self.frame, text="Available Port(s): ", bg="white", width=15, 
+            anchor="w")
         self.label_bd = Label(
             self.frame, text="Baud Rate: ", bg="white", width=15, anchor="w")
 
@@ -60,7 +61,8 @@ class ComGui():
         self.btn_refresh = Button(self.frame, text="Refresh",
                                   width=10,  command=self.com_refresh)
         self.btn_connect = Button(self.frame, text="Connect",
-                                  width=10, state="disabled",  command=self.serial_connect)
+                                  width=10, state="disabled",  
+                                  command=self.serial_connect)
 
         # Optional Graphic parameters
         self.padx = 20
@@ -96,7 +98,8 @@ class ComGui():
         self.clicked_com = StringVar()
         self.clicked_com.set(self.serial.com_list[0])
         self.drop_com = OptionMenu(
-            self.frame, self.clicked_com, *self.serial.com_list, command=self.connect_ctrl)
+            self.frame, self.clicked_com, *self.serial.com_list, 
+            command=self.connect_ctrl)
 
         self.drop_com.config(width=10)
 
@@ -148,7 +151,6 @@ class ComGui():
         if self.btn_connect["text"] in "Connect":
             # Start the serial communication
             self.serial.SerialOpen(self)
-
             # If connection established move on
             if self.serial.ser.status:
                 # Update the COM manager
@@ -158,26 +160,23 @@ class ComGui():
                 self.drop_com["state"] = "disable"
                 InfoMsg = f"Successful UART connection using {self.clicked_com.get()}"
                 messagebox.showinfo("showinfo", InfoMsg)
-
-                # Display the Auto Mode manager
-                self.auto_mode = AutoModeGUI(self.root, self.serial, self.data)
+                # Display the Motor Ready manager
+                self.motor_ready = MotorReadyGUI(self.root, self.serial, self.data)
                 # Access to Init UC
                 self.serial.SerialIpt(self, self.data.iptENTER)
                 # Access to Motor Ready
                 self.serial.SerialIpt(self, self.data.ipt0)
-                # Access to Auto Mode
-                self.serial.SerialIpt(self, self.data.ipt3)
             else:
                 ErrorMsg = f"Failure to estabish UART connection using {self.clicked_com.get()} "
                 messagebox.showerror("showerror", ErrorMsg)
         else:
             
-            # Landing mode called in case the motor is still functionning (if you click on 'Disconnect' button before 'STOP!' button)
+            # Landing mode called in case the motor is still functionning
             self.serial.SerialIpt(self, self.data.ipt0)
             # Closing the Serial COM
             self.serial.SerialClose(self)
-            # Closing the Auto Mode Manager
-            self.auto_mode.AutoModeClose()
+            # Closing the Motor Ready Manager
+            self.motor_ready.MotorReadyClose()
             self.data.ClearData()
 
             InfoMsg = f"UART connection using {self.clicked_com.get()} is now closed"
@@ -187,6 +186,111 @@ class ComGui():
             self.drop_baud["state"] = "active"
             self.drop_com["state"] = "active"
 
+class MotorReadyGUI():
+    def __init__(self, root, serial, data):
+        '''
+        Initialize main widgets for Motor Ready GUI
+        '''
+        self.root = root
+        self.serial = serial
+        self.data = data
+
+        # Build MotorReadyGUI Static Elements
+        self.frame = LabelFrame(root, text="Motor Ready",
+                                padx=5, pady=5, bg="white", width=60)
+        ## Button to start the Manual Mode Pot
+        self.btn_mode1 = Button(self.frame, text="Manual Mode Pot", width=15, 
+                                      state="disabled")
+        ## Button to start the Manual Mode Term
+        self.btn_mode2 = Button(self.frame, text="Manual Mode Term", width=15, 
+                                      state="disabled")
+        ## Button to start the Auto Mode
+        self.btn_mode3 = Button(self.frame, text="Auto Mode", width=15,
+                                command=self.ModeChoice3)
+
+        # Extending the GUI
+        self.MotorReadyOpen()
+        
+    def MotorReadyOpen(self):
+        '''
+        Method to display all the widgets 
+        '''
+        self.root.geometry("400x190")
+        self.frame.grid(row=4, column=0, rowspan=3, columnspan=5,
+                        padx=5, pady=5)
+        self.btn_mode1.grid(row=0, column=1, 
+                                  padx=5, pady=5)
+        self.btn_mode2.grid(row=0, column=2, 
+                                  padx=5, pady=5)
+        self.btn_mode3.grid(row=0, column=3, 
+                                  padx=5, pady=5)
+        
+    def MotorReadyClose(self):
+        '''
+        Method to close the Motor Ready GUI and destroy the widgets
+        '''
+        # Must destroy all the elements so that they are not kept in memory
+        for widget in self.frame.winfo_children():
+            widget.destroy()
+        self.frame.destroy()
+        self.root.geometry("360x120")
+        
+    def ModeChoice3(self):
+        """
+        Method to redirect on the chosen mode'
+        """
+        self.auto_mode = AutoModeGUI(self.root, self.serial, self.data)
+        self.serial.SerialIpt(self, self.data.ipt3)
+            
+class ModeTermGUI():
+    def __init__(self, root, serial, data):
+        '''
+        Initialize main widgets for Manual Mode Term GUI
+        '''
+        self.root = root
+        self.serial = serial
+        self.data = data
+
+        # Build AutoModeGUI Static Elements
+        self.frame = LabelFrame(root, text="Manual Mode Term",
+                                padx=5, pady=5, bg="white", width=60)
+        ## Angle consigne
+        self.label_consigne = Label(
+            self.frame, text="Gas (%): ", bg="white", width=15, anchor="w")
+        self.consigne_box = Entry(self.frame, width=5, validate="focus",
+                                  validatecommand=self.isGas)
+        ## Button to start the engine
+        self.btn_go_consigne = Button(self.frame, text="GO!", width=10, 
+                                      state="disabled",
+                                      command=self.start_auto_mode)
+        ## Button to stop the engine by landing
+        self.btn_stop_landing = Button(self.frame, text="STOP!", width=10,
+                                       state="disabled",
+                                      command=self.stop_auto_mode) 
+        
+    def isGas(self):
+        """
+        Method to check if the entry is a correct gas value
+        """
+        angle_entry = self.consigne_box.get()
+        
+        
+        if angle_entry.isdigit():
+            angle_entry = int(angle_entry)
+            if (angle_entry >= 0) and (angle_entry <= 10):
+                self.btn_go_consigne["state"] = "active"
+                return True
+            else:
+                self.btn_go_consigne["state"] = "disabled"
+                return False
+        elif angle_entry == "+" or angle_entry == "-":
+            self.btn_go_consigne["state"] = "active"
+            return True
+        else:
+            self.btn_go_consigne["state"] = "disabled"
+            return False
+
+               
 
 class AutoModeGUI():
     def __init__(self, root, serial, data):
@@ -203,9 +307,11 @@ class AutoModeGUI():
         ## Angle consigne
         self.label_consigne = Label(
             self.frame, text="Angle (°): ", bg="white", width=15, anchor="w")
-        self.consigne_box = Entry(self.frame, width=5)
+        self.consigne_box = Entry(self.frame, width=5, validate="focus",
+                                  validatecommand=self.isAngle)
         ## Button to start the engine
         self.btn_go_consigne = Button(self.frame, text="GO!", width=10, 
+                                      state="disabled",
                                       command=self.start_auto_mode)
         ## Button to stop the engine by landing
         self.btn_stop_landing = Button(self.frame, text="STOP!", width=10,
@@ -236,19 +342,34 @@ class AutoModeGUI():
         self.btn_default_set_k = Button(self.frame, text="Default", width=10,
                                       command=self.default_k_values)
         
-        # Optional Graphic parameters
-        self.padx = 20
-        self.pady = 15
-
         # Extending the GUI
         self.AutoModeOpen()
-
+        
+    def isAngle(self):
+        """
+        Method to check if the entry is a correct angle value
+        """
+        angle_entry = self.consigne_box.get()
+        
+        
+        if angle_entry.isdigit():
+            angle_entry = int(angle_entry)
+            if (angle_entry >= 0) and (angle_entry <= 90):
+                self.btn_go_consigne["state"] = "active"
+                return True
+            else:
+                self.btn_go_consigne["state"] = "disabled"
+                return False
+        else:
+            self.btn_go_consigne["state"] = "disabled"
+            return False
+        
     def AutoModeOpen(self):
         '''
         Method to display all the widgets 
         '''
-        self.root.geometry("730x180")
-        self.frame.grid(row=0, column=4, rowspan=3,
+        self.root.geometry("760x250")
+        self.frame.grid(row=1, column=5, rowspan=3,
                         columnspan=5, padx=5, pady=5)
         self.label_consigne.grid(row=1, column=1)
         self.consigne_box.grid(row=1, column=2, 
@@ -346,8 +467,10 @@ class AutoModeGUI():
         self.ki_box.insert(0, "018")
         self.kd_box.delete(0,"end")
         self.kd_box.insert(0, "1")
+        
 
 if __name__ == "__main__":
     RootGUI()
     ComGui()
+    MotorReadyGUI()
     AutoModeGUI()
