@@ -327,6 +327,16 @@ int main(void) {
 			etat = previous_etat;
 			break;
 
+			// State 'r': read position
+		case read_position:
+			MPU6050_Read_All(&hi2c1, &mpu);
+			position_angulaire = mpu.KalmanAngleX + 90;
+			printf("Position : %lf\n\r", position_angulaire);
+
+			//go to previous state
+			etat = previous_etat;
+			break;
+
 			// State '0' | ' ': motor is ready
 		case motor_ready:
 
@@ -474,7 +484,7 @@ int main(void) {
 			} while ((r_buffer[0] != '\r') && (r_buffer[0] != '+')
 					&& (r_buffer[0] != '-') && (r_buffer[0] != 'i')
 					&& (r_buffer_string[0] != '0')
-					&& (r_buffer_string[2] != '0') && (r_buffer[0] != ' '));
+					&& (r_buffer_string[2] != '0') && (r_buffer[0] != ' ')&& (r_buffer[0] != 'r'));
 			printf("\n\n\r");
 
 			int value0 = r_buffer_string[0] - '0';
@@ -535,7 +545,7 @@ int main(void) {
 
 			mapped_value = mapping_adc_value_percent(gaz_term_percent);
 
-			printf("Mapping adc value percent : %d\n\n\r", mapped_value);
+			//printf("Mapping adc value percent : %d\n\n\r", mapped_value);
 			load_pwm(htim3, mapped_value);
 			HAL_Delay(100);
 
@@ -549,6 +559,10 @@ int main(void) {
 
 			if (r_buffer[0] == 'i') {
 				etat = info_mode;
+				previous_etat = manual_mode_term;
+			}
+			if (r_buffer[0] == 'r') {
+				etat = read_position;
 				previous_etat = manual_mode_term;
 			}
 			if (r_buffer[0] == ' ') {

@@ -6,7 +6,8 @@ Created on Thu Dec  1 10:27:04 2022
 """
 
 from tkinter import Tk, LabelFrame, Label, Button, Entry
-from tkinter import messagebox, StringVar, OptionMenu
+from tkinter import messagebox, StringVar, OptionMenu, filedialog
+import time
 
 # Class to setup the main window
 class RootGUI():
@@ -203,10 +204,13 @@ class MotorReadyGUI():
                                       state="disabled")
         ## Button to start the Manual Mode Term
         self.btn_mode2 = Button(self.frame, text="Manual Mode Term", width=15, 
-                                      state="disabled")
+                                command=self.ModeChoice2)
         ## Button to start the Auto Mode
         self.btn_mode3 = Button(self.frame, text="Auto Mode", width=15,
                                 command=self.ModeChoice3)
+        ## Button to start the Calibration Mode
+        self.btn_mode4 = Button(self.frame, text="Mode Calibration", width=15,
+                                command=self.ModeChoice4)
 
         # Extending the GUI
         self.MotorReadyOpen()
@@ -215,7 +219,7 @@ class MotorReadyGUI():
         '''
         Method to display all the widgets 
         '''
-        self.root.geometry("400x190")
+        self.root.geometry("400x220")
         self.frame.grid(row=4, column=0, rowspan=3, columnspan=5,
                         padx=5, pady=5)
         self.btn_mode1.grid(row=0, column=1, 
@@ -224,7 +228,10 @@ class MotorReadyGUI():
                                   padx=5, pady=5)
         self.btn_mode3.grid(row=0, column=3, 
                                   padx=5, pady=5)
+        self.btn_mode4.grid(row=1, column=1, 
+                                  padx=5, pady=5)
         
+    
     def MotorReadyClose(self):
         '''
         Method to close the Motor Ready GUI and destroy the widgets
@@ -235,12 +242,26 @@ class MotorReadyGUI():
         self.frame.destroy()
         self.root.geometry("360x120")
         
+    def ModeChoice2(self):
+        """
+        Method to redirect on manual term mode
+        """
+        self.auto_mode = ModeTermGUI(self.root, self.serial, self.data)
+        self.serial.SerialIpt(self, self.data.ipt2)
+    
     def ModeChoice3(self):
         """
-        Method to redirect on the chosen mode'
+        Method to redirect on auto mode
         """
-        self.auto_mode = AutoModeGUI(self.root, self.serial, self.data)
+        self.manual_term_mode = AutoModeGUI(self.root, self.serial, self.data)
         self.serial.SerialIpt(self, self.data.ipt3)
+        
+    def ModeChoice4(self):
+        """
+        Method to redirect on calibration mode
+        """
+        self.manual_term_mode = CalibrationGUI(self.root, self.serial, self.data)
+        self.serial.SerialIpt(self, self.data.ipt2)    
             
 class ModeTermGUI():
     def __init__(self, root, serial, data):
@@ -262,11 +283,13 @@ class ModeTermGUI():
         ## Button to start the engine
         self.btn_go_consigne = Button(self.frame, text="GO!", width=10, 
                                       state="disabled",
-                                      command=self.start_auto_mode)
+                                      command=self.start_manual_term_mode)
         ## Button to stop the engine by landing
         self.btn_stop_landing = Button(self.frame, text="STOP!", width=10,
                                        state="disabled",
-                                      command=self.stop_auto_mode) 
+                                      command=self.stop_manual_term_mode) 
+        # Extending the GUI
+        self.ModeTermOpen()
         
     def isGas(self):
         """
@@ -290,8 +313,55 @@ class ModeTermGUI():
             self.btn_go_consigne["state"] = "disabled"
             return False
 
-               
-
+    def ModeTermOpen(self):
+        '''
+        Method to display all the widgets 
+        '''
+        self.root.geometry("760x280")
+        self.frame.grid(row=1, column=5, rowspan=3,
+                        columnspan=5, padx=5, pady=5)
+        self.label_consigne.grid(row=1, column=1)
+        self.consigne_box.grid(row=1, column=2, 
+                               padx=5, pady=5)
+        self.btn_go_consigne.grid(row=1, column=3, 
+                                  padx=5, pady=5)
+        self.btn_stop_landing.grid(row=1, column=4, 
+                                  padx=5, pady=5)
+        
+    def ModeTermClose(self):
+        '''
+        Method to close the Mode Term GUI and destroy the widgets
+        '''
+        # Must destroy all the elements so that they are not kept in memory
+        for widget in self.frame.winfo_children():
+            widget.destroy()
+        self.frame.destroy()
+        self.root.geometry("360x120")
+        
+    def start_manual_term_mode(self):
+        """
+        Method to start the engine after entering the gas value and
+        clicking on the button "GO!"
+        """
+        self.btn_stop_landing["state"] = "active"
+        # Take the gas value in the "Entry" widget
+        gas_value = self.consigne_box.get()
+        
+        self.serial.ser.write(gas_value.encode())
+        self.serial.SerialIpt(self, self.data.iptENTER) 
+        
+    def stop_manual_term_mode(self):
+        """
+        Method to stop the engine and landing after clicking on the button "STOP!"
+        """
+        # Landing & Return to Motor Ready
+        self.serial.SerialIpt(self, self.data.ipt0)
+        # Go to Manual Term Mode
+        self.serial.SerialIpt(self, self.data.ipt2)
+        
+        self.btn_stop_landing["state"] = "disabled"
+    
+    
 class AutoModeGUI():
     def __init__(self, root, serial, data):
         '''
@@ -368,7 +438,7 @@ class AutoModeGUI():
         '''
         Method to display all the widgets 
         '''
-        self.root.geometry("760x250")
+        self.root.geometry("760x280")
         self.frame.grid(row=1, column=5, rowspan=3,
                         columnspan=5, padx=5, pady=5)
         self.label_consigne.grid(row=1, column=1)
@@ -468,9 +538,76 @@ class AutoModeGUI():
         self.kd_box.delete(0,"end")
         self.kd_box.insert(0, "1")
         
+class CalibrationGUI():
+    def __init__(self, root, serial, data):
+        '''
+        Initialize main widgets for Calibration GUI
+        '''
+        self.root = root
+        self.serial = serial
+        self.data = data
+
+        # Build AutoModeGUI Static Elements
+        self.frame = LabelFrame(root, text="Calibration Mode",
+                                padx=5, pady=5, bg="white", width=60)
+        
+        self.btn_browse_file = Button(self.frame, text="Search File", width=10,
+                                      command=self.browseFile)
+        
+        # Extending the GUI
+        self.CalibrationModeOpen()
+        
+    def CalibrationModeOpen(self):
+        '''
+        Method to display all the widgets 
+        '''
+        self.root.geometry("760x280")
+        self.frame.grid(row=1, column=5, rowspan=3,
+                        columnspan=5, padx=5, pady=5)
+        self.btn_browse_file.grid(row=1, column=3, 
+                                  padx=5, pady=5)
+        
+    def browseFile(self):
+        """
+        Method to search for txt files
+        """
+        self.root.filename = filedialog.askopenfilename(
+            initialdir="/", 
+            title="File Explorer",
+            filetypes=(
+                ("Text files","*.txt"),
+                       ("All files","*.*")
+                       )
+            )
+        
+        myfile = open(self.root.filename, "rt")
+        content = myfile.readlines()
+        myfile.close()
+        start_value = int(content[0])
+        incr_value = int(content[1])
+        stop_value = int(content[2])
+        
+        print(start_value)
+        print(incr_value)
+        print(stop_value)
+        
+        i = start_value
+        while i < stop_value:
+            if i<10:
+                self.serial.ser.write(str(i).encode())
+            else:
+                self.serial.ser.write('+'.encode())
+            
+            self.serial.SerialIpt(self, self.data.iptENTER)
+            i+=incr_value
+            time.sleep(1)
+        self.serial.SerialIpt(self, self.data.ipt0)
+
 
 if __name__ == "__main__":
     RootGUI()
     ComGui()
     MotorReadyGUI()
+    ModeTermGUI()
     AutoModeGUI()
+    CalibrationGUI()

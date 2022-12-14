@@ -13,7 +13,7 @@
 #include<string.h>
 
 
-enum states{entrance, init_uc, landing, motor_ready,manual_mode_pot,manual_mode_term,auto_mode,info_mode,init_gyro,instruct_angle,instruct_kp,instruct_ki,instruct_kd};
+enum states{entrance, init_uc, read_position, landing, motor_ready,manual_mode_pot,manual_mode_term,auto_mode,info_mode,init_gyro,instruct_angle,instruct_kp,instruct_ki,instruct_kd};
 
 extern float firmware_version;
 extern int  valeur_min_moteur;
