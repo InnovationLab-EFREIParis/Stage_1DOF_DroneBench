@@ -70,4 +70,5 @@ class SerialCtrl():
         # Read the printf
         for i in range(30):
             gui.data.RowMsg = self.ser.readline()
-            print(f"RowMsg: {gui.data.RowMsg}")        
+            print(f"RowMsg: {gui.data.RowMsg}") 
+            gui.data.DecodeMsg()

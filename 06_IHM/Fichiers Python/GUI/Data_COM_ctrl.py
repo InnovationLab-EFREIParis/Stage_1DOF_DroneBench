@@ -17,9 +17,28 @@ class DataMaster():
         self.iptx = "x"
         self.ipty = "y"
         self.iptz = "z"
-        self.iptw = "w"     
+        self.iptw = "w"  
+        self.iptr = "r"
 
         self.msg = []
+        self.record = []
+
+    def DecodeMsg(self):
+        temp = self.RowMsg.decode('utf8')
+        if len(temp) > 0:
+            if "Position : " in temp:
+                self.msg = temp.split("Position : ")
+                # print(f"Before removing index :{self.msg}")
+                del self.msg[0]
+                # print(f"After removing index :{self.msg}")
+                self.record.append([(self.msg[0]).removesuffix('\n'),0])
+            if "Gaz Term : " in temp:
+                self.msg = temp.split("Gaz Term : ")
+                # print(f"Before removing index :{self.msg}")
+                del self.msg[0]
+                print(f"After removing index :{self.msg}")
+                self.record.append([0,(self.msg[0]).removesuffix('\n')])
+
 
     def ClearData(self):
         """
@@ -27,3 +46,4 @@ class DataMaster():
         """
         self.RowMsg = ""
         self.msg = []
+        self.record = []

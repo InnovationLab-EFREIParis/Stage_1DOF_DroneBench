@@ -8,6 +8,7 @@ Created on Thu Dec  1 10:27:04 2022
 from tkinter import Tk, LabelFrame, Label, Button, Entry
 from tkinter import messagebox, StringVar, OptionMenu, filedialog
 import time
+import csv
 
 # Class to setup the main window
 class RootGUI():
@@ -211,6 +212,9 @@ class MotorReadyGUI():
         ## Button to start the Calibration Mode
         self.btn_mode4 = Button(self.frame, text="Mode Calibration", width=15,
                                 command=self.ModeChoice4)
+        ## Button to start the Trip Mode
+        self.btn_mode5 = Button(self.frame, text="Trip Mode", width=15,
+                                command=self.ModeChoice5)
 
         # Extending the GUI
         self.MotorReadyOpen()
@@ -229,6 +233,8 @@ class MotorReadyGUI():
         self.btn_mode3.grid(row=0, column=3, 
                                   padx=5, pady=5)
         self.btn_mode4.grid(row=1, column=1, 
+                                  padx=5, pady=5)
+        self.btn_mode5.grid(row=1, column=2, 
                                   padx=5, pady=5)
         
     
@@ -261,7 +267,18 @@ class MotorReadyGUI():
         Method to redirect on calibration mode
         """
         self.manual_term_mode = CalibrationGUI(self.root, self.serial, self.data)
-        self.serial.SerialIpt(self, self.data.ipt2)    
+        # It permits to initialize the Gyro
+        self.serial.SerialIpt(self, self.data.ipt3)
+        self.serial.SerialIpt(self, self.data.ipt0)
+        # Use the manual term mode (gas values)
+        self.serial.SerialIpt(self, self.data.ipt2) 
+        
+    def ModeChoice5(self):
+        """
+        Method to redirect on trip mode
+        """
+        self.trip_mode = TripModeGUI(self.root, self.serial, self.data)
+        self.serial.SerialIpt(self, self.data.ipt3)
             
 class ModeTermGUI():
     def __init__(self, root, serial, data):
@@ -288,6 +305,7 @@ class ModeTermGUI():
         self.btn_stop_landing = Button(self.frame, text="STOP!", width=10,
                                        state="disabled",
                                       command=self.stop_manual_term_mode) 
+        
         # Extending the GUI
         self.ModeTermOpen()
         
@@ -326,6 +344,8 @@ class ModeTermGUI():
         self.btn_go_consigne.grid(row=1, column=3, 
                                   padx=5, pady=5)
         self.btn_stop_landing.grid(row=1, column=4, 
+                                  padx=5, pady=5)
+        self.btn_factice.grid(row=2, column=3, 
                                   padx=5, pady=5)
         
     def ModeTermClose(self):
@@ -551,7 +571,7 @@ class CalibrationGUI():
         self.frame = LabelFrame(root, text="Calibration Mode",
                                 padx=5, pady=5, bg="white", width=60)
         
-        self.btn_browse_file = Button(self.frame, text="Search File", width=10,
+        self.btn_browse_file = Button(self.frame, text="Select File", width=10,
                                       command=self.browseFile)
         
         # Extending the GUI
@@ -569,7 +589,7 @@ class CalibrationGUI():
         
     def browseFile(self):
         """
-        Method to search for txt files
+        Method to search for txt files and do the calibration protocol
         """
         self.root.filename = filedialog.askopenfilename(
             initialdir="/", 
@@ -583,26 +603,106 @@ class CalibrationGUI():
         myfile = open(self.root.filename, "rt")
         content = myfile.readlines()
         myfile.close()
+        # For now, the txt file only has 3 lines: 1st one has one number which is the first gas value (%) we want to try
+        # 2nd one has also a number which is the incrementation, for example if we say 1, we will do the sequence 1 -> 2 -> 3 etc
+        # Until the number of the 3rd line, which is the last gas value we want to try
         start_value = int(content[0])
         incr_value = int(content[1])
         stop_value = int(content[2])
         
-        print(start_value)
-        print(incr_value)
-        print(stop_value)
-        
         i = start_value
-        while i < stop_value:
+        while i <= stop_value:
             if i<10:
                 self.serial.ser.write(str(i).encode())
+                self.serial.SerialIpt(self, self.data.iptENTER)
             else:
                 self.serial.ser.write('+'.encode())
             
-            self.serial.SerialIpt(self, self.data.iptENTER)
+            for j in range(30):
+                self.data.RowMsg = self.serial.ser.readline()
+                print(f"RowMsg: {self.data.RowMsg}") 
+                self.data.DecodeMsg()
+                #self.serial.ser.readline()
+                
             i+=incr_value
-            time.sleep(1)
+            timeout = time.time() + 5
+            while time.time()<= timeout:
+                self.serial.SerialIpt(self, self.data.iptr)
         self.serial.SerialIpt(self, self.data.ipt0)
+        
+        fields = ['Position', 'Gas']
+        with open('GFG','w') as f:
+            write = csv.writer(f)
+            write.writerow(fields)
+            write.writerows(self.data.record)
+        
+        print(self.data.record)
+        
+class TripModeGUI():
+    def __init__(self, root, serial, data):
+        '''
+        Initialize main widgets for Trip Mode GUI
+        '''
+        self.root = root
+        self.serial = serial
+        self.data = data
 
+        # Build AutoModeGUI Static Elements
+        self.frame = LabelFrame(root, text="Trip Mode",
+                                padx=5, pady=5, bg="white", width=60)
+        
+        self.btn_browse_file = Button(self.frame, text="Select File", width=10,
+                                      command=self.browseFile)
+        
+        # Extending the GUI
+        self.TripModeOpen()
+        
+    def TripModeOpen(self):
+        '''
+        Method to display all the widgets 
+        '''
+        self.root.geometry("760x280")
+        self.frame.grid(row=1, column=5, rowspan=3,
+                        columnspan=5, padx=5, pady=5)
+        self.btn_browse_file.grid(row=1, column=3, 
+                                  padx=5, pady=5)
+        
+    def browseFile(self):
+        """
+        Method to search for txt files and do the "séquence de vol"/trip
+        """
+        self.root.filename = filedialog.askopenfilename(
+            initialdir="/", 
+            title="File Explorer",
+            filetypes=(
+                ("Text files","*.txt"),
+                       ("All files","*.*")
+                       )
+            )
+
+        myfile = open(self.root.filename, "rt")
+        content = myfile.readlines()
+        myfile.close()
+        print(content)
+        new_content=[]
+        # 1st loop change the raw elements in something we will use in the 2nd loop
+        # 'content' holds lists of 2 elements : 1st one is a str which corresponds to the angle value we will assign to Auto Mode
+        # 2nd element is an int, the time (in seconds) we want to wait on this position before next position
+        for i in range(len(content)):
+            new_content.append(content[i].split("\t"))
+            new_content[i][1].removesuffix('\n')
+            new_content[i][1] = int(new_content[i][1])
+        print(new_content)
+        
+        for i in range(len(new_content)):
+            self.serial.ser.write(new_content[i][0].encode())
+            self.serial.SerialIpt(self, self.data.iptENTER)
+            timeout = time.time() + new_content[i][1]
+            while time.time()<= timeout:
+                pass
+            self.serial.SerialIpt(self, self.data.iptw)
+        self.serial.SerialIpt(self, self.data.ipt0)
+        self.serial.SerialIpt(self, self.data.iptENTER)
 
 if __name__ == "__main__":
     RootGUI()
@@ -611,3 +711,4 @@ if __name__ == "__main__":
     ModeTermGUI()
     AutoModeGUI()
     CalibrationGUI()
+    TripModeGUI()
