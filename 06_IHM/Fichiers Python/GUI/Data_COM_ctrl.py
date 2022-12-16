@@ -19,6 +19,9 @@ class DataMaster():
         self.iptz = "z"
         self.iptw = "w"  
         self.iptr = "r"
+        self.iptMINUS = "-"
+        self.iptPLUS = "+"
+        
 
         self.msg = []
         self.record = []

@@ -252,21 +252,21 @@ class MotorReadyGUI():
         """
         Method to redirect on manual term mode
         """
-        self.auto_mode = ModeTermGUI(self.root, self.serial, self.data)
+        self.manual_term_mode = ModeTermGUI(self.root, self.serial, self.data)
         self.serial.SerialIpt(self, self.data.ipt2)
     
     def ModeChoice3(self):
         """
         Method to redirect on auto mode
         """
-        self.manual_term_mode = AutoModeGUI(self.root, self.serial, self.data)
+        self.auto_mode = AutoModeGUI(self.root, self.serial, self.data)
         self.serial.SerialIpt(self, self.data.ipt3)
         
     def ModeChoice4(self):
         """
         Method to redirect on calibration mode
         """
-        self.manual_term_mode = CalibrationGUI(self.root, self.serial, self.data)
+        self.calibration_mode = CalibrationGUI(self.root, self.serial, self.data)
         # It permits to initialize the Gyro
         self.serial.SerialIpt(self, self.data.ipt3)
         self.serial.SerialIpt(self, self.data.ipt0)
@@ -303,11 +303,43 @@ class ModeTermGUI():
                                       command=self.start_manual_term_mode)
         ## Button to stop the engine by landing
         self.btn_stop_landing = Button(self.frame, text="STOP!", width=10,
-                                       state="disabled",
                                       command=self.stop_manual_term_mode) 
+        self.btn_plus = Button(self.frame, text="+", width=5,
+                               command=self.plus_gas_value)
+        self.btn_minus = Button(self.frame, text="-", width=5,
+                               command=self.minus_gas_value)
         
         # Extending the GUI
         self.ModeTermOpen()
+
+    def ModeTermOpen(self):
+        '''
+        Method to display all the widgets 
+        '''
+        self.root.geometry("760x280")
+        self.frame.grid(row=1, column=5, rowspan=3,
+                        columnspan=5, padx=5, pady=5)
+        self.label_consigne.grid(row=1, column=1)
+        self.consigne_box.grid(row=1, column=2, 
+                               padx=5, pady=5)
+        self.btn_go_consigne.grid(row=1, column=3, 
+                                  padx=5, pady=5)
+        self.btn_stop_landing.grid(row=1, column=4, 
+                                  padx=5, pady=5)
+        self.btn_minus.grid(row=2, column=3, 
+                                  padx=5, pady=5)
+        self.btn_plus.grid(row=2, column=4, 
+                                  padx=5, pady=5)
+        
+    def ModeTermClose(self):
+        '''
+        Method to close the Mode Term GUI and destroy the widgets
+        '''
+        # Must destroy all the elements so that they are not kept in memory
+        for widget in self.frame.winfo_children():
+            widget.destroy()
+        self.frame.destroy()
+        self.root.geometry("360x120")
         
     def isGas(self):
         """
@@ -324,39 +356,9 @@ class ModeTermGUI():
             else:
                 self.btn_go_consigne["state"] = "disabled"
                 return False
-        elif angle_entry == "+" or angle_entry == "-":
-            self.btn_go_consigne["state"] = "active"
-            return True
         else:
             self.btn_go_consigne["state"] = "disabled"
             return False
-
-    def ModeTermOpen(self):
-        '''
-        Method to display all the widgets 
-        '''
-        self.root.geometry("760x280")
-        self.frame.grid(row=1, column=5, rowspan=3,
-                        columnspan=5, padx=5, pady=5)
-        self.label_consigne.grid(row=1, column=1)
-        self.consigne_box.grid(row=1, column=2, 
-                               padx=5, pady=5)
-        self.btn_go_consigne.grid(row=1, column=3, 
-                                  padx=5, pady=5)
-        self.btn_stop_landing.grid(row=1, column=4, 
-                                  padx=5, pady=5)
-        self.btn_factice.grid(row=2, column=3, 
-                                  padx=5, pady=5)
-        
-    def ModeTermClose(self):
-        '''
-        Method to close the Mode Term GUI and destroy the widgets
-        '''
-        # Must destroy all the elements so that they are not kept in memory
-        for widget in self.frame.winfo_children():
-            widget.destroy()
-        self.frame.destroy()
-        self.root.geometry("360x120")
         
     def start_manual_term_mode(self):
         """
@@ -369,6 +371,18 @@ class ModeTermGUI():
         
         self.serial.ser.write(gas_value.encode())
         self.serial.SerialIpt(self, self.data.iptENTER) 
+        
+    def minus_gas_value(self):
+        """
+        Method to remove 1% of gas value
+        """
+        self.serial.SerialIpt(self, self.data.iptMINUS)
+    
+    def plus_gas_value(self):
+        """
+        Method to add 1% of gas value
+        """
+        self.serial.SerialIpt(self, self.data.iptPLUS)
         
     def stop_manual_term_mode(self):
         """
@@ -435,25 +449,6 @@ class AutoModeGUI():
         # Extending the GUI
         self.AutoModeOpen()
         
-    def isAngle(self):
-        """
-        Method to check if the entry is a correct angle value
-        """
-        angle_entry = self.consigne_box.get()
-        
-        
-        if angle_entry.isdigit():
-            angle_entry = int(angle_entry)
-            if (angle_entry >= 0) and (angle_entry <= 90):
-                self.btn_go_consigne["state"] = "active"
-                return True
-            else:
-                self.btn_go_consigne["state"] = "disabled"
-                return False
-        else:
-            self.btn_go_consigne["state"] = "disabled"
-            return False
-        
     def AutoModeOpen(self):
         '''
         Method to display all the widgets 
@@ -489,6 +484,25 @@ class AutoModeGUI():
             widget.destroy()
         self.frame.destroy()
         self.root.geometry("360x120")
+        
+    def isAngle(self):
+        """
+        Method to check if the entry is a correct angle value
+        """
+        angle_entry = self.consigne_box.get()
+        
+        
+        if angle_entry.isdigit():
+            angle_entry = int(angle_entry)
+            if (angle_entry >= 0) and (angle_entry <= 90):
+                self.btn_go_consigne["state"] = "active"
+                return True
+            else:
+                self.btn_go_consigne["state"] = "disabled"
+                return False
+        else:
+            self.btn_go_consigne["state"] = "disabled"
+            return False
         
     def start_auto_mode(self):
         """
@@ -612,17 +626,12 @@ class CalibrationGUI():
         
         i = start_value
         while i <= stop_value:
-            if i<10:
+            if i<=10:
                 self.serial.ser.write(str(i).encode())
                 self.serial.SerialIpt(self, self.data.iptENTER)
             else:
-                self.serial.ser.write('+'.encode())
-            
-            for j in range(30):
-                self.data.RowMsg = self.serial.ser.readline()
-                print(f"RowMsg: {self.data.RowMsg}") 
-                self.data.DecodeMsg()
-                #self.serial.ser.readline()
+                for j in range(incr_value):
+                    self.serial.SerialIpt(self, self.data.iptPLUS)
                 
             i+=incr_value
             timeout = time.time() + 5
@@ -690,7 +699,6 @@ class TripModeGUI():
         # 2nd element is an int, the time (in seconds) we want to wait on this position before next position
         for i in range(len(content)):
             new_content.append(content[i].split("\t"))
-            new_content[i][1].removesuffix('\n')
             new_content[i][1] = int(new_content[i][1])
         print(new_content)
         
