@@ -25,6 +25,7 @@ class DataMaster():
 
         self.msg = []
         self.record = []
+        self.gas_value = 0
 
     def DecodeMsg(self):
         temp = self.RowMsg.decode('utf8')
@@ -34,13 +35,14 @@ class DataMaster():
                 # print(f"Before removing index :{self.msg}")
                 del self.msg[0]
                 # print(f"After removing index :{self.msg}")
-                self.record.append([(self.msg[0]).removesuffix('\n'),0])
+                self.record.append([self.gas_value,(self.msg[0]).removesuffix('\n')])
+                
             if "Gaz Term : " in temp:
                 self.msg = temp.split("Gaz Term : ")
                 # print(f"Before removing index :{self.msg}")
                 del self.msg[0]
-                print(f"After removing index :{self.msg}")
-                self.record.append([0,(self.msg[0]).removesuffix('\n')])
+                #print(f"After removing index :{self.msg}")
+                self.gas_value = (self.msg[0]).removesuffix('\n')
 
 
     def ClearData(self):

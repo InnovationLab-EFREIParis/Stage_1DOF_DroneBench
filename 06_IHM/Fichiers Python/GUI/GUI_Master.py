@@ -618,10 +618,10 @@ class CalibrationGUI():
         content = myfile.readlines()
         myfile.close()
         # For now, the txt file only has 3 lines: 1st one has one number which is the first gas value (%) we want to try
-        # 2nd one has also a number which is the incrementation, for example if we say 1, we will do the sequence 1 -> 2 -> 3 etc
-        # Until the number of the 3rd line, which is the last gas value we want to try
+        # 2nd one has also a number which is the time we want to wait before changing the gas value
+        # 3rd line is the last gas value we want to try
         start_value = int(content[0])
-        incr_value = int(content[1])
+        time_value = int(content[1])
         stop_value = int(content[2])
         
         i = start_value
@@ -630,18 +630,22 @@ class CalibrationGUI():
                 self.serial.ser.write(str(i).encode())
                 self.serial.SerialIpt(self, self.data.iptENTER)
             else:
-                for j in range(incr_value):
-                    self.serial.SerialIpt(self, self.data.iptPLUS)
+                self.serial.SerialIpt(self, self.data.iptPLUS)
                 
-            i+=incr_value
-            timeout = time.time() + 5
+            i+=1
+            
+            # You can choose or not to add a delay before recording the position values
+            time.sleep(10)
+            
+            timeout = time.time() + time_value
             while time.time()<= timeout:
                 self.serial.SerialIpt(self, self.data.iptr)
         self.serial.SerialIpt(self, self.data.ipt0)
         
-        fields = ['Position', 'Gas']
-        with open('GFG','w') as f:
-            write = csv.writer(f)
+        fields = ['Gas', 'Position']
+        with open('Calibration mode - Results','w',
+                  newline='') as f:
+            write = csv.writer(f, delimiter=',')
             write.writerow(fields)
             write.writerows(self.data.record)
         
