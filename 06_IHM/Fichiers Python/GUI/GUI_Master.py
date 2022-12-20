@@ -295,10 +295,12 @@ class ModeTermGUI():
         ## Angle consigne
         self.label_consigne = Label(
             self.frame, text="Gas (%): ", bg="white", width=15, anchor="w")
-        self.consigne_box = Entry(self.frame, width=5, validate="focus",
-                                  validatecommand=self.isGas)
+        self.consigne_box = Entry(self.frame, width=5)
+        ## Button to check if the value of consigne_box is correct
+        self.btn_check_is_correct = Button(self.frame, text="Check", width=10, 
+                                      command=self.isGas)
         ## Button to start the engine
-        self.btn_go_consigne = Button(self.frame, text="GO!", width=10, 
+        self.btn_go_consigne = Button(self.frame, text="GO!", width=10,
                                       state="disabled",
                                       command=self.start_manual_term_mode)
         ## Button to stop the engine by landing
@@ -308,7 +310,7 @@ class ModeTermGUI():
                                command=self.plus_gas_value)
         self.btn_minus = Button(self.frame, text="-", width=5,
                                command=self.minus_gas_value)
-        
+
         # Extending the GUI
         self.ModeTermOpen()
 
@@ -316,15 +318,17 @@ class ModeTermGUI():
         '''
         Method to display all the widgets 
         '''
-        self.root.geometry("760x280")
+        self.root.geometry("780x280")
         self.frame.grid(row=1, column=5, rowspan=3,
                         columnspan=5, padx=5, pady=5)
         self.label_consigne.grid(row=1, column=1)
         self.consigne_box.grid(row=1, column=2, 
                                padx=5, pady=5)
-        self.btn_go_consigne.grid(row=1, column=3, 
+        self.btn_check_is_correct.grid(row=1, column=3, 
                                   padx=5, pady=5)
-        self.btn_stop_landing.grid(row=1, column=4, 
+        self.btn_go_consigne.grid(row=1, column=4, 
+                                  padx=5, pady=5)
+        self.btn_stop_landing.grid(row=1, column=5, 
                                   padx=5, pady=5)
         self.btn_minus.grid(row=2, column=3, 
                                   padx=5, pady=5)
@@ -345,26 +349,29 @@ class ModeTermGUI():
         """
         Method to check if the entry is a correct gas value
         """
-        angle_entry = self.consigne_box.get()
-        
+        angle_entry = self.consigne_box.get()        
         
         if angle_entry.isdigit():
             angle_entry = int(angle_entry)
             if (angle_entry >= 0) and (angle_entry <= 10):
                 self.btn_go_consigne["state"] = "active"
-                return True
             else:
                 self.btn_go_consigne["state"] = "disabled"
-                return False
+                ErrorMsg = "Please enter a number between 1 and 10. If you want a number over 10, please use the '+' symbol."
+                messagebox.showerror("showerror", ErrorMsg)
+                self.consigne_box.delete(0,"end")
         else:
             self.btn_go_consigne["state"] = "disabled"
-            return False
+            ErrorMsg = "Please enter a positive integer."
+            messagebox.showerror("showerror", ErrorMsg)
+            self.consigne_box.delete(0,"end")
         
     def start_manual_term_mode(self):
         """
         Method to start the engine after entering the gas value and
         clicking on the button "GO!"
         """
+        self.btn_go_consigne["state"] = "disabled"
         self.btn_stop_landing["state"] = "active"
         # Take the gas value in the "Entry" widget
         gas_value = self.consigne_box.get()
@@ -376,12 +383,30 @@ class ModeTermGUI():
         """
         Method to remove 1% of gas value
         """
+        self.btn_go_consigne["state"] = "disabled"
+        
+        angle_entry = int(self.consigne_box.get())
+        angle_entry -=1
+        self.consigne_box.delete(0,"end")
+        self.consigne_box.insert(0, str(angle_entry))
+        
         self.serial.SerialIpt(self, self.data.iptMINUS)
+        
+        if angle_entry == 0:
+            self.btn_stop_landing["state"] = "disabled"
+        
     
     def plus_gas_value(self):
         """
         Method to add 1% of gas value
         """
+        self.btn_go_consigne["state"] = "disabled"
+        
+        angle_entry = int(self.consigne_box.get())
+        angle_entry +=1
+        self.consigne_box.delete(0,"end")
+        self.consigne_box.insert(0, str(angle_entry))
+        
         self.serial.SerialIpt(self, self.data.iptPLUS)
         
     def stop_manual_term_mode(self):
