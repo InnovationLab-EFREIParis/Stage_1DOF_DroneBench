@@ -617,29 +617,24 @@ class CalibrationGUI():
         myfile = open(self.root.filename, "rt")
         content = myfile.readlines()
         myfile.close()
-        # For now, the txt file only has 3 lines: 1st one has one number which is the first gas value (%) we want to try
-        # 2nd one has also a number which is the time we want to wait before changing the gas value
-        # 3rd line is the last gas value we want to try
-        start_value = int(content[0])
-        time_value = int(content[1])
-        stop_value = int(content[2])
+        new_content=[]
         
-        i = start_value
-        while i <= stop_value:
-            if i<=10:
-                self.serial.ser.write(str(i).encode())
-                self.serial.SerialIpt(self, self.data.iptENTER)
-            else:
-                self.serial.SerialIpt(self, self.data.iptPLUS)
-                
-            i+=9
-            
+        # We have lines with 2 values, separated by \t
+        # 1st one is the gas value
+        # 2nd one is the time we want to spend on this value
+        for i in range(len(content)):
+            new_content.append(content[i].split("\t"))
+            new_content[i][1] = int(new_content[i][1])
+        
+        for i in range(len(new_content)):
+            self.serial.ser.write(new_content[i][0].encode())
+            self.serial.SerialIpt(self, self.data.iptENTER)  
             # You can choose or not to add a delay before recording the position values
             #time.sleep(10)
-            
-            timeout = time.time() + time_value
+            timeout = time.time() + new_content[i][1]
             while time.time()<= timeout:
                 self.serial.SerialIpt(self, self.data.iptr)
+            
         self.serial.SerialIpt(self, self.data.ipt0)
         
         fields = ['Gas', 'Position']

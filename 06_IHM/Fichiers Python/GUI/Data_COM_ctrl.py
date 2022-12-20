@@ -37,8 +37,8 @@ class DataMaster():
                 # print(f"Before removing index :{self.msg}")
                 del self.msg[0]
                 # print(f"After removing index :{self.msg}")
-                #self.record.append([self.gas_value,(self.msg[0]).removesuffix('\n')])
-                self.record.append([self.gas_value,time.time(),(self.msg[0]).removesuffix('\n')])
+                self.record.append([self.gas_value,(self.msg[0]).removesuffix('\n')])
+                #self.record.append([self.gas_value,time.time(),(self.msg[0]).removesuffix('\n')])
                 
             if "Gaz Term : " in temp:
                 self.msg = temp.split("Gaz Term : ")
