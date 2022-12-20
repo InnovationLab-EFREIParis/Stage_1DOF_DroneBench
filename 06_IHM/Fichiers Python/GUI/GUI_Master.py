@@ -632,10 +632,10 @@ class CalibrationGUI():
             else:
                 self.serial.SerialIpt(self, self.data.iptPLUS)
                 
-            i+=1
+            i+=9
             
             # You can choose or not to add a delay before recording the position values
-            time.sleep(10)
+            #time.sleep(10)
             
             timeout = time.time() + time_value
             while time.time()<= timeout:

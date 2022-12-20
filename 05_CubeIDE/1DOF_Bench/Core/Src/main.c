@@ -547,7 +547,8 @@ int main(void) {
 
 			//printf("Mapping adc value percent : %d\n\n\r", mapped_value);
 			load_pwm(htim3, mapped_value);
-			HAL_Delay(100);
+			// HAL_Delay(100);
+			HAL_Delay(10);
 
 			if (gaz_term_percent == 0) {
 				landing_value = mapped_value;
