@@ -6,6 +6,7 @@ Created on Fri Dec  2 17:47:54 2022
 """
 import time
 
+# TAG_IHM_009
 # Class to setup the communication data
 class DataMaster():
     def __init__(self):
@@ -16,9 +17,9 @@ class DataMaster():
         self.iptENTER = "\r"
         self.ipt2 = "2"
         self.ipt3 = "3"
-        self.iptx = "x"
-        self.ipty = "y"
-        self.iptz = "z"
+        self.iptp = "p"
+        self.ipti = "i"
+        self.iptd = "d"
         self.iptw = "w"  
         self.iptr = "r"
         self.iptMINUS = "-"

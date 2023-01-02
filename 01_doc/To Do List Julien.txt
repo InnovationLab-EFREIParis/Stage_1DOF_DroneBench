@@ -31,4 +31,18 @@ Main.c
 	/ mode-ci
 
 + atterrissage à rajouter
-+ possibilité de définir des variables char pour réduire les lignes de codes avec les messages redondants (les "Press nb pour mode ...")      
++ possibilité de définir des variables char pour réduire les lignes de codes avec les messages redondants (les "Press nb pour mode ...") 
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+Lundi 02/01/23
+
+-> Faire des balises TAG_UC_num TAG_IHM_num dans le code (pour s'y retrouver via la doc) [FAIT] 
+-> Avec Read position, lire le temps via la STM32 et non python
+-> Dans le main.c : Accès landing puis Motor Ready avec ' ' uniquement (plus de '0')
+-> Commentaires pour les fichiers txt en lecture
+-> '?' à la place de 'i' pour info mode & p i d pour les coeff (et donc autre chose pour default)  [FAIT]
+-> changer le nom de création de fichiers (Date Année-Mois-Jour-Horaires-Calibration etc)    

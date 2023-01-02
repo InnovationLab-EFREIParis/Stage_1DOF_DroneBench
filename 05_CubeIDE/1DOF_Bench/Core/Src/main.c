@@ -169,7 +169,7 @@ int main(void) {
 	char r_buffer_string_kd[max_cpt_char_kd];
 
 	char msg_motor_ready[] = "> Press [ 0 ] or [ SPACE ] for Motor ready\n\r";
-	char msg_info_mode[] = "> Press [ i ] for Info mode\n\n\r";
+	char msg_info_mode[] = "> Press [ ? ] for Info mode\n\n\r";
 	char msg_error_char_nb[] =
 			"ERROR: Please enter only characters included in this list : 0 1 2 3 4 5 6 7 8 9\n\n\r";
 	char msg_error_value_sup[] = "ERROR: Value > 17\n\n\r";
@@ -238,7 +238,8 @@ int main(void) {
 
 		switch (etat) {
 
-		// First step: Press ENTER to start the experiment
+			// TAG_UC_001
+			// First step: Press ENTER to start the experiment
 		case entrance:
 
 			do {
@@ -249,6 +250,7 @@ int main(void) {
 
 			break;
 
+			// TAG_UC_002
 			// State init: initialization of micro-controller
 		case init_uc:
 
@@ -282,7 +284,7 @@ int main(void) {
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
 			} while ((r_buffer[0] != ' ') && (r_buffer[0] != '0')
-					&& (r_buffer[0] != 'i'));
+					&& (r_buffer[0] != '?'));
 			printf("\n\n\r");
 
 			switch (r_buffer[0]) {
@@ -292,7 +294,7 @@ int main(void) {
 			case '0':
 				etat = motor_ready;
 				break;
-			case 'i':
+			case '?':
 				etat = info_mode;
 				previous_etat = init_uc;
 				break;
@@ -302,7 +304,8 @@ int main(void) {
 
 			break;
 
-			// State 'i': board of informations
+			// TAG_UC_003
+			// State '?': board of informations
 		case info_mode:
 
 			printf("State: Info mode\n\n\r");
@@ -327,16 +330,18 @@ int main(void) {
 			etat = previous_etat;
 			break;
 
+			// TAG_UC_004
 			// State 'r': read position
 		case read_position:
 			MPU6050_Read_All(&hi2c1, &mpu);
 			position_angulaire = mpu.KalmanAngleX + 90;
-			printf("Position : %lf\n\r", position_angulaire);
+			printf("Position : %.2lf\n\r", position_angulaire);
 
 			//go to previous state
 			etat = previous_etat;
 			break;
 
+			// TAG_UC_005
 			// State '0' | ' ': motor is ready
 		case motor_ready:
 
@@ -359,12 +364,12 @@ int main(void) {
 				} else {
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
-			} while ((r_buffer[0] != 'i') && (r_buffer[0] != '1')
+			} while ((r_buffer[0] != '?') && (r_buffer[0] != '1')
 					&& (r_buffer[0] != '2') && (r_buffer[0] != '3'));
 			printf("\n\n\r");
 
 			switch (r_buffer[0]) {
-			case 'i':
+			case '?':
 				etat = info_mode;
 				previous_etat = motor_ready;
 				break;
@@ -383,6 +388,7 @@ int main(void) {
 
 			break;
 
+			// TAG_UC_006
 			// State '1': manual mode pot
 		case manual_mode_pot:
 
@@ -433,11 +439,11 @@ int main(void) {
 				load_pwm(htim3, mapped_value);
 
 			} while (r_buffer[0] != '0' && (r_buffer[0] != ' ')
-					&& (r_buffer[0] != 'i'));
+					&& (r_buffer[0] != '?'));
 			printf("\n\n\r");
 
 			switch (r_buffer[0]) {
-			case 'i':
+			case '?':
 				etat = info_mode;
 				previous_etat = manual_mode_pot;
 				break;
@@ -455,6 +461,7 @@ int main(void) {
 
 			break;
 
+			// TAG_UC_007
 			// State '2': manual mode term
 		case manual_mode_term:
 
@@ -483,7 +490,7 @@ int main(void) {
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
 			} while ((r_buffer[0] != '\r') && (r_buffer[0] != '+')
-					&& (r_buffer[0] != '-') && (r_buffer[0] != 'i')
+					&& (r_buffer[0] != '-') && (r_buffer[0] != '?')
 					&& (r_buffer_string[0] != '0')
 					&& (r_buffer_string[2] != '0') && (r_buffer[0] != ' ')&& (r_buffer[0] != 'r'));
 			printf("\n\n\r");
@@ -559,7 +566,7 @@ int main(void) {
 				etat = manual_mode_term;
 			}
 
-			if (r_buffer[0] == 'i') {
+			if (r_buffer[0] == '?') {
 				etat = info_mode;
 				previous_etat = manual_mode_term;
 			}
@@ -592,6 +599,7 @@ int main(void) {
 
 			// State '3': auto mode
 
+			// TAG_UC_008
 		case init_gyro:
 
 			printf("State: Auto mode\n\n\r");
@@ -611,6 +619,7 @@ int main(void) {
 			}
 			break;
 
+			// TAG_UC_009
 		case instruct_angle:
 
 			printf(msg_info_mode);
@@ -631,7 +640,7 @@ int main(void) {
 				} else {
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
-			} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i')
+			} while ((r_buffer[0] != '\r') && (r_buffer[0] != '?')
 					&& (r_buffer_string_prime[0] != '0') && (r_buffer[0] != ' '));
 			printf("\n\n\r");
 
@@ -672,7 +681,7 @@ int main(void) {
 				}
 			}
 
-			if (r_buffer[0] == 'i') {
+			if (r_buffer[0] == '?') {
 				etat = info_mode;
 				previous_etat = instruct_angle;
 			}
@@ -698,6 +707,7 @@ int main(void) {
 			cpt_char_prime = 0;
 			break;
 
+			// TAG_UC_010
 		case instruct_kp:
 
 			printf(msg_info_mode);
@@ -719,7 +729,7 @@ int main(void) {
 				} else {
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
-			} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i')
+			} while ((r_buffer[0] != '\r') && (r_buffer[0] != '?')
 					&& (r_buffer[0] != ' '));
 			printf("\n\n\r");
 
@@ -775,7 +785,7 @@ int main(void) {
 				}
 			}
 
-			if (r_buffer[0] == 'i') {
+			if (r_buffer[0] == '?') {
 				etat = info_mode;
 				previous_etat = instruct_kp;
 			}
@@ -792,6 +802,7 @@ int main(void) {
 
 			break;
 
+			// TAG_UC_011
 		case instruct_ki:
 
 			printf(msg_info_mode);
@@ -813,7 +824,7 @@ int main(void) {
 				} else {
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
-			} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i')
+			} while ((r_buffer[0] != '\r') && (r_buffer[0] != '?')
 					&& (r_buffer[0] != ' '));
 			printf("\n\n\r");
 
@@ -869,7 +880,7 @@ int main(void) {
 				}
 			}
 
-			if (r_buffer[0] == 'i') {
+			if (r_buffer[0] == '?') {
 				etat = info_mode;
 				previous_etat = instruct_ki;
 			}
@@ -886,6 +897,7 @@ int main(void) {
 
 			break;
 
+			// TAG_UC_012
 		case instruct_kd:
 
 			printf(msg_info_mode);
@@ -907,7 +919,7 @@ int main(void) {
 				} else {
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
-			} while ((r_buffer[0] != '\r') && (r_buffer[0] != 'i')
+			} while ((r_buffer[0] != '\r') && (r_buffer[0] != '?')
 					&& (r_buffer[0] != ' '));
 			printf("\n\n\r");
 
@@ -963,7 +975,7 @@ int main(void) {
 				}
 			}
 
-			if (r_buffer[0] == 'i') {
+			if (r_buffer[0] == '?') {
 				etat = info_mode;
 				previous_etat = instruct_kd;
 			}
@@ -980,16 +992,17 @@ int main(void) {
 
 			break;
 
+			// TAG_UC_013
 		case auto_mode:
 
 			printf(msg_info_mode);
 			printf(msg_motor_ready);
 			printf(
-					"> Please enter [x] if you want to modify kp value\n\rPlease enter [y] if you want to modify ki value\n\rPlease enter [z] if you want to modify kd value\n\r");
+					"> Please enter [p] if you want to modify kp value\n\rPlease enter [i] if you want to modify ki value\n\rPlease enter [d] if you want to modify kd value\n\r");
 			printf(
 					"> Please enter [w] if you want to modify the angle value\n\r");
 			printf(
-					"> If you want to come back to default set of PID coefficients then press [d]\n\r");
+					"> If you want to come back to default set of PID coefficients then press [!]\n\r");
 
 			consigne = angle_term;
 			printf("\n\r");
@@ -1037,9 +1050,9 @@ int main(void) {
 
 				load_pwm(htim3, commande);
 			} while (r_buffer[0] != '0' && (r_buffer[0] != ' ')
-					&& (r_buffer[0] != 'i') && (r_buffer[0] != 'd')
-					&& (r_buffer[0] != 'w') && (r_buffer[0] != 'x')
-					&& (r_buffer[0] != 'y') && (r_buffer[0] != 'z'));
+					&& (r_buffer[0] != '?') && (r_buffer[0] != '!')
+					&& (r_buffer[0] != 'w') && (r_buffer[0] != 'p')
+					&& (r_buffer[0] != 'i') && (r_buffer[0] != 'd'));
 
 			if (r_buffer[0] == '0') {
 				landing_value = commande;
@@ -1056,11 +1069,11 @@ int main(void) {
 				integre_erreur = 0;
 				erreur = 0;
 			}
-			if (r_buffer[0] == 'i') {
+			if (r_buffer[0] == '?') {
 				etat = info_mode;
 				previous_etat = auto_mode;
 			}
-			if (r_buffer[0] == 'd') {
+			if (r_buffer[0] == '!') {
 				kp = 0.001;
 				ki = 0.018;
 				kd = 0.1;
@@ -1074,7 +1087,7 @@ int main(void) {
 			if (r_buffer[0] == 'w') {
 				etat = instruct_angle;
 			}
-			if (r_buffer[0] == 'x') {
+			if (r_buffer[0] == 'p') {
 				landing_value = commande;
 				commande = valeur_min_moteur;
 				landing_func(landing_value, htim3, valeur_min_moteur);
@@ -1082,7 +1095,7 @@ int main(void) {
 				integre_erreur = 0;
 				erreur = 0;
 			}
-			if (r_buffer[0] == 'y') {
+			if (r_buffer[0] == 'i') {
 				landing_value = commande;
 				commande = valeur_min_moteur;
 				landing_func(landing_value, htim3, valeur_min_moteur);
@@ -1090,7 +1103,7 @@ int main(void) {
 				integre_erreur = 0;
 				erreur = 0;
 			}
-			if (r_buffer[0] == 'z') {
+			if (r_buffer[0] == 'd') {
 				landing_value = commande;
 				commande = valeur_min_moteur;
 				landing_func(landing_value, htim3, valeur_min_moteur);
@@ -1101,6 +1114,7 @@ int main(void) {
 
 			break;
 
+			// TAG_UC_014
 		case landing:
 
 			landing_func(landing_value, htim3, valeur_min_moteur);

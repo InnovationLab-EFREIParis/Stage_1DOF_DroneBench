@@ -1,0 +1,32 @@
+Répertoire des TAG
+
+TAG_UC : 
+
+TAG_UC_001	État 'entrance' de l'automate
+TAG_UC_002	État 'init_uc' de l'automate
+TAG_UC_003	État 'info_mode' de l'automate
+TAG_UC_004	État 'read_position' de l'automate
+TAG_UC_005	État 'motor_ready' de l'automate
+TAG_UC_006	État 'manual_mode_pot' de l'automate
+TAG_UC_007	État 'manual_mode_term' de l'automate
+TAG_UC_008	État 'init_gyro' de l'automate
+TAG_UC_009	État 'instruct_angle' de l'automate
+TAG_UC_010	État 'instruct_kp' de l'automate
+TAG_UC_011	État 'instruct_ki' de l'automate
+TAG_UC_012	État 'instruct_kd' de l'automate
+TAG_UC_013	État 'auto_mode' de l'automate
+TAG_UC_014	État 'landing' de l'automate
+
+
+TAG_IHM :
+
+TAG_IHM_001	Classe RootGUI, fenêtre principale accueillant l'interface de communication série	
+TAG_IHM_002	Classe ComGUI, interface de communication série 
+TAG_IHM_003	Classe MotorReadyGUI, extension de fenêtre accueillant le menu de modes/état 'Motor Ready'	
+TAG_IHM_004	Classe ModeTermGUI, extension de fenêtre accueillant l'état 'manual_mode_term'
+TAG_IHM_005	Classe AutoModeGUI, extension de fenêtre accueillant l'état 'auto_mode'
+TAG_IHM_006	Classe CalibrationGUI, extension de fenêtre accueillant le mode calibration
+TAG_IHM_007	Classe TripModeGUI, extension de fenêtre accueillant le mode séquence de vol
+TAG_IHM_008	Classe SerialCtrl, protocole de communication UART-MCU
+TAG_IHM_009	Classe DataMaster, contient les fonctions relatives aux données d'entrée et au protocole de décodage de messages
+

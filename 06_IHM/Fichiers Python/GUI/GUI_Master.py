@@ -10,6 +10,7 @@ from tkinter import messagebox, StringVar, OptionMenu, filedialog
 import time
 import csv
 
+# TAG_IHM_001
 # Class to setup the main window
 class RootGUI():
     def __init__(self, serial, data):
@@ -38,6 +39,7 @@ class RootGUI():
         self.serial.SerialClose(self)
         
 
+# TAG_IHM_002
 # Class to setup and create the communication manager with MCU
 class ComGui():
     def __init__(self, root, serial, data):
@@ -190,6 +192,7 @@ class ComGui():
             self.drop_baud["state"] = "active"
             self.drop_com["state"] = "active"
 
+# TAG_IHM_003
 class MotorReadyGUI():
     def __init__(self, root, serial, data):
         '''
@@ -276,7 +279,8 @@ class MotorReadyGUI():
         """
         self.trip_mode = TripModeGUI(self.root, self.serial, self.data)
         self.serial.SerialIpt(self, self.data.ipt3)
-            
+
+# TAG_IHM_004            
 class ModeTermGUI():
     def __init__(self, root, serial, data):
         '''
@@ -425,6 +429,7 @@ class ModeTermGUI():
         self.btn_stop_landing["state"] = "disabled"
         self.btn_minus["state"] = "disabled"
             
+# TAG_IHM_005   
 class AutoModeGUI():
     def __init__(self, root, serial, data):
         '''
@@ -576,15 +581,15 @@ class AutoModeGUI():
                     self.serial.SerialIpt(self, self.data.iptENTER)
                     self.label_screen["text"] = angle_value
                     ## kp
-                    self.serial.SerialIpt(self, self.data.iptx)
+                    self.serial.SerialIpt(self, self.data.iptp)
                     self.serial.ser.write(kp_value.encode())
                     self.serial.SerialIpt(self, self.data.iptENTER)
                     ## ki
-                    self.serial.SerialIpt(self, self.data.ipty)
+                    self.serial.SerialIpt(self, self.data.ipti)
                     self.serial.ser.write(ki_value.encode())
                     self.serial.SerialIpt(self, self.data.iptENTER)
                     ## kd
-                    self.serial.SerialIpt(self, self.data.iptz)
+                    self.serial.SerialIpt(self, self.data.iptd)
                     self.serial.ser.write(kd_value.encode())
                     self.serial.SerialIpt(self, self.data.iptENTER)
                     
@@ -625,6 +630,7 @@ class AutoModeGUI():
         self.kd_box.delete(0,"end")
         self.kd_box.insert(0, "1")
         
+# TAG_IHM_006
 class CalibrationGUI():
     def __init__(self, root, serial, data):
         '''
@@ -717,6 +723,7 @@ class CalibrationGUI():
         
         self.serial.SerialIpt(self, self.data.ipt2)
         
+# TAG_IHM_007
 class TripModeGUI():
     def __init__(self, root, serial, data):
         '''
