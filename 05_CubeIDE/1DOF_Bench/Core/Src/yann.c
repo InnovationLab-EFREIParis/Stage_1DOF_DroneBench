@@ -58,6 +58,11 @@ int mapping_adc_value_percent(int val) {
 	return (valeur_min_moteur + (val * (valeur_max_moteur) / 100));
 }
 
+int mapping_adc_value_permil(int val) {
+
+	return (valeur_min_moteur + (val * (valeur_max_moteur) / 1000));
+}
+
 void load_pwm(TIM_HandleTypeDef htimX, int val) {
 
 	htimX.Instance->CCR2 = val;

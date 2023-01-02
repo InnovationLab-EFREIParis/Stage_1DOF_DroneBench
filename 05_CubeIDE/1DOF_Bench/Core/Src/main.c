@@ -168,7 +168,7 @@ int main(void) {
 	int max_cpt_char_kd = 5; //7 avec virgule et chiffre des unités
 	char r_buffer_string_kd[max_cpt_char_kd];
 
-	char msg_motor_ready[] = "> Press [ 0 ] or [ SPACE ] for Motor ready\n\r";
+	char msg_motor_ready[] = "> Press [ SPACE ] for Motor ready\n\r";
 	char msg_info_mode[] = "> Press [ ? ] for Info mode\n\n\r";
 	char msg_error_char_nb[] =
 			"ERROR: Please enter only characters included in this list : 0 1 2 3 4 5 6 7 8 9\n\n\r";
@@ -283,15 +283,11 @@ int main(void) {
 				} else {
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
-			} while ((r_buffer[0] != ' ') && (r_buffer[0] != '0')
-					&& (r_buffer[0] != '?'));
+			} while ((r_buffer[0] != ' ') && (r_buffer[0] != '?'));
 			printf("\n\n\r");
 
 			switch (r_buffer[0]) {
 			case ' ':
-				etat = motor_ready;
-				break;
-			case '0':
 				etat = motor_ready;
 				break;
 			case '?':
@@ -342,7 +338,7 @@ int main(void) {
 			break;
 
 			// TAG_UC_005
-			// State '0' | ' ': motor is ready
+			// State ' ': motor is ready
 		case motor_ready:
 
 			printf("State: Motor ready\n\n\r");
@@ -410,11 +406,9 @@ int main(void) {
 				} else {
 					printf("Conversion NOK\n\r");
 				}
-
 				if (valeur_can <= 20) {
 					okay = 0;
 				}
-
 				HAL_Delay(1000);
 			}
 
@@ -438,18 +432,13 @@ int main(void) {
 				HAL_Delay(100);
 				load_pwm(htim3, mapped_value);
 
-			} while (r_buffer[0] != '0' && (r_buffer[0] != ' ')
-					&& (r_buffer[0] != '?'));
+			} while ((r_buffer[0] != ' ') && (r_buffer[0] != '?'));
 			printf("\n\n\r");
 
 			switch (r_buffer[0]) {
 			case '?':
 				etat = info_mode;
 				previous_etat = manual_mode_pot;
-				break;
-			case '0':
-				landing_value = mapped_value;
-				etat = landing;
 				break;
 			case ' ':
 				landing_value = mapped_value;
@@ -470,6 +459,7 @@ int main(void) {
 			// for now let's say 10 as value max -> 15% = dangerous
 			// edit: it can now go up to 10% but only by incrementing by 1% with '+'
 			// edit2: I need to increase it to 17% for the GUI
+			// edit3: with permil I need to increase it to 170 (/1000) which is equivalent to 17%
 			printf(
 					"> Enter value between 1 and 17 (power percentage) then press [ ENTER ]\n\r");
 			printf("> Press [ + ] or [ - ]\n\n\r");
@@ -491,8 +481,7 @@ int main(void) {
 				}
 			} while ((r_buffer[0] != '\r') && (r_buffer[0] != '+')
 					&& (r_buffer[0] != '-') && (r_buffer[0] != '?')
-					&& (r_buffer_string[0] != '0')
-					&& (r_buffer_string[2] != '0') && (r_buffer[0] != ' ')&& (r_buffer[0] != 'r'));
+					&& (r_buffer[0] != ' ')&& (r_buffer[0] != 'r'));
 			printf("\n\n\r");
 
 			int value0 = r_buffer_string[0] - '0';
@@ -504,7 +493,7 @@ int main(void) {
 					printf(msg_error_char_nb);
 				} else {
 					int prov_gaz_term_percent = value0;
-					if (prov_gaz_term_percent > 17) {
+					if (prov_gaz_term_percent > 170) {
 						printf(msg_error_value_sup);
 					} else {
 						gaz_term_percent = prov_gaz_term_percent;
@@ -518,7 +507,7 @@ int main(void) {
 					printf(msg_error_char_nb);
 				} else {
 					int prov_gaz_term_percent = value0 * 10 + value1;
-					if (prov_gaz_term_percent > 17) {
+					if (prov_gaz_term_percent > 170) {
 						printf(msg_error_value_sup);
 					} else {
 						gaz_term_percent = prov_gaz_term_percent;
@@ -533,7 +522,7 @@ int main(void) {
 				} else {
 					int prov_gaz_term_percent = value0 * 100 + value1 * 10
 							+ value2;
-					if (prov_gaz_term_percent > 17) {
+					if (prov_gaz_term_percent > 170) {
 						printf(msg_error_value_sup);
 					} else {
 						gaz_term_percent = prov_gaz_term_percent;
@@ -551,20 +540,15 @@ int main(void) {
 				printf("Gaz Term : %d\n\r", gaz_term_percent);
 			}
 
-			mapped_value = mapping_adc_value_percent(gaz_term_percent);
+			//mapped_value = mapping_adc_value_percent(gaz_term_percent);
+			mapped_value = mapping_adc_value_permil(gaz_term_percent);
 
 			//printf("Mapping adc value percent : %d\n\n\r", mapped_value);
 			load_pwm(htim3, mapped_value);
 			// HAL_Delay(100);
 			HAL_Delay(10);
 
-			if (gaz_term_percent == 0) {
-				landing_value = mapped_value;
-				mapped_value = valeur_min_moteur;
-				etat = landing;
-			} else {
-				etat = manual_mode_term;
-			}
+			etat = manual_mode_term;
 
 			if (r_buffer[0] == '?') {
 				etat = info_mode;
@@ -575,12 +559,6 @@ int main(void) {
 				previous_etat = manual_mode_term;
 			}
 			if (r_buffer[0] == ' ') {
-				landing_value = mapped_value;
-				mapped_value = valeur_min_moteur;
-				etat = landing;
-				gaz_term_percent = 0;
-			}
-			if (r_buffer_string[0] == '0') {
 				landing_value = mapped_value;
 				mapped_value = valeur_min_moteur;
 				etat = landing;
@@ -626,7 +604,7 @@ int main(void) {
 			printf(msg_motor_ready);
 			// Ask for instructions for the angle of the arm
 			printf(
-					"> Enter value between 1 and 90 degrees (angle of the arm) then press [ ENTER ]\n\r");
+					"> Enter value between 0 and 90 degrees (angle of the arm) then press [ ENTER ]\n\r");
 
 			printf("\n\r");
 			do {
@@ -641,7 +619,7 @@ int main(void) {
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
 			} while ((r_buffer[0] != '\r') && (r_buffer[0] != '?')
-					&& (r_buffer_string_prime[0] != '0') && (r_buffer[0] != ' '));
+					&& (r_buffer[0] != ' '));
 			printf("\n\n\r");
 
 			int value_prime0 = r_buffer_string_prime[0] - '0';
@@ -686,13 +664,6 @@ int main(void) {
 				previous_etat = instruct_angle;
 			}
 			if (r_buffer[0] == ' ') {
-				landing_value = commande;
-				commande = valeur_min_moteur;
-				etat = landing;
-				integre_erreur = 0;
-				erreur = 0;
-			}
-			if (r_buffer_string_prime[0] == '0') {
 				landing_value = commande;
 				commande = valeur_min_moteur;
 				etat = landing;
@@ -1049,18 +1020,10 @@ int main(void) {
 				}
 
 				load_pwm(htim3, commande);
-			} while (r_buffer[0] != '0' && (r_buffer[0] != ' ')
+			} while ((r_buffer[0] != ' ')
 					&& (r_buffer[0] != '?') && (r_buffer[0] != '!')
 					&& (r_buffer[0] != 'w') && (r_buffer[0] != 'p')
 					&& (r_buffer[0] != 'i') && (r_buffer[0] != 'd'));
-
-			if (r_buffer[0] == '0') {
-				landing_value = commande;
-				commande = valeur_min_moteur;
-				etat = landing;
-				integre_erreur = 0;
-				erreur = 0;
-			}
 
 			if (r_buffer[0] == ' ') {
 				landing_value = commande;

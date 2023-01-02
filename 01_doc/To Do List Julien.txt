@@ -45,4 +45,6 @@ Lundi 02/01/23
 -> Dans le main.c : Accès landing puis Motor Ready avec ' ' uniquement (plus de '0')
 -> Commentaires pour les fichiers txt en lecture
 -> '?' à la place de 'i' pour info mode & p i d pour les coeff (et donc autre chose pour default)  [FAIT]
--> changer le nom de création de fichiers (Date Année-Mois-Jour-Horaires-Calibration etc)    
+-> changer le nom de création de fichiers (Date Année-Mois-Jour-Horaires-Calibration etc) [FAIT]  
+-> tester calibration mode en modifiant le main.c pour avoir un "pas de %" non en /100 mais /1000  
+-> Rajouter graphique dans l'IHM à la fin de Calibration Mode 

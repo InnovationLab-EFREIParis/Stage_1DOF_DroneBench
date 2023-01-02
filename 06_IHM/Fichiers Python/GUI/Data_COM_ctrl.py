@@ -13,7 +13,7 @@ class DataMaster():
         """
         Initializing the main variables
         """
-        self.ipt0 = "0"
+        self.iptSPACE = " "
         self.iptENTER = "\r"
         self.ipt2 = "2"
         self.ipt3 = "3"

@@ -29,6 +29,7 @@ void asservissement(float kp, float ki, float kd, int consigne, double position,
 
 int mapping_adc_value(int val);
 int mapping_adc_value_percent(int val);
+int mapping_adc_value_permil(int val);
 int concat(char *tableau);
 
 
