@@ -1,44 +1,47 @@
-# Bras ‡ un degrÈ de libertÈ (1DOF Drone Bench)
-Dispositif pÈdagogique permettant de faire dÈcouvrir quelques principes et composants que l'on peut retrouver sur un drone mais de faÁon largement simplifiÈ et en toute sÈcuritÈ. Le prinicpe est d'asservir un bras mobile (qui par dÈfaut est ‡ la verticale) ‡ un angle voulue en pilotant le moteur et l'hÈlice fixÈ ‡ l'extremitÈ de ce bras. La mesure de l'angle se fait par un gyroscope. Le tout est controlÈ par un microncontroller reliÈ ‡ un PC.
+# Bras √† un degr√© de libert√© (1DOF Drone Bench)
+Dispositif p√©dagogique permettant de faire d√©couvrir quelques principes et composants que l'on peut retrouver sur un drone mais de fa√ßon largement simplifi√©e et en toute s√©curit√©. Le principe est d'asservir un bras mobile (qui par d√©faut est √† la verticale) √† un angle voulu en pilotant le moteur et l'h√©lice fix√©s √† l'extremit√© de ce bras. La mesure de l'angle se fait par un gyroscope. Le tout est control√© par un microcontr√¥leur reli√© √† un PC.
 
 ![This is an image](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/blob/main/01_doc/img/plan.png)
 
-[VidÈo](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/blob/main/01_doc/img/video_20220902_181232.mp4)
+[Vid√©o](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/blob/main/01_doc/img/video_20220902_181232.mp4)
 
 
 # Utilisation
 ## Alimentation
-La carte microcontroller est alimentÈe par USB. Il faut donc la connecter ‡ un PC, ce qui permet egalement d'Èchanger des donnÈes.
-La partie moteur est alimentÈe par les cables bannanes. RÈgler l'alimentation sur 24V avec une limitation de courant ‡ 5A.
+La carte microcontr√¥leur est aliment√©e par USB. Il faut donc la connecter √† un PC, ce qui permet egalement d'√©changer des donn√©es.
+La partie moteur est aliment√©e par les c√¢bles bananes. R√©gler l'alimentation sur 24V avec une limitation de courant √† 5A.
 ## Commandes
-Ouvrir ensuite un [terminal sÈrie](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/04_UART_Term/UART_Terminal_1.2.2) puis Ètablir la communication ‡ 115200 bd/s.
-Le microcontroller se comporte comme un automate. En envoyant des commandes via la liaison sÈrie, il va entrer dans diffÈrent Ètats, que l'on va appeler mode.
-Le mode dans lequel se trouve l'automate s'affiche ‡ l'Ècran.
-Par dÈfaut, la carte sera en "Init", taper 2 pour entrer dans le mode "Info".
-Taper ensuite 1 pour initialiser le moteur. A cette Ètape, la sÈrie de "bip" Èmis par le moteur doit s'arreter. C'est signe qu'il est prÍt.
+Ouvrir ensuite un [terminal s√©rie](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/04_UART_Term/UART_Terminal_1.2.2) puis √©tablir la communication √† 115200 bits/s.
+Le microcontr√¥leur se comporte comme un automate. En envoyant des commandes via la liaison s√©rie, il va entrer dans diff√©rent √©tats, dont certains seront propres aux diff√©rents modes de fonctionnement du dispositif.
+Le mode dans lequel se trouve l'automate s'affiche √† l'√©cran.
+Par d√©faut, la carte est dans l'√©tat "Entrance" : tapez sur la touche Entr√©e et suivez les indications √† l'√©cran.
+Une fois l'√©tat "Init UC" pass√©, la s√©rie de "bip" √©mis par le moteur doit s'arr√™ter. Le moteur est pr√™t.
+L'√©tat suivant "Motor Ready" fait office de menu de s√©lection de mode.
 ## Mode automatique
-Taper 4 pour entrer dans le mode automatique. Les gaz sont calculÈs pour que le bras se stabilise ‡ un angle donnÈ.
-Taper 6 pour quitter et revenir au mode "Moteur prÍt"
-## Mode manuel
-Taper 3 pour commander les gaz avec le potentionmËtre.
-Taper 6 pour quitter et revenir au mode "Moteur prÍt"
+Le mode "Auto Mode" vous permettra de renseigner une consigne de position angulaire, ainsi que des coefficients PID. Il s'agit du seul mode asservis.
+## Modes manuels
+Le mode "Manual Mode Pot" vous permettra de modifier manuellement les gazs du moteur via le potentiom√®tre.
+Le mode "Manual Mode Term" vous permettra de jouer sur une consigne en % de gazs du moteur.
 
 # Conception
-## MÈcanique
-Une bonne partie des piËces ont ÈtÈ conÁues avec Solidworks et fabriquÈes en impression 3D par dÈpot de filament.
-Les modËles 3D sont accessibles [ici](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/03_mdl)
+## M√©canique
+Une bonne partie des pi√®ces ont √©t√© con√ßues avec Solidworks et fabriqu√©es en impression 3D par d√©pot de filament.
+Les mod√®les 3D sont accessibles [ici](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/03_mdl)
 
-Les montants sont en profilÈ d'aluminium de 20 mm dont voici la [rÈfÈrence](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/rs)
+Les montants sont en profil√© d'aluminium de 20 mm dont voici la [r√©f√©rence](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/rs)
 
 
 ## Electronique
-- [Carte microcontroller STM32 L476RG](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/stm)
+- [Carte microcontr√¥leur STM32 L476RG](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/stm)
 - [Moteur et ESC](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/moteur_esc)
-- [Gyroscope](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/gyro%20doc)
+- [Centrale inertielle](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/gyro%20doc)
 
 # IHM
 ## Installation
-- BibliothËques ‡ installer : tkinter et serial
-- Pour run le fichier main "Master" (Stage_1DOF_DroneBench\06_IHM\Fichiers Python\GUI), il est nÈcessaire d'avoir tous les fichiers du dossier GUI
-
-
+- Biblioth√®ques √† installer : tkinter et serial
+- Seul le fichier ["Master"](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/06_IHM/Fichiers Python/GUI/Master.py) doit √™tre ex√©cut√©, mais il est n√©cessaire d'avoir tous les fichiers du dossier [GUI](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/06_IHM/Fichiers Python/GUI).
+## Utilisation
+L'IHM est r√©alis√©e en Python via la biblioth√®que Tkinter. Une fois le fichier "Master" ex√©cut√©, il vous sera alors demand√© de s√©lectionner le port COM et le Baud rate (similaire √† l'interaction avec le terminal UART).
+Ensuite, vous aurez alors le choix entre 4 modes : les modes "Manual Mode Term" et "Auto Mode" (accessibles √©galement avec le terminal), ainsi que les modes "Calibration" et "Trip Mode" (s√©quence de vol).
+Le mode "Calibration" n√©cessite de s√©lectionner un fichier .txt comportant les lignes d'instructions suivantes : valeur de % de gazs moteur (tabulation) temps d'attente pass√© sur cette mesure avant l'acc√®s √† la ligne suivante. Il est tout √† fait possible de modifier le fichier .txt (seulement, veuillez noter qu'une valeur de gazs au-del√† de 17% entra√Ænera le bras dans une position sup√©rieure √† 90¬∞, ce qui n'est pas recommand√©).
+Le mode "Trip Mode" (ou s√©quence de vol) n√©cessite √©galement la s√©lection d'un fichier .txt comportant les lignes d'instructions suivantes : valeur consigne de position angulaire (tabulation) temps d'attente avant la prochaine consigne. Il est √©galement possible de modifier les consignes, cependant veuillez noter qu'il n'est pas possible de renseigner des valeurs d'angles sup√©rieures √† 90¬∞.
