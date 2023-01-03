@@ -5,11 +5,14 @@ Created on Thu Dec  1 10:27:04 2022
 @author: Julien
 """
 
+import tkinter as tk
 from tkinter import Tk, LabelFrame, Label, Button, Entry
 from tkinter import messagebox, StringVar, OptionMenu, filedialog
 import time
-import csv
 import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 # TAG_IHM_001
 # Class to setup the main window
@@ -649,6 +652,11 @@ class CalibrationGUI():
         
         self.change_mode = Button(self.frame, text="Change Mode", width=15,
                                   command=self.CalibrationModeClose)
+        
+        self.btn_show_graph = Button(self.frame, text="Show Graph", width=10,
+                                     state="disabled",
+                                      command=self.showgraph)
+        
         # Extending the GUI
         self.CalibrationModeOpen()
         
@@ -662,6 +670,8 @@ class CalibrationGUI():
         self.btn_browse_file.grid(row=1, column=1, 
                                   padx=5, pady=5)
         self.change_mode.grid(row=1, column=2, 
+                                  padx=5, pady=5)
+        self.btn_show_graph.grid(row=2, column=1, 
                                   padx=5, pady=5)
         
     def CalibrationModeClose(self):
@@ -680,6 +690,7 @@ class CalibrationGUI():
         """
         Method to search for txt files and do the calibration protocol
         """
+        self.btn_show_graph["state"] = "disabled"
         self.root.filename = filedialog.askopenfilename(
             initialdir="/", 
             title="File Explorer",
@@ -713,15 +724,42 @@ class CalibrationGUI():
         self.serial.SerialIpt(self, self.data.iptSPACE)
         
         title_file = time.strftime("%Y-%m-%d-%Hh%M-Calibration_mode_Results")        
-        df = pd.DataFrame(self.data.record, 
+        self.df = pd.DataFrame(self.data.record, 
                           columns = ['Gas', 'Position'])
         saving_path = filedialog.asksaveasfile(initialfile=title_file,
                                                mode='w',
-                                               defaultextension='.csv')
-        df.to_csv(saving_path, sep=',', encoding='utf-8', index=False)
+                                               defaultextension='.csv',
+                                               filetypes=(
+                                                   ("CSV files","*.csv"),
+                                                          ("All files","*.*")
+                                                          ))
+        self.df.to_csv(saving_path, sep=';', decimal=',', encoding='utf-8', index=False, line_terminator='\n')
         print(self.data.record)
+        self.btn_show_graph["state"] = "active"
         
         self.serial.SerialIpt(self, self.data.ipt2)
+        
+    def showgraph(self):
+        """
+        Method to show the graphic of the simulation
+        """
+        fig = Figure(figsize = (5, 5), dpi = 100)
+        plot1 = fig.add_subplot(111)
+        plot1.self.df.plot.scatter(x=self.df.columns[0],
+                                   y=self.df.columns[1])
+        
+        new_window = Tk()
+        new_window.title("Plotting in Tkinter")
+        new_window.geometry("500x500")
+        
+        canvas= FigureCanvasTkAgg(fig,
+                                  master=new_window)
+        canvas.draw()
+        canvas.get_tk_widget().pack()
+        
+        new_window.mainloop()
+        
+        
         
 # TAG_IHM_007
 class TripModeGUI():
