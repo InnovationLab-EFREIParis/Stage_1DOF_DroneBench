@@ -9,6 +9,7 @@ from tkinter import Tk, LabelFrame, Label, Button, Entry
 from tkinter import messagebox, StringVar, OptionMenu, filedialog
 import time
 import csv
+import pandas as pd
 
 # TAG_IHM_001
 # Class to setup the main window
@@ -711,14 +712,13 @@ class CalibrationGUI():
             
         self.serial.SerialIpt(self, self.data.iptSPACE)
         
-        fields = ['Gas', 'Position']
-        title_file = time.strftime("%Y-%m-%d-%Hh%M-Calibration_mode_Results")
-        with open(title_file,'w',
-                  newline='') as f:
-            write = csv.writer(f, delimiter=',')
-            write.writerow(fields)
-            write.writerows(self.data.record)
-        
+        title_file = time.strftime("%Y-%m-%d-%Hh%M-Calibration_mode_Results")        
+        df = pd.DataFrame(self.data.record, 
+                          columns = ['Gas', 'Position'])
+        saving_path = filedialog.asksaveasfile(initialfile=title_file,
+                                               mode='w',
+                                               defaultextension='.csv')
+        df.to_csv(saving_path, sep=',', encoding='utf-8', index=False)
         print(self.data.record)
         
         self.serial.SerialIpt(self, self.data.ipt2)
