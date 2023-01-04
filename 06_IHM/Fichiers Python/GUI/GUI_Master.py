@@ -5,13 +5,10 @@ Created on Thu Dec  1 10:27:04 2022
 @author: Julien
 """
 
-import tkinter as tk
 from tkinter import Tk, LabelFrame, Label, Button, Entry
 from tkinter import messagebox, StringVar, OptionMenu, filedialog
 import time
 import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 # TAG_IHM_001
@@ -743,20 +740,18 @@ class CalibrationGUI():
         """
         Method to show the graphic of the simulation
         """
-        fig = Figure(figsize = (5, 5), dpi = 100)
-        plot1 = fig.add_subplot(111)
-        plot1.self.df.plot.scatter(x=self.df.columns[0],
-                                   y=self.df.columns[1])
+        fig = self.df.plot.scatter(
+            x=self.df.columns[0],
+            y=self.df.columns[1]).get_figure()
         
         new_window = Tk()
-        new_window.title("Plotting in Tkinter")
         new_window.geometry("500x500")
+        new_window.title("Calibration Graphic")
         
-        canvas= FigureCanvasTkAgg(fig,
-                                  master=new_window)
-        canvas.draw()
-        canvas.get_tk_widget().pack()
-        
+        canvas= FigureCanvasTkAgg(fig, new_window)
+        canvas.get_tk_widget().grid(row=1,column=1,
+                                    padx=30,pady=30)
+    
         new_window.mainloop()
         
         
