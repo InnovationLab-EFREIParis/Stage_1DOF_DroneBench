@@ -11,6 +11,7 @@ from tkinter import messagebox, StringVar, OptionMenu, filedialog
 import time
 import pandas as pd
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+import re
 
 # TAG_IHM_001
 # Class to setup the main window
@@ -706,11 +707,15 @@ class CalibrationGUI():
         # We have lines with 2 values, separated by \t
         # 1st one is the gas value
         # 2nd one is the time we want to spend on this value
+        # so here is the pattern : 2 integers and \t between them (nothing before, nothing after)
+        # other lines will be ignored and considered as errors or comments
+        pattern = re.compile("^[0-9]+\t[0-9]+$")
         for i in range(len(content)):
-            new_content.append(content[i].split("\t"))
-            new_content[i][1] = int(new_content[i][1])
+            if pattern.match(content[i]):
+                new_content.append(content[i].split("\t"))   
         
         for i in range(len(new_content)):
+            new_content[i][1] = int(new_content[i][1])
             self.serial.ser.write(new_content[i][0].encode())
             self.serial.SerialIpt(self, self.data.iptENTER)  
             # You can choose or not to add a delay before recording the position values
@@ -826,16 +831,17 @@ class TripModeGUI():
         myfile = open(self.root.filename, "rt")
         content = myfile.readlines()
         myfile.close()
-        print(content)
         new_content=[]
         # 1st loop change the raw elements in something we will use in the 2nd loop
         # 'content' holds lists of 2 elements : 1st one is a str which corresponds to the angle value we will assign to Auto Mode
         # 2nd element is an int, the time (in seconds) we want to wait on this position before next position
+        pattern = re.compile("^[0-9]+\t[0-9]+$")
         for i in range(len(content)):
-            new_content.append(content[i].split("\t"))
-            new_content[i][1] = int(new_content[i][1])
+            if pattern.match(content[i]):
+                new_content.append(content[i].split("\t"))  
             
         for i in range(len(new_content)):
+            new_content[i][1] = int(new_content[i][1])
             self.serial.ser.write(new_content[i][0].encode())
             self.serial.SerialIpt(self, self.data.iptENTER)
             timeout = time.time() + new_content[i][1]

@@ -1,13 +1,24 @@
+Instructions---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+*This file is an example of the kind of data file you would use with the 'Trip Mode' from the GUI of the Drone Bench project*
+*Please follow the instructions below, if you want to do the simulation correctly*
+
+# First and foremost, we invite you to take into consideration that the data that will be used for the simulation, must be entered this way:
+
+N1	N2
+
+# N1 and N2 are numbers (you must strictly use integers) and they must be separated by a tabulation.
+# Be sure not to add any spaces before, between or after the numbers or the line won't be understood as a correct line.
+# Do not add any comments on the line, or it will be considered as incorrect.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+Angle	Time
+(°)	(s)
+
 40	25
-60	10
-30	5
-0	5
-50	10
-20	10
-70	5
-10	15
-50	10
-60	5
-15	10
-35	15
-60	10
+30	10
+20	5
+50	15
+ 30	6
+40	10 
+	20
+# ahbv
