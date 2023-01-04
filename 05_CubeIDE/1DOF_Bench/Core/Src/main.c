@@ -459,9 +459,9 @@ int main(void) {
 			// for now let's say 10 as value max -> 15% = dangerous
 			// edit: it can now go up to 10% but only by incrementing by 1% with '+'
 			// edit2: I need to increase it to 17% for the GUI
-			// edit3: with permil I need to increase it to 170 (/1000) which is equivalent to 17%
+			// edit3: with permil I need to increase it to 180 (/1000) which is equivalent to 18%
 			printf(
-					"> Enter value between 1 and 17 (power percentage) then press [ ENTER ]\n\r");
+					"> Enter value between 1 and 180 (power percentage) then press [ ENTER ]\n\r");
 			printf("> Press [ + ] or [ - ]\n\n\r");
 			printf(msg_info_mode);
 			printf(msg_motor_ready);
@@ -493,7 +493,7 @@ int main(void) {
 					printf(msg_error_char_nb);
 				} else {
 					int prov_gaz_term_percent = value0;
-					if (prov_gaz_term_percent > 170) {
+					if (prov_gaz_term_percent > 173) {
 						printf(msg_error_value_sup);
 					} else {
 						gaz_term_percent = prov_gaz_term_percent;
@@ -507,7 +507,7 @@ int main(void) {
 					printf(msg_error_char_nb);
 				} else {
 					int prov_gaz_term_percent = value0 * 10 + value1;
-					if (prov_gaz_term_percent > 170) {
+					if (prov_gaz_term_percent > 173) {
 						printf(msg_error_value_sup);
 					} else {
 						gaz_term_percent = prov_gaz_term_percent;
@@ -522,7 +522,7 @@ int main(void) {
 				} else {
 					int prov_gaz_term_percent = value0 * 100 + value1 * 10
 							+ value2;
-					if (prov_gaz_term_percent > 170) {
+					if (prov_gaz_term_percent > 173) {
 						printf(msg_error_value_sup);
 					} else {
 						gaz_term_percent = prov_gaz_term_percent;

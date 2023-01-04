@@ -5,11 +5,12 @@ Created on Thu Dec  1 10:27:04 2022
 @author: Julien
 """
 
+import tkinter as tk
 from tkinter import Tk, LabelFrame, Label, Button, Entry
 from tkinter import messagebox, StringVar, OptionMenu, filedialog
 import time
 import pandas as pd
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 
 # TAG_IHM_001
 # Class to setup the main window
@@ -745,13 +746,19 @@ class CalibrationGUI():
             y=self.df.columns[1]).get_figure()
         
         new_window = Tk()
-        new_window.geometry("500x500")
+        new_window.geometry("500x400")
         new_window.title("Calibration Graphic")
         
         canvas= FigureCanvasTkAgg(fig, new_window)
-        canvas.get_tk_widget().grid(row=1,column=1,
-                                    padx=30,pady=30)
-    
+        canvas.draw()
+        
+        toolbar = NavigationToolbar2Tk(
+            canvas, new_window)
+        toolbar.update()
+        
+        canvas.get_tk_widget().pack(
+            side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+        
         new_window.mainloop()
         
         
