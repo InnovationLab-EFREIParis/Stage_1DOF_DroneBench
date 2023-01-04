@@ -34,7 +34,7 @@ Les montants sont en profilé d'aluminium de 20 mm dont voici la [référence](h
 - [Centrale inertielle](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/gyro%20doc)
 # IHM
 ## Installation
-- Bibliothèques à installer : tkinter / serial / pandas    
+- Bibliothèques à installer : tkinter / serial / pandas / matplotlib     
 - Seul le fichier ["Master"](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/blob/a495668b303d1658d739c43df9a72356ac64ced2/06_IHM/Fichiers%20Python/GUI/Master.py) doit être exécuté, mais il est nécessaire d'avoir tous les fichiers du dossier GUI.  
 ## Utilisation
 L'IHM est réalisée en Python via la bibliothèque Tkinter. Une fois le fichier "Master" exécuté, il vous sera alors demandé de sélectionner le port COM et le Baud rate (similaire à l'interaction avec le terminal UART).  
