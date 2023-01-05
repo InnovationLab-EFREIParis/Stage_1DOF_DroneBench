@@ -115,11 +115,12 @@ int _write(int file, char *data, int len) {
 /* USER CODE END 0 */
 
 /**
- * @brief  The application entry point.
- * @retval int
- */
-int main(void) {
-	/* USER CODE BEGIN 1 */
+  * @brief  The application entry point.
+  * @retval int
+  */
+int main(void)
+{
+  /* USER CODE BEGIN 1 */
 
 	//uint16_t timer_val;
 	//uint32_t timer_val2=UINT32_C(1234567890);
@@ -175,35 +176,36 @@ int main(void) {
 	char msg_error_value_sup[] = "ERROR: Value > 17\n\n\r";
 	char msg_error_value_sup_angle[] = "ERROR: Value > 90\n\n\r";
 
-	/* USER CODE END 1 */
+  /* USER CODE END 1 */
 
-	/* MCU Configuration--------------------------------------------------------*/
+  /* MCU Configuration--------------------------------------------------------*/
 
-	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-	HAL_Init();
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
 
-	/* USER CODE BEGIN Init */
+  /* USER CODE BEGIN Init */
 
-	/* USER CODE END Init */
+  /* USER CODE END Init */
 
-	/* Configure the system clock */
-	SystemClock_Config();
+  /* Configure the system clock */
+  SystemClock_Config();
 
-	/* USER CODE BEGIN SysInit */
+  /* USER CODE BEGIN SysInit */
 
-	/* USER CODE END SysInit */
+  /* USER CODE END SysInit */
 
-	/* Initialize all configured peripherals */
-	MX_GPIO_Init();
-	MX_DMA_Init();
-	MX_ADC1_Init();
-	MX_USART2_UART_Init();
-	MX_TIM3_Init();
-	MX_I2C1_Init();
-	MX_TIM2_Init();
-	MX_TIM15_Init();
-	MX_TIM17_Init();
-	/* USER CODE BEGIN 2 */
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_DMA_Init();
+  MX_ADC1_Init();
+  MX_USART2_UART_Init();
+  MX_TIM3_Init();
+  MX_I2C1_Init();
+  MX_TIM2_Init();
+  MX_TIM15_Init();
+  MX_TIM17_Init();
+  MX_TIM16_Init();
+  /* USER CODE BEGIN 2 */
 //	while (MPU6050_Init(&hi2c1) == 1)
 //		;
 	// Light up green led
@@ -223,10 +225,10 @@ int main(void) {
 
 	//HAL_Delay(3000);
 
-	/* USER CODE END 2 */
+  /* USER CODE END 2 */
 
-	/* Infinite loop */
-	/* USER CODE BEGIN WHILE */
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
 	while (1) {
 
 		__HAL_UART_CLEAR_OREFLAG(&huart2);
@@ -329,6 +331,7 @@ int main(void) {
 			// TAG_UC_004
 			// State 'r': read position
 		case read_position:
+
 			MPU6050_Read_All(&hi2c1, &mpu);
 			position_angulaire = mpu.KalmanAngleX + 90;
 			printf("Position : %.2lf\n\r", position_angulaire);
@@ -459,9 +462,9 @@ int main(void) {
 			// for now let's say 10 as value max -> 15% = dangerous
 			// edit: it can now go up to 10% but only by incrementing by 1% with '+'
 			// edit2: I need to increase it to 17% for the GUI
-			// edit3: with permil I need to increase it to 180 (/1000) which is equivalent to 18%
+			// edit3: with permil I need to increase it to 173 (/1000) which is equivalent to 17.3%
 			printf(
-					"> Enter value between 1 and 180 (power percentage) then press [ ENTER ]\n\r");
+					"> Enter value between 1 and 173 (power percentage) then press [ ENTER ]\n\r");
 			printf("> Press [ + ] or [ - ]\n\n\r");
 			printf(msg_info_mode);
 			printf(msg_motor_ready);
@@ -481,7 +484,8 @@ int main(void) {
 				}
 			} while ((r_buffer[0] != '\r') && (r_buffer[0] != '+')
 					&& (r_buffer[0] != '-') && (r_buffer[0] != '?')
-					&& (r_buffer[0] != ' ')&& (r_buffer[0] != 'r'));
+					&& (r_buffer[0] != ' ')&& (r_buffer[0] != 'r')
+					&& (r_buffer[0] != 's'));
 			printf("\n\n\r");
 
 			int value0 = r_buffer_string[0] - '0';
@@ -555,8 +559,14 @@ int main(void) {
 				previous_etat = manual_mode_term;
 			}
 			if (r_buffer[0] == 'r') {
-				etat = read_position;
-				previous_etat = manual_mode_term;
+
+				HAL_TIM_Base_Start_IT(&htim16);
+
+				//etat = read_position;
+				//previous_etat = manual_mode_term;
+			}
+			if (r_buffer[0] == 's') {
+				HAL_TIM_Base_Stop_IT(&htim16);
 			}
 			if (r_buffer[0] == ' ') {
 				landing_value = mapped_value;
@@ -1091,74 +1101,86 @@ int main(void) {
 		}
 		//---------changing states----END---
 
-		/* USER CODE END WHILE */
+    /* USER CODE END WHILE */
 
-		/* USER CODE BEGIN 3 */
+    /* USER CODE BEGIN 3 */
 	}
-	/* USER CODE END 3 */
+  /* USER CODE END 3 */
 }
 
 /**
- * @brief System Clock Configuration
- * @retval None
- */
-void SystemClock_Config(void) {
-	RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
-	RCC_ClkInitTypeDef RCC_ClkInitStruct = { 0 };
+  * @brief System Clock Configuration
+  * @retval None
+  */
+void SystemClock_Config(void)
+{
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
 
-	/** Configure the main internal regulator output voltage
-	 */
-	if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1)
-			!= HAL_OK) {
-		Error_Handler();
-	}
+  /** Configure the main internal regulator output voltage
+  */
+  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
-	/** Initializes the RCC Oscillators according to the specified parameters
-	 * in the RCC_OscInitTypeDef structure.
-	 */
-	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
-	RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-	RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-	RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-	RCC_OscInitStruct.PLL.PLLM = 1;
-	RCC_OscInitStruct.PLL.PLLN = 10;
-	RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
-	RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
-	RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
-	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
-		Error_Handler();
-	}
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
+  */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLM = 1;
+  RCC_OscInitStruct.PLL.PLLN = 10;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
+  RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
+  RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
-	/** Initializes the CPU, AHB and APB buses clocks
-	 */
-	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
-			| RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
-	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
-	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+  /** Initializes the CPU, AHB and APB buses clocks
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK) {
-		Error_Handler();
-	}
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
+  {
+    Error_Handler();
+  }
 }
 
 /* USER CODE BEGIN 4 */
 
+// Callback function : timer reset
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	MPU6050_Read_All(&hi2c1, &mpu);
+	double position_angulaire = mpu.KalmanAngleX + 90;
+	printf("Position : %.2lf\n\r", position_angulaire);
+}
+
 /* USER CODE END 4 */
 
 /**
- * @brief  This function is executed in case of error occurrence.
- * @retval None
- */
-void Error_Handler(void) {
-	/* USER CODE BEGIN Error_Handler_Debug */
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
+void Error_Handler(void)
+{
+  /* USER CODE BEGIN Error_Handler_Debug */
 	/* User can add his own implementation to report the HAL error return state */
 	__disable_irq();
 	while (1) {
 	}
-	/* USER CODE END Error_Handler_Debug */
+  /* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT

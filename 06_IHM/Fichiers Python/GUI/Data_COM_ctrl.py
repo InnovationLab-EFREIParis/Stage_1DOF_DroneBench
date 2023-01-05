@@ -22,6 +22,7 @@ class DataMaster():
         self.iptd = "d"
         self.iptw = "w"  
         self.iptr = "r"
+        self.ipts = "s"
         self.iptMINUS = "-"
         self.iptPLUS = "+"
         

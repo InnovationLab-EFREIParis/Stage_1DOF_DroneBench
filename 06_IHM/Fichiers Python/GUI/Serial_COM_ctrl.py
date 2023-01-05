@@ -63,13 +63,13 @@ class SerialCtrl():
         except:
             self.ser.status = False 
     
-    def SerialIpt(self, gui, ipt):
+    def SerialIpt(self, gui, ipt, nb_lines):
         """"
         Method used to communicate with the STM32 by sending a char
         """
         self.ser.write(ipt.encode())
         # Read the printf
-        for i in range(30):
+        for i in range(nb_lines):
             gui.data.RowMsg = self.ser.readline()
             print(f"RowMsg: {gui.data.RowMsg}") 
             gui.data.DecodeMsg()

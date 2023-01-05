@@ -37,7 +37,7 @@ class RootGUI():
         print("Closing the window and exit")
         self.root.destroy()
         # Landing Mode called in case the engine is still functionning (if we click on the red cross before the 'STOP!' button)
-        self.serial.SerialIpt(self, self.data.iptSPACE)
+        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         # Closing Serial COM
         self.serial.SerialClose(self)
         
@@ -171,16 +171,16 @@ class ComGui():
                 # Display the Motor Ready manager
                 self.motor_ready = MotorReadyGUI(self.root, self.serial, self.data)
                 # Access to Init UC
-                self.serial.SerialIpt(self, self.data.iptENTER)
+                self.serial.SerialIpt(self, self.data.iptENTER, 30)
                 # Access to Motor Ready
-                self.serial.SerialIpt(self, self.data.iptSPACE)
+                self.serial.SerialIpt(self, self.data.iptSPACE, 30)
             else:
                 ErrorMsg = f"Failure to estabish UART connection using {self.clicked_com.get()} "
                 messagebox.showerror("showerror", ErrorMsg)
         else:
             
             # Landing mode called in case the motor is still functionning
-            self.serial.SerialIpt(self, self.data.iptSPACE)
+            self.serial.SerialIpt(self, self.data.iptSPACE, 30)
             # Closing the Serial COM
             self.serial.SerialClose(self)
             # Closing the Motor Ready Manager
@@ -256,14 +256,14 @@ class MotorReadyGUI():
         Method to redirect on manual term mode
         """
         self.manual_term_mode = ModeTermGUI(self.root, self.serial, self.data)
-        self.serial.SerialIpt(self, self.data.ipt2)
+        self.serial.SerialIpt(self, self.data.ipt2, 30)
     
     def ModeChoice3(self):
         """
         Method to redirect on auto mode
         """
         self.auto_mode = AutoModeGUI(self.root, self.serial, self.data)
-        self.serial.SerialIpt(self, self.data.ipt3)
+        self.serial.SerialIpt(self, self.data.ipt3, 30)
         
     def ModeChoice4(self):
         """
@@ -271,17 +271,17 @@ class MotorReadyGUI():
         """
         self.calibration_mode = CalibrationGUI(self.root, self.serial, self.data)
         # It permits to initialize the Gyro
-        self.serial.SerialIpt(self, self.data.ipt3)
-        self.serial.SerialIpt(self, self.data.iptSPACE)
+        self.serial.SerialIpt(self, self.data.ipt3, 30)
+        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         # Use the manual term mode (gas values)
-        self.serial.SerialIpt(self, self.data.ipt2) 
+        self.serial.SerialIpt(self, self.data.ipt2, 30) 
         
     def ModeChoice5(self):
         """
         Method to redirect on trip mode
         """
         self.trip_mode = TripModeGUI(self.root, self.serial, self.data)
-        self.serial.SerialIpt(self, self.data.ipt3)
+        self.serial.SerialIpt(self, self.data.ipt3, 30)
 
 # TAG_IHM_004            
 class ModeTermGUI():
@@ -346,7 +346,7 @@ class ModeTermGUI():
         '''
         Method to close the Mode Term GUI and destroy the widgets
         '''
-        self.serial.SerialIpt(self, self.data.iptSPACE)
+        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         # Must destroy all the elements so that they are not kept in memory
         for widget in self.frame.winfo_children():
             widget.destroy()
@@ -368,7 +368,7 @@ class ModeTermGUI():
             if (gas_value >= 0) and (gas_value <= 10):
                 self.btn_stop_landing["state"] = "active"
                 self.serial.ser.write(str(gas_value).encode())
-                self.serial.SerialIpt(self, self.data.iptENTER)
+                self.serial.SerialIpt(self, self.data.iptENTER, 30)
                 self.label_screen["text"] = gas_value
             else:
                 ErrorMsg = "Please enter a number between 0 and 10. If you want a number over 10, please use the '+' symbol."
@@ -391,7 +391,7 @@ class ModeTermGUI():
         gas_entry = int(self.label_screen["text"])
         gas_entry -=1
         self.label_screen["text"] = str(gas_entry)
-        self.serial.SerialIpt(self, self.data.iptMINUS)
+        self.serial.SerialIpt(self, self.data.iptMINUS, 30)
         
         if gas_entry == 0:
             self.btn_stop_landing["state"] = "disabled"
@@ -410,7 +410,7 @@ class ModeTermGUI():
         gas_entry = int(self.label_screen["text"])
         gas_entry +=1
         self.label_screen["text"] = str(gas_entry)
-        self.serial.SerialIpt(self, self.data.iptPLUS)
+        self.serial.SerialIpt(self, self.data.iptPLUS, 30)
         
         if self.label_screen["text"] == "0":
             self.btn_minus["state"] = "disabled"
@@ -424,9 +424,9 @@ class ModeTermGUI():
         """        
         self.label_screen["text"] = "0"
         # Landing & Return to Motor Ready
-        self.serial.SerialIpt(self, self.data.iptSPACE)
+        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         # Go to Manual Term Mode
-        self.serial.SerialIpt(self, self.data.ipt2)
+        self.serial.SerialIpt(self, self.data.ipt2, 30)
         
         self.btn_stop_landing["state"] = "disabled"
         self.btn_minus["state"] = "disabled"
@@ -520,7 +520,7 @@ class AutoModeGUI():
         '''
         Method to close the Auto Mode GUI and destroy the widgets
         '''
-        self.serial.SerialIpt(self, self.data.iptSPACE)
+        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         # Must destroy all the elements so that they are not kept in memory
         for widget in self.frame.winfo_children():
             widget.destroy()
@@ -565,9 +565,9 @@ class AutoModeGUI():
                 self.btn_stop_landing["state"] = "active"
                 self.btn_default_set_k["state"] = "disabled"
                 if self.kp_box["state"] == "disabled":
-                    self.serial.SerialIpt(self, self.data.iptw)
+                    self.serial.SerialIpt(self, self.data.iptw, 30)
                     self.serial.ser.write(str(angle_value).encode())
-                    self.serial.SerialIpt(self, self.data.iptENTER)
+                    self.serial.SerialIpt(self, self.data.iptENTER, 30)
                     self.label_screen["text"] = angle_value
                 elif self.kp_box["state"] == "normal":
                     # Take the kp value in the "Entry" widget
@@ -579,20 +579,20 @@ class AutoModeGUI():
                     # Communicate the values of the Entry widgets
                     ## Angle
                     self.serial.ser.write(str(angle_value).encode())
-                    self.serial.SerialIpt(self, self.data.iptENTER)
+                    self.serial.SerialIpt(self, self.data.iptENTER, 30)
                     self.label_screen["text"] = angle_value
                     ## kp
-                    self.serial.SerialIpt(self, self.data.iptp)
+                    self.serial.SerialIpt(self, self.data.iptp, 30)
                     self.serial.ser.write(kp_value.encode())
-                    self.serial.SerialIpt(self, self.data.iptENTER)
+                    self.serial.SerialIpt(self, self.data.iptENTER, 30)
                     ## ki
-                    self.serial.SerialIpt(self, self.data.ipti)
+                    self.serial.SerialIpt(self, self.data.ipti, 30)
                     self.serial.ser.write(ki_value.encode())
-                    self.serial.SerialIpt(self, self.data.iptENTER)
+                    self.serial.SerialIpt(self, self.data.iptENTER, 30)
                     ## kd
-                    self.serial.SerialIpt(self, self.data.iptd)
+                    self.serial.SerialIpt(self, self.data.iptd, 30)
                     self.serial.ser.write(kd_value.encode())
-                    self.serial.SerialIpt(self, self.data.iptENTER)
+                    self.serial.SerialIpt(self, self.data.iptENTER, 30)
                     
                     self.kp_box["state"] = "disabled"
                     self.ki_box["state"] = "disabled"
@@ -610,9 +610,9 @@ class AutoModeGUI():
         """
         self.label_screen["text"] = "0"
         # Landing & Return to Motor Ready
-        self.serial.SerialIpt(self, self.data.iptSPACE)
+        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         # Go to Auto Mode (for now, we need this line too because we don't have a menu for modes, we directly go to Auto Mode)
-        self.serial.SerialIpt(self, self.data.ipt3)
+        self.serial.SerialIpt(self, self.data.ipt3, 30)
         
         self.kp_box["state"] = "normal"
         self.ki_box["state"] = "normal"
@@ -677,7 +677,7 @@ class CalibrationGUI():
         '''
         Method to close the Calibration Mode GUI and destroy the widgets
         '''
-        self.serial.SerialIpt(self, self.data.iptSPACE)
+        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         # Must destroy all the elements so that they are not kept in memory
         for widget in self.frame.winfo_children():
             widget.destroy()
@@ -717,14 +717,17 @@ class CalibrationGUI():
         for i in range(len(new_content)):
             new_content[i][1] = int(new_content[i][1])
             self.serial.ser.write(new_content[i][0].encode())
-            self.serial.SerialIpt(self, self.data.iptENTER)  
+            self.serial.SerialIpt(self, self.data.iptENTER, 30)  
             # You can choose or not to add a delay before recording the position values
-            #time.sleep(10)
+            #time.sleep(1)
+            self.serial.ser.write(self.data.iptr.encode())
             timeout = time.time() + new_content[i][1]
             while time.time()<= timeout:
-                self.serial.SerialIpt(self, self.data.iptr)
+                #self.serial.SerialIpt(self, self.data.iptr, 30)
+                pass
+            self.serial.SerialIpt(self, self.data.ipts, 500)
             
-        self.serial.SerialIpt(self, self.data.iptSPACE)
+        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         
         title_file = time.strftime("%Y-%m-%d-%Hh%M-Calibration_mode_Results")        
         self.df = pd.DataFrame(self.data.record, 
@@ -740,7 +743,7 @@ class CalibrationGUI():
         print(self.data.record)
         self.btn_show_graph["state"] = "active"
         
-        self.serial.SerialIpt(self, self.data.ipt2)
+        self.serial.SerialIpt(self, self.data.ipt2, 30)
         
     def showgraph(self):
         """
@@ -806,8 +809,8 @@ class TripModeGUI():
         '''
         Method to close the Trip Mode GUI and destroy the widgets
         '''
-        self.serial.SerialIpt(self, self.data.iptSPACE)
-        self.serial.SerialIpt(self, self.data.iptENTER)
+        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
+        self.serial.SerialIpt(self, self.data.iptENTER, 30)
         # Must destroy all the elements so that they are not kept in memory
         for widget in self.frame.winfo_children():
             widget.destroy()
@@ -843,14 +846,14 @@ class TripModeGUI():
         for i in range(len(new_content)):
             new_content[i][1] = int(new_content[i][1])
             self.serial.ser.write(new_content[i][0].encode())
-            self.serial.SerialIpt(self, self.data.iptENTER)
+            self.serial.SerialIpt(self, self.data.iptENTER, 30)
             timeout = time.time() + new_content[i][1]
             while time.time()<= timeout:
                 pass
-            self.serial.SerialIpt(self, self.data.iptw)
+            self.serial.SerialIpt(self, self.data.iptw, 30)
         
-        self.serial.SerialIpt(self, self.data.iptSPACE)
-        self.serial.SerialIpt(self, self.data.ipt3)
+        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
+        self.serial.SerialIpt(self, self.data.ipt3, 30)
 
 if __name__ == "__main__":
     RootGUI()
