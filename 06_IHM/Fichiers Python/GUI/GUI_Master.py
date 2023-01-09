@@ -731,7 +731,9 @@ class CalibrationGUI():
         
         title_file = time.strftime("%Y-%m-%d-%Hh%M-Calibration_mode_Results")        
         self.df = pd.DataFrame(self.data.record, 
-                          columns = ['Gas', 'Position'])
+                          columns = ['Gas', 'PositionX', 'PositionY', 
+                                     "Ax Raw", "Ay Raw", "Az Raw",
+                                     "Gx Raw", "Gy Raw", "Gz Raw"])
         saving_path = filedialog.asksaveasfile(initialfile=title_file,
                                                mode='w',
                                                defaultextension='.csv',

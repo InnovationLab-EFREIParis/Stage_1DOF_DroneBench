@@ -1163,8 +1163,24 @@ void SystemClock_Config(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	MPU6050_Read_All(&hi2c1, &mpu);
-	double position_angulaire = mpu.KalmanAngleX + 90;
-	printf("Position : %.2lf\n\r", position_angulaire);
+	double position_angulaireX = mpu.KalmanAngleX + 90 ;
+	double position_angulaireY = mpu.KalmanAngleY ;
+	int16_t AxRaw = mpu.Accel_X_RAW ;
+	int16_t AyRaw = mpu.Accel_Y_RAW ;
+	int16_t AzRaw = mpu.Accel_Z_RAW ;
+	int16_t GxRaw = mpu.Gyro_X_RAW ;
+	int16_t GyRaw = mpu.Gyro_Y_RAW ;
+	int16_t GzRaw = mpu.Gyro_Z_RAW ;
+	//printf("PositionX : %.2lf\n\r", position_angulaireX);
+	//printf("PositionY : %.2lf\n\r", position_angulaireY);
+	//printf("Ax : %d\n\r", AxRaw);
+	//printf("Ay : %d\n\r", AyRaw);
+	//printf("Az : %d\n\r", AzRaw);
+	//printf("Gx : %d\n\r", GxRaw);
+	//printf("Gy : %d\n\r", GyRaw);
+	//printf("Gz : %d\n\r", GzRaw);
+	printf("Data:%.2lf;%.2lf;%d;%d;%d;%d;%d;%d\n",
+			position_angulaireX, position_angulaireY, AxRaw, AyRaw, AzRaw, GxRaw, GyRaw, GzRaw);
 }
 
 /* USER CODE END 4 */
