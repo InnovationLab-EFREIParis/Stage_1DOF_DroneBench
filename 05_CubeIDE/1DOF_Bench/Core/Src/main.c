@@ -206,25 +206,11 @@ int main(void)
   MX_TIM17_Init();
   MX_TIM16_Init();
   /* USER CODE BEGIN 2 */
-//	while (MPU6050_Init(&hi2c1) == 1)
-//		;
-	// Light up green led
-	//setGreenLed();
-	// blink green led
-	//HAL_UART_Receive_IT(&huart2, (uint8_t*)gaz_buffer, 4);
-	//blinkGreenLed(10, 100);
-	// Welcome message on UART
-	//sendWelcomeMsgRS232(&huart2);
-	//la fonction au dessus pose des soucis
 	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
-	//Nous mettons ici la valeur minimale pour émettre un signal vers notre ESC dans notre registre capture and compare register
+
+	// counters to test stuff 15-> 10^-6s / 2-> 10^-7s
 	//HAL_TIM_Base_Start(&htim15);
 	//HAL_TIM_Base_Start(&htim2);
-
-	//TIM3->CCR2 = valeur_min_moteur;
-
-	//HAL_Delay(3000);
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -260,6 +246,7 @@ int main(void)
 
 			// -------------------------------------------------------------------------
 			// -> démarrer le compteur
+
 			//HAL_Delay(1000);
 			//timer_val = __HAL_TIM_GET_COUNTER(&htim15);
 			//HAL_Delay(6);
@@ -323,18 +310,6 @@ int main(void)
 			printf(">>Manual Mode Pot\n\r");
 			printf(">>Manual Mode Term\n\r");
 			printf(">>Auto Mode\n\n\r");
-
-			//go to previous state
-			etat = previous_etat;
-			break;
-
-			// TAG_UC_004
-			// State 'r': read position
-		case read_position:
-
-			MPU6050_Read_All(&hi2c1, &mpu);
-			position_angulaire = mpu.KalmanAngleX + 90;
-			printf("Position : %.2lf\n\r", position_angulaire);
 
 			//go to previous state
 			etat = previous_etat;
@@ -549,7 +524,6 @@ int main(void)
 
 			//printf("Mapping adc value percent : %d\n\n\r", mapped_value);
 			load_pwm(htim3, mapped_value);
-			// HAL_Delay(100);
 			HAL_Delay(10);
 
 			etat = manual_mode_term;
@@ -559,11 +533,7 @@ int main(void)
 				previous_etat = manual_mode_term;
 			}
 			if (r_buffer[0] == 'r') {
-
 				HAL_TIM_Base_Start_IT(&htim16);
-
-				//etat = read_position;
-				//previous_etat = manual_mode_term;
 			}
 			if (r_buffer[0] == 's') {
 				HAL_TIM_Base_Stop_IT(&htim16);
@@ -1007,10 +977,6 @@ int main(void)
 				}
 
 				MPU6050_Read_All(&hi2c1, &mpu);
-				//MPU6050_Read_Accel(&hi2c1, &mpu);
-				//MPU6050_Read_Gyro(&hi2c1, &mpu);
-				//Kalman_getAngle(&KalmanX, roll, DataStruct->Gx, dt);
-
 				position_angulaire = mpu.KalmanAngleX + 90;
 
 				// Asservissement
@@ -1171,14 +1137,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	int16_t GxRaw = mpu.Gyro_X_RAW ;
 	int16_t GyRaw = mpu.Gyro_Y_RAW ;
 	int16_t GzRaw = mpu.Gyro_Z_RAW ;
-	//printf("PositionX : %.2lf\n\r", position_angulaireX);
-	//printf("PositionY : %.2lf\n\r", position_angulaireY);
-	//printf("Ax : %d\n\r", AxRaw);
-	//printf("Ay : %d\n\r", AyRaw);
-	//printf("Az : %d\n\r", AzRaw);
-	//printf("Gx : %d\n\r", GxRaw);
-	//printf("Gy : %d\n\r", GyRaw);
-	//printf("Gz : %d\n\r", GzRaw);
+
 	printf("Data:%.2lf;%.2lf;%d;%d;%d;%d;%d;%d\n",
 			position_angulaireX, position_angulaireY, AxRaw, AyRaw, AzRaw, GxRaw, GyRaw, GzRaw);
 }
