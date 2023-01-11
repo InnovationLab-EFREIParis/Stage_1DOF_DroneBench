@@ -39,7 +39,7 @@ class DataMaster():
         self.record = []
         self.gas_value = 0
 
-    def DecodeMsg2(self):
+    def DecodeMsg1(self):
         temp = self.RowMsg.decode('utf8')
         if len(temp) > 0:
             if "Gaz Term : " in temp:
@@ -103,6 +103,34 @@ class DataMaster():
                                     int(self.msg[5]),
                                     int(self.msg[6]),
                                     int((self.msg[7]).removesuffix('\n'))])
+    def DecodeMsg3(self):
+        temp = self.RowMsg.decode('utf8')
+        if len(temp) > 0:
+            if "Gaz Term : " in temp:
+                self.msg = temp.split("Gaz Term : ")
+                del self.msg[0]
+                self.gas_value = (self.msg[0]).removesuffix('\n')
+            if "Data:" in temp:
+                self.msg = temp.split("Data:")
+                self.msg = self.msg[1].split(";")
+                self.posx_value = float(self.msg[0])
+                self.posy_value = float(self.msg[1])
+                self.Ax_value = int(self.msg[2])
+                self.Ay_value = int((self.msg[3]).removesuffix('\n'))
+            
+                              
+            if "Data2:" in temp:
+                self.msg = temp.split("Data:")
+                self.msg = self.msg[1].split(";")
+                self.record.append([int(self.gas_value),
+                                    self.posx_value,
+                                    self.posy_value,
+                                    self.Ax_value,
+                                    self.Ay_value,
+                                    int(self.msg[0]),
+                                    int(self.msg[1]),
+                                    int(self.msg[2]),
+                                    int((self.msg[3]).removesuffix('\n'))])   
 
 
     def ClearData(self):

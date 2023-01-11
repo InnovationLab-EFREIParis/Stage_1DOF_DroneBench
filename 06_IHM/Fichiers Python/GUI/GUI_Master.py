@@ -725,7 +725,7 @@ class CalibrationGUI():
             while time.time()<= timeout:
                 #self.serial.SerialIpt(self, self.data.iptr, 30)
                 pass
-            self.serial.SerialIpt(self, self.data.ipts, 500)
+            self.serial.SerialIpt(self, self.data.ipts, 3000)
             
         self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         

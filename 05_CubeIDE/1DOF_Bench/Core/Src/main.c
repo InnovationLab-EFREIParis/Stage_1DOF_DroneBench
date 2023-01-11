@@ -1128,18 +1128,23 @@ void SystemClock_Config(void)
 // Callback function : timer reset
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	MPU6050_Read_All(&hi2c1, &mpu);
-	double position_angulaireX = mpu.KalmanAngleX + 90 ;
-	double position_angulaireY = mpu.KalmanAngleY ;
-	int16_t AxRaw = mpu.Accel_X_RAW ;
-	int16_t AyRaw = mpu.Accel_Y_RAW ;
-	int16_t AzRaw = mpu.Accel_Z_RAW ;
-	int16_t GxRaw = mpu.Gyro_X_RAW ;
-	int16_t GyRaw = mpu.Gyro_Y_RAW ;
-	int16_t GzRaw = mpu.Gyro_Z_RAW ;
+	if (htim == &htim16)
+	{
+		MPU6050_Read_All(&hi2c1, &mpu);
+		double position_angulaireX = mpu.KalmanAngleX + 90 ;
+		double position_angulaireY = mpu.KalmanAngleY ;
+		int16_t AxRaw = mpu.Accel_X_RAW ;
+		int16_t AyRaw = mpu.Accel_Y_RAW ;
+		int16_t AzRaw = mpu.Accel_Z_RAW ;
+		int16_t GxRaw = mpu.Gyro_X_RAW ;
+		int16_t GyRaw = mpu.Gyro_Y_RAW ;
+		int16_t GzRaw = mpu.Gyro_Z_RAW ;
 
-	printf("Data:%.2lf;%.2lf;%d;%d;%d;%d;%d;%d\n",
-			position_angulaireX, position_angulaireY, AxRaw, AyRaw, AzRaw, GxRaw, GyRaw, GzRaw);
+		char data = printf("Data:%.2lf;%.2lf;%d;%d;%d;%d;%d;%d\n",
+				position_angulaireX, position_angulaireY, AxRaw, AyRaw, AzRaw, GxRaw, GyRaw, GzRaw);
+		HAL_UART_Transmit_DMA(&huart2, data, sizeof(data));
+	}
+
 }
 
 /* USER CODE END 4 */
