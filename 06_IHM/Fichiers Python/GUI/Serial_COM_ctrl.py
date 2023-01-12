@@ -5,6 +5,7 @@ Created on Thu Dec  1 14:25:05 2022
 @author: Julien
 """
 import serial.tools.list_ports  # pip install pyserial
+import time
 
 # TAG_IHM_008
 # Class to secure the UART serial communication with MCU

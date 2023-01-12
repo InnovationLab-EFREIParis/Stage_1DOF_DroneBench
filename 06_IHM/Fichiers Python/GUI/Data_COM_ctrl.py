@@ -94,15 +94,47 @@ class DataMaster():
             if "Data:" in temp:
                 self.msg = temp.split("Data:")
                 self.msg = self.msg[1].split(";")
-                self.record.append([int(self.gas_value),
-                                    float(self.msg[0]),
-                                    float(self.msg[1]),
-                                    int(self.msg[2]),
-                                    int(self.msg[3]),
-                                    int(self.msg[4]),
-                                    int(self.msg[5]),
-                                    int(self.msg[6]),
-                                    int((self.msg[7]).removesuffix('\n'))])
+                if len(self.msg) == 8:
+                    self.record.append([int(self.gas_value),
+                                        float(self.msg[0]),
+                                        float(self.msg[1]),
+                                        int(self.msg[2]),
+                                        int(self.msg[3]),
+                                        int(self.msg[4]),
+                                        int(self.msg[5]),
+                                        int(self.msg[6]),
+                                        int((self.msg[7]).removesuffix('\n'))])
+                else:
+                    self.record.append([100,
+                                        1,
+                                        1,
+                                        1,
+                                        1,
+                                        1,
+                                        1,
+                                        1,
+                                        1])
+            else:
+                self.record.append([100,
+                                    0,
+                                    0,
+                                    0,
+                                    0,
+                                    0,
+                                    0,
+                                    0,
+                                    0])
+        else:
+            self.record.append([100,
+                                2,
+                                2,
+                                2,
+                                2,
+                                2,
+                                2,
+                                2,
+                                2])
+                
     def DecodeMsg3(self):
         temp = self.RowMsg.decode('utf8')
         if len(temp) > 0:

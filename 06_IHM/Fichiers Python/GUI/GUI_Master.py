@@ -171,9 +171,9 @@ class ComGui():
                 # Display the Motor Ready manager
                 self.motor_ready = MotorReadyGUI(self.root, self.serial, self.data)
                 # Access to Init UC
-                self.serial.SerialIpt(self, self.data.iptENTER, 30)
+                self.serial.SerialIpt(self, self.data.iptENTER, 5)
                 # Access to Motor Ready
-                self.serial.SerialIpt(self, self.data.iptSPACE, 30)
+                self.serial.SerialIpt(self, self.data.iptSPACE, 20)
             else:
                 ErrorMsg = f"Failure to estabish UART connection using {self.clicked_com.get()} "
                 messagebox.showerror("showerror", ErrorMsg)
@@ -271,10 +271,10 @@ class MotorReadyGUI():
         """
         self.calibration_mode = CalibrationGUI(self.root, self.serial, self.data)
         # It permits to initialize the Gyro
-        self.serial.SerialIpt(self, self.data.ipt3, 30)
-        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
+        self.serial.SerialIpt(self, self.data.ipt3, 14)
+        self.serial.SerialIpt(self, self.data.iptSPACE, 20)
         # Use the manual term mode (gas values)
-        self.serial.SerialIpt(self, self.data.ipt2, 30) 
+        self.serial.SerialIpt(self, self.data.ipt2, 11) 
         
     def ModeChoice5(self):
         """
@@ -717,7 +717,7 @@ class CalibrationGUI():
         for i in range(len(new_content)):
             new_content[i][1] = int(new_content[i][1])
             self.serial.ser.write(new_content[i][0].encode())
-            self.serial.SerialIpt(self, self.data.iptENTER, 30)  
+            self.serial.SerialIpt(self, self.data.iptENTER, 12)  
             # You can choose or not to add a delay before recording the position values
             #time.sleep(1)
             self.serial.ser.write(self.data.iptr.encode())
@@ -725,9 +725,9 @@ class CalibrationGUI():
             while time.time()<= timeout:
                 #self.serial.SerialIpt(self, self.data.iptr, 30)
                 pass
-            self.serial.SerialIpt(self, self.data.ipts, 3000)
+            self.serial.SerialIpt(self, self.data.ipts, 780)
             
-        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
+        self.serial.SerialIpt(self, self.data.iptSPACE, 5)
         
         title_file = time.strftime("%Y-%m-%d-%Hh%M-Calibration_mode_Results")        
         self.df = pd.DataFrame(self.data.record, 

@@ -1142,7 +1142,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 		char data = printf("Data:%.2lf;%.2lf;%d;%d;%d;%d;%d;%d\n",
 				position_angulaireX, position_angulaireY, AxRaw, AyRaw, AzRaw, GxRaw, GyRaw, GzRaw);
-		HAL_UART_Transmit_DMA(&huart2, data, sizeof(data));
+		HAL_UART_Transmit_IT(&huart2, data, sizeof(data));
 	}
 
 }
