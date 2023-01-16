@@ -74,3 +74,27 @@ class SerialCtrl():
             gui.data.RowMsg = self.ser.readline()
             print(f"RowMsg: {gui.data.RowMsg}") 
             gui.data.DecodeMsg()
+            
+    def SerialOpt(self, gui, timeout):
+        """
+        Method used to read the outputs coming from the STM32
+        """
+        while time.time()<= timeout:
+                         # runs this loop forever
+            #time.sleep(.001)                    # delay of 1ms
+            val = self.ser.readline()                # read complete line from serial output
+            while not '\\n'in str(val):         # check if full data is received. 
+                # This loop is entered only if serial read value doesn't contain \n
+                # which indicates end of a sentence. 
+                # str(val) - val is byte where string operation to check `\\n` 
+                # can't be performed
+                time.sleep(.001)                # delay of 1ms 
+                temp = self.ser.readline()           # check for serial output.
+                if not not temp.decode():       # if temp is not empty.
+                    val = (val.decode()+temp.decode()).encode()
+                    # required to decode, sum, then encode because
+                    # long values might require multiple passes
+            val = val.decode()                  # decoding from bytes
+            gui.data.RowMsg = val.strip()                   # stripping leading and trailing spaces.
+            print(f"RowMsg: {gui.data.RowMsg}")
+            gui.data.DecodeMsg2()

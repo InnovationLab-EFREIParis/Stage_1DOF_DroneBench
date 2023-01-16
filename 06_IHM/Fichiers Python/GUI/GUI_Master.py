@@ -722,10 +722,11 @@ class CalibrationGUI():
             #time.sleep(1)
             self.serial.ser.write(self.data.iptr.encode())
             timeout = time.time() + new_content[i][1]
-            while time.time()<= timeout:
-                #self.serial.SerialIpt(self, self.data.iptr, 30)
-                pass
-            self.serial.SerialIpt(self, self.data.ipts, 780)
+            #while time.time()<= timeout:
+            self.serial.SerialOpt(self, timeout)
+                #pass
+            self.serial.ser.write(self.data.ipts.encode())
+            #self.serial.SerialIpt(self, self.data.ipts, 780)
             
         self.serial.SerialIpt(self, self.data.iptSPACE, 5)
         
