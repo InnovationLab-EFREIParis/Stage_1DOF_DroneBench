@@ -104,36 +104,6 @@ class DataMaster():
                                         int(self.msg[5]),
                                         int(self.msg[6]),
                                         int((self.msg[7]).removesuffix('\n'))])
-                else:
-                    self.record.append([100,
-                                        1,
-                                        1,
-                                        1,
-                                        1,
-                                        1,
-                                        1,
-                                        1,
-                                        1])
-            else:
-                self.record.append([100,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0])
-        else:
-            self.record.append([100,
-                                2,
-                                2,
-                                2,
-                                2,
-                                2,
-                                2,
-                                2,
-                                2])
             
     def DecodeMsg2(self):
         temp = self.RowMsg
@@ -155,36 +125,6 @@ class DataMaster():
                                         int(self.msg[5]),
                                         int(self.msg[6]),
                                         int((self.msg[7]).removesuffix('\n'))])
-                else:
-                    self.record.append([100,
-                                        1,
-                                        1,
-                                        1,
-                                        1,
-                                        1,
-                                        1,
-                                        1,
-                                        1])
-            else:
-                self.record.append([100,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0,
-                                    0])
-        else:
-            self.record.append([100,
-                                2,
-                                2,
-                                2,
-                                2,
-                                2,
-                                2,
-                                2,
-                                2])
                 
     def DecodeMsg3(self):
         temp = self.RowMsg.decode('utf8')

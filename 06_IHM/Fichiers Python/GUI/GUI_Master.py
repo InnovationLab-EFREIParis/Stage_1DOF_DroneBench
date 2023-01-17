@@ -271,8 +271,8 @@ class MotorReadyGUI():
         """
         self.calibration_mode = CalibrationGUI(self.root, self.serial, self.data)
         # It permits to initialize the Gyro
-        self.serial.SerialIpt(self, self.data.ipt3, 14)
-        self.serial.SerialIpt(self, self.data.iptSPACE, 20)
+        #self.serial.SerialIpt(self, self.data.ipt3, 14)
+        #self.serial.SerialIpt(self, self.data.iptSPACE, 20)
         # Use the manual term mode (gas values)
         self.serial.SerialIpt(self, self.data.ipt2, 11) 
         
@@ -684,6 +684,7 @@ class CalibrationGUI():
         self.frame.destroy()
         
         self.motor_ready = MotorReadyGUI(self.root, self.serial, self.data)
+        self.data.ClearData()
         
     def browseFile(self):
         """
@@ -713,11 +714,11 @@ class CalibrationGUI():
         for i in range(len(content)):
             if pattern.match(content[i]):
                 new_content.append(content[i].split("\t"))   
-        
+
         for i in range(len(new_content)):
             new_content[i][1] = int(new_content[i][1])
-            self.serial.ser.write(new_content[i][0].encode())
-            self.serial.SerialIpt(self, self.data.iptENTER, 12)  
+            self.serial.ser.write(new_content[i][0].encode()) 
+            self.serial.SerialIpt(self, self.data.iptENTER, 30)  
             # You can choose or not to add a delay before recording the position values
             #time.sleep(1)
             self.serial.ser.write(self.data.iptr.encode())
@@ -727,8 +728,9 @@ class CalibrationGUI():
                 #pass
             self.serial.ser.write(self.data.ipts.encode())
             #self.serial.SerialIpt(self, self.data.ipts, 780)
+            time.sleep(5)
             
-        self.serial.SerialIpt(self, self.data.iptSPACE, 5)
+        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         
         title_file = time.strftime("%Y-%m-%d-%Hh%M-Calibration_mode_Results")        
         self.df = pd.DataFrame(self.data.record, 
@@ -746,7 +748,10 @@ class CalibrationGUI():
         print(self.data.record)
         self.btn_show_graph["state"] = "active"
         
+        #self.serial.SerialIpt(self, self.data.ipt3, 30)
+        #self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         self.serial.SerialIpt(self, self.data.ipt2, 30)
+        self.data.ClearData()
         
     def showgraph(self):
         """

@@ -98,3 +98,4 @@ class SerialCtrl():
             gui.data.RowMsg = val.strip()                   # stripping leading and trailing spaces.
             print(f"RowMsg: {gui.data.RowMsg}")
             gui.data.DecodeMsg2()
+            
