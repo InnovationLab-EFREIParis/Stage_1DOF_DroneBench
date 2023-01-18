@@ -561,9 +561,9 @@ int main(void)
 		case init_gyro:
 
 			printf("State: Auto mode\n\n\r");
-
+			int timeout_gyro = 1000;
 			printf("Waiting for Gyro MPU6050...\n\r");
-			while (MPU6050_Init(&hi2c1) == 1)
+			while (MPU6050_Init(&hi2c1) == 1 && (--timeout_gyro > 0))
 				;
 			printf("Gyro MPU6050 OK!\n\n\r");
 

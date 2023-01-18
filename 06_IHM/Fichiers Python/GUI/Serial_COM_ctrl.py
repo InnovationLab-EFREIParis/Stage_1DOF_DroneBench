@@ -69,10 +69,11 @@ class SerialCtrl():
         Method used to communicate with the STM32 by sending a char
         """
         self.ser.write(ipt.encode())
-        # Read the printf
+
         for i in range(nb_lines):
             gui.data.RowMsg = self.ser.readline()
-            print(f"RowMsg: {gui.data.RowMsg}") 
+            print(f"RowMsg: {gui.data.RowMsg}")
+            gui.data.RowMsg = gui.data.RowMsg.decode('utf8')
             gui.data.DecodeMsg()
             
     def SerialOpt(self, gui, timeout):
@@ -80,22 +81,13 @@ class SerialCtrl():
         Method used to read the outputs coming from the STM32
         """
         while time.time()<= timeout:
-                         # runs this loop forever
-            #time.sleep(.001)                    # delay of 1ms
-            val = self.ser.readline()                # read complete line from serial output
-            while not '\\n'in str(val):         # check if full data is received. 
-                # This loop is entered only if serial read value doesn't contain \n
-                # which indicates end of a sentence. 
-                # str(val) - val is byte where string operation to check `\\n` 
-                # can't be performed
-                time.sleep(.001)                # delay of 1ms 
-                temp = self.ser.readline()           # check for serial output.
-                if not not temp.decode():       # if temp is not empty.
+            val = self.ser.readline()
+            while not '\\n'in str(val):
+                time.sleep(.001)               
+                temp = self.ser.readline()         
+                if not not temp.decode():       
                     val = (val.decode()+temp.decode()).encode()
-                    # required to decode, sum, then encode because
-                    # long values might require multiple passes
-            val = val.decode()                  # decoding from bytes
-            gui.data.RowMsg = val.strip()                   # stripping leading and trailing spaces.
+            val = val.decode()                
+            gui.data.RowMsg = val.strip()             
             print(f"RowMsg: {gui.data.RowMsg}")
-            gui.data.DecodeMsg2()
-            
+            gui.data.DecodeMsg()

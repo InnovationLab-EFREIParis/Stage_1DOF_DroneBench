@@ -271,8 +271,8 @@ class MotorReadyGUI():
         """
         self.calibration_mode = CalibrationGUI(self.root, self.serial, self.data)
         # It permits to initialize the Gyro
-        #self.serial.SerialIpt(self, self.data.ipt3, 14)
-        #self.serial.SerialIpt(self, self.data.iptSPACE, 20)
+        self.serial.SerialIpt(self, self.data.ipt3, 14)
+        self.serial.SerialIpt(self, self.data.iptSPACE, 20)
         # Use the manual term mode (gas values)
         self.serial.SerialIpt(self, self.data.ipt2, 11) 
         
@@ -655,6 +655,7 @@ class CalibrationGUI():
         self.btn_show_graph = Button(self.frame, text="Show Graph", width=10,
                                      state="disabled",
                                       command=self.showgraph)
+        self.graph_type = 0
         
         # Extending the GUI
         self.CalibrationModeOpen()
@@ -690,6 +691,8 @@ class CalibrationGUI():
         """
         Method to search for txt files and do the calibration protocol
         """
+        self.data.ClearData()
+        self.graph_type = 0
         self.btn_show_graph["state"] = "disabled"
         self.root.filename = filedialog.askopenfilename(
             initialdir="/", 
@@ -727,8 +730,8 @@ class CalibrationGUI():
             self.serial.SerialOpt(self, timeout)
                 #pass
             self.serial.ser.write(self.data.ipts.encode())
-            #self.serial.SerialIpt(self, self.data.ipts, 780)
-            time.sleep(5)
+            #self.serial.SerialIpt(self, self.data.ipts, 780)  
+            time.sleep(.1)
             
         self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         
@@ -748,36 +751,56 @@ class CalibrationGUI():
         print(self.data.record)
         self.btn_show_graph["state"] = "active"
         
-        #self.serial.SerialIpt(self, self.data.ipt3, 30)
-        #self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         self.serial.SerialIpt(self, self.data.ipt2, 30)
-        self.data.ClearData()
+        
+        if len(new_content) == 1:
+            self.graph_type = 1
         
     def showgraph(self):
         """
         Method to show the graphic of the simulation
         """
-        fig = self.df.plot.scatter(
-            x=self.df.columns[0],
-            y=self.df.columns[1]).get_figure()
-        
-        new_window = Tk()
-        new_window.geometry("500x400")
-        new_window.title("Calibration Graphic")
-        
-        canvas= FigureCanvasTkAgg(fig, new_window)
-        canvas.draw()
-        
-        toolbar = NavigationToolbar2Tk(
-            canvas, new_window)
-        toolbar.update()
-        
-        canvas.get_tk_widget().pack(
-            side=tk.BOTTOM, fill=tk.BOTH, expand=True)
-        
-        new_window.mainloop()
-        
-        
+        if self.graph_type == 1:
+            fig = self.df.plot.scatter(
+                x=self.df.columns[0],
+                y=self.df.columns[1]).get_figure()
+            
+            new_window = Tk()
+            new_window.geometry("500x400")
+            new_window.title("Calibration Graphic - Dynamic")
+            
+            canvas= FigureCanvasTkAgg(fig, new_window)
+            canvas.draw()
+            
+            toolbar = NavigationToolbar2Tk(
+                canvas, new_window)
+            toolbar.update()
+            
+            canvas.get_tk_widget().pack(
+                side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+            
+            new_window.mainloop()
+        else:    
+            fig = self.df.plot.scatter(
+                x=self.df.columns[0],
+                y=self.df.columns[1]).get_figure()
+            
+            new_window = Tk()
+            new_window.geometry("500x400")
+            new_window.title("Calibration Graphic - Static")
+            
+            canvas= FigureCanvasTkAgg(fig, new_window)
+            canvas.draw()
+            
+            toolbar = NavigationToolbar2Tk(
+                canvas, new_window)
+            toolbar.update()
+            
+            canvas.get_tk_widget().pack(
+                side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+            
+            new_window.mainloop()
+            
         
 # TAG_IHM_007
 class TripModeGUI():
