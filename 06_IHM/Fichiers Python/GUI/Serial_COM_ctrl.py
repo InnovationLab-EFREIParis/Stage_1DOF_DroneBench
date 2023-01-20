@@ -73,8 +73,6 @@ class SerialCtrl():
         for i in range(nb_lines):
             gui.data.RowMsg = self.ser.readline()
             print(f"RowMsg: {gui.data.RowMsg}")
-            gui.data.RowMsg = gui.data.RowMsg.decode('utf8')
-            gui.data.DecodeMsg()
             
     def SerialOpt(self, gui, timeout):
         """

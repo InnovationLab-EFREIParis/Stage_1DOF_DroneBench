@@ -656,6 +656,7 @@ class CalibrationGUI():
                                      state="disabled",
                                       command=self.showgraph)
         self.graph_type = 0
+        self.gyro_issue = 0
         
         # Extending the GUI
         self.CalibrationModeOpen()
@@ -732,7 +733,7 @@ class CalibrationGUI():
             self.serial.ser.write(self.data.ipts.encode())
             #self.serial.SerialIpt(self, self.data.ipts, 780)  
             time.sleep(.1)
-            
+    
         self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         
         title_file = time.strftime("%Y-%m-%d-%Hh%M-Calibration_mode_Results")        
@@ -761,9 +762,15 @@ class CalibrationGUI():
         Method to show the graphic of the simulation
         """
         if self.graph_type == 1:
-            fig = self.df.plot.scatter(
-                x=self.df.columns[0],
-                y=self.df.columns[1]).get_figure()
+            list_time = []
+           
+            for i in range(len(self.df)):
+                list_time.append(i*20)
+            df2 = self.df.assign(Time=list_time) 
+            
+            fig = df2.plot.scatter(
+                x=df2.columns[-1],
+                y=df2.columns[1]).get_figure()
             
             new_window = Tk()
             new_window.geometry("500x400")

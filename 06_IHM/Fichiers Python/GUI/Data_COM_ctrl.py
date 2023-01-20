@@ -5,6 +5,8 @@ Created on Fri Dec  2 17:47:54 2022
 @author: Julien
 """
 
+from tkinter import messagebox
+
 # TAG_IHM_009
 # Class to setup the communication data
 class DataMaster():
@@ -49,6 +51,10 @@ class DataMaster():
                                         int(self.msg[5]),
                                         int(self.msg[6]),
                                         int((self.msg[7]).removesuffix('\n'))])
+            if "Gyro MPU6050 is not working" in temp:
+                print("Error\n")
+                ErrorMsg = "Gyro MPU6050 is not working. Please check if it is well connected."
+                messagebox.showerror("showerror", ErrorMsg)   
 
     def ClearData(self):
         """
