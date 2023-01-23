@@ -271,10 +271,10 @@ class MotorReadyGUI():
         """
         self.calibration_mode = CalibrationGUI(self.root, self.serial, self.data)
         # It permits to initialize the Gyro
-        self.serial.SerialIpt(self, self.data.ipt3, 14)
-        self.serial.SerialIpt(self, self.data.iptSPACE, 20)
+        self.serial.SerialIpt(self, self.data.ipt3, 30)
+        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         # Use the manual term mode (gas values)
-        self.serial.SerialIpt(self, self.data.ipt2, 11) 
+        self.serial.SerialIpt(self, self.data.ipt2, 30) 
         
     def ModeChoice5(self):
         """
