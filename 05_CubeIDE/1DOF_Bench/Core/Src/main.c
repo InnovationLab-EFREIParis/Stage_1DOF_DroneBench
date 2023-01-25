@@ -615,7 +615,7 @@ int main(void)
 						etat = instruct_angle;
 					} else {
 						angle_term = prov_angle_term;
-						printf("Angle : %d degree(s)\n\n\r", angle_term);
+						printf("Angle : %d\n\r", angle_term);
 						etat = auto_mode;
 					}
 				}
@@ -632,7 +632,7 @@ int main(void)
 						etat = instruct_angle;
 					} else {
 						angle_term = prov_angle_term;
-						printf("Angle : %d degree(s)\n\n\r", angle_term);
+						printf("Angle : %d\n\r", angle_term);
 						etat = auto_mode;
 					}
 				}
@@ -998,7 +998,9 @@ int main(void)
 			} while ((r_buffer[0] != ' ')
 					&& (r_buffer[0] != '?') && (r_buffer[0] != '!')
 					&& (r_buffer[0] != 'w') && (r_buffer[0] != 'p')
-					&& (r_buffer[0] != 'i') && (r_buffer[0] != 'd'));
+					&& (r_buffer[0] != 'i') && (r_buffer[0] != 'd')
+					&& (r_buffer[0] != 'r')&& (r_buffer[0] != 's'));
+
 
 			if (r_buffer[0] == ' ') {
 				landing_value = commande;
@@ -1048,6 +1050,12 @@ int main(void)
 				etat = instruct_kd;
 				integre_erreur = 0;
 				erreur = 0;
+			}
+			if (r_buffer[0] == 'r') {
+				HAL_TIM_Base_Start_IT(&htim16);
+			}
+			if (r_buffer[0] == 's') {
+				HAL_TIM_Base_Stop_IT(&htim16);
 			}
 
 			break;
@@ -1125,6 +1133,7 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 
 // Callback function : timer reset
+// TAG_UC_004
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim == &htim16)

@@ -38,6 +38,10 @@ class DataMaster():
                 self.msg = temp.split("Gaz Term : ")
                 del self.msg[0]
                 self.gas_value = (self.msg[0]).removesuffix('\n')
+            if "Angle : " in temp:
+                self.msg = temp.split("Angle : ")
+                del self.msg[0]
+                self.gas_value = (self.msg[0]).removesuffix('\n')
             if "Data:" in temp:
                 self.msg = temp.split("Data:")
                 self.msg = self.msg[1].split(";")
@@ -55,6 +59,12 @@ class DataMaster():
                 print("Error\n")
                 ErrorMsg = "Gyro MPU6050 is not working. Please check if it is well connected."
                 messagebox.showerror("showerror", ErrorMsg)   
+
+
+
+ 
+
+
 
     def ClearData(self):
         """

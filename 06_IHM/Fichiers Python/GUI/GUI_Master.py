@@ -727,11 +727,9 @@ class CalibrationGUI():
             #time.sleep(1)
             self.serial.ser.write(self.data.iptr.encode())
             timeout = time.time() + new_content[i][1]
-            #while time.time()<= timeout:
             self.serial.SerialOpt(self, timeout)
-                #pass
             self.serial.ser.write(self.data.ipts.encode())
-            #self.serial.SerialIpt(self, self.data.ipts, 780)  
+             
             time.sleep(.1)
     
         self.serial.SerialIpt(self, self.data.iptSPACE, 30)
@@ -860,6 +858,8 @@ class TripModeGUI():
         """
         Method to search for txt files and do the "séquence de vol"/trip
         """
+        self.data.ClearData()
+        
         self.root.filename = filedialog.askopenfilename(
             initialdir="/", 
             title="File Explorer",
@@ -885,13 +885,31 @@ class TripModeGUI():
             new_content[i][1] = int(new_content[i][1])
             self.serial.ser.write(new_content[i][0].encode())
             self.serial.SerialIpt(self, self.data.iptENTER, 30)
+            self.serial.ser.write(self.data.iptr.encode())
+            
             timeout = time.time() + new_content[i][1]
-            while time.time()<= timeout:
-                pass
+            self.serial.SerialOpt(self, timeout)
+            self.serial.ser.write(self.data.ipts.encode())
+            time.sleep(.1)
             self.serial.SerialIpt(self, self.data.iptw, 30)
         
         self.serial.SerialIpt(self, self.data.iptSPACE, 30)
-        self.serial.SerialIpt(self, self.data.ipt3, 30)
+        
+        title_file = time.strftime("%Y-%m-%d-%Hh%M-Trip_mode_Results")        
+        self.df = pd.DataFrame(self.data.record, 
+                          columns = ['Angle', 'PositionX', 'PositionY', 
+                                     "Ax Raw", "Ay Raw", "Az Raw",
+                                     "Gx Raw", "Gy Raw", "Gz Raw"])
+        saving_path = filedialog.asksaveasfile(initialfile=title_file,
+                                               mode='w',
+                                               defaultextension='.csv',
+                                               filetypes=(
+                                                   ("CSV files","*.csv"),
+                                                          ("All files","*.*")
+                                                          ))
+        self.df.to_csv(saving_path, sep=';', decimal=',', encoding='utf-8', index=False, line_terminator='\n')
+        print(self.data.record)
+        
 
 if __name__ == "__main__":
     RootGUI()

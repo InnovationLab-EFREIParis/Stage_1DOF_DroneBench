@@ -5,7 +5,7 @@ TAG_UC :
 TAG_UC_001	État 'entrance' de l'automate
 TAG_UC_002	État 'init_uc' de l'automate
 TAG_UC_003	État 'info_mode' de l'automate
-TAG_UC_004	
+TAG_UC_004	Fonction Callback du Timer Interrupt
 TAG_UC_005	État 'motor_ready' de l'automate
 TAG_UC_006	État 'manual_mode_pot' de l'automate
 TAG_UC_007	État 'manual_mode_term' de l'automate
