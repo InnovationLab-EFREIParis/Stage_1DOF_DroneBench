@@ -58,16 +58,6 @@ class DataMaster():
                                         float(self.msg[8]),
                                         float(self.msg[9]),
                                         float((self.msg[10]).removesuffix('\n'))])
-                if len(self.msg) == 8:
-                    self.record.append([int(self.gas_value),
-                                        float(self.msg[0]),
-                                        float(self.msg[1]),
-                                        int(self.msg[2]),
-                                        int(self.msg[3]),
-                                        int(self.msg[4]),
-                                        int(self.msg[5]),
-                                        int(self.msg[6]),
-                                        int((self.msg[7]).removesuffix('\n'))])
                     
             if "Gyro MPU6050 is not working" in temp:
                 print("Error\n")
