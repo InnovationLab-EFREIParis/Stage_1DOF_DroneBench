@@ -899,7 +899,8 @@ class TripModeGUI():
         self.df = pd.DataFrame(self.data.record, 
                           columns = ['Angle', 'PositionX', 'PositionY', 
                                      "Ax Raw", "Ay Raw", "Az Raw",
-                                     "Gx Raw", "Gy Raw", "Gz Raw"])
+                                     "Gx Raw", "Gy Raw", "Gz Raw", 
+                                     "Erreur P", "Erreur I", "Erreur D"])
         saving_path = filedialog.asksaveasfile(initialfile=title_file,
                                                mode='w',
                                                defaultextension='.csv',

@@ -85,6 +85,12 @@
 /* USER CODE BEGIN PV */
 Kalman_t kali;
 MPU6050_t mpu;
+
+double erreur = 0;
+double integre_erreur = 0;
+double derive_erreur = 0;
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -140,10 +146,9 @@ int main(void)
 	double ki = 0.018;
 	double kd = 0.1;
 
-	double erreur = 0;
+
+
 	double _erreur = 0;
-	double integre_erreur = 0;
-	double derive_erreur = 0;
 
 	// mode 2
 	int cpt_char = 0;
@@ -1148,8 +1153,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		int16_t GyRaw = mpu.Gyro_Y_RAW ;
 		int16_t GzRaw = mpu.Gyro_Z_RAW ;
 
-		char data = printf("Data:%.2lf;%.2lf;%d;%d;%d;%d;%d;%d\n",
-				position_angulaireX, position_angulaireY, AxRaw, AyRaw, AzRaw, GxRaw, GyRaw, GzRaw);
+		char data = printf("Data:%.2lf;%.2lf;%d;%d;%d;%d;%d;%d;%.2lf;%.2lf;%.2lf\n",
+				position_angulaireX, position_angulaireY, AxRaw, AyRaw, AzRaw, GxRaw, GyRaw, GzRaw, erreur, integre_erreur, derive_erreur);
 		HAL_UART_Transmit_IT(&huart2, data, sizeof(data));
 	}
 
