@@ -45,7 +45,7 @@ class DataMaster():
             if "Data:" in temp:
                 self.msg = temp.split("Data:")
                 self.msg = self.msg[1].split(";")
-                if len(self.msg) == 8:
+                if len(self.msg) == 11:
                     self.record.append([int(self.gas_value),
                                         float(self.msg[0]),
                                         float(self.msg[1]),
@@ -54,7 +54,11 @@ class DataMaster():
                                         int(self.msg[4]),
                                         int(self.msg[5]),
                                         int(self.msg[6]),
-                                        int((self.msg[7]).removesuffix('\n'))])
+                                        int(self.msg[7]),
+                                        float(self.msg[8]),
+                                        float(self.msg[9]),
+                                        float((self.msg[10]).removesuffix('\n'))])
+                    
             if "Gyro MPU6050 is not working" in temp:
                 print("Error\n")
                 ErrorMsg = "Gyro MPU6050 is not working. Please check if it is well connected."
