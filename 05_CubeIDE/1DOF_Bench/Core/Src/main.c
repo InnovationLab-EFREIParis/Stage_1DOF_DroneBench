@@ -989,7 +989,7 @@ int main(void)
 				erreur = consigne - position_angulaire;
 				integre_erreur += erreur;
 				derive_erreur = erreur - _erreur;
-				commande = kp * (erreur) + ki * (integre_erreur)
+				commande = 100*kp * (erreur) + ki * (integre_erreur)
 						+ kd * (derive_erreur);
 
 				if (commande > valeur_max_moteur) {
