@@ -6,7 +6,7 @@ Created on Thu Dec  1 10:27:04 2022
 """
 
 import tkinter as tk
-from tkinter import Tk, LabelFrame, Label, Button, Entry
+from tkinter import Tk, LabelFrame, Label, Button, Entry, tix
 from tkinter import messagebox, StringVar, OptionMenu, filedialog
 import time
 import pandas as pd
@@ -298,9 +298,10 @@ class ModeTermGUI():
                                 padx=5, pady=5, bg="white", width=60)
         ## Angle consigne
         self.label_consigne = Label(
-            self.frame, text="Gas (%): ", bg="white", width=15, anchor="w")
+            self.frame, text="Gas (‰): ", bg="white", width=15, anchor="w")
         self.label_screen = Label(self.frame, text="0", bg="white", width=5)
         self.consigne_box = Entry(self.frame, width=5)
+
         ## Button to start the engine
         self.btn_go_consigne = Button(self.frame, text="GO!", width=10,
                                       command=self.start_manual_term_mode)
@@ -330,7 +331,8 @@ class ModeTermGUI():
         self.label_screen.grid(row=1, column=2, 
                                padx=5, pady=5)
         self.consigne_box.grid(row=1, column=3, 
-                               padx=5, pady=5)
+                               padx=5, pady=5)        
+        
         self.btn_go_consigne.grid(row=1, column=5, 
                                   padx=5, pady=5)
         self.btn_stop_landing.grid(row=1, column=6, 
@@ -365,13 +367,13 @@ class ModeTermGUI():
         
         if gas_value.isdigit():
             gas_value = int(gas_value)
-            if (gas_value >= 0) and (gas_value <= 10):
+            if (gas_value >= 0) and (gas_value <= 100):
                 self.btn_stop_landing["state"] = "active"
                 self.serial.ser.write(str(gas_value).encode())
                 self.serial.SerialIpt(self, self.data.iptENTER, 30)
                 self.label_screen["text"] = gas_value
             else:
-                ErrorMsg = "Please enter a number between 0 and 10. If you want a number over 10, please use the '+' symbol."
+                ErrorMsg = "Please enter a number between 0 and 100. If you want a number over 100, please use the '+' symbol."
                 messagebox.showerror("showerror", ErrorMsg)
         else:
             ErrorMsg = "Please enter a positive integer."
@@ -384,7 +386,7 @@ class ModeTermGUI():
         
     def minus_gas_value(self):
         """
-        Method to remove 1% of gas value
+        Method to remove 1‰ of gas value
         """
         self.consigne_box.delete(0,"end")
         
@@ -403,7 +405,7 @@ class ModeTermGUI():
     
     def plus_gas_value(self):
         """
-        Method to add 1% of gas value
+        Method to add 1‰ of gas value
         """
         self.consigne_box.delete(0,"end")
         
@@ -528,28 +530,6 @@ class AutoModeGUI():
         
         self.motor_ready = MotorReadyGUI(self.root, self.serial, self.data)
         
-    def isAngle(self):
-        """
-        Method to check if the entry is a correct angle value
-        """
-        angle_entry = self.consigne_box.get()
-        
-        
-        if angle_entry.isdigit():
-            angle_entry = int(angle_entry)
-            if (angle_entry >= 0) and (angle_entry <= 90):
-                self.btn_go_consigne["state"] = "active"
-            else:
-                self.btn_go_consigne["state"] = "disabled"
-                ErrorMsg = "Please enter a number between 0 and 90."
-                messagebox.showerror("showerror", ErrorMsg)
-                self.consigne_box.delete(0,"end")
-        else:
-            self.btn_go_consigne["state"] = "disabled"
-            ErrorMsg = "Please enter a positive integer."
-            messagebox.showerror("showerror", ErrorMsg)
-            self.consigne_box.delete(0,"end")
-        
     def start_auto_mode(self):
         """
         Method to start the engine after entering the angle value,
@@ -557,14 +537,12 @@ class AutoModeGUI():
         """
         # Take the angle value in the "Entry" widget
         angle_value = self.consigne_box.get()
-        self.consigne_box.delete(0,"end")
-        
+
         if angle_value.isdigit():
             angle_value = int(angle_value)
             if (angle_value >= 0) and (angle_value <= 90):
-                self.btn_stop_landing["state"] = "active"
-                self.btn_default_set_k["state"] = "disabled"
-                if self.kp_box["state"] == "disabled":
+                if self.kp_box["state"] == "disabled":                   
+                    self.consigne_box.delete(0,"end")
                     self.serial.SerialIpt(self, self.data.iptw, 30)
                     self.serial.ser.write(str(angle_value).encode())
                     self.serial.SerialIpt(self, self.data.iptENTER, 30)
@@ -577,26 +555,34 @@ class AutoModeGUI():
                     # Take the kd value in the "Entry" widget
                     kd_value =self.kd_box.get()
                     # Communicate the values of the Entry widgets
-                    ## Angle
-                    self.serial.ser.write(str(angle_value).encode())
-                    self.serial.SerialIpt(self, self.data.iptENTER, 30)
-                    self.label_screen["text"] = angle_value
-                    ## kp
-                    self.serial.SerialIpt(self, self.data.iptp, 30)
-                    self.serial.ser.write(kp_value.encode())
-                    self.serial.SerialIpt(self, self.data.iptENTER, 30)
-                    ## ki
-                    self.serial.SerialIpt(self, self.data.ipti, 30)
-                    self.serial.ser.write(ki_value.encode())
-                    self.serial.SerialIpt(self, self.data.iptENTER, 30)
-                    ## kd
-                    self.serial.SerialIpt(self, self.data.iptd, 30)
-                    self.serial.ser.write(kd_value.encode())
-                    self.serial.SerialIpt(self, self.data.iptENTER, 30)
                     
-                    self.kp_box["state"] = "disabled"
-                    self.ki_box["state"] = "disabled"
-                    self.kd_box["state"] = "disabled"
+                    if kp_value.isdigit() and ki_value.isdigit() and kd_value.isdigit():
+                        self.btn_stop_landing["state"] = "active"
+                        self.btn_default_set_k["state"] = "disabled"
+                        self.consigne_box.delete(0,"end")
+                        ## Angle
+                        self.serial.ser.write(str(angle_value).encode())
+                        self.serial.SerialIpt(self, self.data.iptENTER, 30)
+                        self.label_screen["text"] = angle_value
+                        ## kp
+                        self.serial.SerialIpt(self, self.data.iptp, 30)
+                        self.serial.ser.write(kp_value.encode())
+                        self.serial.SerialIpt(self, self.data.iptENTER, 30)
+                        ## ki
+                        self.serial.SerialIpt(self, self.data.ipti, 30)
+                        self.serial.ser.write(ki_value.encode())
+                        self.serial.SerialIpt(self, self.data.iptENTER, 30)
+                        ## kd
+                        self.serial.SerialIpt(self, self.data.iptd, 30)
+                        self.serial.ser.write(kd_value.encode())
+                        self.serial.SerialIpt(self, self.data.iptENTER, 30)
+                        
+                        self.kp_box["state"] = "disabled"
+                        self.ki_box["state"] = "disabled"
+                        self.kd_box["state"] = "disabled"
+                    else:
+                        ErrorMsg = "Please be sure that the entries for kp, ki and kd values are numbers."
+                        messagebox.showerror("showerror", ErrorMsg)   
             else:
                 ErrorMsg = "Please enter a number between 0 and 90."
                 messagebox.showerror("showerror", ErrorMsg)
@@ -823,9 +809,38 @@ class TripModeGUI():
                                 padx=5, pady=5, bg="white", width=60)
         
         self.btn_browse_file = Button(self.frame, text="Select File", width=10,
-                                      command=self.browseFile)
+                                      state="disabled", command=self.browseFile)
         self.change_mode = Button(self.frame, text="Change Mode", width=15,
                                   command=self.TripModeClose)
+        
+        ## kp
+        self.label_kp = Label(
+            self.frame, text="kp:\t\t0,", bg="white", width=15, anchor="w")
+        self.kp_box = Entry(self.frame, width=5)
+        ### Default value
+        self.kp_box.insert(0, "001")
+        
+        ## ki
+        self.label_ki = Label(
+            self.frame, text="ki:\t\t0,", bg="white", width=15, anchor="w")
+        self.ki_box = Entry(self.frame, width=5)
+        ### Default value
+        self.ki_box.insert(0, "018")
+        
+        ## kd
+        self.label_kd = Label(
+            self.frame, text="kd:\t\t0,", bg="white", width=15, anchor="w")
+        self.kd_box = Entry(self.frame, width=5)
+        ### Default value
+        self.kd_box.insert(0, "1")
+        
+        ## Button to come back to default set of kp/ki/kd values
+        self.btn_default_set_k = Button(self.frame, text="Default", width=10,
+                                      command=self.default_k_values)
+        self.btn_check_set_k = Button(self.frame, text="Check", width=10,
+                                      command=self.CorrectCoeff)
+        
+        
         
         # Extending the GUI
         self.TripModeOpen()
@@ -834,13 +849,27 @@ class TripModeGUI():
         '''
         Method to display all the widgets 
         '''
-        self.root.geometry("600x110")
+        self.root.geometry("710x180")
         self.frame.grid(row=1, column=5, rowspan=3,
                         columnspan=5, padx=5, pady=5)
         self.btn_browse_file.grid(row=1, column=1, 
                                   padx=5, pady=5)
         self.change_mode.grid(row=1, column=2, 
                                   padx=5, pady=5)
+        
+        self.label_kp.grid(row=2, column=1)
+        self.kp_box.grid(row=2, column=2, 
+                               padx=5, pady=5)
+        self.label_ki.grid(row=3, column=1)
+        self.ki_box.grid(row=3, column=2, 
+                               padx=5, pady=5)
+        self.label_kd.grid(row=4, column=1)
+        self.kd_box.grid(row=4, column=2, 
+                               padx=5, pady=5)
+        self.btn_default_set_k.grid(row=3, column=3, 
+                               padx=5, pady=5)
+        self.btn_check_set_k.grid(row=4, column=3, 
+                               padx=5, pady=5)
         
     def TripModeClose(self):
         '''
@@ -854,6 +883,43 @@ class TripModeGUI():
         self.frame.destroy()
         
         self.motor_ready = MotorReadyGUI(self.root, self.serial, self.data)
+        
+    def CorrectCoeff(self):
+        # Take the kp value in the "Entry" widget
+        kp_value = self.kp_box.get()
+        # Take the ki value in the "Entry" widget
+        ki_value = self.ki_box.get()
+        # Take the kd value in the "Entry" widget
+        kd_value =self.kd_box.get()
+        # Communicate the values of the Entry widgets
+        
+        if kp_value.isdigit() and ki_value.isdigit() and kd_value.isdigit():
+            self.btn_default_set_k["state"] = "disabled"
+            self.serial.ser.write("1".encode())
+            self.serial.SerialIpt(self, self.data.iptENTER, 30)
+            ## kp
+            self.serial.SerialIpt(self, self.data.iptp, 30)
+            self.serial.ser.write(kp_value.encode())
+            self.serial.SerialIpt(self, self.data.iptENTER, 30)
+            ## ki
+            self.serial.SerialIpt(self, self.data.ipti, 30)
+            self.serial.ser.write(ki_value.encode())
+            self.serial.SerialIpt(self, self.data.iptENTER, 30)
+            ## kd
+            self.serial.SerialIpt(self, self.data.iptd, 30)
+            self.serial.ser.write(kd_value.encode())
+            self.serial.SerialIpt(self, self.data.iptENTER, 30)
+            
+            self.serial.SerialIpt(self, self.data.iptw, 30)
+            
+            self.kp_box["state"] = "disabled"
+            self.ki_box["state"] = "disabled"
+            self.kd_box["state"] = "disabled"
+            self.btn_check_set_k["state"] = "disabled"
+            self.btn_browse_file["state"] = "active"
+        else:
+            ErrorMsg = "Please be sure that the entries for kp, ki and kd values are numbers."
+            messagebox.showerror("showerror", ErrorMsg)
         
     def browseFile(self):
         """
@@ -911,6 +977,27 @@ class TripModeGUI():
                                                           ))
         self.df.to_csv(saving_path, sep=';', decimal=',', encoding='utf-8', index=False, line_terminator='\n')
         print(self.data.record)
+        
+        self.serial.SerialIpt(self, self.data.ipt3, 30)
+        
+        self.kp_box["state"] = "normal"
+        self.ki_box["state"] = "normal"
+        self.kd_box["state"] = "normal"
+        self.btn_check_set_k["state"] = "active"
+        self.btn_browse_file["state"] = "disabled"
+        self.btn_default_set_k["state"] = "active"
+        
+        
+    def default_k_values(self):
+        """
+        Method to reset the kp/i/d values to default ones
+        """
+        self.kp_box.delete(0,"end")
+        self.kp_box.insert(0, "001")
+        self.ki_box.delete(0,"end")
+        self.ki_box.insert(0, "018")
+        self.kd_box.delete(0,"end")
+        self.kd_box.insert(0, "1")
         
 
 if __name__ == "__main__":

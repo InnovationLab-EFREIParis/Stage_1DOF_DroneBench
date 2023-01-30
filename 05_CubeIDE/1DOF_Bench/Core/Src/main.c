@@ -89,7 +89,8 @@ MPU6050_t mpu;
 double erreur = 0;
 double integre_erreur = 0;
 double derive_erreur = 0;
-
+char r_buffer[2];
+int counter_exceeding_value = 0;
 
 /* USER CODE END PV */
 
@@ -132,7 +133,6 @@ int main(void)
 	//uint32_t timer_val2=UINT32_C(1234567890);
 	enum states etat, previous_etat;
 	etat = entrance;
-	char r_buffer[2];
 	int okay;
 	int valeur_can;
 	int mapped_value = valeur_min_moteur;
@@ -178,7 +178,7 @@ int main(void)
 	char msg_info_mode[] = "> Press [ ? ] for Info mode\n\n\r";
 	char msg_error_char_nb[] =
 			"ERROR: Please enter only characters included in this list : 0 1 2 3 4 5 6 7 8 9\n\n\r";
-	char msg_error_value_sup[] = "ERROR: Value > 17\n\n\r";
+	char msg_error_value_sup[] = "ERROR: Value > 173\n\n\r";
 	char msg_error_value_sup_angle[] = "ERROR: Value > 90\n\n\r";
 
   /* USER CODE END 1 */
@@ -1156,6 +1156,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		char data = printf("Data:%.2lf;%.2lf;%d;%d;%d;%d;%d;%d;%.2lf;%.2lf;%.2lf\n",
 				position_angulaireX, position_angulaireY, AxRaw, AyRaw, AzRaw, GxRaw, GyRaw, GzRaw, erreur, integre_erreur, derive_erreur);
 		HAL_UART_Transmit_IT(&huart2, data, sizeof(data));
+
+		if (position_angulaireX > 90){
+			counter_exceeding_value +=1;
+			if (counter_exceeding_value >10){
+				counter_exceeding_value = 0;
+				r_buffer[0] = ' ';
+				HAL_TIM_Base_Stop_IT(&htim16);
+			}
+		}
 	}
 
 }
