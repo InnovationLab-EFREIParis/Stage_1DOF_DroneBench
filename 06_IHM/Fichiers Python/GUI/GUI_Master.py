@@ -6,12 +6,17 @@ Created on Thu Dec  1 10:27:04 2022
 """
 
 import tkinter as tk
-from tkinter import Tk, LabelFrame, Label, Button, Entry, tix
+from tkinter import Tk, LabelFrame, Label, Button, Entry
 from tkinter import messagebox, StringVar, OptionMenu, filedialog
 import time
 import pandas as pd
+import matplotlib
+matplotlib.use('TkAgg')
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+from matplotlib.backend_bases import key_press_handler
+from matplotlib.figure import Figure
 import re
+
 
 # TAG_IHM_001
 # Class to setup the main window
@@ -810,6 +815,9 @@ class TripModeGUI():
         
         self.btn_browse_file = Button(self.frame, text="Select File", width=10,
                                       state="disabled", command=self.browseFile)
+        self.btn_show_graph = Button(self.frame, text="Show Graph", width=10,
+                                     state="disabled",
+                                      command=self.showgraph)
         self.change_mode = Button(self.frame, text="Change Mode", width=15,
                                   command=self.TripModeClose)
         
@@ -854,7 +862,9 @@ class TripModeGUI():
                         columnspan=5, padx=5, pady=5)
         self.btn_browse_file.grid(row=1, column=1, 
                                   padx=5, pady=5)
-        self.change_mode.grid(row=1, column=2, 
+        self.btn_show_graph.grid(row=1, column=2, 
+                                  padx=5, pady=5)
+        self.change_mode.grid(row=1, column=3, 
                                   padx=5, pady=5)
         
         self.label_kp.grid(row=2, column=1)
@@ -977,7 +987,7 @@ class TripModeGUI():
                                                           ))
         self.df.to_csv(saving_path, sep=';', decimal=',', encoding='utf-8', index=False, line_terminator='\n')
         print(self.data.record)
-        
+        self.btn_show_graph["state"] = "active"
         self.serial.SerialIpt(self, self.data.ipt3, 30)
         
         self.kp_box["state"] = "normal"
@@ -985,9 +995,47 @@ class TripModeGUI():
         self.kd_box["state"] = "normal"
         self.btn_check_set_k["state"] = "active"
         self.btn_browse_file["state"] = "disabled"
-        self.btn_default_set_k["state"] = "active"
+        self.btn_default_set_k["state"] = "active"       
+    
+    def showgraph(self):
+        """
+        Method to show the graphic of the simulation
+        """
+        list_time = []
+       
+        for i in range(len(self.df)):
+            list_time.append(i*20)
+        df2 = self.df.assign(Time=list_time) 
+        
+        ax1 = df2.plot.scatter(
+            x=df2.columns[-1],
+            y=df2.columns[1],
+            c="blue")       
+        ax2 = df2.plot.scatter(
+            x=df2.columns[-1],
+            y=df2.columns[2],
+            ax=ax1,
+            c="red") 
+        fig = ax2.get_figure()
         
         
+        
+        new_window = Tk()
+        new_window.geometry("500x400")
+        new_window.title("Trip Mode Graphic")
+        
+        canvas= FigureCanvasTkAgg(fig, new_window)
+        canvas.draw()
+        
+        toolbar = NavigationToolbar2Tk(
+            canvas, new_window)
+        toolbar.update()
+        
+        canvas.get_tk_widget().pack(
+            side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+        
+        new_window.mainloop()
+    
     def default_k_values(self):
         """
         Method to reset the kp/i/d values to default ones
