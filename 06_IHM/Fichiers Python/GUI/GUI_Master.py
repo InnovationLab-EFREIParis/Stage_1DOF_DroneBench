@@ -7,6 +7,7 @@ Created on Thu Dec  1 10:27:04 2022
 
 import tkinter as tk
 from tkinter import Tk, LabelFrame, Label, Button, Entry
+from tkinter import Frame, IntVar, Checkbutton
 from tkinter import messagebox, StringVar, OptionMenu, filedialog
 import time
 import pandas as pd
@@ -727,10 +728,16 @@ class CalibrationGUI():
         
         title_file = time.strftime("%Y-%m-%d-%Hh%M-Calibration_mode_Results")        
         self.df = pd.DataFrame(self.data.record, 
-                          columns = ['Gas', 'PositionX', 'PositionY', 
+                          columns = ["Consigne Gaz (‰)", "Position Angulaire X (°)", "Position Angulaire Y (°)", 
                                      "Ax Raw", "Ay Raw", "Az Raw",
                                      "Gx Raw", "Gy Raw", "Gz Raw", 
                                      "Erreur P", "Erreur I", "Erreur D"])
+        
+        list_time = []
+        for i in range(len(self.df)):
+            list_time.append(i*20)
+        self.df.insert(1, "Time (ms)", list_time)
+        
         saving_path = filedialog.asksaveasfile(initialfile=title_file,
                                                mode='w',
                                                defaultextension='.csv',
@@ -752,15 +759,10 @@ class CalibrationGUI():
         Method to show the graphic of the simulation
         """
         if self.graph_type == 1:
-            list_time = []
-           
-            for i in range(len(self.df)):
-                list_time.append(i*20)
-            df2 = self.df.assign(Time=list_time) 
             
-            fig = df2.plot.scatter(
-                x=df2.columns[-1],
-                y=df2.columns[1]).get_figure()
+            fig = self.df.plot.scatter(
+                x=self.df.columns[1],
+                y=self.df.columns[2]).get_figure()
             
             new_window = Tk()
             new_window.geometry("500x400")
@@ -780,7 +782,7 @@ class CalibrationGUI():
         else:    
             fig = self.df.plot.scatter(
                 x=self.df.columns[0],
-                y=self.df.columns[1]).get_figure()
+                y=self.df.columns[2]).get_figure()
             
             new_window = Tk()
             new_window.geometry("500x400")
@@ -974,10 +976,15 @@ class TripModeGUI():
         
         title_file = time.strftime("%Y-%m-%d-%Hh%M-Trip_mode_Results")        
         self.df = pd.DataFrame(self.data.record, 
-                          columns = ['Angle', 'PositionX', 'PositionY', 
-                                     "Ax Raw", "Ay Raw", "Az Raw",
-                                     "Gx Raw", "Gy Raw", "Gz Raw", 
-                                     "Erreur P", "Erreur I", "Erreur D"])
+                          columns = ['Consigne Angle (°)', 'Position Angulaire X (°)', 'Position Angulaire Y (°)', 
+                                     'Ax Raw', 'Ay Raw', 'Az Raw',
+                                     'Gx Raw', 'Gy Raw', 'Gz Raw', 
+                                     'Erreur P', 'Erreur I', 'Erreur D'])
+        list_time = []
+        for i in range(len(self.df)):
+            list_time.append(i*20)
+        self.df.insert(1, 'Time (ms)', list_time)
+        
         saving_path = filedialog.asksaveasfile(initialfile=title_file,
                                                mode='w',
                                                defaultextension='.csv',
@@ -1000,41 +1007,87 @@ class TripModeGUI():
     def showgraph(self):
         """
         Method to show the graphic of the simulation
-        """
-        list_time = []
-       
-        for i in range(len(self.df)):
-            list_time.append(i*20)
-        df2 = self.df.assign(Time=list_time) 
-        
-        ax1 = df2.plot.scatter(
-            x=df2.columns[-1],
-            y=df2.columns[1],
-            c="blue")       
-        ax2 = df2.plot.scatter(
-            x=df2.columns[-1],
-            y=df2.columns[2],
-            ax=ax1,
-            c="red") 
-        fig = ax2.get_figure()
-        
-        
-        
+        """     
         new_window = Tk()
         new_window.geometry("500x400")
         new_window.title("Trip Mode Graphic")
         
-        canvas= FigureCanvasTkAgg(fig, new_window)
-        canvas.draw()
+        self.nbvar=2
+          
+        f1 = Figure(figsize=(4,3), dpi=100)
+        a1 = f1.add_subplot(111)
+        
+        # ax1 = self.df.plot.scatter(
+        #     x=self.df.columns[1],
+        #     y=self.df.columns[2],
+        #     visible=True,
+        #     c="blue")       
+        # ax2 = self.df.plot.scatter(
+        #     x=self.df.columns[1],
+        #     y=self.df.columns[3],
+        #     visible=True,
+        #     ax=ax1,
+        #     c="red") 
+        
+        # self.lines=[]
+        # self.lines.append(ax1)
+        # self.lines.append(ax2)
+        
+        
+        self.lines=[]
+        self.lines.append(a1.plot(self.df['Time (ms)'], self.df['Position Angulaire X (°)'], lw=5, visible=True))
+        self.lines.append(a1.plot(self.df['Time (ms)'], self.df['Position Angulaire Y (°)'], lw=5, visible=True))
+        print(self.lines)
+        
+        a1.set_xlabel('Time (ms)')
+        a2 = a1.twinx()
+        
+        # fig = ax2.get_figure()
+        
+    
+        self.canvas= FigureCanvasTkAgg(f1, new_window)
+        self.canvas.draw()
         
         toolbar = NavigationToolbar2Tk(
-            canvas, new_window)
+            self.canvas, new_window)
         toolbar.update()
         
-        canvas.get_tk_widget().pack(
-            side=tk.BOTTOM, fill=tk.BOTH, expand=True)
+        self.canvas.get_tk_widget().pack(
+            side=tk.RIGHT, fill=tk.BOTH, expand=True)
+        
+        option = Frame(new_window)
+        option.pack()
+         
+        var = IntVar()
+        var2 = IntVar()
+        
+        label=[]
+        label.append('PositionX (°)')
+        label.append('PositionY (°)')
+        
+        self.varhide= []
+        for i in range(0,self.nbvar) :
+            self.varhide.append(IntVar())
+        print(self.varhide) 
+        for i in range(0,self.nbvar) :
+            c = Checkbutton(
+                option, text=label[i], variable=self.varhide[i], 
+                command=self.hideline)
+            c.pack()
+        
         
         new_window.mainloop()
+        
+    def hideline(self):
+        for i in range(0,self.nbvar) :
+            print(self.varhide[i].get())
+            if(self.varhide[i].get()==1):
+                print("1")
+                self.lines[i][0].set_visible(True)
+            elif(self.varhide[i].get()==0):
+                print("2")
+                self.lines[i][0].set_visible(False)
+        self.canvas.draw()
     
     def default_k_values(self):
         """

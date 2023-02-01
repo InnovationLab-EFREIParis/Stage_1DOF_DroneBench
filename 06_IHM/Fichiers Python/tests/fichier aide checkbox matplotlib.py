@@ -14,21 +14,22 @@ from tkinter import *
 import tkinter as Tk
   
 root = Tk.Tk()
-root.wm_title("Embedding in TK")
+root.geometry("500x500")
+root.title("Embedding in TK")
  
 nbvar=2
- 
-#figure1
   
-f1 = Figure(figsize=(5,4), dpi=100)
+f1 = Figure(figsize=(4,3), dpi=100)
 a1 = f1.add_subplot(111)
  
 x = [0, 1, 2]
+y2 = [0, 1, 4]
 y = [0, 1, 3] 
  
 lines=[]
 lines.append(a1.plot(x, y, lw=5, visible=True))
-lines.append(a1.plot(y, x, lw=5, visible=True))
+lines.append(a1.plot(x, y2, lw=5, visible=True))
+print(lines)
  
 a1.set_xlabel('time (s)')
 a2 = a1.twinx()
@@ -44,46 +45,22 @@ toolbar = NavigationToolbar2Tk( canvas, root )
 #toolbar.update()
 canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
  
- 
-#figure2
- 
-f2 = Figure(figsize=(5,4), dpi=100)
-a1 = f2.add_subplot(111)
- 
-x = [0, 1, 2]
-y = [0, -1, -3] 
-lines2 = a1.plot(x, y, lw=5, visible=True)
+# def on_key_event(event):
+#     print('you pressed %s'%event.key)
+#     key_press_handler(event, canvas, toolbar)
   
-  
-canvas2 = FigureCanvasTkAgg(f2, master=root)
-canvas2.draw()
-canvas2.get_tk_widget().pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
-  
-toolbar = NavigationToolbar2Tk( canvas2, root )
-toolbar.update()
-canvas2._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
-  
- 
-def on_key_event(event):
-    print('you pressed %s'%event.key)
-    key_press_handler(event, canvas, toolbar)
-  
-canvas.mpl_connect('key_press_event', on_key_event)
-def _quit():
-    root.quit()
-    root.destroy()
+# canvas.mpl_connect('key_press_event', on_key_event)
   
 def hideline():
     for i in range(0,nbvar) :
         if(varhide[i].get()==1):
+            print(varhide[i])
             lines[i][0].set_visible(False)
         if(varhide[i].get()==0):
+            print(varhide[i])
             lines[i][0].set_visible(True)
     canvas.draw()
- 
-button = Tk.Button(master=root, text='Quit', command=_quit)
-button.pack(side=Tk.BOTTOM)
- 
+
 option = Frame(root)
 option.pack()
  
@@ -99,7 +76,9 @@ for i in range(0,nbvar) :
     varhide.append(IntVar())
  
 for i in range(0,nbvar) :
-    c = Checkbutton(option, text=label[i], variable=varhide[i], command=hideline)
+    c = Checkbutton(
+        option, text=label[i], variable=varhide[i], 
+        command=hideline)
     c.pack()
   
 Tk.mainloop()
