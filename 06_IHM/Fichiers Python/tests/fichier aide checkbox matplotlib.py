@@ -64,9 +64,6 @@ def hideline():
 option = Frame(root)
 option.pack()
  
-var = IntVar()
-var2 = IntVar()
- 
 label=[]
 label.append('courbe1')
 label.append('courbe2')
