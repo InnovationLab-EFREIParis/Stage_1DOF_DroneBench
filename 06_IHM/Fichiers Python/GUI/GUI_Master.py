@@ -1188,27 +1188,33 @@ class ShowTripModeGUI():
         
         self.chb = Checkbutton(
             self.option, text=self.label, variable=self.var,
-            command=self.hideline(self.var, 0)).grid(
-                column = 1, 
-                row = 1)
+            command=self.hideline)
+        self.chb.pack()
         self.chb2 = Checkbutton(
             self.option, text=self.label2, variable=self.var2,
-            command=self.hideline(self.var2, 1)).grid(
-                column = 1, 
-                row = 2)
-    
-    def hideline(self, varX, X):
-        print(varX.get())
-        if(varX.get()==1):
-            self.lines[X][0].set_visible(False)
-        if(varX.get()==0):
-            self.lines[X][0].set_visible(True)
+            command=self.hideline2)
+        self.chb2.pack()
+
         
-        self.canvas.draw()
-       
+    def hideline(self):
+        print(self.var.get())
+        print(self.lines[0][0])
+        if(self.var.get()==1):
+            self.lines[0][0].set_visible(False)
+        if(self.var.get()==0):
+            self.lines[0][0].set_visible(True)
         
+        self.canvas.draw()   
         
+    def hideline2(self):
+        print(self.var2.get())
+        print(self.lines[1][0])
+        if(self.var2.get()==1):
+            self.lines[1][0].set_visible(False)
+        if(self.var2.get()==0):
+            self.lines[1][0].set_visible(True)
         
+        self.canvas.draw()      
         
         
         
@@ -1221,3 +1227,4 @@ if __name__ == "__main__":
     AutoModeGUI()
     CalibrationGUI()
     TripModeGUI()
+    ShowTripModeGUI()

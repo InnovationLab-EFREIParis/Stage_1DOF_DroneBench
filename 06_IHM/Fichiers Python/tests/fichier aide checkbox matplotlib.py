@@ -8,7 +8,7 @@ Created on Tue Jan 31 16:22:04 2023
 import matplotlib
 matplotlib.use('TkAgg')
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
-from matplotlib.backend_bases import key_press_handler
+# from matplotlib.backend_bases import key_press_handler
 from matplotlib.figure import Figure
 from tkinter import *
 import tkinter as Tk
@@ -53,6 +53,7 @@ canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
   
 def hideline():
     for i in range(0,nbvar) :
+        print(lines[i][0])
         if(varhide[i].get()==1):
             print(varhide[i])
             lines[i][0].set_visible(False)
