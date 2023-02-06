@@ -7,12 +7,12 @@ Created on Thu Dec  1 10:27:04 2022
 
 import tkinter as tk
 from tkinter import Tk, LabelFrame, Label, Button, Entry
-from tkinter import Frame, IntVar, Checkbutton
+from tkinter import  IntVar, Frame, Checkbutton
 from tkinter import messagebox, StringVar, OptionMenu, filedialog
 import time
 import pandas as pd
-import matplotlib
-matplotlib.use('TkAgg')
+# import matplotlib
+# matplotlib.use('TkAgg')
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 from matplotlib.figure import Figure
 import re
@@ -818,7 +818,7 @@ class TripModeGUI():
                                       state="disabled", command=self.browseFile)
         self.btn_show_graph = Button(self.frame, text="Show Graph", width=10,
                                      state="disabled",
-                                      command=self.showgraph2)
+                                      command=self.showgraph)
         self.change_mode = Button(self.frame, text="Change Mode", width=15,
                                   command=self.TripModeClose)
         
@@ -848,8 +848,6 @@ class TripModeGUI():
                                       command=self.default_k_values)
         self.btn_check_set_k = Button(self.frame, text="Check", width=10,
                                       command=self.CorrectCoeff)
-        
-        
         
         # Extending the GUI
         self.TripModeOpen()
@@ -1003,124 +1001,61 @@ class TripModeGUI():
         self.btn_browse_file["state"] = "disabled"
         self.btn_default_set_k["state"] = "active"       
     
-    def showgraph2(self):
-        self.show_trip_graph = ShowTripModeGUI(self.serial, self.data, self.df)
-    
-    # def showgraph(self):
-    #     """
-    #     Method to show the graphic of the simulation
-    #     """     
-    #     new_window = Tk()
-    #     new_window.geometry("500x400")
-    #     new_window.title("Trip Mode Graphic")
+    def showgraph(self):
+        """
+        Method to show the graphic of the simulation
+        """     
+        new_window = Tk()
+        new_window.geometry("500x400")
+        new_window.title("Trip Mode Graphic")
         
-    #     nbvar=2
+        self.nbvar=2
           
-    #     f1 = Figure(figsize=(4,3), dpi=100)
-    #     a1 = f1.add_subplot(111)
+        f1 = Figure(figsize=(4,3), dpi=100)
+        a1 = f1.add_subplot(111)
+        
+        self.lines=[]
+        self.lines.append(a1.plot(self.df['Time (ms)'], self.df['Position Angulaire X (°)'], lw=5, visible=False))
+        self.lines.append(a1.plot(self.df['Time (ms)'], self.df['Position Angulaire Y (°)'], lw=5, visible=False))
         
         
-        
-    #     # ax1 = self.df.plot.scatter(
-    #     #     x=self.df.columns[1],
-    #     #     y=self.df.columns[2],
-    #     #     visible=True,
-    #     #     c="blue")       
-    #     # ax2 = self.df.plot.scatter(
-    #     #     x=self.df.columns[1],
-    #     #     y=self.df.columns[3],
-    #     #     visible=True,
-    #     #     ax=ax1,
-    #     #     c="red") 
-        
-    #     # self.lines=[]
-    #     # self.lines.append(ax1)
-    #     # self.lines.append(ax2)
-        
-    #     x = self.df['Time (ms)'].values.tolist()
-    #     y1 = self.df['Position Angulaire X (°)'].values.tolist()
-    #     y2 = self.df['Position Angulaire Y (°)'].values.tolist()
-        
-    #     lines=[]
-    #     # self.lines.append(a1.plot(self.df['Time (ms)'], self.df['Position Angulaire X (°)'], lw=5, visible=True))
-    #     # self.lines.append(a1.plot(self.df['Time (ms)'], self.df['Position Angulaire Y (°)'], lw=5, visible=True))
-    #     lines.append(a1.plot(x, y1, lw=5, visible=True))
-    #     lines.append(a1.plot(x, y2, lw=5, visible=True))
-        
-    #     a1.set_xlabel('Time (ms)')
-    #     # a2 = a1.twinx()
-        
-    #     # fig = ax2.get_figure()
-        
+        a1.set_xlabel('Time (ms)')
+        a2 = a1.twinx()
     
-    #     canvas= FigureCanvasTkAgg(f1, new_window)
-    #     canvas.draw()
+        self.canvas= FigureCanvasTkAgg(f1, new_window)
+        self.canvas.draw()
         
-    #     toolbar = NavigationToolbar2Tk(
-    #         canvas, new_window)
-    #     toolbar.update()
+        toolbar = NavigationToolbar2Tk(
+            self.canvas, new_window)
+        toolbar.update()
         
-    #     canvas.get_tk_widget().pack(
-    #         side=tk.RIGHT, fill=tk.BOTH, expand=True)
+        self.canvas.get_tk_widget().pack(
+            side=tk.RIGHT, fill=tk.BOTH, expand=True)
         
-    #     def hideline():
-    #         for i in range(0,nbvar) :
-    #             if(varhide[i].get()==1):
-    #                 print(varhide[i])
-    #                 lines[i][0].set_visible(True)
-    #             if(varhide[i].get()==0):
-    #                 print(varhide[i])
-    #                 lines[i][0].set_visible(False)
-    #         canvas.draw()
+        option = Frame(new_window)
+        option.pack()
         
-    #     option = Frame(new_window)
-    #     option.pack()
-         
-    #     # var = IntVar()
-    #     # var2 = IntVar()
+        label=[]
+        label.append('PositionX (°)')
+        label.append('PositionY (°)')
         
-    #     label=[]
-    #     label.append('PositionX (°)')
-    #     label.append('PositionY (°)')
-        
-    #     varhide= []
-    #     for i in range(0,nbvar) :
-    #         varhide.append(IntVar())
-    #     # varhide.append(var)
-    #     # varhide.append(var2)
+        self.varhide= []
+        for i in range(0,self.nbvar) :
+            self.varhide.append(IntVar(option))
       
-    #     for i in range(0,nbvar) :
-    #         c = Checkbutton(
-    #             option, text=label[i], variable=varhide[i],
-    #             onvalue =1, 
-    #             offvalue = 0,
-    #             command=hideline)
-    #         c.var = varhide[i]  
-    #         c.pack()
+        for i in range(0,self.nbvar) :
+            c = Checkbutton(
+                option, text=label[i], variable=self.varhide[i],
+                command=self.hideline) 
+            c.pack()    
         
-        
-    #     # cb1 = Checkbutton(
-    #     #           option, text='PositionX (°)', variable=var, 
-    #     #           command=self.hideline(var, canvas))
-    #     # cb1.pack()
-    #     # cb2 = Checkbutton(
-    #     #           option, text='PositionY (°)', variable=var2, 
-    #     #           command=self.hideline(var2, canvas))
-    #     # cb2.pack()
-    
-        
-    #     new_window.mainloop()
-        
-    # def hideline(self, varhide, canvas):
-    #     for i in range(0,2) :
-    #         print(varhide.get())
-    #         if(varhide.get()==1):
-    #             print("1")
-    #             self.lines[i][0].set_visible(True)
-    #         elif(varhide.get()==0):
-    #             print("2")
-    #             self.lines[i][0].set_visible(False)
-    #     canvas.draw()
+    def hideline(self):
+        for i in range(0,self.nbvar) :
+            if(self.varhide[i].get()==1):
+                self.lines[i][0].set_visible(True)
+            elif(self.varhide[i].get()==0):
+                self.lines[i][0].set_visible(False)
+        self.canvas.draw()
     
     def default_k_values(self):
         """
@@ -1132,92 +1067,7 @@ class TripModeGUI():
         self.ki_box.insert(0, "018")
         self.kd_box.delete(0,"end")
         self.kd_box.insert(0, "1")
-        
-        
-class ShowTripModeGUI():
-    def __init__(self, serial, data, df):
-        '''
-        Initialize main widgets for Trip Mode GUI
-        '''
-        self.root = Tk()
-        self.root.title("Trip Mode Graphic")
-        self.root.geometry("500x400")
-        self.root.config(bg="white")
-        
-        self.serial = serial
-        self.data = data
-        self.df = df
-        
-        self.f1 = Figure(figsize=(4,3), dpi=100)
-        self.a1 = self.f1.add_subplot(111)
-        
-        self.x = self.df['Time (ms)'].values.tolist()
-        self.y1 = self.df['Position Angulaire X (°)'].values.tolist()
-        self.y2 = self.df['Position Angulaire Y (°)'].values.tolist()
-        
-        self.lines=[]
-        self.lines.append(self.a1.plot(self.x, self.y1, lw=5, visible=True))
-        self.lines.append(self.a1.plot(self.x, self.y2, lw=5, visible=True))
-        
-        self.a1.set_xlabel('Time (ms)')
-        
-        self.canvas= FigureCanvasTkAgg(self.f1, self.root)
-        self.canvas.draw()
-        
-        self.toolbar = NavigationToolbar2Tk(
-            self.canvas, self.root)
-        self.toolbar.update()
-        
-        self.canvas.get_tk_widget().pack(
-            side=tk.RIGHT, fill=tk.BOTH, expand=True)
-        
-        self.option = Frame(self.root)
-        self.option.pack()
-        
-        
-        self.label = 'PositionX (°)'
-        self.label2 = 'PositionY (°)'
-        
-        self.varhide = []
-        self.var = IntVar()
-        self.var2 = IntVar()
-        self.varhide.append(self.var)
-        self.varhide.append(self.var2)
-        
-        
-        
-        self.chb = Checkbutton(
-            self.option, text=self.label, variable=self.var,
-            command=self.hideline)
-        self.chb.pack()
-        self.chb2 = Checkbutton(
-            self.option, text=self.label2, variable=self.var2,
-            command=self.hideline2)
-        self.chb2.pack()
-
-        
-    def hideline(self):
-        print(self.var.get())
-        print(self.lines[0][0])
-        if(self.var.get()==1):
-            self.lines[0][0].set_visible(False)
-        if(self.var.get()==0):
-            self.lines[0][0].set_visible(True)
-        
-        self.canvas.draw()   
-        
-    def hideline2(self):
-        print(self.var2.get())
-        print(self.lines[1][0])
-        if(self.var2.get()==1):
-            self.lines[1][0].set_visible(False)
-        if(self.var2.get()==0):
-            self.lines[1][0].set_visible(True)
-        
-        self.canvas.draw()      
-        
-        
-        
+                       
 
 if __name__ == "__main__":
     RootGUI()
@@ -1227,4 +1077,3 @@ if __name__ == "__main__":
     AutoModeGUI()
     CalibrationGUI()
     TripModeGUI()
-    ShowTripModeGUI()

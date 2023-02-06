@@ -12,7 +12,23 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolb
 from matplotlib.figure import Figure
 from tkinter import *
 import tkinter as Tk
-  
+
+
+
+def hideline():
+    for i in range(0,nbvar) :
+        print(lines[i][0])
+        if(varhide[i].get()==1):
+            print(varhide[i])
+            lines[i][0].set_visible(True)
+        if(varhide[i].get()==0):
+            print(varhide[i])
+            lines[i][0].set_visible(False)
+    canvas.draw()
+
+
+
+
 root = Tk.Tk()
 root.geometry("500x500")
 root.title("Embedding in TK")
@@ -27,8 +43,8 @@ y2 = [0, 1, 4]
 y = [0, 1, 3] 
  
 lines=[]
-lines.append(a1.plot(x, y, lw=5, visible=True))
-lines.append(a1.plot(x, y2, lw=5, visible=True))
+lines.append(a1.plot(x, y, lw=5, visible=False))
+lines.append(a1.plot(x, y2, lw=5, visible=False))
 print(lines)
  
 a1.set_xlabel('time (s)')
@@ -51,16 +67,7 @@ canvas._tkcanvas.pack(side=Tk.TOP, fill=Tk.BOTH, expand=1)
   
 # canvas.mpl_connect('key_press_event', on_key_event)
   
-def hideline():
-    for i in range(0,nbvar) :
-        print(lines[i][0])
-        if(varhide[i].get()==1):
-            print(varhide[i])
-            lines[i][0].set_visible(False)
-        if(varhide[i].get()==0):
-            print(varhide[i])
-            lines[i][0].set_visible(True)
-    canvas.draw()
+
 
 option = Frame(root)
 option.pack()
