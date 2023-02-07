@@ -17,6 +17,9 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolb
 from matplotlib.figure import Figure
 import re
 
+import plotly.graph_objs as go
+from plotly.offline import plot
+
 
 # TAG_IHM_001
 # Class to setup the main window
@@ -972,11 +975,13 @@ class TripModeGUI():
         self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         
         title_file = time.strftime("%Y-%m-%d-%Hh%M-Trip_mode_Results")        
+        self.list_modes = ['Consigne Angle (°)', 'Position Angulaire X (°)', 'Position Angulaire Y (°)', 
+                   'Ax Raw', 'Ay Raw', 'Az Raw',
+                   'Gx Raw', 'Gy Raw', 'Gz Raw', 
+                   'Erreur P', 'Erreur I', 'Erreur D']
         self.df = pd.DataFrame(self.data.record, 
-                          columns = ['Consigne Angle (°)', 'Position Angulaire X (°)', 'Position Angulaire Y (°)', 
-                                     'Ax Raw', 'Ay Raw', 'Az Raw',
-                                     'Gx Raw', 'Gy Raw', 'Gz Raw', 
-                                     'Erreur P', 'Erreur I', 'Erreur D'])
+                          columns = self.list_modes)
+        
         list_time = []
         for i in range(len(self.df)):
             list_time.append(i*20)
@@ -1001,26 +1006,25 @@ class TripModeGUI():
         self.btn_browse_file["state"] = "disabled"
         self.btn_default_set_k["state"] = "active"       
     
-    def showgraph(self):
+    def showgraph2(self):
         """
         Method to show the graphic of the simulation
         """     
         new_window = Tk()
-        new_window.geometry("500x400")
+        new_window.geometry("570x400")
         new_window.title("Trip Mode Graphic")
         
-        self.nbvar=2
+        self.nbvar= len(self.list_modes)
           
         f1 = Figure(figsize=(4,3), dpi=100)
         a1 = f1.add_subplot(111)
         
-        self.lines=[]
-        self.lines.append(a1.plot(self.df['Time (ms)'], self.df['Position Angulaire X (°)'], lw=5, visible=False))
-        self.lines.append(a1.plot(self.df['Time (ms)'], self.df['Position Angulaire Y (°)'], lw=5, visible=False))
-        
+        self.lines=[a1.plot(self.df['Time (ms)'], 
+                            self.df[mode], 
+                            lw=5, 
+                            visible=False) for mode in self.list_modes]
         
         a1.set_xlabel('Time (ms)')
-        a2 = a1.twinx()
     
         self.canvas= FigureCanvasTkAgg(f1, new_window)
         self.canvas.draw()
@@ -1035,9 +1039,7 @@ class TripModeGUI():
         option = Frame(new_window)
         option.pack()
         
-        label=[]
-        label.append('PositionX (°)')
-        label.append('PositionY (°)')
+        label=[mode for mode in self.list_modes]
         
         self.varhide= []
         for i in range(0,self.nbvar) :
@@ -1048,6 +1050,23 @@ class TripModeGUI():
                 option, text=label[i], variable=self.varhide[i],
                 command=self.hideline) 
             c.pack()    
+            
+    def showgraph(self):
+        
+        data_graph = [go.Scatter(x=self.df['Time (ms)'],
+                   y=self.df[mode],
+                   name=mode,
+                   mode='markers',
+                   visible="legendonly") for mode in self.list_modes]
+                  
+        layout = go.Layout(
+            title='Trip Mode Graphic',
+            yaxis=dict(title='Measures (°)'),
+            xaxis=dict(title='Time (ms)')
+        )
+        
+        fig = go.Figure(data=data_graph, layout=layout)
+        plot(fig)
         
     def hideline(self):
         for i in range(0,self.nbvar) :
