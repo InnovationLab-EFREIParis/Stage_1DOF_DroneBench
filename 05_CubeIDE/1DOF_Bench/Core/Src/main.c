@@ -92,6 +92,9 @@ double derive_erreur = 0;
 char r_buffer[2];
 int counter_exceeding_value = 0;
 
+const double radtodeg = 57.295779513082320876798154814105;
+const double gtoms2 = 9.80665;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -1146,12 +1149,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		MPU6050_Read_All(&hi2c1, &mpu);
 		double position_angulaireX = mpu.KalmanAngleX + 90 ;
 		double position_angulaireY = mpu.KalmanAngleY ;
-		int16_t AxRaw = mpu.Accel_X_RAW ;
-		int16_t AyRaw = mpu.Accel_Y_RAW ;
-		int16_t AzRaw = mpu.Accel_Z_RAW ;
-		int16_t GxRaw = mpu.Gyro_X_RAW ;
-		int16_t GyRaw = mpu.Gyro_Y_RAW ;
-		int16_t GzRaw = mpu.Gyro_Z_RAW ;
+		int16_t AxRaw = mpu.Ax * gtoms2;
+		int16_t AyRaw = mpu.Ay * gtoms2;
+		int16_t AzRaw = mpu.Az * gtoms2;
+		int16_t GxRaw = mpu.Gx / radtodeg;
+		int16_t GyRaw = mpu.Gy / radtodeg;
+		int16_t GzRaw = mpu.Gz / radtodeg;
 
 		char data = printf("Data:%.2lf;%.2lf;%d;%d;%d;%d;%d;%d;%.2lf;%.2lf;%.2lf\n",
 				position_angulaireX, position_angulaireY, AxRaw, AyRaw, AzRaw, GxRaw, GyRaw, GzRaw, erreur, integre_erreur, derive_erreur);

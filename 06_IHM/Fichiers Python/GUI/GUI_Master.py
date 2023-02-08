@@ -729,11 +729,12 @@ class CalibrationGUI():
         self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         
         title_file = time.strftime("%Y-%m-%d-%Hh%M-Calibration_mode_Results")        
-        self.df = pd.DataFrame(self.data.record, 
-                          columns = ["Consigne Gaz (‰)", "Position Angulaire X (°)", "Position Angulaire Y (°)", 
-                                     "Ax Raw", "Ay Raw", "Az Raw",
-                                     "Gx Raw", "Gy Raw", "Gz Raw", 
-                                     "Erreur P", "Erreur I", "Erreur D"])
+        
+        self.list_modes = ['Consigne Gaz (‰)', 'Position Angulaire X (°)', 'Position Angulaire Y (°)', 
+                   'Ax Raw (m/s²)', 'Ay Raw (m/s²)', 'Az Raw (m/s²)',
+                   'Gx Raw (rad/s)', 'Gy Raw (rad/s)', 'Gz Raw (rad/s)']
+        self.df = pd.DataFrame([column[:9] for column in self.data.record], 
+                          columns = self.list_modes)
         
         list_time = []
         for i in range(len(self.df)):
@@ -756,7 +757,7 @@ class CalibrationGUI():
         if len(new_content) == 1:
             self.graph_type = 1
         
-    def showgraph(self):
+    def showgraph3(self):
         """
         Method to show the graphic of the simulation
         """
@@ -801,6 +802,137 @@ class CalibrationGUI():
                 side=tk.BOTTOM, fill=tk.BOTH, expand=True)
             
             new_window.mainloop()
+    
+    def showgraph2(self):
+        """
+        Method to show the graphic of the simulation
+        """     
+        
+        if self.graph_type == 1:
+            new_window = Tk()
+            new_window.geometry("570x400")
+            new_window.title("Calibration Graphic - Dynamic")
+            
+            self.nbvar= len(self.list_modes)-1
+              
+            f1 = Figure(figsize=(4,3), dpi=100)
+            a1 = f1.add_subplot(111)
+            
+            self.lines=[a1.plot(self.df['Time (ms)'], 
+                                self.df[mode], 
+                                lw=5, 
+                                visible=False) for mode in self.list_modes[1:]]
+            
+            a1.set_xlabel('Time (ms)')
+        
+            self.canvas= FigureCanvasTkAgg(f1, new_window)
+            self.canvas.draw()
+            
+            toolbar = NavigationToolbar2Tk(
+                self.canvas, new_window)
+            toolbar.update()
+            
+            self.canvas.get_tk_widget().pack(
+                side=tk.RIGHT, fill=tk.BOTH, expand=True)
+            
+            option = Frame(new_window)
+            option.pack()
+            
+            label=[mode for mode in self.list_modes[1:]]
+            
+            self.varhide= []
+            for i in range(0,self.nbvar) :
+                self.varhide.append(IntVar(option))
+          
+            for i in range(0,self.nbvar) :
+                c = Checkbutton(
+                    option, text=label[i], variable=self.varhide[i],
+                    command=self.hideline) 
+                c.pack()  
+                
+        else:
+            new_window = Tk()
+            new_window.geometry("570x400")
+            new_window.title("Calibration Graphic - Static")
+            
+            self.nbvar= len(self.list_modes)
+              
+            f1 = Figure(figsize=(4,3), dpi=100)
+            a1 = f1.add_subplot(111)
+            
+            self.lines=[a1.plot(self.df['Consigne Gaz (‰)'], 
+                                self.df[mode], 
+                                lw=5, 
+                                visible=False) for mode in self.list_modes]
+            
+            a1.set_xlabel('Consigne Gaz (‰)')
+        
+            self.canvas= FigureCanvasTkAgg(f1, new_window)
+            self.canvas.draw()
+            
+            toolbar = NavigationToolbar2Tk(
+                self.canvas, new_window)
+            toolbar.update()
+            
+            self.canvas.get_tk_widget().pack(
+                side=tk.RIGHT, fill=tk.BOTH, expand=True)
+            
+            option = Frame(new_window)
+            option.pack()
+            
+            label=[mode for mode in self.list_modes]
+            
+            self.varhide= []
+            for i in range(0,self.nbvar) :
+                self.varhide.append(IntVar(option))
+          
+            for i in range(0,self.nbvar) :
+                c = Checkbutton(
+                    option, text=label[i], variable=self.varhide[i],
+                    command=self.hideline) 
+                c.pack()  
+            
+    def showgraph(self):
+        
+        if self.graph_type == 1:
+            data_graph = [go.Scatter(x=self.df['Time (ms)'],
+                       y=self.df[mode],
+                       name=mode,
+                       mode='markers',
+                       visible="legendonly") for mode in self.list_modes[1:]]
+                      
+            layout = go.Layout(
+                title='Calibration Graphic - Dynamic',
+                yaxis=dict(title='Measures'),
+                xaxis=dict(title='Time (ms)')
+            )
+            
+            fig = go.Figure(data=data_graph, layout=layout)
+            plot(fig)
+        else:
+            data_graph = [go.Scatter(x=self.df['Consigne Gaz (‰)'],
+                       y=self.df[mode],
+                       name=mode,
+                       mode='markers',
+                       visible="legendonly") for mode in self.list_modes]
+                      
+            layout = go.Layout(
+                title='Calibration Graphic - Static',
+                yaxis=dict(title='Measures'),
+                xaxis=dict(title='Consigne Gaz (‰)')
+            )
+            
+            fig = go.Figure(data=data_graph, layout=layout)
+            plot(fig)
+        
+        
+    def hideline(self):
+        for i in range(0,self.nbvar) :
+            if(self.varhide[i].get()==1):
+                self.lines[i][0].set_visible(True)
+            elif(self.varhide[i].get()==0):
+                self.lines[i][0].set_visible(False)
+        self.canvas.draw()
             
         
 # TAG_IHM_007
@@ -976,9 +1108,9 @@ class TripModeGUI():
         
         title_file = time.strftime("%Y-%m-%d-%Hh%M-Trip_mode_Results")        
         self.list_modes = ['Consigne Angle (°)', 'Position Angulaire X (°)', 'Position Angulaire Y (°)', 
-                   'Ax Raw', 'Ay Raw', 'Az Raw',
-                   'Gx Raw', 'Gy Raw', 'Gz Raw', 
-                   'Erreur P', 'Erreur I', 'Erreur D']
+                   'Ax Raw (m/s²)', 'Ay Raw (m/s²)', 'Az Raw (m/s²)',
+                   'Gx Raw (rad/s)', 'Gy Raw (rad/s)', 'Gz Raw (rad/s)', 
+                   'Erreur P (°)', 'Erreur I (°)', 'Erreur D (°)']
         self.df = pd.DataFrame(self.data.record, 
                           columns = self.list_modes)
         
@@ -1061,7 +1193,7 @@ class TripModeGUI():
                   
         layout = go.Layout(
             title='Trip Mode Graphic',
-            yaxis=dict(title='Measures (°)'),
+            yaxis=dict(title='Measures'),
             xaxis=dict(title='Time (ms)')
         )
         
