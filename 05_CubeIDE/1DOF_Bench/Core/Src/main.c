@@ -992,8 +992,8 @@ int main(void)
 				erreur = consigne - position_angulaire;
 				integre_erreur += erreur;
 				derive_erreur = erreur - _erreur;
-				commande = 100*kp * (erreur) + ki * (integre_erreur)
-						+ kd * (derive_erreur);
+				commande = kp * (erreur) + ki * (integre_erreur)
+						+ 10*kd * (derive_erreur);
 
 				if (commande > valeur_max_moteur) {
 					commande = valeur_max_moteur;
@@ -1149,14 +1149,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		MPU6050_Read_All(&hi2c1, &mpu);
 		double position_angulaireX = mpu.KalmanAngleX + 90 ;
 		double position_angulaireY = mpu.KalmanAngleY ;
-		int16_t AxRaw = mpu.Ax * gtoms2;
-		int16_t AyRaw = mpu.Ay * gtoms2;
-		int16_t AzRaw = mpu.Az * gtoms2;
-		int16_t GxRaw = mpu.Gx / radtodeg;
-		int16_t GyRaw = mpu.Gy / radtodeg;
-		int16_t GzRaw = mpu.Gz / radtodeg;
+		double AxRaw = mpu.Ax * gtoms2;
+		double AyRaw = mpu.Ay * gtoms2;
+		double AzRaw = mpu.Az * gtoms2;
+		double GxRaw = mpu.Gx / radtodeg;
+		double GyRaw = mpu.Gy / radtodeg;
+		double GzRaw = mpu.Gz / radtodeg;
 
-		char data = printf("Data:%.2lf;%.2lf;%d;%d;%d;%d;%d;%d;%.2lf;%.2lf;%.2lf\n",
+		char data = printf("Data:%.2lf;%.2lf;%.4lf;%.4lf;%.4lf;%.4lf;%.4lf;%.4lf;%.2lf;%.2lf;%.2lf\n",
 				position_angulaireX, position_angulaireY, AxRaw, AyRaw, AzRaw, GxRaw, GyRaw, GzRaw, erreur, integre_erreur, derive_erreur);
 		HAL_UART_Transmit_IT(&huart2, data, sizeof(data));
 

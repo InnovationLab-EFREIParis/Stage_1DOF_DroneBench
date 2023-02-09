@@ -1030,28 +1030,28 @@ class TripModeGUI():
         
     def CorrectCoeff(self):
         # Take the kp value in the "Entry" widget
-        kp_value = self.kp_box.get()
+        self.kp_value = self.kp_box.get()
         # Take the ki value in the "Entry" widget
-        ki_value = self.ki_box.get()
+        self.ki_value = self.ki_box.get()
         # Take the kd value in the "Entry" widget
-        kd_value =self.kd_box.get()
+        self.kd_value =self.kd_box.get()
         # Communicate the values of the Entry widgets
         
-        if kp_value.isdigit() and ki_value.isdigit() and kd_value.isdigit():
+        if self.kp_value.isdigit() and self.ki_value.isdigit() and self.kd_value.isdigit():
             self.btn_default_set_k["state"] = "disabled"
             self.serial.ser.write("1".encode())
             self.serial.SerialIpt(self, self.data.iptENTER, 30)
             ## kp
             self.serial.SerialIpt(self, self.data.iptp, 30)
-            self.serial.ser.write(kp_value.encode())
+            self.serial.ser.write(self.kp_value.encode())
             self.serial.SerialIpt(self, self.data.iptENTER, 30)
             ## ki
             self.serial.SerialIpt(self, self.data.ipti, 30)
-            self.serial.ser.write(ki_value.encode())
+            self.serial.ser.write(self.ki_value.encode())
             self.serial.SerialIpt(self, self.data.iptENTER, 30)
             ## kd
             self.serial.SerialIpt(self, self.data.iptd, 30)
-            self.serial.ser.write(kd_value.encode())
+            self.serial.ser.write(self.kd_value.encode())
             self.serial.SerialIpt(self, self.data.iptENTER, 30)
             
             self.serial.SerialIpt(self, self.data.iptw, 30)
@@ -1144,7 +1144,7 @@ class TripModeGUI():
         """     
         new_window = Tk()
         new_window.geometry("570x400")
-        new_window.title("Trip Mode Graphic")
+        new_window.title('Trip Mode Graphic : kp = 0,'+self.kp_value+' / ki = 0,'+self.ki_value+' / kd=0,'+self.kd_value)
         
         self.nbvar= len(self.list_modes)
           
@@ -1192,7 +1192,7 @@ class TripModeGUI():
                    visible="legendonly") for mode in self.list_modes]
                   
         layout = go.Layout(
-            title='Trip Mode Graphic',
+            title='Trip Mode Graphic : kp = 0,'+self.kp_value+' / ki = 0,'+self.ki_value+' / kd=0,'+self.kd_value,
             yaxis=dict(title='Measures'),
             xaxis=dict(title='Time (ms)')
         )
