@@ -1144,7 +1144,7 @@ class TripModeGUI():
         """     
         new_window = Tk()
         new_window.geometry("570x400")
-        new_window.title('Trip Mode Graphic : kp = 0,'+self.kp_value+' / ki = 0,'+self.ki_value+' / kd=0,'+self.kd_value)
+        new_window.title('Trip Mode Graphic : kp = 0,'+self.kp_value+' / ki = 0,'+self.ki_value+' / kd='+self.kd_value)
         
         self.nbvar= len(self.list_modes)
           
@@ -1192,13 +1192,15 @@ class TripModeGUI():
                    visible="legendonly") for mode in self.list_modes]
                   
         layout = go.Layout(
-            title='Trip Mode Graphic : kp = 0,'+self.kp_value+' / ki = 0,'+self.ki_value+' / kd=0,'+self.kd_value,
+            title='Trip Mode Graphic : kp = 0,'+self.kp_value+' | ki = 0,'+self.ki_value+' | kd='+self.kd_value,
             yaxis=dict(title='Measures'),
             xaxis=dict(title='Time (ms)')
         )
         
         fig = go.Figure(data=data_graph, layout=layout)
         plot(fig)
+        # title_file = time.strftime("%Y-%m-%d-%Hh%M- Trip_mode_Results - kp=0,"+self.kp_value+" & ki=0,"+self.ki_value+" & kd="+self.kd_value+".html")
+        # fig.write_html(title_file)
         
     def hideline(self):
         for i in range(0,self.nbvar) :
