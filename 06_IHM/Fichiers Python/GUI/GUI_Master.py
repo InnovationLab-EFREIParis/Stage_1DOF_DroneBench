@@ -20,7 +20,6 @@ import re
 import plotly.graph_objs as go
 from plotly.offline import plot
 
-
 # TAG_IHM_001
 # Class to setup the main window
 class RootGUI():
