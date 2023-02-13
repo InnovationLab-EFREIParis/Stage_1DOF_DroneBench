@@ -993,7 +993,7 @@ int main(void)
 				integre_erreur += erreur;
 				derive_erreur = erreur - _erreur;
 				commande = kp * (erreur) + ki * (integre_erreur)
-						+ 10*kd * (derive_erreur);
+						+ 1000*kd * (derive_erreur);
 
 				if (commande > valeur_max_moteur) {
 					commande = valeur_max_moteur;
