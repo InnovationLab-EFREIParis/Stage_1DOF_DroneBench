@@ -49,3 +49,20 @@ Lundi 02/01/23
 -> tester calibration mode en modifiant le main.c pour avoir un "pas de %" non en /100 mais /1000 [FAIT] 
 -> Rajouter graphique dans l'IHM à la fin de Calibration Mode [FAIT]
 -> Utiliser les timers interrupt [FAIT]
+
+---------------------------------------------------------------------------------------------------------------------
+Mardi 14/02/23
+
+C:
+-> Régler pbm MPU read all, à mettre dans la period elapsed callback uniquement (synchro / cditions état)
+-> Idées Mr Bertrand, kd divisé par dt etc. (kp aussi ?)
+-> ki ; anti windup
+-> glitch, mpu read all dans état init gyro ? court temps
+
+Hardware:
+-> Butée mécanique
+-> Ajout d'une charge sur le bras
+
+Python / Mesures pour Mr Bertrand:
+-> Faire une calibration longue avec les nouvelles unités SI
+-> Faire une simulation avec 0‰ de gaz en déplaçant le bras manuellement

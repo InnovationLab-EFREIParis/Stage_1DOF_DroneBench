@@ -92,8 +92,19 @@ double derive_erreur = 0;
 char r_buffer[2];
 int counter_exceeding_value = 0;
 
+double position_angulaire = 0;
+double position_angulaireY = 0;
+double AxRaw = 0;
+double AyRaw = 0;
+double AzRaw = 0;
+double GxRaw = 0;
+double GyRaw = 0;
+double GzRaw = 0;
+
 const double radtodeg = 57.295779513082320876798154814105;
 const double gtoms2 = 9.80665;
+
+char data;
 
 /* USER CODE END PV */
 
@@ -139,7 +150,6 @@ int main(void)
 	int okay;
 	int valeur_can;
 	int mapped_value = valeur_min_moteur;
-	double position_angulaire;
 
 	double commande = valeur_min_moteur;
 	double landing_value = valeur_min_moteur;
@@ -218,7 +228,7 @@ int main(void)
 
 	// counters to test stuff 15-> 10^-6s / 2-> 10^-7s
 	//HAL_TIM_Base_Start(&htim15);
-	//HAL_TIM_Base_Start(&htim2);
+	HAL_TIM_Base_Start(&htim2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -1003,6 +1013,7 @@ int main(void)
 				}
 
 				load_pwm(htim3, commande);
+
 			} while ((r_buffer[0] != ' ')
 					&& (r_buffer[0] != '?') && (r_buffer[0] != '!')
 					&& (r_buffer[0] != 'w') && (r_buffer[0] != 'p')
@@ -1146,21 +1157,21 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim == &htim16)
 	{
-		MPU6050_Read_All(&hi2c1, &mpu);
-		double position_angulaireX = mpu.KalmanAngleX + 90 ;
-		double position_angulaireY = mpu.KalmanAngleY ;
-		double AxRaw = mpu.Ax * gtoms2;
-		double AyRaw = mpu.Ay * gtoms2;
-		double AzRaw = mpu.Az * gtoms2;
-		double GxRaw = mpu.Gx / radtodeg;
-		double GyRaw = mpu.Gy / radtodeg;
-		double GzRaw = mpu.Gz / radtodeg;
+		//MPU6050_Read_All(&hi2c1, &mpu);
+		//position_angulaire = mpu.KalmanAngleX + 90 ;
+		position_angulaireY = mpu.KalmanAngleY ;
+		AxRaw = mpu.Ax * gtoms2;
+		AyRaw = mpu.Ay * gtoms2;
+		AzRaw = mpu.Az * gtoms2;
+		GxRaw = mpu.Gx / radtodeg;
+		GyRaw = mpu.Gy / radtodeg;
+		GzRaw = mpu.Gz / radtodeg;
 
-		char data = printf("Data:%.2lf;%.2lf;%.4lf;%.4lf;%.4lf;%.4lf;%.4lf;%.4lf;%.2lf;%.2lf;%.2lf\n",
-				position_angulaireX, position_angulaireY, AxRaw, AyRaw, AzRaw, GxRaw, GyRaw, GzRaw, erreur, integre_erreur, derive_erreur);
+		data = printf("Data:%.2lf;%.2lf;%.4lf;%.4lf;%.4lf;%.4lf;%.4lf;%.4lf;%.2lf;%.2lf;%.2lf\n",
+				position_angulaire, position_angulaireY, AxRaw, AyRaw, AzRaw, GxRaw, GyRaw, GzRaw, erreur, integre_erreur, derive_erreur);
 		HAL_UART_Transmit_IT(&huart2, data, sizeof(data));
 
-		if (position_angulaireX > 90){
+		if (position_angulaire > 90){
 			counter_exceeding_value +=1;
 			if (counter_exceeding_value >10){
 				counter_exceeding_value = 0;
