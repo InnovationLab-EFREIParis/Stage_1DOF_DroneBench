@@ -18,6 +18,7 @@ class DataMaster():
         self.iptENTER = "\r"
         self.ipt2 = "2"
         self.ipt3 = "3"
+        self.ipt4 = "4"
         self.iptp = "p"
         self.ipti = "i"
         self.iptd = "d"

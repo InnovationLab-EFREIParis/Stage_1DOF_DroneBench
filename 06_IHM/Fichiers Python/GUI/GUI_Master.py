@@ -180,7 +180,7 @@ class ComGui():
                 # Access to Init UC
                 self.serial.SerialIpt(self, self.data.iptENTER, 5)
                 # Access to Motor Ready
-                self.serial.SerialIpt(self, self.data.iptSPACE, 20)
+                self.serial.SerialIpt(self, self.data.iptSPACE, 25)
             else:
                 ErrorMsg = f"Failure to estabish UART connection using {self.clicked_com.get()} "
                 messagebox.showerror("showerror", ErrorMsg)
@@ -288,7 +288,7 @@ class MotorReadyGUI():
         Method to redirect on trip mode
         """
         self.trip_mode = TripModeGUI(self.root, self.serial, self.data)
-        self.serial.SerialIpt(self, self.data.ipt3, 30)
+        self.serial.SerialIpt(self, self.data.ipt4, 30)
 
 # TAG_IHM_004            
 class ModeTermGUI():
@@ -604,7 +604,6 @@ class AutoModeGUI():
         self.label_screen["text"] = "0"
         # Landing & Return to Motor Ready
         self.serial.SerialIpt(self, self.data.iptSPACE, 30)
-        # Go to Auto Mode (for now, we need this line too because we don't have a menu for modes, we directly go to Auto Mode)
         self.serial.SerialIpt(self, self.data.ipt3, 30)
         
         self.kp_box["state"] = "normal"
@@ -1128,7 +1127,7 @@ class TripModeGUI():
         self.df.to_csv(saving_path, sep=';', decimal=',', encoding='utf-8', index=False, line_terminator='\n')
         print(self.data.record)
         self.btn_show_graph["state"] = "active"
-        self.serial.SerialIpt(self, self.data.ipt3, 30)
+        self.serial.SerialIpt(self, self.data.ipt4, 30)
         
         self.kp_box["state"] = "normal"
         self.ki_box["state"] = "normal"
