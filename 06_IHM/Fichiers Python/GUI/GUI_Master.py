@@ -568,9 +568,8 @@ class AutoModeGUI():
                         self.btn_default_set_k["state"] = "disabled"
                         self.consigne_box.delete(0,"end")
                         ## Angle
-                        self.serial.ser.write(str(angle_value).encode())
+                        self.serial.ser.write("0".encode())
                         self.serial.SerialIpt(self, self.data.iptENTER, 30)
-                        self.label_screen["text"] = angle_value
                         ## kp
                         self.serial.SerialIpt(self, self.data.iptp, 30)
                         self.serial.ser.write(kp_value.encode())
@@ -583,6 +582,11 @@ class AutoModeGUI():
                         self.serial.SerialIpt(self, self.data.iptd, 30)
                         self.serial.ser.write(kd_value.encode())
                         self.serial.SerialIpt(self, self.data.iptENTER, 30)
+                        ## Angle
+                        self.serial.SerialIpt(self, self.data.iptw, 30)
+                        self.serial.ser.write(str(angle_value).encode())
+                        self.serial.SerialIpt(self, self.data.iptENTER, 30)
+                        self.label_screen["text"] = angle_value
                         
                         self.kp_box["state"] = "disabled"
                         self.ki_box["state"] = "disabled"
@@ -1037,7 +1041,7 @@ class TripModeGUI():
         
         if self.kp_value.isdigit() and self.ki_value.isdigit() and self.kd_value.isdigit():
             self.btn_default_set_k["state"] = "disabled"
-            self.serial.ser.write("1".encode())
+            self.serial.ser.write("0".encode())
             self.serial.SerialIpt(self, self.data.iptENTER, 30)
             ## kp
             self.serial.SerialIpt(self, self.data.iptp, 30)

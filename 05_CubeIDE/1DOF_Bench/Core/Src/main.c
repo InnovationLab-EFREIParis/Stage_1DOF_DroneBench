@@ -165,6 +165,7 @@ int main(void)
 	commande = valeur_min_moteur;
 	double landing_value = valeur_min_moteur;
 	int choice_mode = 0;
+	int timeout_gyro = 1000;
 
 	// mode 2
 	int cpt_char = 0;
@@ -589,7 +590,7 @@ int main(void)
 		case init_gyro:
 
 			printf("State: Auto mode\n\n\r");
-			int timeout_gyro = 1000;
+			timeout_gyro = 1000;
 			printf("Waiting for Gyro MPU6050...\n\r");
 			while (MPU6050_Init(&hi2c1) == 1 && (--timeout_gyro > 0))
 				;
