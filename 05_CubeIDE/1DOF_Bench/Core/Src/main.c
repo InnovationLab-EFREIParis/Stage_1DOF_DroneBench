@@ -86,14 +86,36 @@
 Kalman_t kali;
 MPU6050_t mpu;
 
+enum states etat, previous_etat;
+
+
+int consigne = 0;
+double commande =0;
+// Default coefficients
+double kp = 0.001;
+double ki = 0.018;
+double kd = 0.1;
+
 double erreur = 0;
+double _erreur = 0;
 double integre_erreur = 0;
 double derive_erreur = 0;
 char r_buffer[2];
 int counter_exceeding_value = 0;
 
+double position_angulaireX = 0;
+double position_angulaireY = 0;
+double AxRaw = 0;
+double AyRaw = 0;
+double AzRaw = 0;
+double GxRaw = 0;
+double GyRaw = 0;
+double GzRaw = 0;
+
 const double radtodeg = 57.295779513082320876798154814105;
 const double gtoms2 = 9.80665;
+
+char data;
 
 /* USER CODE END PV */
 
@@ -134,24 +156,16 @@ int main(void)
 
 	//uint16_t timer_val;
 	//uint32_t timer_val2=UINT32_C(1234567890);
-	enum states etat, previous_etat;
+
 	etat = entrance;
 	int okay;
 	int valeur_can;
 	int mapped_value = valeur_min_moteur;
-	double position_angulaire;
 
-	double commande = valeur_min_moteur;
+	commande = valeur_min_moteur;
 	double landing_value = valeur_min_moteur;
-
-	// Default coefficients
-	double kp = 0.001;
-	double ki = 0.018;
-	double kd = 0.1;
-
-
-
-	double _erreur = 0;
+	int choice_mode = 0;
+	int timeout_gyro = 1000;
 
 	// mode 2
 	int cpt_char = 0;
@@ -163,7 +177,7 @@ int main(void)
 	int max_cpt_char_prime = 3;
 	char r_buffer_string_prime[max_cpt_char_prime];
 	int angle_term = 0;
-	int consigne = 0;
+
 
 	int cpt_char_kp = 0;
 	int max_cpt_char_kp = 5; //7 avec virgule et chiffre des unités
@@ -218,7 +232,7 @@ int main(void)
 
 	// counters to test stuff 15-> 10^-6s / 2-> 10^-7s
 	//HAL_TIM_Base_Start(&htim15);
-	//HAL_TIM_Base_Start(&htim2);
+	HAL_TIM_Base_Start(&htim2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -333,6 +347,7 @@ int main(void)
 			printf("> Press [ 1 ] for Manual mode pot\n\r");
 			printf("> Press [ 2 ] for Manual mode term\n\r");
 			printf("> Press [ 3 ] for Auto mode\n\r");
+			printf("> Press [ 4 ] for Trip mode\n\r");
 
 			// Init Motor
 			load_pwm(htim3, valeur_min_moteur);
@@ -347,7 +362,8 @@ int main(void)
 					__HAL_UART_CLEAR_OREFLAG(&huart2);
 				}
 			} while ((r_buffer[0] != '?') && (r_buffer[0] != '1')
-					&& (r_buffer[0] != '2') && (r_buffer[0] != '3'));
+					&& (r_buffer[0] != '2') && (r_buffer[0] != '3')
+					&& (r_buffer[0] != '4'));
 			printf("\n\n\r");
 
 			switch (r_buffer[0]) {
@@ -362,6 +378,11 @@ int main(void)
 				etat = manual_mode_term;
 				break;
 			case '3':
+				choice_mode = 3;
+				etat = init_gyro;
+				break;
+			case '4':
+				choice_mode = 4;
 				etat = init_gyro;
 				break;
 			default:
@@ -569,13 +590,14 @@ int main(void)
 		case init_gyro:
 
 			printf("State: Auto mode\n\n\r");
-			int timeout_gyro = 1000;
+			timeout_gyro = 1000;
 			printf("Waiting for Gyro MPU6050...\n\r");
 			while (MPU6050_Init(&hi2c1) == 1 && (--timeout_gyro > 0))
 				;
 
 			if (MPU6050_Init(&hi2c1) == 0) {
 				printf("Gyro MPU6050 initialized\n\n\r");
+				MPU6050_Read_All(&hi2c1, &mpu);
 				etat = instruct_angle;
 			} else {
 				printf("Gyro MPU6050 is not working\n\n\r");
@@ -624,7 +646,12 @@ int main(void)
 					} else {
 						angle_term = prov_angle_term;
 						printf("Angle : %d\n\r", angle_term);
-						etat = auto_mode;
+						if (choice_mode == 3){
+							etat = auto_mode;
+						}
+						if (choice_mode == 4){
+							etat = trip_mode;
+						}
 					}
 				}
 			}
@@ -641,7 +668,12 @@ int main(void)
 					} else {
 						angle_term = prov_angle_term;
 						printf("Angle : %d\n\r", angle_term);
-						etat = auto_mode;
+						if (choice_mode == 3){
+							etat = auto_mode;
+						}
+						if (choice_mode == 4){
+							etat = trip_mode;
+						}
 					}
 				}
 			}
@@ -703,7 +735,12 @@ int main(void)
 				} else {
 					kp = value_kp0 / 10.;
 					printf("kp = %.4f \n\r", kp);
-					etat = auto_mode;
+					if (choice_mode == 3){
+						etat = auto_mode;
+					}
+					if (choice_mode == 4){
+						etat = trip_mode;
+					}
 				}
 			}
 			if (cpt_char_kp == 3) {
@@ -714,7 +751,12 @@ int main(void)
 				} else {
 					kp = value_kp0 / 10. + value_kp1 / 100.;
 					printf("kp = %.4f \n\r", kp);
-					etat = auto_mode;
+					if (choice_mode == 3){
+						etat = auto_mode;
+					}
+					if (choice_mode == 4){
+						etat = trip_mode;
+					}
 				}
 			}
 			if (cpt_char_kp == 4) {
@@ -726,7 +768,12 @@ int main(void)
 				} else {
 					kp = value_kp0 / 10. + value_kp1 / 100. + value_kp2 / 1000.;
 					printf("kp = %.4f \n\r", kp);
-					etat = auto_mode;
+					if (choice_mode == 3){
+						etat = auto_mode;
+					}
+					if (choice_mode == 4){
+						etat = trip_mode;
+					}
 				}
 			}
 			if (cpt_char_kp == 5) {
@@ -739,7 +786,12 @@ int main(void)
 					kp = value_kp0 / 10. + value_kp1 / 100. + value_kp2 / 1000.
 							+ value_kp3 / 10000.;
 					printf("kp = %.4f \n\r", kp);
-					etat = auto_mode;
+					if (choice_mode == 3){
+						etat = auto_mode;
+					}
+					if (choice_mode == 4){
+						etat = trip_mode;
+					}
 				}
 			}
 
@@ -798,7 +850,12 @@ int main(void)
 				} else {
 					ki = value_ki0 / 10.;
 					printf("ki = %.4f \n\r", ki);
-					etat = auto_mode;
+					if (choice_mode == 3){
+						etat = auto_mode;
+					}
+					if (choice_mode == 4){
+						etat = trip_mode;
+					}
 				}
 			}
 			if (cpt_char_ki == 3) {
@@ -809,7 +866,12 @@ int main(void)
 				} else {
 					ki = value_ki0 / 10. + value_ki1 / 100.;
 					printf("ki = %.4f \n\r", ki);
-					etat = auto_mode;
+					if (choice_mode == 3){
+						etat = auto_mode;
+					}
+					if (choice_mode == 4){
+						etat = trip_mode;
+					}
 				}
 			}
 			if (cpt_char_ki == 4) {
@@ -821,7 +883,12 @@ int main(void)
 				} else {
 					ki = value_ki0 / 10. + value_ki1 / 100. + value_ki2 / 1000.;
 					printf("ki = %.4f \n\r", ki);
-					etat = auto_mode;
+					if (choice_mode == 3){
+						etat = auto_mode;
+					}
+					if (choice_mode == 4){
+						etat = trip_mode;
+					}
 				}
 			}
 			if (cpt_char_ki == 5) {
@@ -834,7 +901,12 @@ int main(void)
 					ki = value_ki0 / 10. + value_ki1 / 100. + value_ki2 / 1000.
 							+ value_ki3 / 10000.;
 					printf("ki = %.4f \n\r", ki);
-					etat = auto_mode;
+					if (choice_mode == 3){
+						etat = auto_mode;
+					}
+					if (choice_mode == 4){
+						etat = trip_mode;
+					}
 				}
 			}
 
@@ -893,7 +965,12 @@ int main(void)
 				} else {
 					kd = value_kd0 / 10.;
 					printf("kd = %.4f \n\r", kd);
-					etat = auto_mode;
+					if (choice_mode == 3){
+						etat = auto_mode;
+					}
+					if (choice_mode == 4){
+						etat = trip_mode;
+					}
 				}
 			}
 			if (cpt_char_kd == 3) {
@@ -904,7 +981,12 @@ int main(void)
 				} else {
 					kd = value_kd0 / 10. + value_kd1 / 100.;
 					printf("kd = %.4f \n\r", kd);
-					etat = auto_mode;
+					if (choice_mode == 3){
+						etat = auto_mode;
+					}
+					if (choice_mode == 4){
+						etat = trip_mode;
+					}
 				}
 			}
 			if (cpt_char_kd == 4) {
@@ -916,7 +998,12 @@ int main(void)
 				} else {
 					kd = value_kd0 / 10. + value_kd1 / 100. + value_kd2 / 1000.;
 					printf("kd = %.4f \n\r", kd);
-					etat = auto_mode;
+					if (choice_mode == 3){
+						etat = auto_mode;
+					}
+					if (choice_mode == 4){
+						etat = trip_mode;
+					}
 				}
 			}
 			if (cpt_char_kd == 5) {
@@ -929,7 +1016,12 @@ int main(void)
 					kd = value_kd0 / 10. + value_kd1 / 100. + value_kd2 / 1000.
 							+ value_kd3 / 10000.;
 					printf("kd = %.4f \n\r", kd);
-					etat = auto_mode;
+					if (choice_mode == 3){
+						etat = auto_mode;
+					}
+					if (choice_mode == 4){
+						etat = trip_mode;
+					}
 				}
 			}
 
@@ -984,16 +1076,16 @@ int main(void)
 				}
 
 				MPU6050_Read_All(&hi2c1, &mpu);
-				position_angulaire = mpu.KalmanAngleX + 90;
+				position_angulaireX = mpu.KalmanAngleX + 90;
 
 				// Asservissement
 
 				_erreur = erreur;
-				erreur = consigne - position_angulaire;
+				erreur = consigne - position_angulaireX;
 				integre_erreur += erreur;
 				derive_erreur = erreur - _erreur;
 				commande = kp * (erreur) + ki * (integre_erreur)
-						+ 10*kd * (derive_erreur);
+						+ 1000*kd * (derive_erreur);
 
 				if (commande > valeur_max_moteur) {
 					commande = valeur_max_moteur;
@@ -1003,11 +1095,11 @@ int main(void)
 				}
 
 				load_pwm(htim3, commande);
+
 			} while ((r_buffer[0] != ' ')
 					&& (r_buffer[0] != '?') && (r_buffer[0] != '!')
 					&& (r_buffer[0] != 'w') && (r_buffer[0] != 'p')
-					&& (r_buffer[0] != 'i') && (r_buffer[0] != 'd')
-					&& (r_buffer[0] != 'r')&& (r_buffer[0] != 's'));
+					&& (r_buffer[0] != 'i') && (r_buffer[0] != 'd'));
 
 
 			if (r_buffer[0] == ' ') {
@@ -1059,13 +1151,92 @@ int main(void)
 				integre_erreur = 0;
 				erreur = 0;
 			}
+
+			break;
+
+		case trip_mode:
+			printf(msg_info_mode);
+			printf(msg_motor_ready);
+			printf(
+					"> Please enter [p] if you want to modify kp value\n\rPlease enter [i] if you want to modify ki value\n\rPlease enter [d] if you want to modify kd value\n\r");
+			printf(
+					"> Please enter [w] if you want to modify the angle value\n\r");
+			printf(
+					"> If you want to come back to default set of PID coefficients then press [!]\n\r");
+
+			consigne = angle_term;
+			printf("\n\r");
+
+			do {
+				if (HAL_UART_Receive(&huart2, (uint8_t*) r_buffer, 1, 10)
+						== HAL_OK) {
+					HAL_UART_Transmit(&huart2, (uint8_t*) r_buffer, 1, 10);
+					printf("\n\n\r");
+				} else {
+					__HAL_UART_CLEAR_OREFLAG(&huart2);
+				}
+			} while ((r_buffer[0] != ' ')
+					&& (r_buffer[0] != '?') && (r_buffer[0] != '!')
+					&& (r_buffer[0] != 'w') && (r_buffer[0] != 'p')
+					&& (r_buffer[0] != 'i') && (r_buffer[0] != 'd')
+					&& (r_buffer[0] != 'r')&& (r_buffer[0] != 's'));
+
+
+			if (r_buffer[0] == ' ') {
+				landing_value = commande;
+				commande = valeur_min_moteur;
+				etat = landing;
+				integre_erreur = 0;
+				erreur = 0;
+			}
+			if (r_buffer[0] == '?') {
+				etat = info_mode;
+				previous_etat = trip_mode;
+			}
+			if (r_buffer[0] == '!') {
+				kp = 0.001;
+				ki = 0.018;
+				kd = 0.1;
+				landing_value = commande;
+				commande = valeur_min_moteur;
+				landing_func(landing_value, htim3, valeur_min_moteur);
+				etat = trip_mode;
+				integre_erreur = 0;
+				erreur = 0;
+			}
+			if (r_buffer[0] == 'w') {
+				etat = instruct_angle;
+			}
+			if (r_buffer[0] == 'p') {
+				landing_value = commande;
+				commande = valeur_min_moteur;
+				landing_func(landing_value, htim3, valeur_min_moteur);
+				etat = instruct_kp;
+				integre_erreur = 0;
+				erreur = 0;
+			}
+			if (r_buffer[0] == 'i') {
+				landing_value = commande;
+				commande = valeur_min_moteur;
+				landing_func(landing_value, htim3, valeur_min_moteur);
+				etat = instruct_ki;
+				integre_erreur = 0;
+				erreur = 0;
+			}
+			if (r_buffer[0] == 'd') {
+				landing_value = commande;
+				commande = valeur_min_moteur;
+				landing_func(landing_value, htim3, valeur_min_moteur);
+				etat = instruct_kd;
+				integre_erreur = 0;
+				erreur = 0;
+			}
 			if (r_buffer[0] == 'r') {
 				HAL_TIM_Base_Start_IT(&htim16);
 			}
 			if (r_buffer[0] == 's') {
 				HAL_TIM_Base_Stop_IT(&htim16);
 			}
-
 			break;
 
 			// TAG_UC_014
@@ -1146,19 +1317,43 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim == &htim16)
 	{
+		// Data
 		MPU6050_Read_All(&hi2c1, &mpu);
-		double position_angulaireX = mpu.KalmanAngleX + 90 ;
-		double position_angulaireY = mpu.KalmanAngleY ;
-		double AxRaw = mpu.Ax * gtoms2;
-		double AyRaw = mpu.Ay * gtoms2;
-		double AzRaw = mpu.Az * gtoms2;
-		double GxRaw = mpu.Gx / radtodeg;
-		double GyRaw = mpu.Gy / radtodeg;
-		double GzRaw = mpu.Gz / radtodeg;
+		position_angulaireX = mpu.KalmanAngleX + 90;
+		position_angulaireY = mpu.KalmanAngleY ;
+		AxRaw = mpu.Ax * gtoms2;
+		AyRaw = mpu.Ay * gtoms2;
+		AzRaw = mpu.Az * gtoms2;
+		GxRaw = mpu.Gx / radtodeg;
+		GyRaw = mpu.Gy / radtodeg;
+		GzRaw = mpu.Gz / radtodeg;
 
-		char data = printf("Data:%.2lf;%.2lf;%.4lf;%.4lf;%.4lf;%.4lf;%.4lf;%.4lf;%.2lf;%.2lf;%.2lf\n",
+		if (etat == trip_mode)
+		{
+			// Asservissement
+			_erreur = erreur;
+			erreur = consigne - position_angulaireX;
+			integre_erreur += erreur;
+			derive_erreur = erreur - _erreur;
+			commande = kp * (erreur) + ki * (integre_erreur)
+					+ 1000*kd * (derive_erreur);
+
+			if (commande > valeur_max_moteur) {
+				commande = valeur_max_moteur;
+			}
+			if (commande < valeur_min_moteur) {
+				commande = valeur_min_moteur;
+			}
+			load_pwm(htim3, commande);
+		}
+
+
+		// Data transmission
+		data = printf("Data:%.2lf;%.2lf;%.4lf;%.4lf;%.4lf;%.4lf;%.4lf;%.4lf;%.2lf;%.2lf;%.2lf\n",
 				position_angulaireX, position_angulaireY, AxRaw, AyRaw, AzRaw, GxRaw, GyRaw, GzRaw, erreur, integre_erreur, derive_erreur);
 		HAL_UART_Transmit_IT(&huart2, data, sizeof(data));
+
+		// Garde fou 90°
 
 		if (position_angulaireX > 90){
 			counter_exceeding_value +=1;
@@ -1169,7 +1364,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			}
 		}
 	}
-
 }
 
 /* USER CODE END 4 */
