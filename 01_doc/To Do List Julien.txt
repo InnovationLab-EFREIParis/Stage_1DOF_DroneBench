@@ -54,15 +54,15 @@ Lundi 02/01/23
 Mardi 14/02/23
 
 C:
--> Régler pbm MPU read all, à mettre dans la period elapsed callback uniquement (synchro / cditions état)
+-> Régler pbm MPU read all, à mettre dans la period elapsed callback uniquement (synchro / cditions état) [FAIT]
 -> Idées Mr Bertrand, kd divisé par dt etc. (kp aussi ?)
 -> ki ; anti windup
--> glitch, mpu read all dans état init gyro ? court temps
+-> glitch, mpu read all dans état init gyro ? court temps [FAIT]
 
 Hardware:
 -> Butée mécanique
 -> Ajout d'une charge sur le bras
 
 Python / Mesures pour Mr Bertrand:
--> Faire une calibration longue avec les nouvelles unités SI
--> Faire une simulation avec 0‰ de gaz en déplaçant le bras manuellement
+-> Faire une calibration longue avec les nouvelles unités SI [FAIT]
+-> Faire une simulation avec 0‰ de gaz en déplaçant le bras manuellement [FAIT]

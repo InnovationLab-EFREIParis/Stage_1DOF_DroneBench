@@ -529,6 +529,8 @@ class AutoModeGUI():
         '''
         Method to close the Auto Mode GUI and destroy the widgets
         '''
+        self.serial.ser.write(self.data.ipts.encode())
+        time.sleep(.1)
         self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         # Must destroy all the elements so that they are not kept in memory
         for widget in self.frame.winfo_children():
@@ -550,9 +552,12 @@ class AutoModeGUI():
             if (angle_value >= 0) and (angle_value <= 90):
                 if self.kp_box["state"] == "disabled":                   
                     self.consigne_box.delete(0,"end")
+                    self.serial.ser.write(self.data.ipts.encode())
+                    time.sleep(.1)
                     self.serial.SerialIpt(self, self.data.iptw, 30)
                     self.serial.ser.write(str(angle_value).encode())
                     self.serial.SerialIpt(self, self.data.iptENTER, 30)
+                    self.serial.ser.write(self.data.iptr.encode())
                     self.label_screen["text"] = angle_value
                 elif self.kp_box["state"] == "normal":
                     # Take the kp value in the "Entry" widget
@@ -586,6 +591,7 @@ class AutoModeGUI():
                         self.serial.SerialIpt(self, self.data.iptw, 30)
                         self.serial.ser.write(str(angle_value).encode())
                         self.serial.SerialIpt(self, self.data.iptENTER, 30)
+                        self.serial.ser.write(self.data.iptr.encode())
                         self.label_screen["text"] = angle_value
                         
                         self.kp_box["state"] = "disabled"
@@ -607,6 +613,8 @@ class AutoModeGUI():
         """
         self.label_screen["text"] = "0"
         # Landing & Return to Motor Ready
+        self.serial.ser.write(self.data.ipts.encode())
+        time.sleep(.1)
         self.serial.SerialIpt(self, self.data.iptSPACE, 30)
         self.serial.SerialIpt(self, self.data.ipt3, 30)
         
@@ -725,7 +733,6 @@ class CalibrationGUI():
             timeout = time.time() + new_content[i][1]
             self.serial.SerialOpt(self, timeout)
             self.serial.ser.write(self.data.ipts.encode())
-             
             time.sleep(.1)
     
         self.serial.SerialIpt(self, self.data.iptSPACE, 30)
@@ -735,7 +742,7 @@ class CalibrationGUI():
         self.list_modes = ['Consigne Gaz (‰)', 'Position Angulaire X (°)', 'Position Angulaire Y (°)', 
                    'Ax Raw (m/s²)', 'Ay Raw (m/s²)', 'Az Raw (m/s²)',
                    'Gx Raw (rad/s)', 'Gy Raw (rad/s)', 'Gz Raw (rad/s)']
-        self.df = pd.DataFrame([column[:9] for column in self.data.record], 
+        self.df = pd.DataFrame(self.data.record, 
                           columns = self.list_modes)
         
         list_time = []

@@ -30,7 +30,7 @@ class DataMaster():
         
         self.msg = []
         self.record = []
-        self.gas_value = 0
+        self.consigne_value = 0
                 
     def DecodeMsg(self):
         temp = self.RowMsg
@@ -38,16 +38,16 @@ class DataMaster():
             if "Gaz Term : " in temp:
                 self.msg = temp.split("Gaz Term : ")
                 del self.msg[0]
-                self.gas_value = (self.msg[0]).removesuffix('\n')
+                self.consigne_value = (self.msg[0]).removesuffix('\n')
             if "Angle : " in temp:
                 self.msg = temp.split("Angle : ")
                 del self.msg[0]
-                self.gas_value = (self.msg[0]).removesuffix('\n')
-            if "Data:" in temp:
-                self.msg = temp.split("Data:")
+                self.consigne_value = (self.msg[0]).removesuffix('\n')
+            if "DataA:" in temp:
+                self.msg = temp.split("DataA:")
                 self.msg = self.msg[1].split(";")
                 if len(self.msg) == 11:
-                    self.record.append([int(self.gas_value),
+                    self.record.append([int(self.consigne_value),
                                         float(self.msg[0]),
                                         float(self.msg[1]),
                                         float(self.msg[2]),
@@ -59,6 +59,19 @@ class DataMaster():
                                         float(self.msg[8]),
                                         float(self.msg[9]),
                                         float((self.msg[10]).removesuffix('\n'))])
+            if "DataG:" in temp:
+                self.msg = temp.split("DataG:")
+                self.msg = self.msg[1].split(";")
+                if len(self.msg) == 8:
+                    self.record.append([int(self.consigne_value),
+                                        float(self.msg[0]),
+                                        float(self.msg[1]),
+                                        float(self.msg[2]),
+                                        float(self.msg[3]),
+                                        float(self.msg[4]),
+                                        float(self.msg[5]),
+                                        float(self.msg[6]),
+                                        float((self.msg[7]).removesuffix('\n'))])
                     
             if "Gyro MPU6050 is not working" in temp:
                 print("Error\n")
