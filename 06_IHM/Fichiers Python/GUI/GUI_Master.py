@@ -732,6 +732,9 @@ class CalibrationGUI():
             self.serial.ser.write(self.data.iptr.encode())
             timeout = time.time() + new_content[i][1]
             self.serial.SerialOpt(self, timeout)
+            if self.data.exceeding_value == True:
+                self.data.exceeding_value = False
+                break
             self.serial.ser.write(self.data.ipts.encode())
             time.sleep(.1)
     
@@ -1109,6 +1112,9 @@ class TripModeGUI():
             
             timeout = time.time() + new_content[i][1]
             self.serial.SerialOpt(self, timeout)
+            if self.data.exceeding_value == True:
+                self.data.exceeding_value = False
+                break  
             self.serial.ser.write(self.data.ipts.encode())
             time.sleep(.1)
             self.serial.SerialIpt(self, self.data.iptw, 30)

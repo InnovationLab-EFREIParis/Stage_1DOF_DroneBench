@@ -66,3 +66,9 @@ Hardware:
 Python / Mesures pour Mr Bertrand:
 -> Faire une calibration longue avec les nouvelles unités SI [FAIT]
 -> Faire une simulation avec 0‰ de gaz en déplaçant le bras manuellement [FAIT]
+------------------------------------------------------------------------------------------------------------------------
+Lundi 27/02/23
+
+Solidworks:
+-> Rapporteur : lignes de constructions et bien placer les chiffres
+-> Carter : Augmenter de 2cm le rayon et réduire de 2 lignes d'alvéoles l'épaisseur (plus besoin des solidifications)

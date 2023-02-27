@@ -80,7 +80,7 @@ class SerialCtrl():
         """
         Method used to read the outputs coming from the STM32
         """
-        while time.time()<= timeout:
+        while time.time()<= timeout and gui.data.exceeding_value == False:
             val = self.ser.readline()
             while not '\\n'in str(val):
                 time.sleep(.001)               

@@ -87,11 +87,33 @@ Kalman_t kali;
 MPU6050_t mpu;
 
 enum states etat, previous_etat;
-
+enum choice_mode choice_mode;
 
 int consigne = 0;
 double commande = 0;
-int choice_mode = 0;
+
+int value0 = 0;
+int value1 = 0;
+int value2 = 0;
+
+int value_prime0 = 0;
+int value_prime1 = 0;
+
+int value_kp0 = 0;
+int value_kp1 = 0;
+int value_kp2 = 0;
+int value_kp3 = 0;
+
+int value_ki0 = 0;
+int value_ki1 = 0;
+int value_ki2 = 0;
+int value_ki3 = 0;
+
+int value_kd0 = 0;
+int value_kd1 = 0;
+int value_kd2 = 0;
+int value_kd3 = 0;
+
 // Default coefficients
 double kp = 0.001;
 double ki = 0.018;
@@ -378,11 +400,11 @@ int main(void)
 				etat = manual_mode_term;
 				break;
 			case '3':
-				choice_mode = 3;
+				choice_mode = choice_auto;
 				etat = init_gyro;
 				break;
 			case '4':
-				choice_mode = 4;
+				choice_mode = choice_trip;
 				etat = init_gyro;
 				break;
 			default:
@@ -488,13 +510,13 @@ int main(void)
 				}
 			} while ((r_buffer[0] != '\r') && (r_buffer[0] != '+')
 					&& (r_buffer[0] != '-') && (r_buffer[0] != '?')
-					&& (r_buffer[0] != ' ')&& (r_buffer[0] != 'r')
-					&& (r_buffer[0] != 's'));
+					&& (r_buffer[0] != ' ') && (r_buffer[0] != 'r')
+					&& (r_buffer[0] != 's') && (r_buffer[0] != 'f'));
 			printf("\n\n\r");
 
-			int value0 = r_buffer_string[0] - '0';
-			int value1 = r_buffer_string[1] - '0';
-			int value2 = r_buffer_string[2] - '0';
+			value0 = r_buffer_string[0] - '0';
+			value1 = r_buffer_string[1] - '0';
+			value2 = r_buffer_string[2] - '0';
 
 			if (cpt_char == 2) {
 				if ((value0 > 9) || (value0 < 0)) {
@@ -567,6 +589,10 @@ int main(void)
 			if (r_buffer[0] == 's') {
 				HAL_TIM_Base_Stop_IT(&htim16);
 			}
+			if (r_buffer[0] == 'f') {
+				HAL_TIM_Base_Stop_IT(&htim16);
+				printf("EXCEEDING VALUE\n");
+			}
 			if (r_buffer[0] == ' ') {
 				landing_value = mapped_value;
 				mapped_value = valeur_min_moteur;
@@ -631,8 +657,8 @@ int main(void)
 					&& (r_buffer[0] != ' '));
 			printf("\n\n\r");
 
-			int value_prime0 = r_buffer_string_prime[0] - '0';
-			int value_prime1 = r_buffer_string_prime[1] - '0';
+			value_prime0 = r_buffer_string_prime[0] - '0';
+			value_prime1 = r_buffer_string_prime[1] - '0';
 
 			if (cpt_char_prime == 2) {
 				if ((value_prime0 > 9) || (value_prime0 < 0)) {
@@ -713,10 +739,10 @@ int main(void)
 					&& (r_buffer[0] != ' '));
 			printf("\n\n\r");
 
-			int value_kp0 = r_buffer_string_kp[0] - '0';
-			int value_kp1 = r_buffer_string_kp[1] - '0';
-			int value_kp2 = r_buffer_string_kp[2] - '0';
-			int value_kp3 = r_buffer_string_kp[3] - '0';
+			value_kp0 = r_buffer_string_kp[0] - '0';
+			value_kp1 = r_buffer_string_kp[1] - '0';
+			value_kp2 = r_buffer_string_kp[2] - '0';
+			value_kp3 = r_buffer_string_kp[3] - '0';
 
 			if (cpt_char_kp == 2) {
 				if ((value_kp0 > 9) || (value_kp0 < 0)) {
@@ -808,10 +834,10 @@ int main(void)
 					&& (r_buffer[0] != ' '));
 			printf("\n\n\r");
 
-			int value_ki0 = r_buffer_string_ki[0] - '0';
-			int value_ki1 = r_buffer_string_ki[1] - '0';
-			int value_ki2 = r_buffer_string_ki[2] - '0';
-			int value_ki3 = r_buffer_string_ki[3] - '0';
+			value_ki0 = r_buffer_string_ki[0] - '0';
+			value_ki1 = r_buffer_string_ki[1] - '0';
+			value_ki2 = r_buffer_string_ki[2] - '0';
+			value_ki3 = r_buffer_string_ki[3] - '0';
 
 			if (cpt_char_ki == 2) {
 				if ((value_ki0 > 9) || (value_ki0 < 0)) {
@@ -903,10 +929,10 @@ int main(void)
 					&& (r_buffer[0] != ' '));
 			printf("\n\n\r");
 
-			int value_kd0 = r_buffer_string_kd[0] - '0';
-			int value_kd1 = r_buffer_string_kd[1] - '0';
-			int value_kd2 = r_buffer_string_kd[2] - '0';
-			int value_kd3 = r_buffer_string_kd[3] - '0';
+			value_kd0 = r_buffer_string_kd[0] - '0';
+			value_kd1 = r_buffer_string_kd[1] - '0';
+			value_kd2 = r_buffer_string_kd[2] - '0';
+			value_kd3 = r_buffer_string_kd[3] - '0';
 
 			if (cpt_char_kd == 2) {
 				if ((value_kd0 > 9) || (value_kd0 < 0)) {
@@ -997,7 +1023,8 @@ int main(void)
 					&& (r_buffer[0] != '?') && (r_buffer[0] != '!')
 					&& (r_buffer[0] != 'w') && (r_buffer[0] != 'p')
 					&& (r_buffer[0] != 'i') && (r_buffer[0] != 'd')
-					&& (r_buffer[0] != 'r')&& (r_buffer[0] != 's'));
+					&& (r_buffer[0] != 'r')&& (r_buffer[0] != 's')
+					&& (r_buffer[0] != 'f'));
 
 
 			if (r_buffer[0] == ' ') {
@@ -1054,6 +1081,10 @@ int main(void)
 			}
 			if (r_buffer[0] == 's') {
 				HAL_TIM_Base_Stop_IT(&htim16);
+			}
+			if (r_buffer[0] == 'f') {
+				HAL_TIM_Base_Stop_IT(&htim16);
+				printf("EXCEEDING VALUE\n");
 			}
 			break;
 
@@ -1164,7 +1195,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			}
 			load_pwm(htim3, commande);
 			// Data transmission for trip_mode
-			if (choice_mode == 4)
+			if (choice_mode == choice_trip)
 			{
 				data = printf("DataA:%.2lf;%.2lf;%.4lf;%.4lf;%.4lf;%.4lf;%.4lf;%.4lf;%.2lf;%.2lf;%.2lf\n",
 						position_angulaireX, position_angulaireY, AxRaw, AyRaw, AzRaw, GxRaw, GyRaw, GzRaw, erreur, integre_erreur, derive_erreur);
@@ -1181,12 +1212,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		}
 
 		// Garde fou 90°
-		if (position_angulaireX > 90){
+		if (position_angulaireX >= 90){
 			counter_exceeding_value +=1;
-			if (counter_exceeding_value >10){
+			if (counter_exceeding_value >=5){
 				counter_exceeding_value = 0;
-				r_buffer[0] = ' ';
-				HAL_TIM_Base_Stop_IT(&htim16);
+				r_buffer[0] = 'f';
+
 			}
 		}
 	}

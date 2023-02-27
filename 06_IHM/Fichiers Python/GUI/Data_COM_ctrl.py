@@ -31,6 +31,8 @@ class DataMaster():
         self.msg = []
         self.record = []
         self.consigne_value = 0
+        
+        self.exceeding_value = False
                 
     def DecodeMsg(self):
         temp = self.RowMsg
@@ -77,6 +79,13 @@ class DataMaster():
                 print("Error\n")
                 ErrorMsg = "Gyro MPU6050 is not working. Please check if it is well connected."
                 messagebox.showerror("showerror", ErrorMsg)   
+            
+            if "EXCEEDING VALUE" in temp:
+                print("Error\n")
+                ErrorMsg = "The arm was too close to the maximum value. For safety, landing state has been initiated."
+                messagebox.showerror("showerror", ErrorMsg)
+                self.exceeding_value = True
+                
 
 
 
