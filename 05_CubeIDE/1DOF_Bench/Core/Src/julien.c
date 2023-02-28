@@ -16,8 +16,6 @@ void landing_func(double landing_value, TIM_HandleTypeDef htim3,
 	} while (landing_value > valeur_min_moteur);
 }
 
-// PID coefficients
-
 void reinit_pid_values(char r_buffer_string_k[], int *value_k0, int *value_k1,
 		int *value_k2, int *value_k3, int *cpt_char_k) {
 	r_buffer_string_k[0] = 0;
@@ -29,4 +27,8 @@ void reinit_pid_values(char r_buffer_string_k[], int *value_k0, int *value_k1,
 	*value_k2 = 0;
 	*value_k3 = 0;
 	*cpt_char_k = 0;
+}
+
+int ascii_to_int(char r_buffer_string){
+	return(r_buffer_string - '0');
 }

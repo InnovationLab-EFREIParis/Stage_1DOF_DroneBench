@@ -727,18 +727,19 @@ class CalibrationGUI():
             new_content[i][1] = int(new_content[i][1])
             self.serial.ser.write(new_content[i][0].encode()) 
             self.serial.SerialIpt(self, self.data.iptENTER, 30)  
-            # You can choose or not to add a delay before recording the position values
-            #time.sleep(1)
             self.serial.ser.write(self.data.iptr.encode())
             timeout = time.time() + new_content[i][1]
             self.serial.SerialOpt(self, timeout)
-            if self.data.exceeding_value == True:
-                self.data.exceeding_value = False
+            if self.data.exceeding_value:
                 break
             self.serial.ser.write(self.data.ipts.encode())
             time.sleep(.1)
     
         self.serial.SerialIpt(self, self.data.iptSPACE, 30)
+        if self.data.exceeding_value:
+            self.data.exceeding_value = False
+            ErrorMsg = "The arm was too close to the maximum value. For safety, landing state has been initiated."
+            messagebox.showerror("showerror", ErrorMsg)
         
         title_file = time.strftime("%Y-%m-%d-%Hh%M-Calibration_mode_Results")        
         
@@ -762,8 +763,7 @@ class CalibrationGUI():
                                                           ))
         self.df.to_csv(saving_path, sep=';', decimal=',', encoding='utf-8', index=False, line_terminator='\n')
         print(self.data.record)
-        self.btn_show_graph["state"] = "active"
-        
+        self.btn_show_graph["state"] = "active"        
         self.serial.SerialIpt(self, self.data.ipt2, 30)
         
         if len(new_content) == 1:
@@ -1031,14 +1031,14 @@ class TripModeGUI():
         '''
         Method to close the Trip Mode GUI and destroy the widgets
         '''
-        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
-        self.serial.SerialIpt(self, self.data.iptENTER, 30)
+        self.serial.SerialIpt(self, self.data.iptSPACE, 60)
         # Must destroy all the elements so that they are not kept in memory
         for widget in self.frame.winfo_children():
             widget.destroy()
         self.frame.destroy()
         
         self.motor_ready = MotorReadyGUI(self.root, self.serial, self.data)
+        self.data.ClearData()
         
     def CorrectCoeff(self):
         # Take the kp value in the "Entry" widget
@@ -1081,8 +1081,7 @@ class TripModeGUI():
         """
         Method to search for txt files and do the "séquence de vol"/trip
         """
-        self.data.ClearData()
-        
+        self.data.ClearData()        
         self.root.filename = filedialog.askopenfilename(
             initialdir="/", 
             title="File Explorer",
@@ -1108,18 +1107,20 @@ class TripModeGUI():
             new_content[i][1] = int(new_content[i][1])
             self.serial.ser.write(new_content[i][0].encode())
             self.serial.SerialIpt(self, self.data.iptENTER, 30)
-            self.serial.ser.write(self.data.iptr.encode())
-            
+            self.serial.ser.write(self.data.iptr.encode())            
             timeout = time.time() + new_content[i][1]
             self.serial.SerialOpt(self, timeout)
-            if self.data.exceeding_value == True:
-                self.data.exceeding_value = False
+            if self.data.exceeding_value:
                 break  
             self.serial.ser.write(self.data.ipts.encode())
             time.sleep(.1)
             self.serial.SerialIpt(self, self.data.iptw, 30)
         
         self.serial.SerialIpt(self, self.data.iptSPACE, 30)
+        if self.data.exceeding_value:
+            self.data.exceeding_value = False
+            ErrorMsg = "The arm was too close to the maximum value. For safety, landing state has been initiated."
+            messagebox.showerror("showerror", ErrorMsg)
         
         title_file = time.strftime("%Y-%m-%d-%Hh%M-Trip_mode_Results")        
         self.list_modes = ['Consigne Angle (°)', 'Position Angulaire X (°)', 'Position Angulaire Y (°)', 

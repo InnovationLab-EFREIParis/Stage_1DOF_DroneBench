@@ -82,15 +82,8 @@ class DataMaster():
             
             if "EXCEEDING VALUE" in temp:
                 print("Error\n")
-                ErrorMsg = "The arm was too close to the maximum value. For safety, landing state has been initiated."
-                messagebox.showerror("showerror", ErrorMsg)
                 self.exceeding_value = True
                 
-
-
-
- 
-
 
 
     def ClearData(self):

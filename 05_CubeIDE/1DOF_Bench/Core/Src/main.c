@@ -514,9 +514,9 @@ int main(void)
 					&& (r_buffer[0] != 's') && (r_buffer[0] != 'f'));
 			printf("\n\n\r");
 
-			value0 = r_buffer_string[0] - '0';
-			value1 = r_buffer_string[1] - '0';
-			value2 = r_buffer_string[2] - '0';
+			value0 = ascii_to_int(r_buffer_string[0]);
+			value1 = ascii_to_int(r_buffer_string[1]);
+			value2 = ascii_to_int(r_buffer_string[2]);
 
 			if (cpt_char == 2) {
 				if ((value0 > 9) || (value0 < 0)) {
@@ -657,8 +657,8 @@ int main(void)
 					&& (r_buffer[0] != ' '));
 			printf("\n\n\r");
 
-			value_prime0 = r_buffer_string_prime[0] - '0';
-			value_prime1 = r_buffer_string_prime[1] - '0';
+			value_prime0 = ascii_to_int(r_buffer_string_prime[0]);
+			value_prime1 = ascii_to_int(r_buffer_string_prime[1]);
 
 			if (cpt_char_prime == 2) {
 				if ((value_prime0 > 9) || (value_prime0 < 0)) {
@@ -739,10 +739,10 @@ int main(void)
 					&& (r_buffer[0] != ' '));
 			printf("\n\n\r");
 
-			value_kp0 = r_buffer_string_kp[0] - '0';
-			value_kp1 = r_buffer_string_kp[1] - '0';
-			value_kp2 = r_buffer_string_kp[2] - '0';
-			value_kp3 = r_buffer_string_kp[3] - '0';
+			value_kp0 = ascii_to_int(r_buffer_string_kp[0]);
+			value_kp1 = ascii_to_int(r_buffer_string_kp[1]);
+			value_kp2 = ascii_to_int(r_buffer_string_kp[2]);
+			value_kp3 = ascii_to_int(r_buffer_string_kp[3]);
 
 			if (cpt_char_kp == 2) {
 				if ((value_kp0 > 9) || (value_kp0 < 0)) {
@@ -834,10 +834,10 @@ int main(void)
 					&& (r_buffer[0] != ' '));
 			printf("\n\n\r");
 
-			value_ki0 = r_buffer_string_ki[0] - '0';
-			value_ki1 = r_buffer_string_ki[1] - '0';
-			value_ki2 = r_buffer_string_ki[2] - '0';
-			value_ki3 = r_buffer_string_ki[3] - '0';
+			value_ki0 = ascii_to_int(r_buffer_string_ki[0]);
+			value_ki1 = ascii_to_int(r_buffer_string_ki[1]);
+			value_ki2 = ascii_to_int(r_buffer_string_ki[2]);
+			value_ki3 = ascii_to_int(r_buffer_string_ki[3]);
 
 			if (cpt_char_ki == 2) {
 				if ((value_ki0 > 9) || (value_ki0 < 0)) {
@@ -929,10 +929,10 @@ int main(void)
 					&& (r_buffer[0] != ' '));
 			printf("\n\n\r");
 
-			value_kd0 = r_buffer_string_kd[0] - '0';
-			value_kd1 = r_buffer_string_kd[1] - '0';
-			value_kd2 = r_buffer_string_kd[2] - '0';
-			value_kd3 = r_buffer_string_kd[3] - '0';
+			value_kd0 = ascii_to_int(r_buffer_string_kd[0]);
+			value_kd1 = ascii_to_int(r_buffer_string_kd[1]);
+			value_kd2 = ascii_to_int(r_buffer_string_kd[2]);
+			value_kd3 = ascii_to_int(r_buffer_string_kd[3]);
 
 			if (cpt_char_kd == 2) {
 				if ((value_kd0 > 9) || (value_kd0 < 0)) {
@@ -1212,7 +1212,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		}
 
 		// Garde fou 90°
-		if (position_angulaireX >= 90){
+		if (position_angulaireX >= 85){
 			counter_exceeding_value +=1;
 			if (counter_exceeding_value >=5){
 				counter_exceeding_value = 0;
