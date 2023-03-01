@@ -744,52 +744,55 @@ int main(void)
 			value_kp2 = ascii_to_int(r_buffer_string_kp[2]);
 			value_kp3 = ascii_to_int(r_buffer_string_kp[3]);
 
-			if (cpt_char_kp == 2) {
-				if ((value_kp0 > 9) || (value_kp0 < 0)) {
-					printf(msg_error_char_nb);
-					etat = instruct_kp;
-				} else {
-					kp = value_kp0 / 10.;
-					printf("kp = %.4f \n\r", kp);
-					etat = auto_mode;
-				}
-			}
-			if (cpt_char_kp == 3) {
-				if ((value_kp0 > 9) || (value_kp0 < 0) || (value_kp1 > 9)
-						|| (value_kp1 < 0)) {
-					printf(msg_error_char_nb);
-					etat = instruct_kp;
-				} else {
-					kp = value_kp0 / 10. + value_kp1 / 100.;
-					printf("kp = %.4f \n\r", kp);
-					etat = auto_mode;
-				}
-			}
-			if (cpt_char_kp == 4) {
-				if ((value_kp0 > 9) || (value_kp0 < 0) || (value_kp1 > 9)
-						|| (value_kp1 < 0) || (value_kp2 > 9)
-						|| (value_kp2 < 0)) {
-					printf(msg_error_char_nb);
-					etat = instruct_kp;
-				} else {
-					kp = value_kp0 / 10. + value_kp1 / 100. + value_kp2 / 1000.;
-					printf("kp = %.4f \n\r", kp);
-					etat = auto_mode;
-				}
-			}
-			if (cpt_char_kp == 5) {
-				if ((value_kp0 > 9) || (value_kp0 < 0) || (value_kp1 > 9)
-						|| (value_kp1 < 0) || (value_kp2 > 9) || (value_kp2 < 0)
-						|| (value_kp3 > 9) || (value_kp3 < 0)) {
-					printf(msg_error_char_nb);
-					etat = instruct_kp;
-				} else {
-					kp = value_kp0 / 10. + value_kp1 / 100. + value_kp2 / 1000.
-							+ value_kp3 / 10000.;
-					printf("kp = %.4f \n\r", kp);
-					etat = auto_mode;
-				}
-			}
+			construct_pid_coeff(&cpt_char_kp, &value_kp0, &value_kp1, &value_kp2, &value_kp3,
+					msg_error_char_nb, &etat, instruct_kp, "kp = %.4f \n\r", &kp);
+
+//			if (cpt_char_kp == 2) {
+//				if ((value_kp0 > 9) || (value_kp0 < 0)) {
+//					printf(msg_error_char_nb);
+//					etat = instruct_kp;
+//				} else {
+//					kp = value_kp0 / 10.;
+//					printf("kp = %.4f \n\r", kp);
+//					etat = auto_mode;
+//				}
+//			}
+//			if (cpt_char_kp == 3) {
+//				if ((value_kp0 > 9) || (value_kp0 < 0) || (value_kp1 > 9)
+//						|| (value_kp1 < 0)) {
+//					printf(msg_error_char_nb);
+//					etat = instruct_kp;
+//				} else {
+//					kp = value_kp0 / 10. + value_kp1 / 100.;
+//					printf("kp = %.4f \n\r", kp);
+//					etat = auto_mode;
+//				}
+//			}
+//			if (cpt_char_kp == 4) {
+//				if ((value_kp0 > 9) || (value_kp0 < 0) || (value_kp1 > 9)
+//						|| (value_kp1 < 0) || (value_kp2 > 9)
+//						|| (value_kp2 < 0)) {
+//					printf(msg_error_char_nb);
+//					etat = instruct_kp;
+//				} else {
+//					kp = value_kp0 / 10. + value_kp1 / 100. + value_kp2 / 1000.;
+//					printf("kp = %.4f \n\r", kp);
+//					etat = auto_mode;
+//				}
+//			}
+//			if (cpt_char_kp == 5) {
+//				if ((value_kp0 > 9) || (value_kp0 < 0) || (value_kp1 > 9)
+//						|| (value_kp1 < 0) || (value_kp2 > 9) || (value_kp2 < 0)
+//						|| (value_kp3 > 9) || (value_kp3 < 0)) {
+//					printf(msg_error_char_nb);
+//					etat = instruct_kp;
+//				} else {
+//					kp = value_kp0 / 10. + value_kp1 / 100. + value_kp2 / 1000.
+//							+ value_kp3 / 10000.;
+//					printf("kp = %.4f \n\r", kp);
+//					etat = auto_mode;
+//				}
+//			}
 
 			if (r_buffer[0] == '?') {
 				etat = info_mode;
@@ -839,52 +842,55 @@ int main(void)
 			value_ki2 = ascii_to_int(r_buffer_string_ki[2]);
 			value_ki3 = ascii_to_int(r_buffer_string_ki[3]);
 
-			if (cpt_char_ki == 2) {
-				if ((value_ki0 > 9) || (value_ki0 < 0)) {
-					printf(msg_error_char_nb);
-					etat = instruct_ki;
-				} else {
-					ki = value_ki0 / 10.;
-					printf("ki = %.4f \n\r", ki);
-					etat = auto_mode;
-				}
-			}
-			if (cpt_char_ki == 3) {
-				if ((value_ki0 > 9) || (value_ki0 < 0) || (value_ki1 > 9)
-						|| (value_ki1 < 0)) {
-					printf(msg_error_char_nb);
-					etat = instruct_ki;
-				} else {
-					ki = value_ki0 / 10. + value_ki1 / 100.;
-					printf("ki = %.4f \n\r", ki);
-					etat = auto_mode;
-				}
-			}
-			if (cpt_char_ki == 4) {
-				if ((value_ki0 > 9) || (value_ki0 < 0) || (value_ki1 > 9)
-						|| (value_ki1 < 0) || (value_ki2 > 9)
-						|| (value_ki2 < 0)) {
-					printf(msg_error_char_nb);
-					etat = instruct_ki;
-				} else {
-					ki = value_ki0 / 10. + value_ki1 / 100. + value_ki2 / 1000.;
-					printf("ki = %.4f \n\r", ki);
-					etat = auto_mode;
-				}
-			}
-			if (cpt_char_ki == 5) {
-				if ((value_ki0 > 9) || (value_ki0 < 0) || (value_ki1 > 9)
-						|| (value_ki1 < 0) || (value_ki2 > 9) || (value_ki2 < 0)
-						|| (value_ki3 > 9) || (value_ki3 < 0)) {
-					printf(msg_error_char_nb);
-					etat = instruct_ki;
-				} else {
-					ki = value_ki0 / 10. + value_ki1 / 100. + value_ki2 / 1000.
-							+ value_ki3 / 10000.;
-					printf("ki = %.4f \n\r", ki);
-					etat = auto_mode;
-				}
-			}
+			construct_pid_coeff(&cpt_char_ki, &value_ki0, &value_ki1, &value_ki2, &value_ki3,
+								msg_error_char_nb, &etat, instruct_ki, "ki = %.4f \n\r", &ki);
+
+//			if (cpt_char_ki == 2) {
+//				if ((value_ki0 > 9) || (value_ki0 < 0)) {
+//					printf(msg_error_char_nb);
+//					etat = instruct_ki;
+//				} else {
+//					ki = value_ki0 / 10.;
+//					printf("ki = %.4f \n\r", ki);
+//					etat = auto_mode;
+//				}
+//			}
+//			if (cpt_char_ki == 3) {
+//				if ((value_ki0 > 9) || (value_ki0 < 0) || (value_ki1 > 9)
+//						|| (value_ki1 < 0)) {
+//					printf(msg_error_char_nb);
+//					etat = instruct_ki;
+//				} else {
+//					ki = value_ki0 / 10. + value_ki1 / 100.;
+//					printf("ki = %.4f \n\r", ki);
+//					etat = auto_mode;
+//				}
+//			}
+//			if (cpt_char_ki == 4) {
+//				if ((value_ki0 > 9) || (value_ki0 < 0) || (value_ki1 > 9)
+//						|| (value_ki1 < 0) || (value_ki2 > 9)
+//						|| (value_ki2 < 0)) {
+//					printf(msg_error_char_nb);
+//					etat = instruct_ki;
+//				} else {
+//					ki = value_ki0 / 10. + value_ki1 / 100. + value_ki2 / 1000.;
+//					printf("ki = %.4f \n\r", ki);
+//					etat = auto_mode;
+//				}
+//			}
+//			if (cpt_char_ki == 5) {
+//				if ((value_ki0 > 9) || (value_ki0 < 0) || (value_ki1 > 9)
+//						|| (value_ki1 < 0) || (value_ki2 > 9) || (value_ki2 < 0)
+//						|| (value_ki3 > 9) || (value_ki3 < 0)) {
+//					printf(msg_error_char_nb);
+//					etat = instruct_ki;
+//				} else {
+//					ki = value_ki0 / 10. + value_ki1 / 100. + value_ki2 / 1000.
+//							+ value_ki3 / 10000.;
+//					printf("ki = %.4f \n\r", ki);
+//					etat = auto_mode;
+//				}
+//			}
 
 			if (r_buffer[0] == '?') {
 				etat = info_mode;
@@ -934,52 +940,55 @@ int main(void)
 			value_kd2 = ascii_to_int(r_buffer_string_kd[2]);
 			value_kd3 = ascii_to_int(r_buffer_string_kd[3]);
 
-			if (cpt_char_kd == 2) {
-				if ((value_kd0 > 9) || (value_kd0 < 0)) {
-					printf(msg_error_char_nb);
-					etat = instruct_kd;
-				} else {
-					kd = value_kd0 / 10.;
-					printf("kd = %.4f \n\r", kd);
-					etat = auto_mode;
-				}
-			}
-			if (cpt_char_kd == 3) {
-				if ((value_kd0 > 9) || (value_kd0 < 0) || (value_kd1 > 9)
-						|| (value_kd1 < 0)) {
-					printf(msg_error_char_nb);
-					etat = instruct_kd;
-				} else {
-					kd = value_kd0 / 10. + value_kd1 / 100.;
-					printf("kd = %.4f \n\r", kd);
-					etat = auto_mode;
-				}
-			}
-			if (cpt_char_kd == 4) {
-				if ((value_kd0 > 9) || (value_kd0 < 0) || (value_kd1 > 9)
-						|| (value_kd1 < 0) || (value_kd2 > 9)
-						|| (value_kd2 < 0)) {
-					printf(msg_error_char_nb);
-					etat = instruct_kd;
-				} else {
-					kd = value_kd0 / 10. + value_kd1 / 100. + value_kd2 / 1000.;
-					printf("kd = %.4f \n\r", kd);
-					etat = auto_mode;
-				}
-			}
-			if (cpt_char_kd == 5) {
-				if ((value_kd0 > 9) || (value_kd0 < 0) || (value_kd1 > 9)
-						|| (value_kd1 < 0) || (value_kd2 > 9) || (value_kd2 < 0)
-						|| (value_kd3 > 9) || (value_kd3 < 0)) {
-					printf(msg_error_char_nb);
-					etat = instruct_kd;
-				} else {
-					kd = value_kd0 / 10. + value_kd1 / 100. + value_kd2 / 1000.
-							+ value_kd3 / 10000.;
-					printf("kd = %.4f \n\r", kd);
-					etat = auto_mode;
-				}
-			}
+			construct_pid_coeff(&cpt_char_kd, &value_kd0, &value_kd1, &value_kd2, &value_kd3,
+											msg_error_char_nb, &etat, instruct_kd, "kd = %.4f \n\r", &kd);
+
+//			if (cpt_char_kd == 2) {
+//				if ((value_kd0 > 9) || (value_kd0 < 0)) {
+//					printf(msg_error_char_nb);
+//					etat = instruct_kd;
+//				} else {
+//					kd = value_kd0 / 10.;
+//					printf("kd = %.4f \n\r", kd);
+//					etat = auto_mode;
+//				}
+//			}
+//			if (cpt_char_kd == 3) {
+//				if ((value_kd0 > 9) || (value_kd0 < 0) || (value_kd1 > 9)
+//						|| (value_kd1 < 0)) {
+//					printf(msg_error_char_nb);
+//					etat = instruct_kd;
+//				} else {
+//					kd = value_kd0 / 10. + value_kd1 / 100.;
+//					printf("kd = %.4f \n\r", kd);
+//					etat = auto_mode;
+//				}
+//			}
+//			if (cpt_char_kd == 4) {
+//				if ((value_kd0 > 9) || (value_kd0 < 0) || (value_kd1 > 9)
+//						|| (value_kd1 < 0) || (value_kd2 > 9)
+//						|| (value_kd2 < 0)) {
+//					printf(msg_error_char_nb);
+//					etat = instruct_kd;
+//				} else {
+//					kd = value_kd0 / 10. + value_kd1 / 100. + value_kd2 / 1000.;
+//					printf("kd = %.4f \n\r", kd);
+//					etat = auto_mode;
+//				}
+//			}
+//			if (cpt_char_kd == 5) {
+//				if ((value_kd0 > 9) || (value_kd0 < 0) || (value_kd1 > 9)
+//						|| (value_kd1 < 0) || (value_kd2 > 9) || (value_kd2 < 0)
+//						|| (value_kd3 > 9) || (value_kd3 < 0)) {
+//					printf(msg_error_char_nb);
+//					etat = instruct_kd;
+//				} else {
+//					kd = value_kd0 / 10. + value_kd1 / 100. + value_kd2 / 1000.
+//							+ value_kd3 / 10000.;
+//					printf("kd = %.4f \n\r", kd);
+//					etat = auto_mode;
+//				}
+//			}
 
 			if (r_buffer[0] == '?') {
 				etat = info_mode;
