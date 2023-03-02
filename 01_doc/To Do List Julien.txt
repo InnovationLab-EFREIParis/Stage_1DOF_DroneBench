@@ -71,4 +71,4 @@ Lundi 27/02/23
 
 Solidworks:
 -> Rapporteur : lignes de constructions et bien placer les chiffres [FAIT]
--> Carter : Augmenter de 2cm le rayon et réduire de 2 lignes d'alvéoles l'épaisseur (plus besoin des solidifications)
+-> Carter : Augmenter de 2cm le rayon et réduire de 2 lignes d'alvéoles l'épaisseur (plus besoin des solidifications) [FAIT]
