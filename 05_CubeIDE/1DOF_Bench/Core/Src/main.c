@@ -1007,6 +1007,7 @@ int main(void)
 
 			break;
 
+			// TAG_UC_013
 		case auto_mode:
 			printf(msg_info_mode);
 			printf(msg_motor_ready);
