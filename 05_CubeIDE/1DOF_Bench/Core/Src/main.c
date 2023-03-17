@@ -115,6 +115,8 @@ int value_kd2 = 0;
 int value_kd3 = 0;
 
 // Default coefficients
+const int coeff_d = 1000;
+
 double kp = 0.001;
 double ki = 0.018;
 double kd = 0.1;
@@ -1195,7 +1197,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			integre_erreur += erreur;
 			derive_erreur = erreur - _erreur;
 			commande = kp * (erreur) + ki * (integre_erreur)
-					+ 1000*kd * (derive_erreur);
+					+ coeff_d*kd * (derive_erreur);
 
 			if (commande > valeur_max_moteur) {
 				commande = valeur_max_moteur;
