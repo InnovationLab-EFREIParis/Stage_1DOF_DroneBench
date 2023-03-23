@@ -1,0 +1,5 @@
+yann.c:41:5:load_adc	1
+yann.c:49:5:mapping_adc_value	1
+yann.c:56:5:mapping_adc_value_percent	1
+yann.c:61:5:mapping_adc_value_permil	1
+yann.c:66:6:load_pwm	1
