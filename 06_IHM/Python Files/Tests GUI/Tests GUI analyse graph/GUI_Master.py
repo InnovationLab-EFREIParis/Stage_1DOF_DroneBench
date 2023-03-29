@@ -43,12 +43,13 @@ class RootGUI():
         """
         print("Closing the window and exit")
         self.root.destroy()
-        # Landing Mode called in case the engine is still functionning (if we click on the red cross before the 'STOP!' button)
-        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
-        # Closing Serial COM
-        self.serial.SerialClose(self)
+        if hasattr(self.serial, 'ser'):
+            if self.serial.ser.is_open:
+                # Landing Mode called in case the engine is still functionning (if we click on the red cross before the 'STOP!' button)
+                self.serial.SerialIpt(self, self.data.iptSPACE, 30)
+                # Closing Serial COM
+                self.serial.SerialClose(self)
         
-
 # TAG_IHM_002
 # Class to setup and create the communication manager with MCU
 class ComGui():
@@ -1171,15 +1172,116 @@ class TripModeGUI():
         
         fig = go.Figure(data=data_graph, layout=layout)
         
-        fig.add_shape(type="line",
-                      x0=0, y0=self.df['Position Angulaire X (°)'].max(), 
-                      x1=self.df['Time (ms)'].iloc[self.df['Position Angulaire X (°)'].idxmax()],
-                      y1=self.df['Position Angulaire X (°)'].max(),
-                      line=dict(
-                          color="LightSeaGreen",
-                          width=4,
-                          dash="dot")
-                      )
+        # Temps du premier dépassement
+        # Lines for 1er dépassement (max value)
+        line1a = [dict(type="line",
+                            xref="x", yref="y",
+                            x0=0, y0=self.df['Position Angulaire X (°)'].max(), 
+                            x1=self.df['Time (ms)'].iloc[self.df['Position Angulaire X (°)'].idxmax()],
+                            y1=self.df['Position Angulaire X (°)'].max(),
+                            line=dict(color="LightSeaGreen",
+                            width=4,
+                            dash="dot"))]
+        line1b = [dict(type="line",
+                            xref="x", yref="y",
+                            x0=self.df['Time (ms)'].iloc[self.df['Position Angulaire X (°)'].idxmax()], y0=0, 
+                            x1=self.df['Time (ms)'].iloc[self.df['Position Angulaire X (°)'].idxmax()],
+                            y1=self.df['Position Angulaire X (°)'].max(),
+                            line=dict(
+                                color="LightSeaGreen",
+                                width=4,
+                                dash="dot"))]
+        depassement_pourcent = (self.df['Position Angulaire X (°)'].max() - self.df['Consigne Angle (°)'].iloc[0])/self.df['Consigne Angle (°)'].iloc[0]*100
+        legend1 = [dict(x=self.df['Time (ms)'].iloc[self.df['Position Angulaire X (°)'].idxmax()],
+                         y=self.df['Position Angulaire X (°)'].max(),
+                         xref="x", yref="y",
+                         text="Dépassement :<br> %.2f<br> %.2f %%" % (self.df['Position Angulaire X (°)'].max() , depassement_pourcent) ,
+                         ax=0, ay=-40)]
+        # Temps de réponse à 5%
+        # Lines for +/- 5% of consigne value
+        line2 = [dict(type="line",
+                            xref="x", yref="y",
+                            x0=0, y0=(self.df['Consigne Angle (°)'].iloc[0])*1.05, 
+                            x1=self.df['Time (ms)'].max(),
+                            y1=(self.df['Consigne Angle (°)'].iloc[0])*1.05,
+                            line=dict(
+                                color="Yellow",
+                                width=4,
+                                dash="dot"))]
+        legend2 = [dict(x=0,
+                         y=(self.df['Consigne Angle (°)'].iloc[0])*1.05,
+                         xref="x", yref="y",
+                         text="+5%% : %.2f" % ((self.df['Consigne Angle (°)'].iloc[0])*1.05),
+                         ax=-50, ay=0)]
+        line3 = [dict(type="line",
+                            xref="x", yref="y",
+                            x0=0, y0=(self.df['Consigne Angle (°)'].iloc[0])*0.95, 
+                            x1=self.df['Time (ms)'].max(),
+                            y1=(self.df['Consigne Angle (°)'].iloc[0])*0.95,
+                            line=dict(
+                                color="Yellow",
+                                width=4,
+                                dash="dot"))]
+        legend3 = [dict(x=0,
+                         y=(self.df['Consigne Angle (°)'].iloc[0])*0.95,
+                         xref="x", yref="y",
+                         text="-5%% : %.2f" % ((self.df['Consigne Angle (°)'].iloc[0])*0.95),
+                         ax=-50, ay=0)]
+        # Temps de montée
+        # Lines for 10% of consigne value
+        line4 = [dict(type="line",
+                            xref="x", yref="y",
+                            x0=0, y0=(self.df['Consigne Angle (°)'].iloc[0])*0.1, 
+                            x1=self.df['Time (ms)'].max(),
+                            y1=(self.df['Consigne Angle (°)'].iloc[0])*0.1,
+                            line=dict(
+                                color="Purple",
+                                width=4,
+                                dash="dot"))]
+        legend4 = [dict(x=0,
+                         y=(self.df['Consigne Angle (°)'].iloc[0])*0.1,
+                         xref="x", yref="y",
+                         text="10%% : %.2f" % ((self.df['Consigne Angle (°)'].iloc[0])*0.1),
+                         ax=-50, ay=0)]
+        # Lines for 90% of consigne value
+        line5 = [dict(type="line",
+                            xref="x", yref="y",
+                            x0=0, y0=(self.df['Consigne Angle (°)'].iloc[0])*0.9, 
+                            x1=self.df['Time (ms)'].max(),
+                            y1=(self.df['Consigne Angle (°)'].iloc[0])*0.9,
+                            line=dict(
+                                color="Purple",
+                                width=4,
+                                dash="dot"))]
+        legend5 = [dict(x=0,
+                         y=(self.df['Consigne Angle (°)'].iloc[0])*0.9,
+                         xref="x", yref="y",
+                         text="90%% : %.2f" % ((self.df['Consigne Angle (°)'].iloc[0])*0.9),
+                         ax=-50, ay=0)]
+        
+        fig.update_layout(
+            updatemenus=[
+                dict(
+                    type="buttons",
+                    buttons=[
+                        dict(label="Tracés ON",
+                             method="relayout",
+                             args=["shapes", line1a + line1b  + line2 + line3 + line4 + line5]                             
+                             ),
+                        dict(label="Tracés OFF",
+                             method="relayout",
+                             args=["shapes", []]),
+                        dict(label="Paramètres ON",
+                             method="update",
+                             args=[{"visible":[]},{"annotations": legend1 + legend2 + legend3 + legend4 + legend5}]),
+                        dict(label="Paramètres OFF",
+                             method="update",
+                             args=[{"visible":[]},{"annotations":[]}])
+                    ]
+                )
+            ]
+        )
+        
         
         plot(fig)
         # title_file = time.strftime("%Y-%m-%d-%Hh%M- Trip_mode_Results - kp=0,"+self.kp_value+" & ki=0,"+self.ki_value+" & kd="+self.kd_value+".html")
