@@ -5,7 +5,7 @@ Le principe est d'asservir un bras mobile (qui par défaut est à la verticale) 
 
 ![This is an image](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/blob/main/01_doc/Photos/plan.png)
 
-[Vidéo](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/blob/main/01_doc/img/video_20220902_181232.mp4)
+[Vidéo](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/blob/main/01_doc/Photos/video_20220902_181232.mp4)
 
 
 # Utilisation
