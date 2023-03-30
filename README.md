@@ -29,7 +29,7 @@ Le mode "Manual Mode Term" vous permettra de jouer sur une consigne en % de gazs
 Une bonne partie des pièces ont été conçues avec Solidworks et fabriquées en impression 3D par dépot de filament.  
 Les modèles 3D sont accessibles [ici](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/03_mdl)  
 Les montants sont en profilé d'aluminium de 20 mm dont voici la [référence](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/rs)  
-## Electronique
+## Électronique
 - [Carte microcontrôleur STM32 L476RG](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/stm)
 - [Moteur et ESC](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/moteur_esc)
 - [Centrale inertielle](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/gyro%20doc)
