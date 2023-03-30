@@ -30,9 +30,9 @@ Une bonne partie des pièces ont été conçues avec Solidworks et fabriquées e
 Les modèles 3D sont accessibles [ici](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/03_mdl)  
 Les montants sont en profilé d'aluminium de 20 mm dont voici la [référence](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/Structure%20et%20assemblage)  
 ## Électronique
-- [Carte microcontrôleur STM32 L476RG](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/stm)
-- [Moteur et ESC](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/moteur_esc)
-- [Centrale inertielle](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/gyro%20doc)
+- [Carte microcontrôleur STM32 L476RG](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/STM32)
+- [Moteur et ESC](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/Moteur%20et%20ESC)
+- [Centrale inertielle](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/tree/main/01_doc/Centrale%20inertielle)
 # IHM
 ## Installation
 - Bibliothèques à installer : tkinter / serial / pandas / matplotlib     
