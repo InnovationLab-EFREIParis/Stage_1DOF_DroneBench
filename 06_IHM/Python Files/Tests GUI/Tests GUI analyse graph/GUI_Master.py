@@ -1192,72 +1192,155 @@ class TripModeGUI():
                                 width=4,
                                 dash="dot"))]
         depassement_pourcent = (self.df['Position Angulaire X (°)'].max() - self.df['Consigne Angle (°)'].iloc[0])/self.df['Consigne Angle (°)'].iloc[0]*100
-        legend1 = [dict(x=self.df['Time (ms)'].iloc[self.df['Position Angulaire X (°)'].idxmax()],
+        legend1a = [dict(x=self.df['Time (ms)'].iloc[self.df['Position Angulaire X (°)'].idxmax()],
                          y=self.df['Position Angulaire X (°)'].max(),
                          xref="x", yref="y",
                          text="Dépassement :<br> %.2f<br> %.2f %%" % (self.df['Position Angulaire X (°)'].max() , depassement_pourcent) ,
                          ax=0, ay=-40)]
+        legend1b = [dict(x=self.df['Time (ms)'].iloc[self.df['Position Angulaire X (°)'].idxmax()],
+                         y=0,
+                         xref="x", yref="y",
+                         text="Tp = %d" % self.df['Time (ms)'].iloc[self.df['Position Angulaire X (°)'].idxmax()],
+                         ax=0, ay=40)]
         # Temps de réponse à 5%
         # Lines for +/- 5% of consigne value
+        plus5_pourcent = (self.df['Consigne Angle (°)'].iloc[0])*1.05
         line2 = [dict(type="line",
                             xref="x", yref="y",
-                            x0=0, y0=(self.df['Consigne Angle (°)'].iloc[0])*1.05, 
+                            x0=0, y0=plus5_pourcent, 
                             x1=self.df['Time (ms)'].max(),
-                            y1=(self.df['Consigne Angle (°)'].iloc[0])*1.05,
+                            y1=plus5_pourcent,
                             line=dict(
                                 color="Yellow",
                                 width=4,
                                 dash="dot"))]
         legend2 = [dict(x=0,
-                         y=(self.df['Consigne Angle (°)'].iloc[0])*1.05,
+                         y=plus5_pourcent,
                          xref="x", yref="y",
-                         text="+5%% : %.2f" % ((self.df['Consigne Angle (°)'].iloc[0])*1.05),
+                         text="+5%% : %.2f" % plus5_pourcent,
                          ax=-50, ay=0)]
+        moins5_pourcent = (self.df['Consigne Angle (°)'].iloc[0])*0.95
         line3 = [dict(type="line",
                             xref="x", yref="y",
-                            x0=0, y0=(self.df['Consigne Angle (°)'].iloc[0])*0.95, 
+                            x0=0, y0=moins5_pourcent, 
                             x1=self.df['Time (ms)'].max(),
-                            y1=(self.df['Consigne Angle (°)'].iloc[0])*0.95,
+                            y1=moins5_pourcent,
                             line=dict(
                                 color="Yellow",
                                 width=4,
                                 dash="dot"))]
         legend3 = [dict(x=0,
-                         y=(self.df['Consigne Angle (°)'].iloc[0])*0.95,
+                         y=moins5_pourcent,
                          xref="x", yref="y",
-                         text="-5%% : %.2f" % ((self.df['Consigne Angle (°)'].iloc[0])*0.95),
+                         text="-5%% : %.2f" % moins5_pourcent,
                          ax=-50, ay=0)]
+        btwn = ~self.df['Position Angulaire X (°)'].between(moins5_pourcent, plus5_pourcent)
+        last_time_5 = self.df[btwn].iloc[-1]['Time (ms)']
+        last_time_5_idx = self.df.index[self.df['Time (ms)'] == last_time_5]
+        if last_time_5 != self.df['Time (ms)'].iloc[-1]:  
+            coeff_lineaire_tr =(self.df['Position Angulaire X (°)'].iloc[last_time_5_idx[0] +1] - self.df['Position Angulaire X (°)'].iloc[last_time_5_idx[0]])/(self.df['Time (ms)'].iloc[last_time_5_idx[0] +1] - last_time_5)
+            ord_orig_tr = self.df['Position Angulaire X (°)'].iloc[last_time_5_idx[0]] - coeff_lineaire_tr*last_time_5
+            if (self.df['Position Angulaire X (°)'].iloc[last_time_5_idx[0]]) > plus5_pourcent:
+                y_tr = plus5_pourcent
+            else:
+                y_tr = moins5_pourcent
+                
+            tr_5_pourcent = (y_tr - ord_orig_tr)/coeff_lineaire_tr
+            line23 = [dict(type="line",
+                           xref="x", yref="y",
+                           x0=tr_5_pourcent, y0=0, 
+                           x1=tr_5_pourcent,
+                           y1=y_tr,
+                           line=dict(
+                               color="Yellow",
+                               width=4,
+                               dash="dot"))]
+            legend23 = [dict(x=tr_5_pourcent,
+                             y=0,
+                             xref="x", yref="y",
+                             text="Tr 5%% = %.2f" % tr_5_pourcent,
+                             ax=0, ay=40)]            
+        else:
+            line23 = []
+            legend23 = []
         # Temps de montée
         # Lines for 10% of consigne value
-        line4 = [dict(type="line",
-                            xref="x", yref="y",
-                            x0=0, y0=(self.df['Consigne Angle (°)'].iloc[0])*0.1, 
-                            x1=self.df['Time (ms)'].max(),
-                            y1=(self.df['Consigne Angle (°)'].iloc[0])*0.1,
-                            line=dict(
-                                color="Purple",
-                                width=4,
-                                dash="dot"))]
-        legend4 = [dict(x=0,
-                         y=(self.df['Consigne Angle (°)'].iloc[0])*0.1,
-                         xref="x", yref="y",
-                         text="10%% : %.2f" % ((self.df['Consigne Angle (°)'].iloc[0])*0.1),
-                         ax=-50, ay=0)]
+        if (self.df['Position Angulaire X (°)'].iloc[0]) >= ((self.df['Consigne Angle (°)'].iloc[0])*0.1):
+            tm_10_pourcent = self.df['Time (ms)'].iloc[0]
+            line4a = []
+            line4b = []
+            legend4a = []
+            legend4b = [] 
+        else:
+            udr = self.df.loc[self.df['Position Angulaire X (°)'] < ((self.df['Consigne Angle (°)'].iloc[0])*0.1)]
+            last_time_10 = udr['Time (ms)'].iloc[-1]
+            last_time_10_idx = self.df.index[self.df['Time (ms)'] == last_time_10]
+            coeff_lineaire_tm10 =(self.df['Position Angulaire X (°)'].iloc[last_time_10_idx[0] +1] - self.df['Position Angulaire X (°)'].iloc[last_time_10_idx[0]])/(self.df['Time (ms)'].iloc[last_time_10_idx[0] +1] - last_time_10)
+            ord_orig_tm10 = self.df['Position Angulaire X (°)'].iloc[last_time_10_idx[0]] - coeff_lineaire_tm10*last_time_10
+            tm_10_pourcent = (((self.df['Consigne Angle (°)'].iloc[0])*0.1) - ord_orig_tm10)/coeff_lineaire_tm10
+            line4a = [dict(type="line",
+                                xref="x", yref="y",
+                                x0=0, y0=(self.df['Consigne Angle (°)'].iloc[0])*0.1,
+                                x1=tm_10_pourcent,
+                                y1=(self.df['Consigne Angle (°)'].iloc[0])*0.1,
+                                line=dict(
+                                    color="Purple",
+                                    width=4,
+                                    dash="dot"))]
+            line4b = [dict(type="line",
+                                xref="x", yref="y",
+                                x0=tm_10_pourcent, y0=0,
+                                x1=tm_10_pourcent,
+                                y1=(self.df['Consigne Angle (°)'].iloc[0])*0.1,
+                                line=dict(
+                                    color="Purple",
+                                    width=4,
+                                    dash="dot"))]
+            legend4a = [dict(x=0,
+                             y=(self.df['Consigne Angle (°)'].iloc[0])*0.1,
+                             xref="x", yref="y",
+                             text="10%% : %.2f" % ((self.df['Consigne Angle (°)'].iloc[0])*0.1),
+                             ax=-50, ay=0)]
+            legend4b = [dict(x=tm_10_pourcent,
+                             y=0,
+                             xref="x", yref="y",
+                             text="%.2f" % tm_10_pourcent,
+                             ax=0, ay=40)]   
         # Lines for 90% of consigne value
-        line5 = [dict(type="line",
+        ovr = self.df.loc[self.df['Position Angulaire X (°)'] > ((self.df['Consigne Angle (°)'].iloc[0])*0.9)]
+        first_time_90 = ovr['Time (ms)'].iloc[0]
+        first_time_90_idx = self.df.index[self.df['Time (ms)'] == first_time_90]
+        coeff_lineaire_tm90 =(self.df['Position Angulaire X (°)'].iloc[first_time_90_idx[0] -1] - self.df['Position Angulaire X (°)'].iloc[first_time_90_idx[0]])/(self.df['Time (ms)'].iloc[first_time_90_idx[0] -1] - first_time_90)
+        ord_orig_tm90 = self.df['Position Angulaire X (°)'].iloc[first_time_90_idx[0]] - coeff_lineaire_tm90*first_time_90
+        tm_90_pourcent = (((self.df['Consigne Angle (°)'].iloc[0])*0.9) - ord_orig_tm90)/coeff_lineaire_tm90
+        line5a = [dict(type="line",
                             xref="x", yref="y",
                             x0=0, y0=(self.df['Consigne Angle (°)'].iloc[0])*0.9, 
-                            x1=self.df['Time (ms)'].max(),
+                            x1=tm_90_pourcent,
                             y1=(self.df['Consigne Angle (°)'].iloc[0])*0.9,
                             line=dict(
                                 color="Purple",
                                 width=4,
                                 dash="dot"))]
-        legend5 = [dict(x=0,
+        line5b = [dict(type="line",
+                            xref="x", yref="y",
+                            x0=tm_90_pourcent, y0=0, 
+                            x1=tm_90_pourcent,
+                            y1=(self.df['Consigne Angle (°)'].iloc[0])*0.9,
+                            line=dict(
+                                color="Purple",
+                                width=4,
+                                dash="dot"))]
+        legend5a = [dict(x=0,
                          y=(self.df['Consigne Angle (°)'].iloc[0])*0.9,
                          xref="x", yref="y",
                          text="90%% : %.2f" % ((self.df['Consigne Angle (°)'].iloc[0])*0.9),
                          ax=-50, ay=0)]
+        legend5b = [dict(x=tm_90_pourcent,
+                         y=0,
+                         xref="x", yref="y",
+                         text="%.2f<br> Tm = %.2f" % (tm_90_pourcent, tm_90_pourcent - tm_10_pourcent),
+                         ax=0, ay=40)]
         
         fig.update_layout(
             updatemenus=[
@@ -1266,14 +1349,14 @@ class TripModeGUI():
                     buttons=[
                         dict(label="Tracés ON",
                              method="relayout",
-                             args=["shapes", line1a + line1b  + line2 + line3 + line4 + line5]                             
+                             args=["shapes", line1a + line1b  + line2 + line3 + line23 + line4a + line4b + line5a + line5b]                             
                              ),
                         dict(label="Tracés OFF",
                              method="relayout",
                              args=["shapes", []]),
                         dict(label="Paramètres ON",
                              method="update",
-                             args=[{"visible":[]},{"annotations": legend1 + legend2 + legend3 + legend4 + legend5}]),
+                             args=[{"visible":[]},{"annotations": legend1a + legend1b + legend2 + legend3 + legend23 + legend4a +legend4b + legend5a +legend5b}]),
                         dict(label="Paramètres OFF",
                              method="update",
                              args=[{"visible":[]},{"annotations":[]}])
