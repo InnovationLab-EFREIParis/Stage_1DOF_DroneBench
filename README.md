@@ -3,7 +3,7 @@ Dispositif pédagogique permettant de faire découvrir quelques principes et com
 Le principe est d'asservir un bras mobile (qui par défaut est à la verticale) à un angle voulu en pilotant le moteur et l'hélice fixés à l'extremité de ce bras. La mesure de l'angle se fait par une centrale inertielle. Le tout est controlé par un microcontrôleur relié à un PC où une interface en Python trace différentes courbes (angle en fonction des gazs, angles en fonction du temps).
 
 
-![This is an image](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/blob/main/01_doc/img/plan.png)
+![This is an image](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/blob/main/01_doc/Photos/plan.png)
 
 [Vidéo](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/blob/main/01_doc/img/video_20220902_181232.mp4)
 
