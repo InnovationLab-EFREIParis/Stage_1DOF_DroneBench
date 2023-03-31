@@ -43,12 +43,13 @@ class RootGUI():
         """
         print("Closing the window and exit")
         self.root.destroy()
-        # Landing Mode called in case the engine is still functionning (if we click on the red cross before the 'STOP!' button)
-        self.serial.SerialIpt(self, self.data.iptSPACE, 30)
-        # Closing Serial COM
-        self.serial.SerialClose(self)
+        if hasattr(self.serial, 'ser'):
+            if self.serial.ser.is_open:
+                # Landing Mode called in case the engine is still functionning (if we click on the red cross before the 'STOP!' button)
+                self.serial.SerialIpt(self, self.data.iptSPACE, 30)
+                # Closing Serial COM
+                self.serial.SerialClose(self)
         
-
 # TAG_IHM_002
 # Class to setup and create the communication manager with MCU
 class ComGui():
@@ -762,150 +763,17 @@ class CalibrationGUI():
                                                           ("All files","*.*")
                                                           ))
         self.df.to_csv(saving_path, sep=';', decimal=',', encoding='utf-8', index=False, line_terminator='\n')
-        print(self.data.record)
+        
         self.btn_show_graph["state"] = "active"        
         self.serial.SerialIpt(self, self.data.ipt2, 30)
         
         if len(new_content) == 1:
             self.graph_type = 1
-        
-    def showgraph3(self):
-        """
-        Method to show the graphic of the simulation
-        """
-        if self.graph_type == 1:
-            
-            fig = self.df.plot.scatter(
-                x=self.df.columns[1],
-                y=self.df.columns[2]).get_figure()
-            
-            new_window = Tk()
-            new_window.geometry("500x400")
-            new_window.title("Calibration Graphic - Dynamic")
-            
-            canvas= FigureCanvasTkAgg(fig, new_window)
-            canvas.draw()
-            
-            toolbar = NavigationToolbar2Tk(
-                canvas, new_window)
-            toolbar.update()
-            
-            canvas.get_tk_widget().pack(
-                side=tk.BOTTOM, fill=tk.BOTH, expand=True)
-            
-            new_window.mainloop()
-        else:    
-            fig = self.df.plot.scatter(
-                x=self.df.columns[0],
-                y=self.df.columns[2]).get_figure()
-            
-            new_window = Tk()
-            new_window.geometry("500x400")
-            new_window.title("Calibration Graphic - Static")
-            
-            canvas= FigureCanvasTkAgg(fig, new_window)
-            canvas.draw()
-            
-            toolbar = NavigationToolbar2Tk(
-                canvas, new_window)
-            toolbar.update()
-            
-            canvas.get_tk_widget().pack(
-                side=tk.BOTTOM, fill=tk.BOTH, expand=True)
-            
-            new_window.mainloop()
-    
-    def showgraph2(self):
-        """
-        Method to show the graphic of the simulation
-        """     
-        
-        if self.graph_type == 1:
-            new_window = Tk()
-            new_window.geometry("570x400")
-            new_window.title("Calibration Graphic - Dynamic")
-            
-            self.nbvar= len(self.list_modes)-1
-              
-            f1 = Figure(figsize=(4,3), dpi=100)
-            a1 = f1.add_subplot(111)
-            
-            self.lines=[a1.plot(self.df['Time (ms)'], 
-                                self.df[mode], 
-                                lw=5, 
-                                visible=False) for mode in self.list_modes[1:]]
-            
-            a1.set_xlabel('Time (ms)')
-        
-            self.canvas= FigureCanvasTkAgg(f1, new_window)
-            self.canvas.draw()
-            
-            toolbar = NavigationToolbar2Tk(
-                self.canvas, new_window)
-            toolbar.update()
-            
-            self.canvas.get_tk_widget().pack(
-                side=tk.RIGHT, fill=tk.BOTH, expand=True)
-            
-            option = Frame(new_window)
-            option.pack()
-            
-            label=[mode for mode in self.list_modes[1:]]
-            
-            self.varhide= []
-            for i in range(0,self.nbvar) :
-                self.varhide.append(IntVar(option))
-          
-            for i in range(0,self.nbvar) :
-                c = Checkbutton(
-                    option, text=label[i], variable=self.varhide[i],
-                    command=self.hideline) 
-                c.pack()  
-                
-        else:
-            new_window = Tk()
-            new_window.geometry("570x400")
-            new_window.title("Calibration Graphic - Static")
-            
-            self.nbvar= len(self.list_modes)
-              
-            f1 = Figure(figsize=(4,3), dpi=100)
-            a1 = f1.add_subplot(111)
-            
-            self.lines=[a1.plot(self.df['Consigne Gaz (‰)'], 
-                                self.df[mode], 
-                                lw=5, 
-                                visible=False) for mode in self.list_modes]
-            
-            a1.set_xlabel('Consigne Gaz (‰)')
-        
-            self.canvas= FigureCanvasTkAgg(f1, new_window)
-            self.canvas.draw()
-            
-            toolbar = NavigationToolbar2Tk(
-                self.canvas, new_window)
-            toolbar.update()
-            
-            self.canvas.get_tk_widget().pack(
-                side=tk.RIGHT, fill=tk.BOTH, expand=True)
-            
-            option = Frame(new_window)
-            option.pack()
-            
-            label=[mode for mode in self.list_modes]
-            
-            self.varhide= []
-            for i in range(0,self.nbvar) :
-                self.varhide.append(IntVar(option))
-          
-            for i in range(0,self.nbvar) :
-                c = Checkbutton(
-                    option, text=label[i], variable=self.varhide[i],
-                    command=self.hideline) 
-                c.pack()  
             
     def showgraph(self):
-        
+        """
+        Method to make the graphic (in html with plotly) from the dataframe
+        """
         if self.graph_type == 1:
             data_graph = [go.Scatter(x=self.df['Time (ms)'],
                        y=self.df[mode],
@@ -935,17 +803,7 @@ class CalibrationGUI():
             )
             
             fig = go.Figure(data=data_graph, layout=layout)
-            plot(fig)
-        
-        
-    def hideline(self):
-        for i in range(0,self.nbvar) :
-            if(self.varhide[i].get()==1):
-                self.lines[i][0].set_visible(True)
-            elif(self.varhide[i].get()==0):
-                self.lines[i][0].set_visible(False)
-        self.canvas.draw()
-            
+            plot(fig)          
         
 # TAG_IHM_007
 class TripModeGUI():
@@ -995,6 +853,7 @@ class TripModeGUI():
                                       command=self.default_k_values)
         self.btn_check_set_k = Button(self.frame, text="Check", width=10,
                                       command=self.CorrectCoeff)
+        self.graph_type = 0
         
         # Extending the GUI
         self.TripModeOpen()
@@ -1081,7 +940,8 @@ class TripModeGUI():
         """
         Method to search for txt files and do the "séquence de vol"/trip
         """
-        self.data.ClearData()        
+        self.data.ClearData() 
+        self.graph_type = 0
         self.root.filename = filedialog.askopenfilename(
             initialdir="/", 
             title="File Explorer",
@@ -1143,64 +1003,25 @@ class TripModeGUI():
                                                           ("All files","*.*")
                                                           ))
         self.df.to_csv(saving_path, sep=';', decimal=',', encoding='utf-8', index=False, line_terminator='\n')
-        print(self.data.record)
+     
         self.btn_show_graph["state"] = "active"
         self.serial.SerialIpt(self, self.data.ipt4, 30)
+        
+        if len(new_content) == 1:
+            self.graph_type = 1
         
         self.kp_box["state"] = "normal"
         self.ki_box["state"] = "normal"
         self.kd_box["state"] = "normal"
         self.btn_check_set_k["state"] = "active"
         self.btn_browse_file["state"] = "disabled"
-        self.btn_default_set_k["state"] = "active"       
-    
-    def showgraph2(self):
-        """
-        Method to show the graphic of the simulation
-        """     
-        new_window = Tk()
-        new_window.geometry("570x400")
-        new_window.title('Trip Mode Graphic : kp = 0,'+self.kp_value+' / ki = 0,'+self.ki_value+' / kd='+self.kd_value)
-        
-        self.nbvar= len(self.list_modes)
-          
-        f1 = Figure(figsize=(4,3), dpi=100)
-        a1 = f1.add_subplot(111)
-        
-        self.lines=[a1.plot(self.df['Time (ms)'], 
-                            self.df[mode], 
-                            lw=5, 
-                            visible=False) for mode in self.list_modes]
-        
-        a1.set_xlabel('Time (ms)')
-    
-        self.canvas= FigureCanvasTkAgg(f1, new_window)
-        self.canvas.draw()
-        
-        toolbar = NavigationToolbar2Tk(
-            self.canvas, new_window)
-        toolbar.update()
-        
-        self.canvas.get_tk_widget().pack(
-            side=tk.RIGHT, fill=tk.BOTH, expand=True)
-        
-        option = Frame(new_window)
-        option.pack()
-        
-        label=[mode for mode in self.list_modes]
-        
-        self.varhide= []
-        for i in range(0,self.nbvar) :
-            self.varhide.append(IntVar(option))
-      
-        for i in range(0,self.nbvar) :
-            c = Checkbutton(
-                option, text=label[i], variable=self.varhide[i],
-                command=self.hideline) 
-            c.pack()    
+        self.btn_default_set_k["state"] = "active"         
             
     def showgraph(self):
-        
+        """
+        Method to make the graphic (in html with plotly) from the dataframe
+        """
+        # Main part of the graph
         data_graph = [go.Scatter(x=self.df['Time (ms)'],
                    y=self.df[mode],
                    name=mode,
@@ -1214,17 +1035,206 @@ class TripModeGUI():
         )
         
         fig = go.Figure(data=data_graph, layout=layout)
-        plot(fig)
-        # title_file = time.strftime("%Y-%m-%d-%Hh%M- Trip_mode_Results - kp=0,"+self.kp_value+" & ki=0,"+self.ki_value+" & kd="+self.kd_value+".html")
-        # fig.write_html(title_file)
         
-    def hideline(self):
-        for i in range(0,self.nbvar) :
-            if(self.varhide[i].get()==1):
-                self.lines[i][0].set_visible(True)
-            elif(self.varhide[i].get()==0):
-                self.lines[i][0].set_visible(False)
-        self.canvas.draw()
+        # Anayse de performance
+        if self.graph_type == 1:
+            # Temps du premier dépassement
+            # Lines for 1er dépassement (max value)
+            line1a = [dict(type="line",
+                                xref="x", yref="y",
+                                x0=0, y0=self.df['Position Angulaire X (°)'].max(), 
+                                x1=self.df['Time (ms)'].iloc[self.df['Position Angulaire X (°)'].idxmax()],
+                                y1=self.df['Position Angulaire X (°)'].max(),
+                                line=dict(color="LightSeaGreen",
+                                width=4,
+                                dash="dot"))]
+            line1b = [dict(type="line",
+                                xref="x", yref="y",
+                                x0=self.df['Time (ms)'].iloc[self.df['Position Angulaire X (°)'].idxmax()], y0=0, 
+                                x1=self.df['Time (ms)'].iloc[self.df['Position Angulaire X (°)'].idxmax()],
+                                y1=self.df['Position Angulaire X (°)'].max(),
+                                line=dict(
+                                    color="LightSeaGreen",
+                                    width=4,
+                                    dash="dot"))]
+            depassement_pourcent = (self.df['Position Angulaire X (°)'].max() - self.df['Consigne Angle (°)'].iloc[0])/self.df['Consigne Angle (°)'].iloc[0]*100
+            legend1a = [dict(x=self.df['Time (ms)'].iloc[self.df['Position Angulaire X (°)'].idxmax()],
+                             y=self.df['Position Angulaire X (°)'].max(),
+                             xref="x", yref="y",
+                             text="Dépassement :<br> %.2f<br> %.2f %%" % (self.df['Position Angulaire X (°)'].max() , depassement_pourcent) ,
+                             ax=0, ay=-40)]
+            legend1b = [dict(x=self.df['Time (ms)'].iloc[self.df['Position Angulaire X (°)'].idxmax()],
+                             y=0,
+                             xref="x", yref="y",
+                             text="Tp = %d" % self.df['Time (ms)'].iloc[self.df['Position Angulaire X (°)'].idxmax()],
+                             ax=0, ay=40)]
+            # Temps de réponse à 5%
+            # Lines for +/- 5% of consigne value
+            plus5_pourcent = (self.df['Consigne Angle (°)'].iloc[0])*1.05
+            line2 = [dict(type="line",
+                                xref="x", yref="y",
+                                x0=0, y0=plus5_pourcent, 
+                                x1=self.df['Time (ms)'].max(),
+                                y1=plus5_pourcent,
+                                line=dict(
+                                    color="Yellow",
+                                    width=4,
+                                    dash="dot"))]
+            legend2 = [dict(x=0,
+                             y=plus5_pourcent,
+                             xref="x", yref="y",
+                             text="+5%% : %.2f" % plus5_pourcent,
+                             ax=-50, ay=0)]
+            moins5_pourcent = (self.df['Consigne Angle (°)'].iloc[0])*0.95
+            line3 = [dict(type="line",
+                                xref="x", yref="y",
+                                x0=0, y0=moins5_pourcent, 
+                                x1=self.df['Time (ms)'].max(),
+                                y1=moins5_pourcent,
+                                line=dict(
+                                    color="Yellow",
+                                    width=4,
+                                    dash="dot"))]
+            legend3 = [dict(x=0,
+                             y=moins5_pourcent,
+                             xref="x", yref="y",
+                             text="-5%% : %.2f" % moins5_pourcent,
+                             ax=-50, ay=0)]
+            btwn = ~self.df['Position Angulaire X (°)'].between(moins5_pourcent, plus5_pourcent)
+            last_time_5 = self.df[btwn].iloc[-1]['Time (ms)']
+            last_time_5_idx = self.df.index[self.df['Time (ms)'] == last_time_5]
+            if last_time_5 != self.df['Time (ms)'].iloc[-1]:  
+                coeff_lineaire_tr =(self.df['Position Angulaire X (°)'].iloc[last_time_5_idx[0] +1] - self.df['Position Angulaire X (°)'].iloc[last_time_5_idx[0]])/(self.df['Time (ms)'].iloc[last_time_5_idx[0] +1] - last_time_5)
+                ord_orig_tr = self.df['Position Angulaire X (°)'].iloc[last_time_5_idx[0]] - coeff_lineaire_tr*last_time_5
+                if (self.df['Position Angulaire X (°)'].iloc[last_time_5_idx[0]]) > plus5_pourcent:
+                    y_tr = plus5_pourcent
+                else:
+                    y_tr = moins5_pourcent
+                    
+                tr_5_pourcent = (y_tr - ord_orig_tr)/coeff_lineaire_tr
+                line23 = [dict(type="line",
+                               xref="x", yref="y",
+                               x0=tr_5_pourcent, y0=0, 
+                               x1=tr_5_pourcent,
+                               y1=y_tr,
+                               line=dict(
+                                   color="Yellow",
+                                   width=4,
+                                   dash="dot"))]
+                legend23 = [dict(x=tr_5_pourcent,
+                                 y=0,
+                                 xref="x", yref="y",
+                                 text="Tr 5%% = %.2f" % tr_5_pourcent,
+                                 ax=0, ay=40)]            
+            else:
+                line23 = []
+                legend23 = []
+            # Temps de montée
+            # Lines for 10% of consigne value
+            if (self.df['Position Angulaire X (°)'].iloc[0]) >= ((self.df['Consigne Angle (°)'].iloc[0])*0.1):
+                tm_10_pourcent = self.df['Time (ms)'].iloc[0]
+                line4a = []
+                line4b = []
+                legend4a = []
+                legend4b = [] 
+            else:
+                udr = self.df.loc[self.df['Position Angulaire X (°)'] < ((self.df['Consigne Angle (°)'].iloc[0])*0.1)]
+                last_time_10 = udr['Time (ms)'].iloc[-1]
+                last_time_10_idx = self.df.index[self.df['Time (ms)'] == last_time_10]
+                coeff_lineaire_tm10 =(self.df['Position Angulaire X (°)'].iloc[last_time_10_idx[0] +1] - self.df['Position Angulaire X (°)'].iloc[last_time_10_idx[0]])/(self.df['Time (ms)'].iloc[last_time_10_idx[0] +1] - last_time_10)
+                ord_orig_tm10 = self.df['Position Angulaire X (°)'].iloc[last_time_10_idx[0]] - coeff_lineaire_tm10*last_time_10
+                tm_10_pourcent = (((self.df['Consigne Angle (°)'].iloc[0])*0.1) - ord_orig_tm10)/coeff_lineaire_tm10
+                line4a = [dict(type="line",
+                                    xref="x", yref="y",
+                                    x0=0, y0=(self.df['Consigne Angle (°)'].iloc[0])*0.1,
+                                    x1=tm_10_pourcent,
+                                    y1=(self.df['Consigne Angle (°)'].iloc[0])*0.1,
+                                    line=dict(
+                                        color="Purple",
+                                        width=4,
+                                        dash="dot"))]
+                line4b = [dict(type="line",
+                                    xref="x", yref="y",
+                                    x0=tm_10_pourcent, y0=0,
+                                    x1=tm_10_pourcent,
+                                    y1=(self.df['Consigne Angle (°)'].iloc[0])*0.1,
+                                    line=dict(
+                                        color="Purple",
+                                        width=4,
+                                        dash="dot"))]
+                legend4a = [dict(x=0,
+                                 y=(self.df['Consigne Angle (°)'].iloc[0])*0.1,
+                                 xref="x", yref="y",
+                                 text="10%% : %.2f" % ((self.df['Consigne Angle (°)'].iloc[0])*0.1),
+                                 ax=-50, ay=0)]
+                legend4b = [dict(x=tm_10_pourcent,
+                                 y=0,
+                                 xref="x", yref="y",
+                                 text="%.2f" % tm_10_pourcent,
+                                 ax=0, ay=40)]   
+            # Lines for 90% of consigne value
+            ovr = self.df.loc[self.df['Position Angulaire X (°)'] > ((self.df['Consigne Angle (°)'].iloc[0])*0.9)]
+            first_time_90 = ovr['Time (ms)'].iloc[0]
+            first_time_90_idx = self.df.index[self.df['Time (ms)'] == first_time_90]
+            coeff_lineaire_tm90 =(self.df['Position Angulaire X (°)'].iloc[first_time_90_idx[0] -1] - self.df['Position Angulaire X (°)'].iloc[first_time_90_idx[0]])/(self.df['Time (ms)'].iloc[first_time_90_idx[0] -1] - first_time_90)
+            ord_orig_tm90 = self.df['Position Angulaire X (°)'].iloc[first_time_90_idx[0]] - coeff_lineaire_tm90*first_time_90
+            tm_90_pourcent = (((self.df['Consigne Angle (°)'].iloc[0])*0.9) - ord_orig_tm90)/coeff_lineaire_tm90
+            line5a = [dict(type="line",
+                                xref="x", yref="y",
+                                x0=0, y0=(self.df['Consigne Angle (°)'].iloc[0])*0.9, 
+                                x1=tm_90_pourcent,
+                                y1=(self.df['Consigne Angle (°)'].iloc[0])*0.9,
+                                line=dict(
+                                    color="Purple",
+                                    width=4,
+                                    dash="dot"))]
+            line5b = [dict(type="line",
+                                xref="x", yref="y",
+                                x0=tm_90_pourcent, y0=0, 
+                                x1=tm_90_pourcent,
+                                y1=(self.df['Consigne Angle (°)'].iloc[0])*0.9,
+                                line=dict(
+                                    color="Purple",
+                                    width=4,
+                                    dash="dot"))]
+            legend5a = [dict(x=0,
+                             y=(self.df['Consigne Angle (°)'].iloc[0])*0.9,
+                             xref="x", yref="y",
+                             text="90%% : %.2f" % ((self.df['Consigne Angle (°)'].iloc[0])*0.9),
+                             ax=-50, ay=0)]
+            legend5b = [dict(x=tm_90_pourcent,
+                             y=0,
+                             xref="x", yref="y",
+                             text="%.2f<br> Tm = %.2f" % (tm_90_pourcent, tm_90_pourcent - tm_10_pourcent),
+                             ax=0, ay=40)]
+            # Buttons are made here
+            fig.update_layout(
+                updatemenus=[
+                    dict(
+                        type="buttons",
+                        buttons=[
+                            dict(label="Tracés ON",
+                                 method="relayout",
+                                 args=["shapes", line1a + line1b  + line2 + line3 + line23 + line4a + line4b + line5a + line5b]                             
+                                 ),
+                            dict(label="Tracés OFF",
+                                 method="relayout",
+                                 args=["shapes", []]),
+                            dict(label="Paramètres ON",
+                                 method="update",
+                                 args=[{"visible":[]},{"annotations": legend1a + legend1b + legend2 + legend3 + legend23 + legend4a +legend4b + legend5a +legend5b}]),
+                            dict(label="Paramètres OFF",
+                                 method="update",
+                                 args=[{"visible":[]},{"annotations":[]}])
+                        ]
+                    )
+                ]
+            )
+        
+        plot(fig)
+        # Save the html file with a name
+        title_file = time.strftime("%Y-%m-%d-%Hh%M- Trip_mode_Results - kp=0,"+self.kp_value+" & ki=0,"+self.ki_value+" & kd="+self.kd_value+".html")
+        fig.write_html(title_file)
     
     def default_k_values(self):
         """
