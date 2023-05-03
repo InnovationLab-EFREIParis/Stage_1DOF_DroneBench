@@ -2,7 +2,13 @@
 Dispositif pédagogique permettant de faire découvrir quelques principes et composants que l'on peut retrouver sur un drone mais de façon largement simplifiée et en toute sécurité.  
 Le principe est d'asservir un bras mobile (qui par défaut est à la verticale) à un angle voulu en pilotant le moteur et l'hélice fixés à l'extremité de ce bras. La mesure de l'angle se fait par une centrale inertielle. Le tout est controlé par un microcontrôleur relié à un PC où une interface en Python trace différentes courbes (angle en fonction des gazs, angles en fonction du temps).
 
+# Exemple de courbe
+L'interface graphique génére une page visible dans un navigateur où l'on peut voir la consigne angulaire et la position du bras évoluant au cours du temps.
+Les données brut issues de la centrale sont egalement disponible, ainsi que quelques indications sur les temps de réponses, dépassement...
 
+https://ilab.efrei.fr/html/brasdrone
+
+# Dispositif
 ![This is an image](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/blob/main/01_doc/Photos/plan.png)
 
 [Vidéo](https://github.com/InnovationLab-EFREIParis/Stage_1DOF_DroneBench/blob/main/01_doc/Photos/video_20220902_181232.mp4)
