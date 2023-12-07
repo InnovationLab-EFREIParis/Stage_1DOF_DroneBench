@@ -21,18 +21,18 @@ function TF_with_feedback
     % Transfer function computation
     sys = ss(A, B, C, D);
     transferFunction = tf(sys);
+
+
     
-    poles = [-4.1, -4.2];
-    K = place(A, B, poles);
+    % PID Controller Parameters
+    Kp = 20;  % Proportional Gain
+    Ki = 5;  % Integral Gain
+    Kd = 2;  % Derivative Gain
 
-    % Define the closed-loop system with feedback
-    A_cl = A - B*K;
-    B_cl = B;
-    C_cl = C;
-    D_cl = D;
+    C = pid(Kp,Ki,Kd);
 
-    % Create the closed-loop state-space system
-    sys_cl = ss(A_cl, B_cl, C_cl, D_cl);
+    % Closed-loop transfer function with PID controller
+    sys_cl_pid = feedback(sys,C);
 
     % Display the transfer function
     disp('Transfer Function:');
@@ -43,14 +43,14 @@ function TF_with_feedback
     
     subplot(3,1,1);
     step(transferFunction);
-    title('Reponse indicielle (Open Loop)');
+    title('Step Response (Open Loop)');
 
     subplot(3,1,2);
-    step(sys_cl);
-    title('Reponse indicielle avec retroaction (Closed Loop)');
+    impulse(sys_cl_pid);
+    title('Impulse Response with PID Controller (Closed Loop)');
 
     subplot(3,1,3);
-    impulse(transferFunction);
-    title('Reponse a impulsion de Dirac (Open Loop)');
+    step(sys_cl_pid);
+    title('Impulse Response (Open Loop)');
 
 end

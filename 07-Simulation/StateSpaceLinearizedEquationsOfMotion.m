@@ -9,7 +9,7 @@ function computeAndPlotOutput
     J = 1/3*(m*d1^2) + m_motor*d1^2; % Moment of inertia
     
     % Define the linearized system matrices A and B
-    A = [0, 1; -m*g*dc/J, -c/J];
+    A = [0, 1; (-m*g*dc)/J, -c/J];
     B = [0; d1/J];
     
     % Output matrix C
