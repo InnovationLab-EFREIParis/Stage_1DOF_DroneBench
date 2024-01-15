@@ -9,7 +9,7 @@ function pendulumSolver
     J = 1/3*(m*d1^2) + m_motor*d1^2;     % Moment of inertia
     
     % Thrust
-    T = @(t) 1;
+    T = @(t) 2;
     
     % Define the differential equation
     odefun = @(t, y) pendulumODE(t, y, J, c, m, g, dc, d1, T);
@@ -21,7 +21,7 @@ function pendulumSolver
     initial_conditions = [initial_theta; initial_theta_dot];
     
     % Set the time span
-    tspan = [0 10];  % Time span for simulation
+    tspan = [0 400];  % Time span for simulation
     
     % Solve the ODE
     [t, y] = ode45(odefun, tspan, deg2rad(initial_conditions));

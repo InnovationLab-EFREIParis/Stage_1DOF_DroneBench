@@ -16,7 +16,7 @@ function simulateControlledPendulum
     equilibrium_angle = 0.12;
 
     % Proportional, Integral, and Derivative gains for the PID controller
-    Kp = 20;
+    Kp = 200;
     Ki = 5;  
     Kd = 2;  
 

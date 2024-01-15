@@ -17,6 +17,8 @@ function linearPendulumSolver
 
     % Compute eigenvalues of matrix A
     eigenvalues_A = eig(A);
+
+    disp([A,A*B]);
     
     % Display the eigenvalues
     disp('Eigenvalues of matrix A:');
@@ -36,6 +38,8 @@ function linearPendulumSolver
     
     % Convert results to degrees
     x(:,1) = rad2deg(x(:,1));
+
+   
 
     
     % Plot the results

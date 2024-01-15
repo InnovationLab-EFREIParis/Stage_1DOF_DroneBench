@@ -11,21 +11,17 @@ function simulateControlledPendulum
     % Linearized system matrices A and B
     A = [0, 1; -m*g*dc/J, -c/J];
     B = [0; d1/J];
-    C = [1,0];
-    D = [0];
-    disp(A);
-    disp(B);
-    disp(C);
-    disp(D);
+
+    Q = [1, 0; 0, 10];
+    R = 0.01;
+
     % Equilibrium point
     equilibrium_angle = 0.12;
 
     % Controller gains
-    poles = [-50.2, -50.3];
-    K = place(A, B, poles);
+    K = lqr(A,B,Q,R);
 
-    disp(eig(A-B*K));
-
+    
     % Define the control law
     control_law = @(t, x) -K * (x - [equilibrium_angle; 0]) + 3*d1; % Proportional control + constant thrust
 
